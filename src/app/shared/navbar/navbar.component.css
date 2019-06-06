@@ -1,0 +1,15 @@
+.titulo {
+    margin-left: 0.6rem;
+    font-size: 1.5rem;
+    color: white !important;
+}
+
+.boton {
+    font-size: 0.7em;
+    border-color: white !important;
+    color: white !important;
+}
+
+.margen {
+    margin-bottom: 5rem;
+}
