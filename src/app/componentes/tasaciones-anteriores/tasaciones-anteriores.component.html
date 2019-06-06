@@ -1,0 +1,33 @@
+<div class="margen">
+  <p class="tasaciones">Tasaciones Anteriores</p>
+  <div class="contenedor-tasaciones">
+    <div class="card tasaciones">
+      <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+        <table class="table">
+          <thead class="colorear-celeste">
+            <tr>
+              <th>FECHA</th>
+              <th>UBICACION</th>
+              <th>VALOR</th>
+              <th>AMB</th>
+              <th>SUPERFICE</th>
+              <th>TIPO</th>
+              <th>PRIVADA</th>
+              <th>PUBLICADA</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let tasacion of tasaciones">
+            <tr class="fila-contenido">
+              <td>{{ tasacion.fecha }} </td>
+              <td> </td>
+              <td> </td>
+              <td>{{ tasacion.ambientes }}</td>
+              <td>{{ tasacion.superficie }}</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
