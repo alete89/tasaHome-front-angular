@@ -1,9 +1,5 @@
 export class Usuario {
 
-    constructor(init?: Partial<Usuario>) {
-        Object.assign(this, init)
-    }
-
     id: number
 
     nombre: String
@@ -15,6 +11,10 @@ export class Usuario {
     email: String
 
     genero: String
+
+    constructor(init?: Partial<Usuario>) {
+        Object.assign(this, init)
+    }
 
     validar() {
         // if (!this.nombre || !this.apellido || !this.email || !this.contraseña) {

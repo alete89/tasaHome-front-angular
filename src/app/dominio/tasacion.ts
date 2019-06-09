@@ -1,8 +1,5 @@
 export class Tasacion {
 
-    constructor(init?: Partial<Tasacion>) {
-        Object.assign(this, init)
-    }
 
     id: number
 
@@ -35,6 +32,10 @@ export class Tasacion {
     //         throw "Tasacion inválida"
     //     }
     // }
+    
+    constructor(init?: Partial<Tasacion>) {
+        Object.assign(this, init)
+    }
 
     calcularValor() {
         this.valor = 200
