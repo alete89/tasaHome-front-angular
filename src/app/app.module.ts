@@ -10,6 +10,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
+// import { SafePipe } from './shared/pipes/url_sanitizer';
 
 @NgModule({
    declarations: [
@@ -19,6 +20,7 @@ import { TasacionesAnterioresComponent } from './componentes/tasaciones-anterior
       LoginComponent,
       NotificationsComponent,
       TasacionesAnterioresComponent
+      // SafePipe
    ],
    imports: [
       BrowserModule,
