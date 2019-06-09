@@ -1,0 +1,124 @@
+<!-- Material form register -->
+<mdb-card class="card-registro">
+
+  <mdb-card-header class="registro info-color white-text text-center py-4">
+    <h5>
+      <strong class="grande">Crear cuenta</strong>
+    </h5>
+  </mdb-card-header>
+
+  <!--Card content-->
+  <mdb-card-body class="px-lg-5 pt-0">
+
+    <!-- Form -->
+    <form class="text-center" style="color: #757575;">
+
+      <div class="form-row">
+        <div class="col margen">
+          <!-- First name -->
+          <div class="md-form">
+            <input type="text" id="materialRegisterFormFirstName" class="form-control" mdbInput>
+            <label for="materialRegisterFormFirstName">Nombre</label>
+          </div>
+        </div>
+        <div class="col">
+          <!-- Last name -->
+          <div class="md-form">
+            <input type="email" id="materialRegisterFormLastName" class="form-control" mdbInput>
+            <label for="materialRegisterFormLastName">Apellido</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col margen">
+          <div class="md-form ">
+            <select class="browser-default custom-select">
+              <option selected>Género</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="md-form">
+            <input type="date" id="input" class="form-control" mdbInput>
+            <label for="input">Fecha de nacimiento</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col">
+          <div *ngFor="let provincia of provincias" class="md-form">
+            <!-- <mdb-select [options]="provincias" placeholder="Provincia"></mdb-select> -->
+            <select class="browser-default custom-select">
+              <option selected>Provincia</option>
+              <option value="1">{{provincia.nombre}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div *ngFor="let partido of partidos" class="md-form">
+            <select class="browser-default custom-select">
+              <option selected>Partido</option>
+              <option value="1">{{partido.nombre}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div *ngFor="let localidad of localidades" class="md-form">
+            <select class="browser-default custom-select">
+              <option selected>Localidad</option>
+              <option value="1">{{localidad.nombre}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- E-mail -->
+      <div class="md-form mt-0">
+        <input type="email" id="materialRegisterFormEmail" class="form-control" mdbInput>
+        <label for="materialRegisterFormEmail">E-mail</label>
+      </div>
+
+      <!-- Password -->
+      <div class="md-form">
+        <input type="password" id="materialRegisterFormPassword" class="form-control"
+          aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput>
+        <label for="materialRegisterFormPassword">Contraseña</label>
+        <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+          Al menos 8 caracteres y un digito
+        </small>
+      </div>
+      <div class="md-form">
+        <input type="password" id="materialRegisterFormPassword" class="form-control"
+          aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput>
+        <label for="materialRegisterFormPassword">Confirmar contraseña</label>
+        <!-- <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+          Al menos 8 caracteres y un digito
+        </small> -->
+      </div>
+
+
+      <!-- Sign up button -->
+      <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0"
+        mdbWavesEffect type="submit">Aceptar</button>
+
+
+      <hr>
+
+      <!-- Terms of service -->
+      <p>By clicking
+        <em>Sign up</em> you agree to our
+        <a href="" target="_blank">terms of service</a> and
+        <a href="" target="_blank">terms of service</a>. </p>
+
+    </form>
+    <!-- Form -->
+
+  </mdb-card-body>
+
+</mdb-card>
+<!-- Material form register -->

@@ -10,6 +10,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
+import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/registrar-usuario.component';
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
 @NgModule({
@@ -19,7 +20,8 @@ import { TasacionesAnterioresComponent } from './componentes/tasaciones-anterior
       NavbarComponent,
       LoginComponent,
       NotificationsComponent,
-      TasacionesAnterioresComponent
+      TasacionesAnterioresComponent,
+      RegistrarUsuarioComponent
       // SafePipe
    ],
    imports: [
