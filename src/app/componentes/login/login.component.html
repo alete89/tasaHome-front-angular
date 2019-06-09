@@ -1,41 +1,40 @@
 <div (keyup.enter)="iniciarSesion()" class="card login">
   <form class="form text-center border border-light p-5">
-
+    
     <p class="h4 mb-4">Iniciar Sesión</p>
-
+    
     <input type="text" name="email" [(ngModel)]="email" class="form-control mb-4" placeholder="Correo electrónico">
+    <div *ngIf="intentoFallido">
+      <a class="recuperar-contraseña">¿Olvidaste tu contraseña?</a>
+    </div>
     <input type="password" name="password" [(ngModel)]="password" class="form-control mb-4" placeholder="Password">
-
-    <!--      <div class="d-flex justify-content-around">
-        <div>
-          <mdb-checkbox [default]="true">Recuérdame</mdb-checkbox>
-        </div>
-        <div>
-          <a href="">¿Olvidaste tu contraseña?</a>
-        </div>
-      </div-->
-
-    <button [disabled]="camposIncompletos()" mdbBtn type="button" gradient="blue" rounded="true" block="true"
-      class="my-4" (click)="iniciarSesion()">Iniciar Sesión</button>
-
-    <!--      <p>¿No tienes cuenta?
-        <a href="">Registrarse</a>
-      </p>
-
-      <p>Iniciar Sesión con:</p>
-      <a type="button" class="light-blue-text mx-2">
-        <mdb-icon fab icon="facebook"></mdb-icon>
-      </a>
-      <a type="button" class="light-blue-text mx-2">
-        <mdb-icon fab icon="twitter"></mdb-icon>
-      </a>
-      <a type="button" class="light-blue-text mx-2">
-        <mdb-icon fab icon="linkedin"></mdb-icon>
-      </a>
-      <a type="button" class="light-blue-text mx-2">
-        <mdb-icon fab icon="heart"></mdb-icon>
-      </a-->
-    <!-- <app-notifications [notification]="notification"></app-notifications> -->
+    
+    <div class="d-flex justify-content-around">
+    </div>
+    
+    <button class="iniciar-sesion" [disabled]="camposIncompletos()" mdbBtn type="button" gradient="blue" rounded="true" block="true"
+    (click)="iniciarSesion()">Iniciar Sesión</button>
+    <p *ngIf="intentoFallido">Nuevo en TasaHome?
+      <a (click)="irARegistrarUsuario()">Registrarse</a>
+    </p>
     <app-notifications [notification]="notification"></app-notifications>
+    
+    <!--      <p>¿No tienes cuenta?
+      <a href="">Registrarse</a>
+    </p>
+    
+    <p>Iniciar Sesión con:</p>
+    <a type="button" class="light-blue-text mx-2">
+      <mdb-icon fab icon="facebook"></mdb-icon>
+    </a>
+    <a type="button" class="light-blue-text mx-2">
+      <mdb-icon fab icon="twitter"></mdb-icon>
+    </a>
+    <a type="button" class="light-blue-text mx-2">
+      <mdb-icon fab icon="linkedin"></mdb-icon>
+    </a>
+    <a type="button" class="light-blue-text mx-2">
+      <mdb-icon fab icon="heart"></mdb-icon>
+    </a-->
   </form>
 </div>
