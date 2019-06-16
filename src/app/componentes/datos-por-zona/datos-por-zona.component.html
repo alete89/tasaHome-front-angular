@@ -13,14 +13,26 @@
     <!-- Form -->
     <form class="text-center radio" style="color: #757575;">
 
-      <input type="radio" [(ngModel)]="zonaSeleccionada" (change)="seleccionarDireccion()" name="zona"
-        value="Direccion"> Direccion
-      <input type="radio" [(ngModel)]="zonaSeleccionada" (change)="seleccionarBarrio()" name="zona" value="Barrio">
-      Barrio
-      <input type="radio" [(ngModel)]="zonaSeleccionada" (change)="seleccionarComuna()" name="zona" value="Comuna">
-      Comuna
+      <!-- Default inline 1-->
+      <div class="custom-control custom-radio custom-control-inline">
+        <input [(ngModel)]="zonaSeleccionada" (change)="seleccionarDireccion()" name="zona" value="Direccion"
+          type="radio" class="custom-control-input" id="defaultInline1" mdbInput>
+        <label class="custom-control-label" for="defaultInline1">Direccion</label>
+      </div>
 
+      <!-- Default inline 2-->
+      <div class="custom-control custom-radio custom-control-inline">
+        <input [(ngModel)]="zonaSeleccionada" (change)="seleccionarBarrio()" name="zona" value="Barrio" type="radio"
+          class="custom-control-input" id="defaultInline2" mdbInput>
+        <label class="custom-control-label" for="defaultInline2">Barrio</label>
+      </div>
 
+      <!-- Default inline 3-->
+      <div class="custom-control custom-radio custom-control-inline">
+        <input [(ngModel)]="zonaSeleccionada" (change)="seleccionarComuna()" name="zona" value="Comuna" type="radio"
+          class="custom-control-input" id="defaultInline3" mdbInput>
+        <label class="custom-control-label" for="defaultInline3">Comuna</label>
+      </div>
 
       <div *ngIf="zonaSeleccionada == 'Barrio'" class="md-form">
 
