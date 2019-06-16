@@ -9,41 +9,42 @@
 
   <!--Card content-->
   <mdb-card-body class="px-lg-5 pt-0">
-
     <!-- Form -->
     <form class="text-center" style="color: #757575;">
 
       <div class="form-row">
         <div class="col margen">
           <!-- First name -->
-          <div class="md-form">
-            <input type="text" id="materialRegisterFormFirstName" class="form-control" mdbInput>
+          <div class="md-form" [formGroup]="camposValidatingForm">
+            <input name="nombre" formControlName="nombreForm" [(ngModel)]="usuario.nombre" type="text"
+              id="materialRegisterFormFirstName" class="form-control" mdbValidate mdbInput>
             <label for="materialRegisterFormFirstName">Nombre</label>
+            <mdb-error *ngIf="nombreTieneErrores()">Debe completar este campo</mdb-error>
           </div>
         </div>
         <div class="col">
           <!-- Last name -->
-          <div class="md-form">
-            <input type="email" id="materialRegisterFormLastName" class="form-control" mdbInput>
+          <div class="md-form" [formGroup]="camposValidatingForm">
+            <input name="apellido" formControlName="apellidoForm" [(ngModel)]="usuario.apellido" type="text"
+              id="materialRegisterFormLastName" class="form-control" mdbValidate mdbInput>
             <label for="materialRegisterFormLastName">Apellido</label>
+            <mdb-error *ngIf="apellidoTieneErrores()">Debe completar este campo</mdb-error>
           </div>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col margen">
-          <div class="md-form ">
-            <select class="browser-default custom-select">
-              <option selected>Género</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
+          <p style="text-align: left">Género</p>
+          <select name="genero" [(ngModel)]="usuario.genero" class="browser-default custom-select">
+            <option value="Femenino">Femenino</option>
+            <option value="Masculino">Masculino</option>
+          </select>
         </div>
         <div class="col">
           <div class="md-form">
-            <input type="date" id="input" class="form-control" mdbInput>
+            <input name="fecha_nacimiento" [(ngModel)]="usuario.fecha_nacimiento" type="date" id="input"
+              class="form-control" mdbInput>
             <label for="input">Fecha de nacimiento</label>
           </div>
         </div>
@@ -51,27 +52,29 @@
 
       <div class="form-row">
         <div class="col">
-          <div *ngFor="let provincia of provincias" class="md-form">
-            <!-- <mdb-select [options]="provincias" placeholder="Provincia"></mdb-select> -->
-            <select class="browser-default custom-select">
-              <option selected>Provincia</option>
-              <option value="1">{{provincia.nombre}}</option>
+          <div style="margin-right: 1rem;" class="md-form">
+            <p>Provincia</p>
+            <select name="provincia" (change)="getPartidos()" [(ngModel)]="usuario.provincia"
+              class="browser-default custom-select">
+              <option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.descripcion}}</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="col">
+          <div style="margin-right: 1rem;" class="md-form">
+            <p>Partido</p>
+            <select name="partido" (change)="getLocalidades()" [(ngModel)]="usuario.partido"
+              class="browser-default custom-select">
+              <option *ngFor="let partido of partidos" [value]="partido.id">{{partido.descripcion}}</option>
             </select>
           </div>
         </div>
         <div class="col">
-          <div *ngFor="let partido of partidos" class="md-form">
-            <select class="browser-default custom-select">
-              <option selected>Partido</option>
-              <option value="1">{{partido.nombre}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="col">
-          <div *ngFor="let localidad of localidades" class="md-form">
-            <select class="browser-default custom-select">
-              <option selected>Localidad</option>
-              <option value="1">{{localidad.nombre}}</option>
+          <div style="margin-right: 1rem;" class="md-form">
+            <p>Localidad</p>
+            <select name="localidad" [(ngModel)]="usuario.localidad" class="browser-default custom-select">
+              <option *ngFor="let localidad of localidades" [value]="localidad.id">{{localidad.descripcion}}</option>
             </select>
           </div>
         </div>
@@ -79,21 +82,21 @@
 
       <!-- E-mail -->
       <div class="md-form mt-0">
-        <input type="email" id="materialRegisterFormEmail" class="form-control" mdbInput>
+        <input name="email" type="email" id="materialRegisterFormEmail" class="form-control" mdbInput>
         <label for="materialRegisterFormEmail">E-mail</label>
       </div>
 
       <!-- Password -->
       <div class="md-form">
-        <input type="password" id="materialRegisterFormPassword" class="form-control"
-          aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput>
+        <input [(ngModel)]="usuario.contrasenia" name="password" type="password" id="materialRegisterFormPassword"
+          class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput>
         <label for="materialRegisterFormPassword">Contraseña</label>
         <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
           Al menos 8 caracteres y un digito
         </small>
       </div>
       <div class="md-form">
-        <input type="password" id="materialRegisterFormPassword" class="form-control"
+        <input [(ngModel)]="confirmacion_contrasenia" name="confirmacion_password" type="password" class="form-control"
           aria-describedby="materialRegisterFormPasswordHelpBlock" mdbInput>
         <label for="materialRegisterFormPassword">Confirmar contraseña</label>
         <!-- <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
@@ -103,17 +106,17 @@
 
 
       <!-- Sign up button -->
-      <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0"
-        mdbWavesEffect type="submit">Aceptar</button>
+      <button [disabled]="hayErrores()" (click)="aceptar()" mdbBtn color="info" outline="true" rounded="true"
+        block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect type="submit">Aceptar</button>
 
 
       <hr>
 
       <!-- Terms of service -->
-      <p>By clicking
+      <!-- <p>By clicking
         <em>Sign up</em> you agree to our
         <a href="" target="_blank">terms of service</a> and
-        <a href="" target="_blank">terms of service</a>. </p>
+        <a href="" target="_blank">terms of service</a>. </p> -->
 
     </form>
     <!-- Form -->
