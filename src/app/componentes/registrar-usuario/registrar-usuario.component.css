@@ -9,6 +9,14 @@
     font-size: 2rem;
 }
 
-.margen{
+.margen {
     margin-right: 2rem;
+}
+
+.errorContraseñas {
+    margin-left: 10rem;
+}
+
+.aceptar {
+    margin-top: 5rem !important;
 }

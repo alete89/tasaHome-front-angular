@@ -24,6 +24,8 @@ export class Usuario {
 
     localidad: number
 
+    direccion: string
+
     constructor(init?: Partial<Usuario>) {
         Object.assign(this, init)
     }
