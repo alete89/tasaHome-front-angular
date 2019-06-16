@@ -19,14 +19,14 @@ export class ZonaService {
     return resp.json().map(Zona.fromJson)
   }
 
-  async partidos() {
-    const url = REST_SERVER_URL + "/partidos"
+  async partidos(provincia_id: number) {
+    const url = REST_SERVER_URL + "/partidos/" + provincia_id
     const resp = await this.http.get(url).toPromise()
     return resp.json().map(Zona.fromJson)
   }
 
-  async localidades() {
-    const url = REST_SERVER_URL + "/localidades"
+  async localidades(partido_id: number) {
+    const url = REST_SERVER_URL + "/localidades/" + partido_id
     const resp = await this.http.get(url).toPromise()
     return resp.json().map(Zona.fromJson)
   }
