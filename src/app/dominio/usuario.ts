@@ -1,3 +1,5 @@
+import { Zona } from './zona';
+
 export class Usuario {
 
     id: number
@@ -10,7 +12,17 @@ export class Usuario {
 
     email: String
 
+    fecha_nacimiento: Date
+
     genero: String
+
+    contrasenia: String
+
+    partido: number
+
+    provincia: number
+
+    localidad: number
 
     constructor(init?: Partial<Usuario>) {
         Object.assign(this, init)
