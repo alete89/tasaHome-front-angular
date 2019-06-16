@@ -1,7 +1,7 @@
 export class Zona {
 
     id: number
-    nombre: String
+    descripcion: String
 
     constructor(init?: Partial<Zona>) {
         Object.assign(this, init)

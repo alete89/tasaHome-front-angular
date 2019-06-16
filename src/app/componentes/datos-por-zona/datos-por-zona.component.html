@@ -11,44 +11,69 @@
   <mdb-card-body class="px-lg-5 pt-0">
 
     <!-- Form -->
-    <form class="text-center" style="color: #757575;">
+    <form class="text-center radio" style="color: #757575;">
 
-<input type="radio"[(ngModel)]="zonaSeleccionada" (change)="prueba()" name="zona" value="direccion"> Direccion
-<input type="radio" [(ngModel)]="zonaSeleccionada" (change)="prueba()"name="zona" value="barrio"> Barrio
-<input type="radio"[(ngModel)]="zonaSeleccionada"  (change)="prueba()" name="zona" value="comuna"> Comuna
+      <input type="radio" [(ngModel)]="zonaSeleccionada" (change)="seleccionarDireccion()" name="zona"
+        value="Direccion"> Direccion
+      <input type="radio" [(ngModel)]="zonaSeleccionada" (change)="seleccionarBarrio()" name="zona" value="Barrio">
+      Barrio
+      <input type="radio" [(ngModel)]="zonaSeleccionada" (change)="seleccionarComuna()" name="zona" value="Comuna">
+      Comuna
 
-<div *ngFor="let zona of zonas" class="md-form">
-            <select class="browser-default custom-select">
-              <option selected>Barrio</option>
-              <option value="1">{{zona.nombre}}</option>
-            </select>
-  </div>
+
+
+      <div *ngIf="zonaSeleccionada == 'Barrio'" class="md-form">
+
+        <select name="datos" [(ngModel)]="zonaId" (change)="traerDatosBarrio()" class="browser-default custom-select">
+          <option *ngFor="let zona of zonas" [value]="zona.id">
+            {{zona.descripcion}}</option>
+        </select>
+      </div>
+
+
+      <div *ngIf="zonaSeleccionada == 'Comuna'" class="md-form">
+
+        <select name="datos" [(ngModel)]="zonaId" (change)="traerDatosComuna()" class="browser-default custom-select">
+          <option *ngFor="let zona of zonas" [value]="zona.id">
+            {{zona.descripcion}}</option>
+        </select>
+      </div>
 
 
     </form>
     <!-- Form -->
 
 
-  <div class="contenedor-tasaciones">
-    <div class="card-datos">
-      <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
-        <table class="table">
-          <thead class="colorear-celeste">
-            <tr>
-              <th>INDICADOR</th>
-              <th>VALORES</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let tasacion of tasaciones">
+    <div class="contenedor-tasaciones">
+      <div class="card-datos">
+        <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+          <table class="table">
+            <thead class="colorear-celeste">
+              <tr>
+                <th>INDICADOR</th>
+                <th>VALORES</th>
+              </tr>
+            </thead>
             <tr class="fila-contenido">
-              <td>{{ tasacion.fecha }} </td>
-              <td> </td>
+              <td *ngIf="datos"> Escuelas </td>
+              <td *ngIf="datos">{{ datos.escuelas }} </td>
             </tr>
-          </tbody>
-        </table>
+            <tr class="fila-contenido">
+              <td *ngIf="datos"> Comisarias </td>
+              <td *ngIf="datos">{{ datos.comisarias }} </td>
+            </tr>
+            <tr class="fila-contenido">
+              <td *ngIf="datos"> Espacios Verdes </td>
+              <td *ngIf="datos">{{ datos.espacios_verdes }} </td>
+            </tr>
+            <tr class="fila-contenido">
+              <td *ngIf="datos"> Hospitales </td>
+              <td *ngIf="datos">{{ datos.hospitales }} </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
 
   </mdb-card-body>
 
