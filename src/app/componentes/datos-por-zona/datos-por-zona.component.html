@@ -1,3 +1,58 @@
-<p>
-  datos-por-zona works!
-</p>
+<!-- Material form register -->
+<mdb-card class="card">
+
+  <mdb-card-header class="registro info-color white-text text-center py-4">
+    <h5>
+      <strong class="grande">Datos por zona</strong>
+    </h5>
+  </mdb-card-header>
+
+  <!--Card content-->
+  <mdb-card-body class="px-lg-5 pt-0">
+
+    <!-- Form -->
+    <form class="text-center" style="color: #757575;">
+
+<input type="radio"[(ngModel)]="zonaSeleccionada" (change)="prueba()" name="zona" value="direccion"> Direccion
+<input type="radio" [(ngModel)]="zonaSeleccionada" (change)="prueba()"name="zona" value="barrio"> Barrio
+<input type="radio"[(ngModel)]="zonaSeleccionada"  (change)="prueba()" name="zona" value="comuna"> Comuna
+
+<div *ngFor="let zona of zonas" class="md-form">
+            <select class="browser-default custom-select">
+              <option selected>Barrio</option>
+              <option value="1">{{zona.nombre}}</option>
+            </select>
+  </div>
+
+
+    </form>
+    <!-- Form -->
+
+
+  <div class="contenedor-tasaciones">
+    <div class="card-datos">
+      <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+        <table class="table">
+          <thead class="colorear-celeste">
+            <tr>
+              <th>INDICADOR</th>
+              <th>VALORES</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let tasacion of tasaciones">
+            <tr class="fila-contenido">
+              <td>{{ tasacion.fecha }} </td>
+              <td> </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  </mdb-card-body>
+
+
+
+</mdb-card>
+<!-- Material form register -->

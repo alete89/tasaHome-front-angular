@@ -32,5 +32,12 @@ export class ZonaService {
   }
 
 
+  async barrios() {
+    const url = REST_SERVER_URL + "/barrios"
+    const resp = await this.http.get(url).toPromise()
+    return resp.json().map(Zona.fromJson)
+  }
+
+
 }
 

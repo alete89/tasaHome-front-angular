@@ -1,0 +1,35 @@
+.card {
+    max-width: 40%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin: auto;
+}
+
+.grande {
+    font-size: 2rem;
+}
+
+.margen{
+    margin-right: 2rem;
+}
+
+.radio{
+text-align: center;
+margin-top:2rem;
+
+}
+
+.card-datos {
+    /* max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white !important; */
+}
+
+.texto-centrado {
+    text-align: center;
+}
+
+th {
+    font-weight: bold;
+}

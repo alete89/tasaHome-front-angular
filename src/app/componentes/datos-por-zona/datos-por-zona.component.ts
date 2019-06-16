@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Zona } from 'src/app/dominio/zona';
+import { ZonaService } from 'src/app/servicios/zona.service';
 
 @Component({
   selector: 'app-datos-por-zona',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DatosPorZonaComponent implements OnInit {
 
-  constructor() { }
+  zonas: Array<Zona>
+  zonaSeleccionada: String
 
-  ngOnInit() {
+  constructor(private zonaService: ZonaService) {
+
+  }
+
+  async ngOnInit() {
+    this.zonas = await this.zonaService.barrios()
+  }
+
+  prueba(){
+    console.log(this.zonaSeleccionada)
   }
 
 }
