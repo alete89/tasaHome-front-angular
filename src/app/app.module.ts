@@ -11,6 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
 import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/registrar-usuario.component';
+import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zona.component';
+import { BuscarTasacionesComponent } from './componentes/buscar-tasaciones/buscar-tasaciones.component';
+import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
 @NgModule({
@@ -21,7 +24,10 @@ import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/regis
       LoginComponent,
       NotificationsComponent,
       TasacionesAnterioresComponent,
-      RegistrarUsuarioComponent
+      RegistrarUsuarioComponent,
+      DatosPorZonaComponent,
+      BuscarTasacionesComponent,
+      TasarPropiedadComponent
       // SafePipe
    ],
    imports: [
