@@ -21,7 +21,6 @@ export class UsuarioService implements IUsuarioService {
     let json: any = {}
     json.email = email
     json.contraseña = password
-    console.log(json)
     const resp = await this.http.post(url, json).toPromise()
     const usuario: Usuario = Usuario.fromJson(resp.json())
     sessionStorage.setItem("userLoggedInId", String(usuario.id));

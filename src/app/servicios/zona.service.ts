@@ -4,6 +4,7 @@ import { REST_SERVER_URL } from './configuration';
 import { Http } from '@angular/http';
 import { Tasacion } from '../dominio/tasacion';
 import { Zona } from '../dominio/zona';
+import { TipoPropiedad } from '../dominio/tipo_propiedad';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,6 @@ export class ZonaService {
     return resp.json().map(Zona.fromJson)
   }
 
-
   async barrios() {
     const url = REST_SERVER_URL + "/barrios"
     const resp = await this.http.get(url).toPromise()
@@ -49,7 +49,6 @@ export class ZonaService {
     const resp = await this.http.get(url).toPromise()
     return resp.json()
   }
-
 
   async datosComuna(id: number) {
     const url = REST_SERVER_URL + "/datos/comuna/" + id
