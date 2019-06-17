@@ -21,22 +21,11 @@ export class RegistrarUsuarioComponent implements OnInit {
   camposValidatingForm: FormGroup
 
   constructor(private zonaService: ZonaService, private usuarioService: UsuarioService) {
-    this.usuario = new Usuario()
-    this.camposValidatingForm = new FormGroup({
-      nombreForm: new FormControl(null, [Validators.required]),
-      apellidoForm: new FormControl(null, [Validators.required]),
-      direccionForm: new FormControl(null, [Validators.required]),
-      emailForm: new FormControl(null, [Validators.required, Validators.email]),
-      passwordForm: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-      confirmacionPasswordForm: new FormControl(null, [Validators.required, Validators.minLength(8)])
-    })
-
+    this.setearFormulario()
   }
 
   async ngOnInit() {
-    // this.partidos = await this.zonaService.partidos()
     this.provincias = await this.zonaService.provincias()
-    // this.localidades = await this.zonaService.localidades()
   }
 
   get inputNombre() { return this.camposValidatingForm.get('nombreForm') }
@@ -81,6 +70,24 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   async aceptar() {
     await this.usuarioService.registrarUsuario(this.usuario)
+    this.setearFormulario()
+  }
+
+  setearFormulario() {
+    this.confirmacion_contrasenia = undefined
+    this.usuario = new Usuario()
+    this.camposValidatingForm = new FormGroup({
+      nombreForm: new FormControl(null, [Validators.required]),
+      apellidoForm: new FormControl(null, [Validators.required]),
+      direccionForm: new FormControl(null, [Validators.required]),
+      emailForm: new FormControl(null, [Validators.required, Validators.email]),
+      passwordForm: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+      confirmacionPasswordForm: new FormControl(null, [Validators.required, Validators.minLength(8)])
+    })
+  }
+
+  formularioVacio() {
+    return !this.usuario.nombre && !this.usuario.apellido && !this.usuario.genero && !this.usuario.fecha_nacimiento && !this.usuario.provincia && !this.usuario.partido && !this.usuario.localidad && !this.usuario.direccion && !this.usuario.email && !this.usuario.contrasenia && !this.confirmacion_contrasenia
   }
 
   async getPartidos() {

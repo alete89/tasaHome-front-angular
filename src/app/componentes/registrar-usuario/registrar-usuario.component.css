@@ -1,5 +1,5 @@
 .card-registro {
-    max-width: 50%;
+    max-width: 45%;
     margin-left: 1rem;
     margin-top: 1rem;
     margin: auto;
@@ -18,5 +18,8 @@
 }
 
 .aceptar {
-    margin-top: 5rem !important;
+    max-width: 14rem;
+    margin-top: 3rem;
+    /* margin-right: 4rem; */
 }
+

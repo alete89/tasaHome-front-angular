@@ -122,14 +122,15 @@
         </small> -->
       </div>
 
-
-
       <!-- Sign up button -->
-      <button [disabled]="hayErrores()" (click)="aceptar()" mdbBtn color="info" outline="true" rounded="true"
-        block="true" class="my-4 waves-effect z-depth-0 aceptar" mdbWavesEffect type="submit">Aceptar</button>
+      <div class="botonera">
 
-
-      <hr>
+        <button [disabled]="hayErrores()" (click)="aceptar()" mdbBtn color="info" outline="true" rounded="true"
+          class="my-4 waves-effect z-depth-0 aceptar " mdbWavesEffect type="submit">Aceptar</button>
+        <button [disabled]="formularioVacio()" (click)="setearFormulario()" mdbBtn color="danger" rounded="true"
+          class="my-4 waves-effect z-depth-0 aceptar" mdbWavesEffect type="button">Limpiar formulario</button>
+        <hr>
+      </div>
 
       <!-- Terms of service -->
       <!-- <p>By clicking
