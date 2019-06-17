@@ -24,7 +24,6 @@ export class TasacionesAnterioresComponent implements OnInit {
   async traerTasaciones() {
     try {
       this.tasaciones = await this.usuarioService.tasacionesAnteriores()
-      console.log(this.tasaciones)
     } catch (error) {
       this.notification.showError(error)
     }
