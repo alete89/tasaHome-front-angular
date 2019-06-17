@@ -58,11 +58,6 @@ export class BuscarTasacionesComponent implements OnInit {
     return !this.tasacionBusqueda.ambientes && !this.tasacionBusqueda.fecha_desde && !this.tasacionBusqueda.id_barrio && !this.tasacionBusqueda.id_tipo_operacion && !this.tasacionBusqueda.id_tipo_propiedad && !this.tasacionBusqueda.superficie_minima
   }
 
-  hayErrores() {
-    return this.inputSuperficie.invalid || !this.tasacionBusqueda.ambientes || !this.tasacionBusqueda.fecha_desde || !this.tasacionBusqueda.id_barrio || !this.tasacionBusqueda.id_tipo_operacion || !this.tasacionBusqueda.id_tipo_propiedad || !this.tasacionBusqueda.superficie_minima
-
-  }
-
   async buscar() {
     this.resultados = await this.tasacionService.tasacionesSimilares(this.tasacionBusqueda)
   }

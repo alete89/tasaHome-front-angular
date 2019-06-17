@@ -63,7 +63,7 @@
       </div>
 
       <div class="botonera">
-        <button [disabled]="hayErrores()" (click)="buscar()" mdbBtn color="info" outline="true" rounded="true"
+        <button [disabled]="formularioVacio()" (click)="buscar()" mdbBtn color="info" outline="true" rounded="true"
           class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">Buscar</button>
         <button [disabled]="formularioVacio()" (click)="setearFormulario()" mdbBtn color="danger" rounded="true"
           class="my-4 waves-effect z-depth-0 buscar" mdbWavesEffect type="button">Nueva búsqueda</button>
