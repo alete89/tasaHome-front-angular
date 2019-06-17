@@ -113,7 +113,7 @@
           name="confirmacion_password" type="password" class="form-control"
           aria-describedby="materialRegisterFormPasswordHelpBlock" mdbValidate mdbInput>
         <label for="materialRegisterFormPassword">Confirmar</label>
-        <mdb-error *ngIf="confirmacionPasswordTieneErrores()">Debe completar este campo</mdb-error>
+        <mdb-error *ngIf="confirmacionPasswordTieneErrores()">Contraseña inválida</mdb-error>
         <mdb-error class="errorContraseñas" *ngIf="contraseniasNoCoinciden()">Las contraseñas deben coincidir
         </mdb-error>
 
