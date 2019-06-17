@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Zona } from 'src/app/dominio/zona';
 import { ZonaService } from 'src/app/servicios/zona.service';
+import { MDBModalRef } from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-datos-por-zona',
@@ -17,7 +18,7 @@ export class DatosPorZonaComponent implements OnInit {
   direcciones: Array<Zona>
   datos: Array<any>
 
-  constructor(private zonaService: ZonaService) {
+  constructor(public modalRef: MDBModalRef, private zonaService: ZonaService) {
 
   }
 

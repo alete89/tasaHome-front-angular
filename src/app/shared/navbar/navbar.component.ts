@@ -3,6 +3,7 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Router } from '@angular/router';
 import { LoginComponent } from 'src/app/componentes/login/login.component';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { DatosPorZonaComponent } from 'src/app/componentes/datos-por-zona/datos-por-zona.component';
 
 @Component({
   selector: 'navbar',
@@ -12,6 +13,8 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 export class NavbarComponent implements OnInit {
 
   modalRef: MDBModalRef;
+  modalDatosPorZona: MDBModalRef;
+
 
   constructor(private router: Router, private usuarioService: UsuarioService, private modalService: MDBModalService) {
 
@@ -34,6 +37,11 @@ export class NavbarComponent implements OnInit {
       data: {
         returnUrl: this.router.url
       }
+    });
+  }
+
+  openModalDatosPorZona() {
+    this.modalDatosPorZona = this.modalService.show(DatosPorZonaComponent, {
     });
   }
 
