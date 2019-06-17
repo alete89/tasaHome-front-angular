@@ -1,0 +1,30 @@
+.grande {
+    font-size: 2rem;
+}
+
+.margen {
+    margin-right: 2rem;
+}
+
+.buscar {
+    max-width: 14rem;
+    margin-top: 3rem;
+}
+
+.card-busqueda {
+    width: 50rem;
+}
+
+.texto-centrado {
+    text-align: center;
+}
+
+th {
+    font-weight: bold;
+}
+
+.tasaciones {
+    font-weight: bold;
+    font-size: 3rem;
+    text-align: center;
+}

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from '../dominio/usuario';
-import { REST_SERVER_URL } from './configuration';
 import { Http } from '@angular/http';
 import { Tasacion } from '../dominio/tasacion';
-import { Zona } from '../dominio/zona';
+import { TasacionBusqueda } from '../dominio/tasacion_busqueda';
 import { TipoPropiedad } from '../dominio/tipo_propiedad';
-import { TasacionBusqueda } from '../dominio/tasacionBúsqueda';
+import { REST_SERVER_URL } from './configuration';
 
 @Injectable({
   providedIn: 'root'

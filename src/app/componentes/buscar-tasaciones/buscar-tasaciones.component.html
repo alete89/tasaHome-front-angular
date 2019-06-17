@@ -1,3 +1,102 @@
-<p>
-  buscar-tasaciones works!
-</p>
+<mdb-card class="card-busqueda">
+
+  <mdb-card-header class="info-color white-text text-center py-4">
+    <h5>
+      <strong class="grande">Buscar tasaciones similares</strong>
+    </h5>
+  </mdb-card-header>
+
+  <mdb-card-body class="px-lg-5 pt-0">
+    <form class="text-center" style="color: #757575;margin-top: 2rem;">
+
+      <div style="margin-bottom: 2rem;" class="form-row">
+        <div class="col margen">
+          <p>Barrio</p>
+          <select name="barrio" [(ngModel)]="tasacionBusqueda.id_barrio" class="browser-default custom-select">
+            <option *ngFor="let barrio of barrios" [value]="barrio.id">{{barrio.descripcion}}</option>
+          </select>
+        </div>
+        <div class="col margen">
+          <p>Tipo de propiedad</p>
+          <select name="tipo_propiedad" [(ngModel)]="tasacionBusqueda.id_tipo_propiedad"
+            class="browser-default custom-select">
+            <option *ngFor="let tipo of tiposDePropiedad" [value]="tipo.id">{{tipo.descripcion}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+
+        <div *ngFor="let tipo of tiposDeOperacion">
+          <div style="margin-left: 2rem;" class="custom-control custom-radio custom-control-inline">
+            <input [(ngModel)]="tasacionBusqueda.id_tipo_operacion" name="tipo_operacion_{{tipo.id}}" [value]="tipo.id"
+              type="radio" class="custom-control-input" id="defaultInline1_{{tipo.id}}" mdbInput>
+            <label class="custom-control-label" for="defaultInline1_{{tipo.id}}">{{tipo.descripcion}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 1rem" class="form-row">
+        <div class="col">
+          <div [formGroup]="numbersValidatingForm" class="md-form">
+            <input class="form-control" formControlName="ambientes" type="number" mdbInput mdbValidate min="1" mdbInput
+              max="500" [(ngModel)]="tasacionBusqueda.ambientes">
+            <label style="font-size: 0.8rem;" for="form1">Cantidad ambientes</label>
+            <mdb-error *ngIf="ambientesInvalidos()">Cantidad de ambientes incorrecta</mdb-error>
+            <mdb-success *ngIf="!ambientesInvalidos()"></mdb-success>
+          </div>
+        </div>
+        <div class="col">
+          <div [formGroup]="numbersValidatingForm" class="md-form">
+            <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="1" mdbInput
+              max="100000000" [(ngModel)]="tasacionBusqueda.superficie_minima">
+            <label style="font-size: 0.8rem;" for="form1">Superficie mínima</label>
+            <mdb-error *ngIf="superficieInvalida()">Superficie incorrecta</mdb-error>
+            <mdb-success *ngIf="!superficieInvalida()"></mdb-success>
+          </div>
+        </div>
+      </div>
+
+      <div class="md-form">
+        <input name="fecha_nacimiento" [(ngModel)]="tasacionBusqueda.fecha_desde" type="date" id="input"
+          class="form-control" mdbInput>
+        <label for="input">Fecha desde</label>
+      </div>
+
+      <div class="botonera">
+        <button [disabled]="hayErrores()" (click)="buscar()" mdbBtn color="info" outline="true" rounded="true"
+          class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">Buscar</button>
+        <button [disabled]="formularioVacio()" (click)="setearFormulario()" mdbBtn color="danger" rounded="true"
+          class="my-4 waves-effect z-depth-0 buscar" mdbWavesEffect type="button">Nueva búsqueda</button>
+        <hr>
+      </div>
+    </form>
+
+
+    <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+      <table class="table">
+        <thead class="colorear-celeste">
+          <tr>
+            <th>FECHA</th>
+            <th>BARRIO</th>
+            <th>VALOR</th>
+            <th>AMBIENTES</th>
+            <th>SUPERFICE</th>
+            <th>TIPO</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let resultado of resultados">
+          <tr class="fila-contenido">
+            <td>{{ resultado.fecha  | date: 'dd/MM/yyyy'}} </td>
+            <td>{{ resultado.__barrio__.descripcion }}</td>
+            <td>{{ resultado.valor }} </td>
+            <td>{{ resultado.ambientes }}</td>
+            <td>{{ resultado.superficie }}</td>
+            <td>{{ resultado.__tipoDePropiedad__.descripcion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </mdb-card-body>
+
+</mdb-card>
