@@ -1,3 +1,5 @@
+import { TipoPropiedad } from './tipo_propiedad';
+
 export class Tasacion {
 
 
@@ -15,7 +17,6 @@ export class Tasacion {
 
     // usuario: Usuario
 
-    // tipoDePropiedad: TipoPropiedad
 
     // tipoDeOperacion: TipoOperacion
 
@@ -32,7 +33,7 @@ export class Tasacion {
     //         throw "Tasacion inválida"
     //     }
     // }
-    
+
     constructor(init?: Partial<Tasacion>) {
         Object.assign(this, init)
     }
@@ -42,7 +43,9 @@ export class Tasacion {
         return this.valor
     }
 
-    static fromJson(tasacionJson: String) {
-        return Object.assign(new Tasacion(), tasacionJson)
+    static fromJson(tasacionJson) {
+        let tasacion = Object.assign(new Tasacion(), tasacionJson)
+        tasacion.tipoDePropiedad = TipoPropiedad.fromJson(tasacionJson.tipoDePropiedad)
+        return tasacion
     }
 }

@@ -18,11 +18,19 @@
           </thead>
           <tbody *ngFor="let tasacion of tasaciones">
             <tr class="fila-contenido">
-              <td>{{ tasacion.fecha }} </td>
-              <td> </td>
-              <td> </td>
+              <td>{{ tasacion.fecha  | date: 'dd/MM/yyyy'}} </td>
+              <td>{{ tasacion.__barrio__.descripcion }}</td>
+              <td>{{ tasacion.valor }} </td>
               <td>{{ tasacion.ambientes }}</td>
               <td>{{ tasacion.superficie }}</td>
+              <td>{{ tasacion.__tipoDePropiedad__.descripcion }}</td>
+              <td>
+                <mdb-checkbox [disabled]="true" [checked]=tasacion.privada [default]="true">
+                </mdb-checkbox>
+              </td>
+              <td *ngFor="let sitio of tasacion.__sitios_publicados__">
+                <img height="40" width="40" [src]="sitio.logo_url">
+              </td>
 
             </tr>
           </tbody>
