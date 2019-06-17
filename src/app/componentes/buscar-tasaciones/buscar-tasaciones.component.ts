@@ -22,9 +22,9 @@ export class BuscarTasacionesComponent implements OnInit {
   tasacionBusqueda: TasacionBusqueda
   numbersValidatingForm: FormGroup
   resultados: Array<Tasacion>
+  seLanzoBusqueda: boolean
 
   constructor(private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
-    this.setearFormulario()
   }
 
   get inputSuperficie() { return this.numbersValidatingForm.get('superficie') }
@@ -32,12 +32,14 @@ export class BuscarTasacionesComponent implements OnInit {
 
 
   async ngOnInit() {
+    this.setearFormulario()
     this.barrios = await this.zonaService.barrios()
     this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
     this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
   }
 
   setearFormulario() {
+    this.seLanzoBusqueda = false
     this.resultados = undefined
     this.tasacionBusqueda = new TasacionBusqueda()
     this.numbersValidatingForm = new FormGroup({
@@ -60,6 +62,11 @@ export class BuscarTasacionesComponent implements OnInit {
 
   async buscar() {
     this.resultados = await this.tasacionService.tasacionesSimilares(this.tasacionBusqueda)
+    this.seLanzoBusqueda = true
+  }
+
+  noHuboResultados() {
+    return this.resultados.length == 0 
   }
 
 }

@@ -95,6 +95,9 @@
           </tr>
         </tbody>
       </table>
+      <div *ngIf="seLanzoBusqueda && noHuboResultados()">
+        <strong style="font-size: 2.5rem">No se encontraron tasaciones similares</strong>
+      </div>
     </div>
 
   </mdb-card-body>
