@@ -7,7 +7,7 @@
           <a class="nav-link" (click)="openModalDatosPorZona()">Datos por zona</a>
         </li>
         <li *ngIf="estaLogueado()" class="nav-item">
-          <a class="nav-link" routerLink="/buscar-tasaciones">Buscar tasaciones</a>
+          <a class="nav-link" (click)="openModalBuscarTasaciones()">Buscar tasaciones</a>
         </li>
         <li *ngIf="estaLogueado()" class="nav-item">
           <a class="nav-link" routerLink="/tasar-propiedad">Tasar propiedades</a>
@@ -16,13 +16,13 @@
           <a class="nav-link" routerLink="/tasaciones-anteriores">Tasaciones anteriores</a>
         </li>
         <li *ngIf="!estaLogueado()" class="nav-item">
-          <a class="nav-link" routerLink="/registrar-usuario">Registrar usuario</a>
+          <a class="nav-link" (click)="openModalRegistrarUsuario()">Registrar usuario</a>
         </li>
       </ul>
 
       <div class="nav-item" *ngIf="!estaLogueado()">
         <button class="boton" type="button" mdbBtn color="primary" size="sm" outline="true" rounded="true"
-          data-toggle="modal" [disabled]="modalAbierto" data-target="#modal" (click)="openModal()"
+          data-toggle="modal" [disabled]="modalAbierto" data-target="#modal" (click)="openModalLogin()"
           mdbWavesEffect>Iniciar Sesion</button>
       </div>
 

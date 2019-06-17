@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LoginComponent } from 'src/app/componentes/login/login.component';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { DatosPorZonaComponent } from 'src/app/componentes/datos-por-zona/datos-por-zona.component';
+import { BuscarTasacionesComponent } from 'src/app/componentes/buscar-tasaciones/buscar-tasaciones.component';
+import { RegistrarUsuarioComponent } from 'src/app/componentes/registrar-usuario/registrar-usuario.component';
 
 @Component({
   selector: 'navbar',
@@ -12,9 +14,10 @@ import { DatosPorZonaComponent } from 'src/app/componentes/datos-por-zona/datos-
 })
 export class NavbarComponent implements OnInit {
 
-  modalRef: MDBModalRef;
+  modalLogin: MDBModalRef;
   modalDatosPorZona: MDBModalRef;
-
+  modalBuscarTasaciones: MDBModalRef;
+  modalRegistrarUsuario: MDBModalRef;
 
   constructor(private router: Router, private usuarioService: UsuarioService, private modalService: MDBModalService) {
 
@@ -32,8 +35,8 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/home')
   }
 
-  openModal() {
-    this.modalRef = this.modalService.show(LoginComponent, {
+  openModalLogin() {
+    this.modalLogin = this.modalService.show(LoginComponent, {
       data: {
         returnUrl: this.router.url
       }
@@ -42,6 +45,16 @@ export class NavbarComponent implements OnInit {
 
   openModalDatosPorZona() {
     this.modalDatosPorZona = this.modalService.show(DatosPorZonaComponent, {
+    });
+  }
+
+  openModalBuscarTasaciones() {
+    this.modalBuscarTasaciones = this.modalService.show(BuscarTasacionesComponent, {
+    });
+  }
+
+  openModalRegistrarUsuario() {
+    this.modalRegistrarUsuario = this.modalService.show(RegistrarUsuarioComponent, {
     });
   }
 
