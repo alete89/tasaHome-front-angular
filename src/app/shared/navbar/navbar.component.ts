@@ -37,6 +37,13 @@ export class NavbarComponent implements OnInit {
 
   openModalLogin() {
     this.modalLogin = this.modalService.show(LoginComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      containerClass: 'right',
+      animated: true,
       data: {
         returnUrl: this.router.url
       }
@@ -45,16 +52,41 @@ export class NavbarComponent implements OnInit {
 
   openModalDatosPorZona() {
     this.modalDatosPorZona = this.modalService.show(DatosPorZonaComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      containerClass: 'right',
+      animated: true
     });
   }
 
   openModalBuscarTasaciones() {
     this.modalBuscarTasaciones = this.modalService.show(BuscarTasacionesComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog modal-lg',
+      containerClass: 'right',
+      animated: true
+
     });
   }
 
   openModalRegistrarUsuario() {
     this.modalRegistrarUsuario = this.modalService.show(RegistrarUsuarioComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog modal-lg',
+      containerClass: 'right',
+      animated: true,
+
     });
   }
 
