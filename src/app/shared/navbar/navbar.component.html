@@ -41,7 +41,7 @@
             class="img-fluid rounded-circle z-depth-0" style="height: 30px"></a>
         <div class="dropdown-menu dropdown-menu-right  dropdown-primary">
           <a class="dropdown-item" routerLink="/tasaciones-anteriores">Mis tasaciones</a>
-          <a class="dropdown-item" routerLink="/buscar-tasaciones">Tasaciones similares</a>
+          <a class="dropdown-item" (click)="openModalBuscarTasaciones()">Tasaciones similares</a>
           <div class="divider dropdown-divider"></div>
           <a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesión</a>
         </div>
