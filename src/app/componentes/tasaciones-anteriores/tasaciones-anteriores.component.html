@@ -1,4 +1,4 @@
-<div class="margen">
+<div *ngIf="hayTasacionesAnteriores()" class="margen">
   <p class="tasaciones">Tasaciones Anteriores</p>
   <div class="contenedor-tasaciones">
     <div class="card tasaciones">
@@ -38,4 +38,11 @@
       </div>
     </div>
   </div>
+
 </div>
+
+<mdb-card *ngIf="!hayTasacionesAnteriores()" style="width: 30rem;">
+  <div style="text-align:center;">
+    <strong style="font-size: 3rem; text-align: center">No Hay Tasaciones anteriores</strong>
+  </div>
+</mdb-card>

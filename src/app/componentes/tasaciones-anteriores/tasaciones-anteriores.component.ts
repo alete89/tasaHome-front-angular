@@ -29,5 +29,9 @@ export class TasacionesAnterioresComponent implements OnInit {
     }
   }
 
+  hayTasacionesAnteriores() {
+    return this.tasaciones.length > 0
+  }
+
 
 }
