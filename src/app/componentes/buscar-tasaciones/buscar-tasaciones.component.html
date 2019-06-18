@@ -72,34 +72,34 @@
     </form>
 
 
-    <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
-      <table class="table">
-        <thead class="colorear-celeste">
-          <tr>
-            <th>FECHA</th>
-            <th>BARRIO</th>
-            <th>VALOR</th>
-            <th>AMBIENTES</th>
-            <th>SUPERFICE</th>
-            <th>TIPO</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let resultado of resultados">
-          <tr class="fila-contenido">
-            <td>{{ resultado.fecha  | date: 'dd/MM/yyyy'}} </td>
-            <td>{{ resultado.__barrio__.descripcion }}</td>
-            <td>{{ resultado.valor }} </td>
-            <td>{{ resultado.ambientes }}</td>
-            <td>{{ resultado.superficie }}</td>
-            <td>{{ resultado.__tipoDePropiedad__.descripcion }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div *ngIf="seLanzoBusqueda && noHuboResultados()">
-        <strong style="font-size: 2.5rem">No se encontraron tasaciones similares</strong>
-      </div>
-    </div>
-
   </mdb-card-body>
+
+  <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+    <table class="table">
+      <thead class="colorear-celeste">
+        <tr>
+          <th>FECHA</th>
+          <th>BARRIO</th>
+          <th>VALOR</th>
+          <th>AMBIENTES</th>
+          <th>SUPERFICE</th>
+          <th>TIPO</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let resultado of resultados">
+        <tr class="fila-contenido">
+          <td>{{ resultado.fecha  | date: 'dd/MM/yyyy'}} </td>
+          <td>{{ resultado.__barrio__.descripcion }}</td>
+          <td>{{ resultado.valor }} </td>
+          <td>{{ resultado.ambientes }}</td>
+          <td>{{ resultado.superficie }}</td>
+          <td>{{ resultado.__tipoDePropiedad__.descripcion }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="seLanzoBusqueda && noHuboResultados()">
+      <strong style="font-size: 2.5rem">No se encontraron tasaciones similares</strong>
+    </div>
+  </div>
 
 </mdb-card>
