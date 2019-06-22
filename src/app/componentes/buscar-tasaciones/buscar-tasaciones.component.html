@@ -28,9 +28,9 @@
 
         <div *ngFor="let tipo of tiposDeOperacion">
           <div style="margin-left: 2rem;" class="custom-control custom-radio custom-control-inline">
-            <input [(ngModel)]="tasacionBusqueda.id_tipo_operacion" name="tipo_operacion_{{tipo.id}}" [value]="tipo.id"
-              type="radio" class="custom-control-input" id="defaultInline1_{{tipo.id}}" mdbInput>
-            <label class="custom-control-label" for="defaultInline1_{{tipo.id}}">{{tipo.descripcion}}</label>
+            <input [(ngModel)]="tasacionBusqueda.id_tipo_operacion" name="buscar_tipo_operacion_{{tipo.id}}" [value]="tipo.id"
+              type="radio" class="custom-control-input" id="buscar_tipo_operacion_{{tipo.id}}" mdbInput>
+            <label class="custom-control-label" for="buscar_tipo_operacion_{{tipo.id}}">{{tipo.descripcion}}</label>
           </div>
         </div>
       </div>

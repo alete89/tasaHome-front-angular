@@ -30,8 +30,8 @@ export class TasacionesAnterioresComponent implements OnInit {
   }
 
   hayTasacionesAnteriores() {
-    return this.tasaciones.length > 0
+    if (this.tasaciones) {
+      return this.tasaciones.length > 0
+    }
   }
-
-
 }
