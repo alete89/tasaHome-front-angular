@@ -1,3 +1,94 @@
-<p>
-  tasar-propiedad works!
-</p>
+<div class="card fondo_tasar" style="margin: 2rem;">
+  <div style="margin-left: 3rem; margin-top: 1rem;margin-bottom: 3rem;" class="form-row">
+    <div class="col">
+      <div style="margin-left: 3rem;">
+        <div style="margin-bottom: 3rem;width: 30rem;" class="md-form">
+          <input name="direccion" [(ngModel)]="tasacion.direccion" type="text" id="direccion" class="form-control"
+            mdbInput>
+          <label for="direccion">Dirección</label>
+        </div>
+
+        <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM
+    &q=UNSAM+Buenos+Aires" allowfullscreen>
+        </iframe>
+      </div>
+
+
+      <div style="margin-left: 3rem; margin-top: 1rem;margin-bottom: 3rem;width: 40rem;" class="form-row">
+        <div class="col margen">
+          <div [formGroup]="numbersValidatingForm" class="md-form">
+            <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="1" mdbInput
+              max="100000000" [(ngModel)]="tasacion.superficie">
+            <label for="form1">Superficie mínima</label>
+            <mdb-error *ngIf="superficieInvalida()">Superficie incorrecta</mdb-error>
+            <mdb-success *ngIf="!superficieInvalida()"></mdb-success>
+          </div>
+        </div>
+        <div class="col margen">
+          <p>Tipo de propiedad</p>
+          <select style="width: 10rem;" name="tipo_propiedad" [(ngModel)]="tasacion.id_tipo_propiedad"
+            class="browser-default custom-select">
+            <option *ngFor="let tipo of tiposDePropiedad" [value]="tipo.id">{{tipo.descripcion}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div *ngFor="let tipo of tiposDeOperacion">
+          <div style="margin-left: 2rem;" class="custom-control custom-radio custom-control-inline">
+            <input [(ngModel)]="tasacion.id_tipo_operacion" name="tipo_operacion_{{tipo.id}}" [value]="tipo.id"
+              type="radio" class="custom-control-input" id="defaultInline1_{{tipo.id}}" mdbInput>
+            <label class="custom-control-label" for="defaultInline1_{{tipo.id}}">{{tipo.descripcion}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-row">
+        <div class="col margen">
+          <div [formGroup]="numbersValidatingForm" class="md-form">
+            <input class="form-control" formControlName="ambientes" type="number" mdbInput mdbValidate min="1" mdbInput
+              max="500" [(ngModel)]="tasacion.ambientes">
+            <label style="font-size: 0.8rem;" for="form1">Cantidad ambientes</label>
+            <mdb-error *ngIf="ambientesInvalidos()">Cantidad de ambientes incorrecta</mdb-error>
+            <mdb-success *ngIf="!ambientesInvalidos()"></mdb-success>
+          </div>
+        </div>
+        <div class="col margen">
+          <p>Estado General</p>
+          <select style="width: 10rem;" name="estado" [(ngModel)]="tasacion.id_estado"
+            class="browser-default custom-select">
+            <option *ngFor="let estado of estados" [value]="estado.id">{{estado.descripcion}}</option>
+          </select>
+        </div>
+      </div>
+      <!-- Default unchecked -->
+      <p>Servicios</p>
+      <div class="row" style="margin-top: 1rem;margin-bottom: 1rem;">
+        <div class="col" *ngFor="let servicio of tasacion.servicios">
+          <mdb-checkbox [(ngModel)]="servicio.chequeado" name="servicio_{{servicio.id}}" [default]="true">
+            {{servicio.descripcion}}</mdb-checkbox>
+        </div>
+      </div>
+      <div class="botonera">
+        <button (click)="tasar()" mdbBtn color="info" outline="true" rounded="true"
+          class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">Tasar</button>
+      </div>
+      <div style="max-width: 40rem;margin:auto;margin-top: 2rem;" class="card tasacion" *ngIf="tasacion.valor">
+        <div>
+          <div style="text-align: center;font-size: 4rem;">
+            <strong style="color:black;">U$S {{tasacion.valor | number}}</strong></div>
+        </div>
+        <mdb-checkbox [(ngModel)]="tasacion.privada" name="privada" [default]="true">
+          Guardar tasación privada</mdb-checkbox>
+        <div class="botonera" style="text-align: center;">
+          <button (click)="guardar()" mdbBtn color="info" rounded="true" class="my-4 waves-effect z-depth-0 buscar "
+            mdbWavesEffect type="submit">Guardar</button>
+          <button (click)="publicar()" mdbBtn color="info" rounded="true" class="my-4 waves-effect z-depth-0 buscar "
+            mdbWavesEffect type="submit">Publicar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
