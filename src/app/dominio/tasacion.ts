@@ -1,7 +1,7 @@
 import { TipoPropiedad } from './tipo_propiedad';
+import { Servicio } from './servicio';
 
 export class Tasacion {
-
 
     id: number
 
@@ -15,24 +15,17 @@ export class Tasacion {
 
     valor: number
 
-    // usuario: Usuario
+    direccion: String
 
+    id_tipo_propiedad: number
 
-    // tipoDeOperacion: TipoOperacion
+    id_tipo_operacion: number
 
-    // estado: Estado
+    id_estado: number
 
-    // servicios: Servicio[]
+    servicios: Array<Servicio>
 
-    // sitios_publicados: SitioPublicacion[]
-
-    // barrio: Barrio;
-
-    // validar() {
-    //     if (!this.descripcion || !this.ambientes || !this.superficie || !this.fecha || !this.valor) {
-    //         throw "Tasacion inválida"
-    //     }
-    // }
+    privada: boolean = false
 
     constructor(init?: Partial<Tasacion>) {
         Object.assign(this, init)
