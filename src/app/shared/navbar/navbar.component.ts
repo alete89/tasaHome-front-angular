@@ -17,7 +17,6 @@ export class NavbarComponent implements OnInit {
   modalLogin: MDBModalRef;
   modalDatosPorZona: MDBModalRef;
   modalBuscarTasaciones: MDBModalRef;
-  modalRegistrarUsuario: MDBModalRef;
 
   constructor(private router: Router, private usuarioService: UsuarioService, private modalService: MDBModalService) {
 
@@ -75,19 +74,4 @@ export class NavbarComponent implements OnInit {
 
     });
   }
-
-  openModalRegistrarUsuario() {
-    this.modalRegistrarUsuario = this.modalService.show(RegistrarUsuarioComponent, {
-      backdrop: true,
-      keyboard: true,
-      focus: true,
-      show: false,
-      ignoreBackdropClick: false,
-      class: 'modal-dialog modal-lg',
-      containerClass: 'right',
-      animated: true,
-
-    });
-  }
-
 }
