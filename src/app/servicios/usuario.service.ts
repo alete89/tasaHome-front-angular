@@ -47,7 +47,12 @@ export class UsuarioService implements IUsuarioService {
 
   async registrarUsuario(usuario: Usuario) {
     const json = JSON.parse(JSON.stringify(usuario))
-    return this.http.post(REST_SERVER_URL + '/registrar-usuario', json).toPromise()
+    return await this.http.post(REST_SERVER_URL + '/registrar_usuario', json).toPromise()
+  }
+
+  async guardarTasacion(tasacion: Tasacion) {
+    const json = JSON.parse(JSON.stringify(tasacion))
+    return await this.http.post(REST_SERVER_URL + '/guardar_tasacion/' + this.userLoggedInId(), json).toPromise()
   }
 
 

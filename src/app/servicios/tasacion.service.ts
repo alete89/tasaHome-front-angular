@@ -14,13 +14,13 @@ export class TasacionService {
   constructor(private http: Http) { }
 
   async tiposDePropiedad() {
-    const url = REST_SERVER_URL + "/tipos-propiedad"
+    const url = REST_SERVER_URL + "/tipos_propiedad"
     const resp = await this.http.get(url).toPromise()
     return resp.json().map(TipoPropiedad.fromJson)
   }
 
   async tiposDeOperacion() {
-    const url = REST_SERVER_URL + "/tipos-operacion"
+    const url = REST_SERVER_URL + "/tipos_operacion"
     const resp = await this.http.get(url).toPromise()
     return resp.json().map(TipoPropiedad.fromJson)
   }
@@ -30,6 +30,12 @@ export class TasacionService {
     const json = JSON.parse(JSON.stringify(tasacionBusqueda))
     const resp = await this.http.put(REST_SERVER_URL + '/tasaciones_similares', json).toPromise()
     return resp.json().map(Tasacion.fromJson)
+  }
+
+  async tasarPropiedad(tasacion: Tasacion) {
+    const json = JSON.parse(JSON.stringify(tasacion))
+    let resp = await this.http.put(REST_SERVER_URL + '/tasar_propiedad', json).toPromise()
+    return resp.json()
   }
 
 }
