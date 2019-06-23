@@ -8,6 +8,9 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { TasacionBusqueda } from 'src/app/dominio/tasacion_busqueda';
 import { TipoPropiedad } from 'src/app/dominio/tipo_propiedad';
 import { TasacionService } from 'src/app/servicios/tasacion.service';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { Router } from '@angular/router';
+import { ContactarUsuarioComponent } from '../contactar-usuario/contactar-usuario.component';
 
 @Component({
   selector: 'app-buscar-tasaciones',
@@ -23,8 +26,9 @@ export class BuscarTasacionesComponent implements OnInit {
   numbersValidatingForm: FormGroup
   resultados: Array<Tasacion>
   seLanzoBusqueda: boolean
+  modalContactarUsuario: MDBModalRef
 
-  constructor(private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
+  constructor(private router: Router, public modalService: MDBModalService, public modalBuscarTasaciones: MDBModalRef, private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
   }
 
   get inputSuperficie() { return this.numbersValidatingForm.get('superficie') }
@@ -61,12 +65,29 @@ export class BuscarTasacionesComponent implements OnInit {
   }
 
   async buscar() {
-    this.resultados = await this.tasacionService.tasacionesSimilares(this.tasacionBusqueda)
+    this.resultados = await this.usuarioService.tasacionesSimilares(this.tasacionBusqueda)
     this.seLanzoBusqueda = true
   }
 
   noHuboResultados() {
-    return this.resultados.length == 0 
+    return this.resultados.length == 0
+  }
+
+  openModalContactarUsuario(usuario: Usuario) {
+    this.modalContactarUsuario = this.modalService.show(ContactarUsuarioComponent, {
+      data: {
+        id_emisor: this.usuarioService.userLoggedInId(),
+        email_receptor: usuario.email
+      },
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog modal-dialog-centered',
+      containerClass: 'right',
+      animated: true,
+    })
   }
 
 }

@@ -24,3 +24,8 @@ th {
     font-size: 3rem;
     text-align: center;
 }
+
+.contactar_usuario {
+    display: block;
+    margin: auto;
+}

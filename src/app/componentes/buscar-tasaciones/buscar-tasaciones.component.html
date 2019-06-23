@@ -28,8 +28,9 @@
 
         <div *ngFor="let tipo of tiposDeOperacion">
           <div style="margin-left: 2rem;" class="custom-control custom-radio custom-control-inline">
-            <input [(ngModel)]="tasacionBusqueda.id_tipo_operacion" name="buscar_tipo_operacion_{{tipo.id}}" [value]="tipo.id"
-              type="radio" class="custom-control-input" id="buscar_tipo_operacion_{{tipo.id}}" mdbInput>
+            <input [(ngModel)]="tasacionBusqueda.id_tipo_operacion" name="buscar_tipo_operacion_{{tipo.id}}"
+              [value]="tipo.id" type="radio" class="custom-control-input" id="buscar_tipo_operacion_{{tipo.id}}"
+              mdbInput>
             <label class="custom-control-label" for="buscar_tipo_operacion_{{tipo.id}}">{{tipo.descripcion}}</label>
           </div>
         </div>
@@ -39,8 +40,8 @@
         <div class="col">
           <div [formGroup]="numbersValidatingForm" class="md-form">
             <input class="form-control" formControlName="ambientes" type="number" mdbInput mdbValidate min="1" mdbInput
-              max="500" [(ngModel)]="tasacionBusqueda.ambientes">
-            <label style="font-size: 0.8rem;" for="form1">Cantidad ambientes</label>
+              max="500" [(ngModel)]="tasacionBusqueda.ambientes" id="cantidad_ambientes_buscar_tasaciones">
+            <label style="font-size: 0.8rem;" for="cantidad_ambientes_buscar_tasaciones">Cantidad ambientes</label>
             <mdb-error *ngIf="ambientesInvalidos()">Cantidad de ambientes incorrecta</mdb-error>
             <mdb-success *ngIf="!ambientesInvalidos()"></mdb-success>
           </div>
@@ -48,8 +49,8 @@
         <div class="col">
           <div [formGroup]="numbersValidatingForm" class="md-form">
             <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="1" mdbInput
-              max="100000000" [(ngModel)]="tasacionBusqueda.superficie_minima">
-            <label style="font-size: 0.8rem;" for="form1">Superficie mínima</label>
+              max="100000000" [(ngModel)]="tasacionBusqueda.superficie_minima" id="superficie_minima_buscar_tasacion">
+            <label style="font-size: 0.8rem;" for="superficie_minima_buscar_tasacion">Superficie mínima</label>
             <mdb-error *ngIf="superficieInvalida()">Superficie incorrecta</mdb-error>
             <mdb-success *ngIf="!superficieInvalida()"></mdb-success>
           </div>
@@ -63,9 +64,10 @@
       </div>
 
       <div class="botonera">
-        <button [disabled]="formularioVacio()" (click)="buscar()" mdbBtn color="info" outline="true" rounded="true"
-          class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">Buscar</button>
-        <button [disabled]="formularioVacio()" (click)="setearFormulario()" mdbBtn color="danger" rounded="true"
+        <button style="color: white;" [disabled]="formularioVacio()" (click)="buscar()" mdbBtn gradient="blue"
+          outline="true" rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect
+          type="submit">Buscar</button>
+        <button [disabled]="formularioVacio()" (click)="setearFormulario()" mdbBtn color="blue-grey" rounded="true"
           class="my-4 waves-effect z-depth-0 buscar" mdbWavesEffect type="button">Nueva búsqueda</button>
         <hr>
       </div>
@@ -84,16 +86,21 @@
           <th>AMBIENTES</th>
           <th>SUPERFICE</th>
           <th>TIPO</th>
+          <th></th>
         </tr>
       </thead>
       <tbody *ngFor="let resultado of resultados">
         <tr class="fila-contenido">
-          <td>{{ resultado.fecha  | date: 'dd/MM/yyyy'}} </td>
-          <td>{{ resultado.__barrio__.descripcion }}</td>
-          <td>{{ resultado.valor }} </td>
-          <td>{{ resultado.ambientes }}</td>
-          <td>{{ resultado.superficie }}</td>
-          <td>{{ resultado.__tipoDePropiedad__.descripcion }}</td>
+          <td *ngIf="resultado.fecha">{{ resultado.fecha  | date: 'dd/MM/yyyy'}} </td>
+          <td *ngIf="resultado.__barrio__">{{ resultado.__barrio__.descripcion }}</td>
+          <td *ngIf="resultado.valor">{{ resultado.valor }} </td>
+          <td *ngIf="resultado.ambientes">{{ resultado.ambientes }}</td>
+          <td *ngIf="resultado.superficie">{{ resultado.superficie }}</td>
+          <td *ngIf="resultado.__tipoDePropiedad__">{{ resultado.__tipoDePropiedad__.descripcion }}</td>
+          <td *ngIf="resultado.__usuario__"><button (click)="openModalContactarUsuario(resultado.__usuario__)"
+              class="contactar_usuario" mdbBtn type="button" color="mdb-color" size="sm"
+              mdbWavesEffect><strong>Contactar</strong></button>
+          </td>
         </tr>
       </tbody>
     </table>
