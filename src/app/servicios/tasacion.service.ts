@@ -25,13 +25,6 @@ export class TasacionService {
     return resp.json().map(TipoPropiedad.fromJson)
   }
 
-
-  async tasacionesSimilares(tasacionBusqueda: TasacionBusqueda) {
-    const json = JSON.parse(JSON.stringify(tasacionBusqueda))
-    const resp = await this.http.put(REST_SERVER_URL + '/tasaciones_similares', json).toPromise()
-    return resp.json().map(Tasacion.fromJson)
-  }
-
   async tasarPropiedad(tasacion: Tasacion) {
     const json = JSON.parse(JSON.stringify(tasacion))
     let resp = await this.http.put(REST_SERVER_URL + '/tasar_propiedad', json).toPromise()

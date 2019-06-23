@@ -3,6 +3,7 @@ import { Usuario } from '../dominio/usuario';
 import { REST_SERVER_URL } from './configuration';
 import { Http } from '@angular/http';
 import { Tasacion } from '../dominio/tasacion';
+import { TasacionBusqueda } from '../dominio/tasacion_busqueda';
 
 export interface IUsuarioService {
   userLogin(username: string, password: string)
@@ -41,6 +42,7 @@ export class UsuarioService implements IUsuarioService {
     return sessionStorage.getItem("userLoggedInId")
   }
 
+
   cerrarSesion() {
     sessionStorage.clear()
   }
@@ -53,6 +55,12 @@ export class UsuarioService implements IUsuarioService {
   async guardarTasacion(tasacion: Tasacion) {
     const json = JSON.parse(JSON.stringify(tasacion))
     return await this.http.post(REST_SERVER_URL + '/guardar_tasacion/' + this.userLoggedInId(), json).toPromise()
+  }
+
+  async tasacionesSimilares(tasacionBusqueda: TasacionBusqueda) {
+    const json = JSON.parse(JSON.stringify(tasacionBusqueda))
+    const resp = await this.http.put(REST_SERVER_URL + '/tasaciones_similares/' + this.userLoggedInId(), json).toPromise()
+    return resp.json().map(Tasacion.fromJson)
   }
 
 
