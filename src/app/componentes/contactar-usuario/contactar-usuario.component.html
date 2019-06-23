@@ -1,0 +1,17 @@
+<mdb-card>
+  <p class="titulo">
+    <strong>Contactar usuario</strong>
+  </p>
+  <div style="margin: 2rem;" class="md-form md-outline">
+    <textarea [(ngModel)]="mensaje" type="text" id="mensaje_contactar_usuario" class="form-control md-textarea" rows="6"
+      mdbInput></textarea>
+    <label style="text-align: center;" for="mensaje_contactar_usuario">Mensaje</label>
+  </div>
+  <div class="botonera">
+    <button (click)="aceptar()" mdbBtn color="success" rounded="true" class="my-4 waves-effect z-depth-0 buscar "
+      mdbWavesEffect type="submit">Aceptar</button>
+    <button (click)="cancelar()" mdbBtn color="danger" rounded="true" class="my-4 waves-effect z-depth-0 buscar"
+      mdbWavesEffect type="button">Cancelar</button>
+    <hr>
+  </div>
+</mdb-card>

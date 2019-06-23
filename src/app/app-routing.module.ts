@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { BuscarTasacionesComponent } from './componentes/buscar-tasaciones/buscar-tasaciones.component';
+import { ContactarUsuarioComponent } from './componentes/contactar-usuario/contactar-usuario.component';
+import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zona.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
-import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
 import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/registrar-usuario.component';
-import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zona.component';
-import { BuscarTasacionesComponent } from './componentes/buscar-tasaciones/buscar-tasaciones.component';
+import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
 import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent, pathMatch: 'full' },
   { path: 'datos-por-zona', component: DatosPorZonaComponent, pathMatch: 'full' },
   { path: 'tasar-propiedad', component: TasarPropiedadComponent, pathMatch: 'full' },
-  { path: 'buscar-tasaciones', component: BuscarTasacionesComponent, pathMatch: 'full' }
+  { path: 'buscar-tasaciones', component: BuscarTasacionesComponent, pathMatch: 'full' },
+  { path: 'contactar-usuario', component: ContactarUsuarioComponent, pathMatch: 'full' }
 
 ];
 

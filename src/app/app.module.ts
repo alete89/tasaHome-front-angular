@@ -14,6 +14,7 @@ import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/regis
 import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zona.component';
 import { BuscarTasacionesComponent } from './componentes/buscar-tasaciones/buscar-tasaciones.component';
 import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
+import { ContactarUsuarioComponent } from './componentes/contactar-usuario/contactar-usuario.component';
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-pro
       RegistrarUsuarioComponent,
       DatosPorZonaComponent,
       BuscarTasacionesComponent,
-      TasarPropiedadComponent
+      TasarPropiedadComponent,
+      ContactarUsuarioComponent
       // SafePipe
    ],
    imports: [
