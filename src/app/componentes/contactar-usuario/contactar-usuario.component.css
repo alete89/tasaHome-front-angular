@@ -11,3 +11,12 @@
     font-size: 3rem;
     text-align: center;
 }
+
+.notifications {
+    z-index: 9999;
+    top: 0;
+    right: 0;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    position: fixed;
+}

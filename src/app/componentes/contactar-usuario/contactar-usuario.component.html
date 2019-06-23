@@ -8,10 +8,15 @@
     <label style="text-align: center;" for="mensaje_contactar_usuario">Mensaje</label>
   </div>
   <div class="botonera">
-    <button (click)="aceptar()" mdbBtn color="success" rounded="true" class="my-4 waves-effect z-depth-0 buscar "
-      mdbWavesEffect type="submit">Aceptar</button>
+    <button [disabled]=!mensaje (click)="aceptar()" mdbBtn color="success" rounded="true"
+      class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">Aceptar</button>
     <button (click)="cancelar()" mdbBtn color="danger" rounded="true" class="my-4 waves-effect z-depth-0 buscar"
       mdbWavesEffect type="button">Cancelar</button>
     <hr>
   </div>
 </mdb-card>
+
+<div class="notifications" style="height: 3rem; ">
+  <app-notifications [notification]="notification">
+  </app-notifications>
+</div>
