@@ -19,7 +19,7 @@
           <tbody *ngFor="let tasacion of tasaciones">
             <tr class="fila-contenido">
               <td *ngIf="tasacion.fecha">{{ tasacion.fecha  | date: 'dd/MM/yyyy'}} </td>
-              <td *ngIf="tasacion.__barrio__">{{ tasacion.__barrio__.descripcion }}</td>
+              <td *ngIf="tasacion.direccion">{{ tasacion.direccion }}</td>
               <td *ngIf="tasacion.valor">{{ tasacion.valor }} </td>
               <td *ngIf="tasacion.fecha">{{ tasacion.ambientes }}</td>
               <td *ngIf="tasacion.superficie">{{ tasacion.superficie }}</td>
