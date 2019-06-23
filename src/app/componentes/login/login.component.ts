@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
   irARegistrarUsuario() {
     this.modalRef.hide()
     this.router.navigate(["/registrar-usuario"])
-
   }
 
 }

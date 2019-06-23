@@ -23,6 +23,8 @@ export class Tasacion {
 
     id_estado: number
 
+    id_usuario: number
+
     servicios: Array<Servicio>
 
     privada: boolean = false

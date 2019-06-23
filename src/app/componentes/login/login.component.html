@@ -1,24 +1,26 @@
 <div (keyup.enter)="iniciarSesion()" class="card login">
   <form class="form text-center border border-light p-5">
-    
+
     <p class="h4 mb-4">Iniciar Sesión</p>
-    
-    <input type="text" name="email" [(ngModel)]="email" class="form-control mb-4" placeholder="Correo electrónico">
+
+    <input type="text" name="email_login" [(ngModel)]="email" class="form-control mb-4"
+      placeholder="Correo electrónico">
     <div *ngIf="intentoFallido">
       <a class="recuperar-contraseña">¿Olvidaste tu contraseña?</a>
     </div>
-    <input type="password" name="password" [(ngModel)]="password" class="form-control mb-4" placeholder="Password">
-    
+    <input type="password" name="password_login" [(ngModel)]="password" class="form-control mb-4"
+      placeholder="Password">
+
     <div class="d-flex justify-content-around">
     </div>
-    
-    <button class="iniciar-sesion" [disabled]="camposIncompletos()" mdbBtn type="button" gradient="blue" rounded="true" block="true"
-    (click)="iniciarSesion()">Iniciar Sesión</button>
+
+    <button class="iniciar-sesion" [disabled]="camposIncompletos()" mdbBtn type="button" gradient="blue" rounded="true"
+      block="true" (click)="iniciarSesion()">Iniciar Sesión</button>
     <p *ngIf="intentoFallido">Nuevo en TasaHome?
       <a (click)="irARegistrarUsuario()">Registrarse</a>
     </p>
     <app-notifications [notification]="notification"></app-notifications>
-    
+
     <!--      <p>¿No tienes cuenta?
       <a href="">Registrarse</a>
     </p>
