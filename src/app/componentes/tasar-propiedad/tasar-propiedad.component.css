@@ -2,10 +2,11 @@
     margin-right: 5rem;
 }
 
-.tasacion {
-    /* background-image: url('https://media.giphy.com/media/12Eo7WogCAoj84/giphy.gif'); */
-}
-
-.fondo_tasar {
-    /* color:white; */
+.notifications {
+    z-index: 9999;
+    top: 0;
+    right: 0;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    position: fixed;
 }

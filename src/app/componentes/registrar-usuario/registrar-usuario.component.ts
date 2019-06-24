@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Zona } from 'src/app/dominio/zona';
-import { ZonaService } from 'src/app/servicios/zona.service';
-import { Tasacion } from 'src/app/dominio/tasacion';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/dominio/usuario';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Zona } from 'src/app/dominio/zona';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { ZonaService } from 'src/app/servicios/zona.service';
+import { Notification } from 'src/app/shared/notifications/notification';
 
 @Component({
   selector: 'registrar-usuario',
@@ -19,12 +19,14 @@ export class RegistrarUsuarioComponent implements OnInit {
   usuario: Usuario
   confirmacion_contrasenia: string
   camposValidatingForm: FormGroup
+  notification: Notification = new Notification()
 
   constructor(private zonaService: ZonaService, private usuarioService: UsuarioService) {
     this.setearFormulario()
   }
 
   async ngOnInit() {
+    this.notification.cleanLoading()
     this.provincias = await this.zonaService.provincias()
   }
 
@@ -69,8 +71,13 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   async aceptar() {
-    await this.usuarioService.registrarUsuario(this.usuario)
-    this.setearFormulario()
+    try {
+      await this.usuarioService.registrarUsuario(this.usuario)
+      this.notification.popUpMessage("Usuario registrado.", "success", 1500)
+      this.setearFormulario()
+    } catch (error) {
+      this.notification.showError(error._body)
+    }
   }
 
   setearFormulario() {

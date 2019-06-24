@@ -7,6 +7,7 @@ import { Estado } from 'src/app/dominio/estado';
 import { EstadoService } from 'src/app/servicios/estado.service';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { Notification } from 'src/app/shared/notifications/notification';
 
 @Component({
   selector: 'app-tasar-propiedad',
@@ -20,6 +21,8 @@ export class TasarPropiedadComponent implements OnInit {
   tiposDeOperacion: Array<TipoPropiedad>
   estados: Array<Estado>
   numbersValidatingForm: FormGroup
+  notification: Notification = new Notification()
+  yaGuardo: boolean = false
 
   constructor(private usuarioService: UsuarioService, private tasacionService: TasacionService, private estadoService: EstadoService, private servicioService: ServicioService) {
     this.tasacion = new Tasacion()
@@ -42,6 +45,7 @@ export class TasarPropiedadComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.notification.cleanLoading()
     this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
     this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
     this.estados = await this.estadoService.estados()
@@ -50,10 +54,17 @@ export class TasarPropiedadComponent implements OnInit {
 
   async tasar() {
     this.tasacion.valor = await this.tasacionService.tasarPropiedad(this.tasacion)
+    this.yaGuardo = false
   }
 
   async guardar() {
-    let respuesta = await this.usuarioService.guardarTasacion(this.tasacion)
+    try {
+      await this.usuarioService.guardarTasacion(this.tasacion)
+      this.notification.popUpMessage("Tasación guardada.", "success", 1500)
+      this.yaGuardo = true
+    } catch (error) {
+      this.notification.showError(error._body)
+    }
   }
 
   async publicar() {

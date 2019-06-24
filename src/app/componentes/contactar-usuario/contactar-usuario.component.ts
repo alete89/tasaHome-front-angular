@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { MensajeService } from 'src/app/servicios/mensaje.service';
+import { Notification } from 'src/app/shared/notifications/notification';
 
 @Component({
   selector: 'contactar-usuario',
@@ -12,10 +13,12 @@ export class ContactarUsuarioComponent implements OnInit {
   id_emisor: string
   email_receptor: String
   mensaje: String
+  notification: Notification = new Notification()
 
   constructor(public modalContactarUsuario: MDBModalRef, private mensajeService: MensajeService) { }
 
   ngOnInit() {
+    this.notification.cleanLoading()
   }
 
   cancelar() {
@@ -23,7 +26,21 @@ export class ContactarUsuarioComponent implements OnInit {
   }
 
   async aceptar() {
-    await this.mensajeService.enviarMensaje(this.id_emisor, this.email_receptor, this.mensaje)
+    try {
+      // await this.mensajeService.enviarMensaje(this.id_emisor, this.email_receptor, this.mensaje)
+      this.notification.popUpMessage("Mensaje enviado.", "success", 1500)
+      this.mensaje = undefined
+      this.cerrarModal()
+    } catch (error) {
+      this.notification.showError(error._body)
+    }
   }
+
+  cerrarModal() {
+    setTimeout(() => {
+      this.modalContactarUsuario.hide()
+    }, 1500)
+  }
+
 
 }

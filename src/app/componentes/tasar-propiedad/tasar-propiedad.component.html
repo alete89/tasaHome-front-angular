@@ -18,8 +18,8 @@
         <div class="col margen">
           <div [formGroup]="numbersValidatingForm" class="md-form">
             <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="1" mdbInput
-              max="100000000" id="superficie_minima_tasar" [(ngModel)]="tasacion.superficie">
-            <label for="superficie_minima_tasar">Superficie mínima</label>
+              max="100000000" id="superficie_tasar" [(ngModel)]="tasacion.superficie">
+            <label for="superficie_tasar">Superficie</label>
             <mdb-error *ngIf="superficieInvalida()">Superficie incorrecta</mdb-error>
             <mdb-success *ngIf="!superficieInvalida()"></mdb-success>
           </div>
@@ -82,13 +82,18 @@
         <mdb-checkbox [(ngModel)]="tasacion.privada" name="privada" [default]="true">
           Guardar tasación privada</mdb-checkbox>
         <div class="botonera" style="text-align: center;">
-          <button (click)="guardar()" mdbBtn color="info" rounded="true" class="my-4 waves-effect z-depth-0 buscar "
-            mdbWavesEffect type="submit">Guardar</button>
-          <button (click)="publicar()" mdbBtn color="info" rounded="true" class="my-4 waves-effect z-depth-0 buscar "
-            mdbWavesEffect type="submit">Publicar</button>
+          <button [disabled]="yaGuardo" mdbTooltip="Guardar tasación" placement="bottom" (click)="guardar()" mdbBtn
+            color="info" rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect
+            type="submit">Guardar</button>
+          <button (click)="publicar()" mdbTooltip="Publicar tasación" placement="bottom" mdbBtn color="info"
+            rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">Publicar</button>
         </div>
       </div>
 
     </div>
+  </div>
+  <div class="notifications" style="height: 3rem; ">
+    <app-notifications [notification]="notification">
+    </app-notifications>
   </div>
 </div>
