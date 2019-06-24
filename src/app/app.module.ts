@@ -1,22 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { AgmCoreModule } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './componentes/home/home.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { LoginComponent } from './componentes/login/login.component';
-import { HttpModule } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NotificationsComponent } from './shared/notifications/notifications.component';
-import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
-import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/registrar-usuario.component';
-import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zona.component';
 import { BuscarTasacionesComponent } from './componentes/buscar-tasaciones/buscar-tasaciones.component';
-import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
 import { ContactarUsuarioComponent } from './componentes/contactar-usuario/contactar-usuario.component';
-import { AgmCoreModule } from '@agm/core';
+import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zona.component';
+import { HomeComponent } from './componentes/home/home.component';
+import { LoginComponent } from './componentes/login/login.component';
 import { MapaComponent } from './componentes/mapa/mapa.component';
+import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/registrar-usuario.component';
+import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
+import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { NotificationsComponent } from './shared/notifications/notifications.component';
+import { MostrarTasacionComponent } from './componentes/mostrar-tasacion/mostrar-tasacion.component';
 
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
@@ -33,7 +35,8 @@ import { MapaComponent } from './componentes/mapa/mapa.component';
       BuscarTasacionesComponent,
       TasarPropiedadComponent,
       ContactarUsuarioComponent,
-      MapaComponent
+      MapaComponent,
+      MostrarTasacionComponent
       // SafePipe
    ],
    imports: [
@@ -44,8 +47,10 @@ import { MapaComponent } from './componentes/mapa/mapa.component';
       ReactiveFormsModule,
       MDBBootstrapModule.forRoot(),
       AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM'
-      })
+         apiKey: 'AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM'
+      }),
+      AgmJsMarkerClustererModule
+
    ],
    providers: [],
    bootstrap: [
