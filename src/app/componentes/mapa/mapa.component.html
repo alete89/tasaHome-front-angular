@@ -1,0 +1,50 @@
+
+<!-- <agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map> -->
+
+  <!-- EL QUE TIENE EL BUSCADOR -->
+  <div class="container">
+    <div class="row my-5 d-flex flex-center">
+      <div class="col-md-6">
+        <agm-map
+        #map
+        [mapTypeId]="'terrain'"
+        [latitude]="location.lat"
+        [longitude]="location.lng"
+        (mapClick)="placeMarker($event)"
+        style="height: 300px"
+        >
+        <agm-marker
+          [latitude]="marker.latitude"
+          [longitude]="marker.longitude"
+        ></agm-marker>
+      </agm-map>
+    </div>
+    <div class="col-md-6">
+      <div class="md-form">
+        <input
+          type="text"
+          [(ngModel)]="direccion"
+          class="form-control"
+          id="searchField"
+          mdbInput
+        />
+        <label for="searchField">Search location</label>
+      </div>
+      <div class="row">
+        <div class="col-md-12 d-flex flex-center">
+          <button
+            mdbBtn
+            color="primary"
+            mdbWavesLight
+            (click)="updateOnMap()"
+            type="submit"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

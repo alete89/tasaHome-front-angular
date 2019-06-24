@@ -15,6 +15,9 @@ import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zo
 import { BuscarTasacionesComponent } from './componentes/buscar-tasaciones/buscar-tasaciones.component';
 import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
 import { ContactarUsuarioComponent } from './componentes/contactar-usuario/contactar-usuario.component';
+import { AgmCoreModule } from '@agm/core';
+import { MapaComponent } from './componentes/mapa/mapa.component';
+
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
 @NgModule({
@@ -29,7 +32,8 @@ import { ContactarUsuarioComponent } from './componentes/contactar-usuario/conta
       DatosPorZonaComponent,
       BuscarTasacionesComponent,
       TasarPropiedadComponent,
-      ContactarUsuarioComponent
+      ContactarUsuarioComponent,
+      MapaComponent
       // SafePipe
    ],
    imports: [
@@ -38,7 +42,10 @@ import { ContactarUsuarioComponent } from './componentes/contactar-usuario/conta
       HttpModule,
       FormsModule,
       ReactiveFormsModule,
-      MDBBootstrapModule.forRoot()
+      MDBBootstrapModule.forRoot(),
+      AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM'
+      })
    ],
    providers: [],
    bootstrap: [
