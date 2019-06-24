@@ -21,7 +21,8 @@ export class GoogleMapsService {
 
   async getLatLongFromStringAddress(address: string){
     // https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
-    const direccion = address.replace(" ", "+")
+    let direccion = address.replace(" ", "+")
+    direccion = direccion + "+Argentina"
     const url = this.googleUrl + "address=" + direccion + this.apiKey
     const resp = await this.http.get(url).toPromise()
     return resp.json().results[0].geometry.location
