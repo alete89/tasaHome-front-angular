@@ -8,6 +8,8 @@ import { EstadoService } from 'src/app/servicios/estado.service';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { Notification } from 'src/app/shared/notifications/notification';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { MostrarTasacionComponent } from '../mostrar-tasacion/mostrar-tasacion.component';
 
 @Component({
   selector: 'app-tasar-propiedad',
@@ -21,10 +23,9 @@ export class TasarPropiedadComponent implements OnInit {
   tiposDeOperacion: Array<TipoPropiedad>
   estados: Array<Estado>
   numbersValidatingForm: FormGroup
-  notification: Notification = new Notification()
-  yaGuardo: boolean = false
+  modalTasacion: MDBModalRef;
 
-  constructor(private usuarioService: UsuarioService, private tasacionService: TasacionService, private estadoService: EstadoService, private servicioService: ServicioService) {
+  constructor(private modalService: MDBModalService, private usuarioService: UsuarioService, private tasacionService: TasacionService, private estadoService: EstadoService, private servicioService: ServicioService) {
     this.tasacion = new Tasacion()
     this.numbersValidatingForm = new FormGroup({
       superficie: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(100000000)]),
@@ -45,7 +46,6 @@ export class TasarPropiedadComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.notification.cleanLoading()
     this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
     this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
     this.estados = await this.estadoService.estados()
@@ -54,21 +54,30 @@ export class TasarPropiedadComponent implements OnInit {
 
   async tasar() {
     this.tasacion.valor = await this.tasacionService.tasarPropiedad(this.tasacion)
-    this.yaGuardo = false
   }
 
-  async guardar() {
-    try {
-      await this.usuarioService.guardarTasacion(this.tasacion)
-      this.notification.popUpMessage("Tasación guardada.", "success", 1500)
-      this.yaGuardo = true
-    } catch (error) {
-      this.notification.showError(error._body)
-    }
+
+  noPuedeTasar() {
+    return this.superficieInvalida() || this.ambientesInvalidos() || !this.tasacion.direccion || !this.tasacion.superficie || !this.tasacion.id_tipo_propiedad || !this.tasacion.id_tipo_operacion || !this.tasacion.ambientes || !this.tasacion.id_estado
   }
 
-  async publicar() {
 
+  async openModalTasacion() {
+    await this.tasar()
+    this.modalTasacion = this.modalService.show(MostrarTasacionComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog modal-frame modal-bottom ',
+      containerClass: 'right',
+      animated: true,
+      data: {
+        tasacion: this.tasacion
+      }
+
+    });
   }
 
 }
