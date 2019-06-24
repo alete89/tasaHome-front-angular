@@ -23,9 +23,12 @@ interface Location {
 })
 export class MapaComponent implements OnInit {
 
+
+  @ViewChild(AgmMap) map: AgmMap;
+
   latitude = -34.5783994
   longitude = -58.5268406
-  direccion: string = ""
+  direccion = ""
   geocoder: any;
   zoom = 16
 
@@ -39,7 +42,8 @@ export class MapaComponent implements OnInit {
     console.log(this.direccion)
   }
 
-  @ViewChild(AgmMap) map: AgmMap;
+
+
 
 
   constructor(public mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService) {
@@ -53,7 +57,7 @@ export class MapaComponent implements OnInit {
   ngOnInit(): void { }
 
   async updateOnMap() {
-
+    this.map.zoom = 16
     const latLong = await this.googleMapsService.getLatLongFromStringAddress(this.direccion)
     console.log(latLong)
     this.marker = { latitude: latLong.lat, longitude: latLong.lng };

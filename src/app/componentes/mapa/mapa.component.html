@@ -13,17 +13,17 @@
         [mapTypeId]="'terrain'"
         [latitude]="latitude"
         [longitude]="longitude"
-        [scrollwheel] = "false"
+        [scrollwheel] = "null"
         (mapClick)="placeMarker($event)"
-        style="height: 300px"
+        style="height: 500px; width: 700px;"
         >
         <agm-marker
           [latitude]="marker.latitude"
           [longitude]="marker.longitude"
         ></agm-marker>
       </agm-map>
-    </div>
-    <div class="col-md-6">
+
+         <div class="col">
       <div class="md-form">
         <input
           type="text"
@@ -48,5 +48,7 @@
         </div>
       </div>
     </div>
+    </div>
+
   </div>
 </div>
