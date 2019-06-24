@@ -9,9 +9,11 @@
       <div class="col-md-6">
         <agm-map
         #map
+        [zoom]="zoom"
         [mapTypeId]="'terrain'"
-        [latitude]="location.lat"
-        [longitude]="location.lng"
+        [latitude]="latitude"
+        [longitude]="longitude"
+        [scrollwheel] = "false"
         (mapClick)="placeMarker($event)"
         style="height: 300px"
         >
