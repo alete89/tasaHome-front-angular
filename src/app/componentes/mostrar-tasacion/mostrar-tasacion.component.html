@@ -8,11 +8,15 @@
       color="success" rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect type="submit">Guardar</button>
     <button (click)="publicar()" mdbTooltip="Publicar tasación" placement="bottom" mdbBtn color="deep-purple"
       rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect type="submit">Publicar</button>
-    <button [disabled]="yaGuardo" mdbBtn style="cursor: default" color="blue-grey">
+    <!-- <button [disabled]="yaGuardo" mdbBtn style="cursor: default" color="blue-grey"> -->
+
+    <button (click)="volver()" mdbBtn color="yellow">Volver</button>
+    <div>
       <mdb-checkbox style="cursor: default" class="my-4 waves-effect z-depth-0  " mdbWavesEffect placement="bottom"
         [(ngModel)]="tasacion.privada" name="privada" [default]="true">
         Guardar tasación privada</mdb-checkbox>
-    </button>
+    </div>
+    <!-- </button> -->
   </div>
 </div>
 <div class="notifications" style="height: 3rem; ">

@@ -36,4 +36,8 @@ export class MostrarTasacionComponent implements OnInit {
 
   }
 
+  volver() {
+    this.modalMostrarTasacion.hide()
+  }
+
 }
