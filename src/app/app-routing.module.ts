@@ -10,6 +10,8 @@ import { TasacionesAnterioresComponent } from './componentes/tasaciones-anterior
 import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
 import { MostrarTasacionComponent } from './componentes/mostrar-tasacion/mostrar-tasacion.component';
 import { PublicarTasacionComponent } from './componentes/publicar-tasacion/publicar-tasacion.component';
+import { EvolucionPreciosComponent } from './componentes/evolucion-precios/evolucion-precios.component';
+import { ActualizarPropiedadComponent } from './componentes/actualizar-propiedad/actualizar-propiedad.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -22,8 +24,9 @@ const routes: Routes = [
   { path: 'buscar-tasaciones', component: BuscarTasacionesComponent, pathMatch: 'full' },
   { path: 'contactar-usuario', component: ContactarUsuarioComponent, pathMatch: 'full' },
   { path: 'mostrar-tasacion', component: MostrarTasacionComponent, pathMatch: 'full' },
-  { path: 'publicar-tasacion', component: PublicarTasacionComponent, pathMatch: 'full' }
-
+  { path: 'publicar-tasacion', component: PublicarTasacionComponent, pathMatch: 'full' },
+  { path: 'evolucion-precios', component: EvolucionPreciosComponent, pathMatch: 'full' },
+  { path: 'actualizar-propiedad', component: ActualizarPropiedadComponent, pathMatch: 'full' }
 ];
 
 @NgModule({

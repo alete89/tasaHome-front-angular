@@ -20,6 +20,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { MostrarTasacionComponent } from './componentes/mostrar-tasacion/mostrar-tasacion.component';
 import { PublicarTasacionComponent } from './componentes/publicar-tasacion/publicar-tasacion.component';
+import { EvolucionPreciosComponent } from './componentes/evolucion-precios/evolucion-precios.component';
+import { ActualizarPropiedadComponent } from './componentes/actualizar-propiedad/actualizar-propiedad.component';
 
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
@@ -38,7 +40,9 @@ import { PublicarTasacionComponent } from './componentes/publicar-tasacion/publi
       ContactarUsuarioComponent,
       MapaComponent,
       MostrarTasacionComponent,
-      PublicarTasacionComponent
+      PublicarTasacionComponent,
+      EvolucionPreciosComponent,
+      ActualizarPropiedadComponent
       // SafePipe
    ],
    imports: [
