@@ -14,24 +14,36 @@
               <th>TIPO</th>
               <th>PRIVADA</th>
               <th>PUBLICADA</th>
+              <th>ACTUALIZAR</th>
+              <th>EVOLUCIÓN</th>
             </tr>
           </thead>
           <tbody *ngFor="let tasacion of tasaciones">
             <tr class="fila-contenido">
-              <td *ngIf="tasacion.fecha">{{ tasacion.fecha  | date: 'dd/MM/yyyy'}} </td>
-              <td *ngIf="tasacion.direccion">{{ tasacion.direccion }}</td>
-              <td *ngIf="tasacion.valor">{{ tasacion.valor }} </td>
-              <td *ngIf="tasacion.fecha">{{ tasacion.ambientes }}</td>
-              <td *ngIf="tasacion.superficie">{{ tasacion.superficie }}</td>
-              <td *ngIf="tasacion.__tipoDePropiedad__">{{ tasacion.__tipoDePropiedad__.descripcion }}</td>
+              <td>{{ tasacion.fecha || "-" | date: 'dd/MM/yyyy' }} </td>
+              <td>{{ tasacion.direccion || "-" }}</td>
+              <td>{{ tasacion.valor || "-"}} </td>
+              <td>{{ tasacion.ambientes || "-" }}</td>
+              <td>{{ tasacion.superficie || "-"}}</td>
+              <td *ngIf="tasacion.__tipoDePropiedad__">{{ tasacion.__tipoDePropiedad__.descripcion || "-" }}</td>
+              <td *ngIf="!tasacion.__tipoDePropiedad__">-</td>
               <td>
                 <mdb-checkbox [disabled]="true" [checked]=tasacion.privada [default]="true">
                 </mdb-checkbox>
               </td>
+              <td *ngIf="tasacion.__sitios_publicados__.length == 0">
+                -
+                <!-- <mdb-icon fas icon="minus"></mdb-icon> -->
+              </td>
               <td *ngFor="let sitio of tasacion.__sitios_publicados__">
                 <img height="40" width="40" [src]="sitio.logo_url">
               </td>
-
+              <td><button (click)="irAActualizarTasacion(tasacion)" class="boton" mdbBtn type="button" color="unique"
+                  size="sm" mdbWavesEffect><strong>Actualizar</strong></button>
+              </td>
+              <td><button (click)="evolucionDePrecios(tasacion)" class="boton" mdbBtn type="button" color="unique"
+                  size="sm" mdbWavesEffect><strong>Evolución</strong></button>
+              </td>
             </tr>
           </tbody>
         </table>

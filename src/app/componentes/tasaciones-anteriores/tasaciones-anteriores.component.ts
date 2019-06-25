@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Tasacion } from 'src/app/dominio/tasacion';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { Notification } from 'src/app/shared/notifications/notification';
@@ -14,7 +15,7 @@ export class TasacionesAnterioresComponent implements OnInit {
   notification: Notification = new Notification()
 
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private router: Router, private usuarioService: UsuarioService) { }
 
   async ngOnInit() {
     this.traerTasaciones()
@@ -33,5 +34,9 @@ export class TasacionesAnterioresComponent implements OnInit {
     if (this.tasaciones) {
       return this.tasaciones.length > 0
     }
+  }
+
+  irAActualizarTasacion(tasacion: Tasacion) {
+    this.router.navigate(['/tasar-propiedad'])
   }
 }

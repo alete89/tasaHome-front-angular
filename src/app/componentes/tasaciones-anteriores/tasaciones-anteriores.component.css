@@ -2,7 +2,7 @@
     font-weight: bold;
     font-size: 3rem;
     text-align: center;
-    color:white
+    color: white;
 }
 
 .card {
@@ -18,4 +18,9 @@
 
 th {
     font-weight: bold;
+}
+
+.boton {
+    display: block;
+    margin: auto;
 }
