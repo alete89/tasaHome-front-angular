@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Tasacion } from 'src/app/dominio/tasacion';
 import { Notification } from 'src/app/shared/notifications/notification';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
-import { MDBModalRef } from 'angular-bootstrap-md';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { Router } from '@angular/router';
+import { PublicarTasacionComponent } from '../publicar-tasacion/publicar-tasacion.component';
 
 @Component({
   selector: 'mostrar-tasacion',
@@ -14,8 +16,9 @@ export class MostrarTasacionComponent implements OnInit {
   tasacion: Tasacion
   notification: Notification = new Notification()
   yaGuardo: boolean = false
+  modalPublicarTasacion: MDBModalRef
 
-  constructor(private usuarioService: UsuarioService, private modalMostrarTasacion: MDBModalRef) { }
+  constructor(private modalService: MDBModalService, private router: Router, private usuarioService: UsuarioService, private modalMostrarTasacion: MDBModalRef) { }
 
   ngOnInit() {
     this.notification.cleanLoading()
@@ -32,8 +35,20 @@ export class MostrarTasacionComponent implements OnInit {
     }
   }
 
-  async publicar() {
-
+  publicar() {
+    this.modalPublicarTasacion = this.modalService.show(PublicarTasacionComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog modal-dialog-centered',
+      containerClass: 'right',
+      animated: true,
+      data: {
+        tasacion: this.tasacion
+      }
+    });
   }
 
   volver() {

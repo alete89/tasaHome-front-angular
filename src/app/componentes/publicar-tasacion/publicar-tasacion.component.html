@@ -1,0 +1,26 @@
+<mdb-card class="card">
+  <mdb-card-header class="registro elegant-color-dark white-text text-center py-4">
+    <h5>
+      <strong style="font-size: 2rem;">Publicar anuncio</strong>
+    </h5>
+  </mdb-card-header>
+
+  <div style="margin-top: 2.2rem;" class="card-deck">
+    <div class="container">
+
+      <div class="col" *ngFor="let sitio of sitios">
+        <div>
+          <div style="max-height: auto;" class="view overlay waves-light" mdbWavesEffect>
+            <a href="{{sitio.url_publicar}}" target="_blank">
+              <mdb-card-img style="width: 200px;" src={{sitio.logo_url}} alt="{{ sitios.descripcion }}">
+              </mdb-card-img>
+            </a>
+            <hr size="8">
+          </div>
+        </div>
+
+        <div class="w-100" style="height: 2rem"></div>
+      </div>
+    </div>
+  </div>
+</mdb-card>

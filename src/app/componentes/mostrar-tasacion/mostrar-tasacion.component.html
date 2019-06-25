@@ -1,22 +1,25 @@
-<div class="row" style="margin-left: 4rem;">
-  <div>
-    <div style="text-align: center;font-size: 4rem;">
-      <strong style="color:black;">Valor: U$S {{tasacion.valor | number}}</strong></div>
-  </div>
-  <div class="botonera" style="text-align: center;">
-    <button [disabled]="yaGuardo" mdbTooltip="Guardar tasación" placement="bottom" (click)="guardar()" mdbBtn
-      color="success" rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect type="submit">Guardar</button>
-    <button (click)="publicar()" mdbTooltip="Publicar tasación" placement="bottom" mdbBtn color="deep-purple"
-      rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect type="submit">Publicar</button>
-    <!-- <button [disabled]="yaGuardo" mdbBtn style="cursor: default" color="blue-grey"> -->
-
-    <button (click)="volver()" mdbBtn color="yellow">Volver</button>
+<div class="card" style="background-color: #0d47a1; color: white;">
+  <div class="row" style="margin-left: 4rem;">
     <div>
-      <mdb-checkbox [disabled]="yaGuardo" style="cursor: default" class="my-4 waves-effect z-depth-0  " mdbWavesEffect placement="bottom"
-        [(ngModel)]="tasacion.privada" name="privada" [default]="true">
-        Guardar tasación privada</mdb-checkbox>
+      <div style="text-align: center;font-size: 4rem;">
+        <strong style="color:white;">Valor: U$S {{tasacion.valor | number}}</strong></div>
     </div>
-    <!-- </button> -->
+    <div class="botonera" style="text-align: center;">
+      <button [disabled]="yaGuardo" mdbTooltip="Guardar tasación" placement="bottom" (click)="guardar()" mdbBtn
+        color="success" rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect
+        type="submit">Guardar</button>
+      <button (click)="publicar()" mdbTooltip="Publicar tasación" placement="bottom" mdbBtn color="deep-purple"
+        rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect type="submit">Publicar</button>
+      <!-- <button [disabled]="yaGuardo" mdbBtn style="cursor: default" color="blue-grey"> -->
+
+      <button (click)="volver()" mdbBtn color="yellow">Volver</button>
+      <div>
+        <mdb-checkbox [disabled]="yaGuardo" style="cursor: default" class="my-4 waves-effect z-depth-0  " mdbWavesEffect
+          placement="bottom" [(ngModel)]="tasacion.privada" name="privada" [default]="true">
+          Guardar tasación privada</mdb-checkbox>
+      </div>
+      <!-- </button> -->
+    </div>
   </div>
 </div>
 <div class="notifications" style="height: 3rem; ">

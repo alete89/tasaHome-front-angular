@@ -19,6 +19,7 @@ import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-pro
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { MostrarTasacionComponent } from './componentes/mostrar-tasacion/mostrar-tasacion.component';
+import { PublicarTasacionComponent } from './componentes/publicar-tasacion/publicar-tasacion.component';
 
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
@@ -36,7 +37,8 @@ import { MostrarTasacionComponent } from './componentes/mostrar-tasacion/mostrar
       TasarPropiedadComponent,
       ContactarUsuarioComponent,
       MapaComponent,
-      MostrarTasacionComponent
+      MostrarTasacionComponent,
+      PublicarTasacionComponent
       // SafePipe
    ],
    imports: [

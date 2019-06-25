@@ -9,6 +9,7 @@ import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/regis
 import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
 import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
 import { MostrarTasacionComponent } from './componentes/mostrar-tasacion/mostrar-tasacion.component';
+import { PublicarTasacionComponent } from './componentes/publicar-tasacion/publicar-tasacion.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,8 +21,8 @@ const routes: Routes = [
   { path: 'tasar-propiedad', component: TasarPropiedadComponent, pathMatch: 'full' },
   { path: 'buscar-tasaciones', component: BuscarTasacionesComponent, pathMatch: 'full' },
   { path: 'contactar-usuario', component: ContactarUsuarioComponent, pathMatch: 'full' },
-  { path: 'mostrar-tasacion', component: MostrarTasacionComponent, pathMatch: 'full' }
-
+  { path: 'mostrar-tasacion', component: MostrarTasacionComponent, pathMatch: 'full' },
+  { path: 'publicar-tasacion', component: PublicarTasacionComponent, pathMatch: 'full' }
 
 ];
 
