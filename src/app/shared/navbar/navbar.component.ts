@@ -50,6 +50,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openModalDatosPorZona() {
+    this.router.navigate(['/home'])
     this.modalDatosPorZona = this.modalService.show(DatosPorZonaComponent, {
       backdrop: true,
       keyboard: true,
