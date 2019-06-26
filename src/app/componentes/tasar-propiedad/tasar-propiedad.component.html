@@ -1,7 +1,7 @@
 <div class="card fondo_tasar" style="margin:auto;margin-top: 8rem; width: 45rem;">
   <mdb-card-header class="blue-gradient white-text text-center py-4">
     <h5>
-      <strong style="font-size: 2rem;">Tasar propiedad</strong>
+      <strong style="font-size: 2rem;">{{titulo}}</strong>
     </h5>
   </mdb-card-header>
   <div style="margin-left: 3rem;">
@@ -29,7 +29,7 @@
     </div>
     <div class="col margen">
       <p>Tipo de propiedad</p>
-      <select style="width: 10rem;" name="tipo_propiedad" [(ngModel)]="tasacion.id_tipo_propiedad"
+      <select style="width: 10rem;" name="tipoDePropiedad" [(ngModel)]="tasacion.tipoDePropiedad.id"
         class="browser-default custom-select">
         <option *ngFor="let tipo of tiposDePropiedad" [value]="tipo.id">{{tipo.descripcion}}</option>
       </select>
@@ -37,7 +37,7 @@
     <div class="row" style="margin-top: 3rem;">
       <div *ngFor="let tipo of tiposDeOperacion">
         <div class="custom-control custom-radio custom-control-inline">
-          <input [(ngModel)]="tasacion.id_tipo_operacion" name="tipo_operacion_{{tipo.id}}" [value]="tipo.id"
+          <input [(ngModel)]="tasacion.tipoDeOperacion.id" name="tipoDeOperacion{{tipo.id}}" [value]="tipo.id"
             type="radio" class="custom-control-input" id="defaultInline1_{{tipo.id}}" mdbInput>
           <label class="custom-control-label" for="defaultInline1_{{tipo.id}}">{{tipo.descripcion}}</label>
         </div>
@@ -58,7 +58,7 @@
     </div>
     <div class="col margen">
       <p>Estado General</p>
-      <select style="width: 10rem;" name="estado" [(ngModel)]="tasacion.id_estado"
+      <select style="width: 10rem;" name="estado" [(ngModel)]="tasacion.estado.id"
         class="browser-default custom-select">
         <option *ngFor="let estado of estados" [value]="estado.id">{{estado.descripcion}}</option>
       </select>
@@ -72,13 +72,13 @@
   <!-- Default unchecked -->
   <!-- <p>Servicios</p> -->
   <div style="margin-left: 3rem;margin-bottom: 1rem;width: 40rem;" class="form-row">
-    <div style="margin-right: 1rem;" *ngFor="let servicio of tasacion.servicios">
-      <mdb-checkbox [(ngModel)]="servicio.chequeado" name="servicio_{{servicio.id}}" [default]="true">
+    <div style="margin-right: 1rem;" *ngFor="let servicio of servicios">
+      <mdb-checkbox [(ngModel)]="servicio.chequeado" name="servicio.chequeado" [default]="true">
         {{servicio.descripcion}}</mdb-checkbox>
     </div>
   </div>
   <button [disabled]="noPuedeTasar()" (click)="openModalTasacion()" mdbBtn color="cyan" rounded="true"
-    class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="button">Tasar</button>
+    class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="button">{{titulo_boton}}</button>
   <div style="margin:auto;" class="botonera">
   </div>
 
