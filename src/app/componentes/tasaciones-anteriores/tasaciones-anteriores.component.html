@@ -25,17 +25,17 @@
               <td>{{ tasacion.valor || "-"}} </td>
               <td>{{ tasacion.ambientes || "-" }}</td>
               <td>{{ tasacion.superficie || "-"}}</td>
-              <td *ngIf="tasacion.__tipoDePropiedad__">{{ tasacion.__tipoDePropiedad__.descripcion || "-" }}</td>
-              <td *ngIf="!tasacion.__tipoDePropiedad__">-</td>
+              <td *ngIf="tasacion.tipoDePropiedad">{{ tasacion.tipoDePropiedad.descripcion || "-" }}</td>
+              <td *ngIf="!tasacion.tipoDePropiedad">-</td>
               <td>
                 <mdb-checkbox [disabled]="true" [checked]=tasacion.privada [default]="true">
                 </mdb-checkbox>
               </td>
-              <td *ngIf="tasacion.__sitios_publicados__.length == 0">
+              <td *ngIf="tasacion.sitios_publicados.length == 0">
                 -
                 <!-- <mdb-icon fas icon="minus"></mdb-icon> -->
               </td>
-              <td *ngFor="let sitio of tasacion.__sitios_publicados__">
+              <td *ngFor="let sitio of tasacion.sitios_publicados">
                 <img height="40" width="40" [src]="sitio.logo_url">
               </td>
               <td><button (click)="irAActualizarTasacion(tasacion)" class="boton" mdbBtn type="button" color="unique"
