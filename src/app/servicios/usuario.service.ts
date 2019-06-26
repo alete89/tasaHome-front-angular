@@ -31,6 +31,7 @@ export class UsuarioService implements IUsuarioService {
   async tasacionesAnteriores() {
     const url = REST_SERVER_URL + "/tasaciones_anteriores/" + this.userLoggedInId()
     const resp = await this.http.get(url).toPromise()
+    
     return resp.json().map(Tasacion.fromJson)
   }
 
