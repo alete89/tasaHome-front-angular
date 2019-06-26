@@ -8,8 +8,14 @@ export class Servicio {
         Object.assign(this, init)
     }
 
+    chequear() {
+        this.chequeado = true
+    }
+
     static fromJson(servicioJson: String) {
         return Object.assign(new Servicio(), servicioJson)
     }
+
+
 
 }

@@ -1,9 +1,13 @@
-import { TipoPropiedad } from './tipo_propiedad';
+import { Estado } from './estado';
 import { Servicio } from './servicio';
+import { TipoPropiedad } from './tipo_propiedad';
+import { Usuario } from './usuario';
 
 export class Tasacion {
 
     id: number
+
+    id_anterior: number
 
     descripcion: String
 
@@ -17,20 +21,29 @@ export class Tasacion {
 
     direccion: String
 
-    id_tipo_propiedad: number
+    tipoDePropiedad: TipoPropiedad
 
-    id_tipo_operacion: number
+    tipoDeOperacion: TipoPropiedad
 
-    id_estado: number
+    estado: Estado
 
-    id_usuario: number
+    usuario: Usuario
 
     servicios: Array<Servicio>
 
     privada: boolean = false
 
     constructor(init?: Partial<Tasacion>) {
+        this.initialize()
         Object.assign(this, init)
+    }
+
+    initialize() {
+        this.estado = new Estado
+        this.usuario = new Usuario
+        this.tipoDePropiedad = new TipoPropiedad
+        this.tipoDeOperacion = new TipoPropiedad
+        this.servicios = []
     }
 
     calcularValor() {
@@ -40,7 +53,10 @@ export class Tasacion {
 
     static fromJson(tasacionJson) {
         let tasacion = Object.assign(new Tasacion(), tasacionJson)
-        tasacion.tipoDePropiedad = TipoPropiedad.fromJson(tasacionJson.tipoDePropiedad)
+        if (tasacionJson.servicios) {
+            tasacion.servicios = tasacionJson.servicios.map(Servicio.fromJson)
+        }
         return tasacion
     }
+
 }
