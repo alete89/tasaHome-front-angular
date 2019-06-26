@@ -10,6 +10,7 @@ import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { MostrarTasacionComponent } from '../mostrar-tasacion/mostrar-tasacion.component';
 import { Servicio } from 'src/app/dominio/servicio';
+import { TipoOperacion } from 'src/app/dominio/tipo_operacion';
 
 @Component({
   selector: 'tasar-propiedad',
@@ -20,7 +21,7 @@ export class TasarPropiedadComponent implements OnInit {
 
   @Input() tasacion: Tasacion
   tiposDePropiedad: Array<TipoPropiedad>
-  tiposDeOperacion: Array<TipoPropiedad>
+  tiposDeOperacion: Array<TipoOperacion>
   estados: Array<Estado>
   servicios: Array<Servicio>
   numbersValidatingForm: FormGroup

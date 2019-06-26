@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Zona } from 'src/app/dominio/zona';
-import { ZonaService } from 'src/app/servicios/zona.service';
-import { Tasacion } from 'src/app/dominio/tasacion';
-import { Usuario } from 'src/app/dominio/usuario';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UsuarioService } from 'src/app/servicios/usuario.service';
-import { TasacionBusqueda } from 'src/app/dominio/tasacion_busqueda';
-import { TipoPropiedad } from 'src/app/dominio/tipo_propiedad';
-import { TasacionService } from 'src/app/servicios/tasacion.service';
-import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { Tasacion } from 'src/app/dominio/tasacion';
+import { TasacionBusqueda } from 'src/app/dominio/tasacion_busqueda';
+import { TipoOperacion } from 'src/app/dominio/tipo_operacion';
+import { TipoPropiedad } from 'src/app/dominio/tipo_propiedad';
+import { Usuario } from 'src/app/dominio/usuario';
+import { Zona } from 'src/app/dominio/zona';
+import { TasacionService } from 'src/app/servicios/tasacion.service';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { ZonaService } from 'src/app/servicios/zona.service';
 import { ContactarUsuarioComponent } from '../contactar-usuario/contactar-usuario.component';
 
 @Component({
@@ -21,7 +22,7 @@ export class BuscarTasacionesComponent implements OnInit {
 
   barrios: Array<Zona>
   tiposDePropiedad: Array<TipoPropiedad>
-  tiposDeOperacion: Array<TipoPropiedad>
+  tiposDeOperacion: Array<TipoOperacion>
   tasacionBusqueda: TasacionBusqueda
   numbersValidatingForm: FormGroup
   resultados: Array<Tasacion>

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Tasacion } from '../dominio/tasacion';
 import { TipoPropiedad } from '../dominio/tipo_propiedad';
 import { REST_SERVER_URL } from './configuration';
+import { TipoOperacion } from '../dominio/tipo_operacion';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class TasacionService {
   async tiposDeOperacion() {
     const url = REST_SERVER_URL + "/tipos_operacion"
     const resp = await this.http.get(url).toPromise()
-    return resp.json().map(TipoPropiedad.fromJson)
+    return resp.json().map(TipoOperacion.fromJson)
   }
 
   async tasarPropiedad(tasacion: Tasacion) {

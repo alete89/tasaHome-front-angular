@@ -2,6 +2,7 @@ import { Estado } from './estado';
 import { Servicio } from './servicio';
 import { TipoPropiedad } from './tipo_propiedad';
 import { Usuario } from './usuario';
+import { TipoOperacion } from './tipo_operacion';
 
 export class Tasacion {
 
@@ -23,7 +24,7 @@ export class Tasacion {
 
     tipoDePropiedad: TipoPropiedad
 
-    tipoDeOperacion: TipoPropiedad
+    tipoDeOperacion: TipoOperacion
 
     estado: Estado
 
@@ -42,7 +43,7 @@ export class Tasacion {
         this.estado = new Estado
         this.usuario = new Usuario
         this.tipoDePropiedad = new TipoPropiedad
-        this.tipoDeOperacion = new TipoPropiedad
+        this.tipoDeOperacion = new TipoOperacion
         this.servicios = []
     }
 
