@@ -35,7 +35,7 @@ export class TasacionService {
     const url = REST_SERVER_URL + "/tasacion/" + id_tasacion
     const resp = await this.http.get(url).toPromise()
     const tasacion: Tasacion = Tasacion.fromJson(resp.json())
-    console.log(tasacion)
+    // console.log(tasacion)
     return tasacion
   }
 

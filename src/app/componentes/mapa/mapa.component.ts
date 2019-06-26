@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
 import { GoogleMapsService } from 'src/app/servicios/google-maps.service';
+import { Escuela } from 'src/app/dominio/escuela';
+import { EscuelaService } from 'src/app/servicios/escuela.service';
 declare var google: any;
 
 interface Marker {
@@ -29,6 +31,16 @@ export class MapaComponent implements OnInit {
   longitude = -58.5268406
   direccion = ""
   geocoder: any;
+  escuelas: Array<Escuela>
+
+  icon = {
+    url: 'https://cdn0.iconfinder.com/data/icons/learning-icons-rounded/110/School-512.png',
+    // url: 'https://banner2.kisspng.com/20180706/gvh/kisspng-computer-icons-google-maps-school-student-5b3f228f73f853.247641171530864271475.jpg',
+    scaledSize: {
+      width: 30,
+      height: 30
+    }
+  }
 
   marker = { latitude: -34.5783994, longitude: -58.5268406 };
 
@@ -39,15 +51,17 @@ export class MapaComponent implements OnInit {
     this.direccion = await this.googleMapsService.getStringDireccionFromLatLong(this.marker)
     console.log(this.direccion)
   }
-  constructor(public mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService) {
+  constructor(public mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private escuelaService: EscuelaService) {
     this.mapsApiLoader = mapsApiLoader;
     this.mapsApiLoader.load().then(() => {
       this.geocoder = new google.maps.Geocoder();
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.map.zoom = 16
+    this.escuelas = await this.escuelaService.getEscuelas()
+    console.log(this.escuelas)
   }
 
   async updateOnMap() {

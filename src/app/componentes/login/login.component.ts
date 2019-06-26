@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     try {
       await this.usuarioService.userLogin(this.email, this.password)
       this.modalRef.hide()
-      console.log(this.returnUrl)
+      // console.log(this.returnUrl)
       if (this.returnUrl == '/registrar-usuario') {
         this.router.navigate(['/home'])
       } else {

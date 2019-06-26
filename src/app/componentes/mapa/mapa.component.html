@@ -10,17 +10,32 @@
         [longitude]="longitude" [scrollwheel]="null" (mapClick)="placeMarker($event)"
         style="height: 500px; width: 700px;">
         <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
+
+        <agm-marker-cluster
+          imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+          <div *ngFor="let escuela of escuelas">
+            <agm-marker [iconUrl]="icon" [latitude]="escuela.latitud" [longitude]="escuela.longitud"> </agm-marker>
+            <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
+          <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
+
+            <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
+          </div>
+        </agm-marker-cluster>
       </agm-map>
 
       <div class="col">
         <div class="md-form">
-          <input style="color:white;" type="text" [(ngModel)]="direccion" class="form-control" id="searchField" mdbInput />
+          <input style="color:white;" type="text" [(ngModel)]="direccion" class="form-control" id="searchField"
+            mdbInput />
           <label for="searchField">Buscar Locación</label>
         </div>
         <div class="row">
           <div class="col-md-12 d-flex flex-center">
             <button mdbBtn color="primary" mdbWavesLight (click)="updateOnMap()" type="submit">
               Buscar
+            </button>
+            <button mdbBtn color="primary" mdbWavesLight (click)="prueba()" type="submit">
+              prueba
             </button>
           </div>
         </div>
