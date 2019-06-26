@@ -2,7 +2,8 @@
   <div class="row" style="margin-left: 4rem;">
     <div>
       <div style="text-align: center;font-size: 4rem;">
-        <strong style="color:white;">Valor: U$S {{tasacion.valor | number}}</strong></div>
+        <strong *ngIf="tasacion.tipoDeOperacion.id == 1" style="color:white;">Valor: U$S {{tasacion.valor | number}}</strong>
+        <strong *ngIf="tasacion.tipoDeOperacion.id == 2" style="color:white;">Valor: AR$ {{tasacion.valor | number}}</strong>
     </div>
     <div class="botonera" style="text-align: center;">
       <button [disabled]="yaGuardo" mdbTooltip="Guardar tasación" placement="bottom" (click)="guardar()" mdbBtn
