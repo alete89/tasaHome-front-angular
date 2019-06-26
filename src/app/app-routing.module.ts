@@ -12,21 +12,23 @@ import { PublicarTasacionComponent } from './componentes/publicar-tasacion/publi
 import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/registrar-usuario.component';
 import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
 import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
+import { AuthGuard } from './guard/auth-guard';
+import { LogueadoGuard } from './guard/logueado-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'tasaciones-anteriores', component: TasacionesAnterioresComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [LogueadoGuard], pathMatch: 'full' },
+  { path: 'tasaciones-anteriores', component: TasacionesAnterioresComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent, pathMatch: 'full' },
   { path: 'datos-por-zona', component: DatosPorZonaComponent, pathMatch: 'full' },
-  { path: 'tasar-propiedad', component: TasarPropiedadComponent, pathMatch: 'full' },
-  { path: 'buscar-tasaciones', component: BuscarTasacionesComponent, pathMatch: 'full' },
-  { path: 'contactar-usuario', component: ContactarUsuarioComponent, pathMatch: 'full' },
-  { path: 'mostrar-tasacion', component: MostrarTasacionComponent, pathMatch: 'full' },
-  { path: 'publicar-tasacion', component: PublicarTasacionComponent, pathMatch: 'full' },
-  { path: 'evolucion-precios', component: EvolucionPreciosComponent, pathMatch: 'full' },
-  { path: 'actualizar-tasacion', component: ActualizarTasacionComponent, pathMatch: 'full' }
+  { path: 'tasar-propiedad', component: TasarPropiedadComponent, canActivate: [AuthGuard],pathMatch: 'full' },
+  { path: 'buscar-tasaciones', component: BuscarTasacionesComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  { path: 'contactar-usuario', component: ContactarUsuarioComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  { path: 'mostrar-tasacion', component: MostrarTasacionComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  { path: 'publicar-tasacion', component: PublicarTasacionComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  { path: 'evolucion-precios/:id', component: EvolucionPreciosComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  { path: 'actualizar-tasacion/:id', component: ActualizarTasacionComponent, canActivate: [AuthGuard], pathMatch: 'full' }
 ];
 
 @NgModule({
