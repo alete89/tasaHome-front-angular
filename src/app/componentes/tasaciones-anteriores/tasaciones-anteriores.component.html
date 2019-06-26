@@ -15,7 +15,7 @@
               <th>PRIVADA</th>
               <th>PUBLICADA</th>
               <th>ACTUALIZAR</th>
-              <th>EVOLUCIÓN</th>
+              <th>EVOLUCIÓN DE PRECIOS</th>
             </tr>
           </thead>
           <tbody *ngFor="let tasacion of tasaciones">
@@ -42,7 +42,7 @@
                   size="sm" mdbWavesEffect><strong>Actualizar</strong></button>
               </td>
               <td><button (click)="irAEvolucionDePrecios(tasacion)" class="boton" mdbBtn type="button" color="unique"
-                  size="sm" mdbWavesEffect><strong>Evolución</strong></button>
+                  size="sm" mdbWavesEffect><strong>Evolución de precios</strong></button>
               </td>
             </tr>
           </tbody>
@@ -53,8 +53,11 @@
 
 </div>
 
-<mdb-card *ngIf="!hayTasacionesAnteriores()" style="width: 30rem;">
+<div class="card" *ngIf="!hayTasacionesAnteriores()"
+  style="width: 36rem;color: white;background-color: black !important">
   <div style="text-align:center;">
-    <strong style="font-size: 3rem; text-align: center">No hay tasaciones para mostrar</strong>
+    <strong style="font-size: 3rem; text-align: center;">No tienes tasaciones</strong>
+    <button style="margin-top: 2rem;margin-bottom: 2rem;" (click)="irATasarPropiedad()" class="boton" mdbBtn
+      type="button" color="unique" size="md" mdbWavesEffect><strong>Hacer una tasación</strong></button>
   </div>
-</mdb-card>
+</div>

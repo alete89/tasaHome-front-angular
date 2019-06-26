@@ -48,6 +48,10 @@ export class TasacionesAnterioresComponent implements OnInit {
       this.router.navigate(['/evolucion-precios', tasacion.id_anterior])
 
     }
-
   }
+
+  irATasarPropiedad() {
+    this.router.navigate(['/tasar-propiedad'])
+  }
+
 }

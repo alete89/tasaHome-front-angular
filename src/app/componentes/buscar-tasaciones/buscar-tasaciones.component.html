@@ -77,10 +77,10 @@
 
   </mdb-card-body>
 
-  <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+  <div *ngIf="resultados && resultados.length > 0" class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
     <table class="table">
       <thead class="colorear-celeste">
-        <tr>
+        <tr class="fondo-tr">
           <th>FECHA</th>
           <th>BARRIO</th>
           <th>VALOR</th>
@@ -105,9 +105,9 @@
         </tr>
       </tbody>
     </table>
-    <div *ngIf="seLanzoBusqueda && noHuboResultados()">
-      <strong style="font-size: 2.5rem">No se encontraron tasaciones similares</strong>
-    </div>
+  </div>
+  <div class="card" style="text-align: center;margin:3rem;color: white;background-color: black;" *ngIf="seLanzoBusqueda && noHuboResultados()">
+    <strong style="font-size: 2.5rem">No se encontraron tasaciones similares</strong>
   </div>
 
 </mdb-card>

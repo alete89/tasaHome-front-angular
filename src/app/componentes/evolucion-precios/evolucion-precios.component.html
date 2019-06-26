@@ -1,4 +1,7 @@
-<div>
+<div class="card" style="color: white;background-color:#263238 !important;width: auto;">
+  <p class="titulo">Evolución de precios</p>
+</div>
+<div class="container-grafico">
   <div style="display: block;background-color: white;">
     <canvas *ngIf="chartDatasets && chartLabels" mdbChart [chartType]="chartType" [datasets]="chartDatasets"
       [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions" [legend]="true"
@@ -10,8 +13,8 @@
 <mdb-card class="card tasaciones" style="margin-top: 4rem;">
   <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
     <table class="table">
-      <thead class="colorear-celeste">
-        <tr>
+      <thead>
+        <tr class="fondo-tr">
           <th>FECHA DE TASACIÓN</th>
           <th>VALOR</th>
         </tr>
