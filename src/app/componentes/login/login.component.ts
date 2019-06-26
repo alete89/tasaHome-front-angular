@@ -32,7 +32,12 @@ export class LoginComponent implements OnInit {
     try {
       await this.usuarioService.userLogin(this.email, this.password)
       this.modalRef.hide()
-      this.router.navigate([this.returnUrl])
+      console.log(this.returnUrl)
+      if (this.returnUrl == '/registrar-usuario') {
+        this.router.navigate(['/home'])
+      } else {
+        this.router.navigate([this.returnUrl])
+      }
     }
     catch (error) {
       let mensaje = JSON.parse(error._body).message
