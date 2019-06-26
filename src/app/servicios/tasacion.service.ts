@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Tasacion } from '../dominio/tasacion';
-import { TasacionBusqueda } from '../dominio/tasacion_busqueda';
 import { TipoPropiedad } from '../dominio/tipo_propiedad';
 import { REST_SERVER_URL } from './configuration';
 
@@ -29,6 +28,20 @@ export class TasacionService {
     const json = JSON.parse(JSON.stringify(tasacion))
     let resp = await this.http.put(REST_SERVER_URL + '/tasar_propiedad', json).toPromise()
     return resp.json()
+  }
+
+  async searchTasacionById(id_tasacion: number) {
+    const url = REST_SERVER_URL + "/tasacion/" + id_tasacion
+    const resp = await this.http.get(url).toPromise()
+    const tasacion: Tasacion = Tasacion.fromJson(resp.json())
+    console.log(tasacion)
+    return tasacion
+  }
+
+  async historialTasacion(id_tasacion: string) {
+    const url = REST_SERVER_URL + "/historial_tasacion/" + id_tasacion
+    const resp = await this.http.get(url).toPromise()
+    return resp.json().map(Tasacion.fromJson)
   }
 
 }
