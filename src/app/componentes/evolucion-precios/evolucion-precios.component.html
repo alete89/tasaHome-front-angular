@@ -1,3 +1,25 @@
-<p>
-  evolucion-precios works!
-</p>
+<div>
+  <div style="display: block;background-color: white;">
+    <canvas *ngIf="chartDatasets && chartLabels" mdbChart [chartType]="chartType" [datasets]="chartDatasets"
+      [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions" [legend]="true"
+      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+</div>
+
+<mdb-card class="card tasaciones" style="margin-top: 4rem;">
+  <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+    <table class="table">
+      <thead class="colorear-celeste">
+        <tr>
+          <th>FECHA DE TASACIÓN</th>
+          <th>VALOR</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let tasacion of historialTasacion" class="fila-contenido">
+        <td> {{tasacion.fecha | date: 'dd/MM/yyyy'}} </td>
+        <td>{{ tasacion.valor }} </td>
+      </tr>
+    </table>
+  </div>
+</mdb-card>

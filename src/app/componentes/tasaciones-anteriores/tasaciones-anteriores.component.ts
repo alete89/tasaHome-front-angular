@@ -37,6 +37,17 @@ export class TasacionesAnterioresComponent implements OnInit {
   }
 
   irAActualizarTasacion(tasacion: Tasacion) {
-    this.router.navigate(['/actualizar-tasacion'])
+    this.router.navigate(['/actualizar-tasacion', tasacion.id])
+  }
+
+  irAEvolucionDePrecios(tasacion: Tasacion) {
+    if (tasacion.id) {
+      this.router.navigate(['/evolucion-precios', tasacion.id])
+    }
+    if (tasacion.id_anterior) {
+      this.router.navigate(['/evolucion-precios', tasacion.id_anterior])
+
+    }
+
   }
 }
