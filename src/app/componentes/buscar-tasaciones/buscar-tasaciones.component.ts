@@ -61,7 +61,7 @@ export class BuscarTasacionesComponent implements OnInit {
   }
 
   formularioVacio() {
-    return !this.tasacionBusqueda.ambientes && !this.tasacionBusqueda.fecha_desde && !this.tasacionBusqueda.id_barrio && !this.tasacionBusqueda.id_tipo_operacion && !this.tasacionBusqueda.id_tipo_propiedad && !this.tasacionBusqueda.superficie_minima
+    return !this.tasacionBusqueda.ambientes_minimos && !this.tasacionBusqueda.fecha_desde && !this.tasacionBusqueda.id_barrio && !this.tasacionBusqueda.id_tipo_operacion && !this.tasacionBusqueda.id_tipo_propiedad && !this.tasacionBusqueda.superficie_minima
   }
 
   async buscar() {

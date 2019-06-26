@@ -40,8 +40,9 @@
         <div class="col">
           <div [formGroup]="numbersValidatingForm" class="md-form">
             <input class="form-control" formControlName="ambientes" type="number" mdbInput mdbValidate min="1" mdbInput
-              max="500" [(ngModel)]="tasacionBusqueda.ambientes" id="cantidad_ambientes_buscar_tasaciones">
-            <label style="font-size: 0.8rem;" for="cantidad_ambientes_buscar_tasaciones">Cantidad ambientes</label>
+              max="500" [(ngModel)]="tasacionBusqueda.ambientes_minimos" id="cantidad_ambientes_min_buscar_tasaciones">
+            <label style="font-size: 0.8rem;" for="cantidad_ambientes_min_buscar_tasaciones">Cantidad mínima de
+              ambientes</label>
             <mdb-error *ngIf="ambientesInvalidos()">Cantidad de ambientes incorrecta</mdb-error>
             <mdb-success *ngIf="!ambientesInvalidos()"></mdb-success>
           </div>

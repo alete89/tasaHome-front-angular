@@ -1,6 +1,6 @@
 export class TasacionBusqueda {
 
-    ambientes: number
+    ambientes_minimos: number
 
     superficie_minima: number
 
