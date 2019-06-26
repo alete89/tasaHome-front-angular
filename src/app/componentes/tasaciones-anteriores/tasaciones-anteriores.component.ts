@@ -37,6 +37,6 @@ export class TasacionesAnterioresComponent implements OnInit {
   }
 
   irAActualizarTasacion(tasacion: Tasacion) {
-    this.router.navigate(['/tasar-propiedad'])
+    this.router.navigate(['/actualizar-tasacion'])
   }
 }

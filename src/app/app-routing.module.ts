@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ActualizarTasacionComponent } from './componentes/actualizar-tasacion/actualizar-tasacion.component';
 import { BuscarTasacionesComponent } from './componentes/buscar-tasaciones/buscar-tasaciones.component';
 import { ContactarUsuarioComponent } from './componentes/contactar-usuario/contactar-usuario.component';
 import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zona.component';
+import { EvolucionPreciosComponent } from './componentes/evolucion-precios/evolucion-precios.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
+import { MostrarTasacionComponent } from './componentes/mostrar-tasacion/mostrar-tasacion.component';
+import { PublicarTasacionComponent } from './componentes/publicar-tasacion/publicar-tasacion.component';
 import { RegistrarUsuarioComponent } from './componentes/registrar-usuario/registrar-usuario.component';
 import { TasacionesAnterioresComponent } from './componentes/tasaciones-anteriores/tasaciones-anteriores.component';
 import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
-import { MostrarTasacionComponent } from './componentes/mostrar-tasacion/mostrar-tasacion.component';
-import { PublicarTasacionComponent } from './componentes/publicar-tasacion/publicar-tasacion.component';
-import { EvolucionPreciosComponent } from './componentes/evolucion-precios/evolucion-precios.component';
-import { ActualizarPropiedadComponent } from './componentes/actualizar-propiedad/actualizar-propiedad.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'mostrar-tasacion', component: MostrarTasacionComponent, pathMatch: 'full' },
   { path: 'publicar-tasacion', component: PublicarTasacionComponent, pathMatch: 'full' },
   { path: 'evolucion-precios', component: EvolucionPreciosComponent, pathMatch: 'full' },
-  { path: 'actualizar-propiedad', component: ActualizarPropiedadComponent, pathMatch: 'full' }
+  { path: 'actualizar-tasacion', component: ActualizarTasacionComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
