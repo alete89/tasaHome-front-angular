@@ -37,8 +37,8 @@ export class TasarPropiedadComponent implements OnInit {
     this.esActualizacion = false
     this.tasacion = new Tasacion()
     this.numbersValidatingForm = new FormGroup({
-      superficie: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(100000000)]),
-      ambientes: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(500)]),
+      superficie: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(15), Validators.max(2000)]),
+      ambientes: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(15)]),
     })
   }
 

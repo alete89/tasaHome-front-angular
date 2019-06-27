@@ -20,8 +20,8 @@
   <div style="margin-left: 3rem; margin-top: 1rem;margin-bottom: 2rem;width: 40rem;" class="form-row">
     <div class="col margen">
       <div [formGroup]="numbersValidatingForm" class="md-form">
-        <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="1" mdbInput
-          max="100000000" id="superficie_tasar" [(ngModel)]="tasacion.superficie">
+        <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="15" mdbInput
+          max="2000" id="superficie_tasar" [(ngModel)]="tasacion.superficie">
         <label for="superficie_tasar">Superficie</label>
         <mdb-error *ngIf="superficieInvalida()">Superficie incorrecta</mdb-error>
         <mdb-success *ngIf="!superficieInvalida()"></mdb-success>
@@ -50,7 +50,7 @@
     <div class="col margen">
       <div [formGroup]="numbersValidatingForm" class="md-form form-sm">
         <input class="form-control form-control-sm" id="ambientes_tasar" formControlName="ambientes" type="number"
-          mdbInput mdbValidate min="1" mdbInput max="500" [(ngModel)]="tasacion.ambientes">
+          mdbInput mdbValidate min="1" mdbInput max="15" [(ngModel)]="tasacion.ambientes">
         <label style="font-size: 0.8rem;" for="ambientes_tasar">Cantidad ambientes</label>
         <mdb-error *ngIf="ambientesInvalidos()">Cantidad de ambientes incorrecta</mdb-error>
         <mdb-success *ngIf="!ambientesInvalidos()"></mdb-success>
