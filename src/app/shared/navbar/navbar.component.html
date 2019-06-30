@@ -21,7 +21,7 @@
       </ul>
 
       <div class="nav-item" *ngIf="!estaLogueado()">
-        <button [disabled]="modalYaAbierto()" class="boton" type="button" mdbBtn color="primary" size="sm"
+        <button [disabled]="modalLoginYaAbierto()" class="boton" type="button" mdbBtn color="primary" size="sm"
           outline="true" rounded="true" data-toggle="modal" [disabled]="modalAbierto" data-target="#modal"
           (click)="openModalLogin()" mdbWavesEffect>Iniciar Sesion</button>
       </div>
