@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/dominio/usuario';
 import { Zona } from 'src/app/dominio/zona';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { ZonaService } from 'src/app/servicios/zona.service';
 import { Notification } from 'src/app/shared/notifications/notification';
+import { PageScrollService } from 'ngx-page-scroll-core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'registrar-usuario',
@@ -21,7 +23,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   camposValidatingForm: FormGroup
   notification: Notification = new Notification()
 
-  constructor(private zonaService: ZonaService, private usuarioService: UsuarioService) {
+  constructor(private zonaService: ZonaService, private usuarioService: UsuarioService, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
     this.setearFormulario()
   }
 
@@ -87,11 +89,21 @@ export class RegistrarUsuarioComponent implements OnInit {
       nombreForm: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.pattern("[a-zA-Z ]*")]),
       apellidoForm: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.pattern("[a-zA-Z ]*")]),
       direccionForm: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\s\d\/]*\d[a-zA-Z\s\d\/]*$/)]),
-     //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
+      //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
       emailForm: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
       passwordForm: new FormControl(null, [Validators.required, Validators.minLength(8)]),
       confirmacionPasswordForm: new FormControl(null, [Validators.required, Validators.minLength(8)])
     })
+    this.scrollToTop()
+  }
+
+  scrollToTop() {
+    this.pageScrollService.scroll({
+      document: this.document,
+      scrollTarget: `.top`,
+      scrollOffset: 99,
+      duration: 300,
+    });
   }
 
   formularioVacio() {

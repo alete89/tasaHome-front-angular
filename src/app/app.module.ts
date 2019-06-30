@@ -23,8 +23,7 @@ import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-pro
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-
-
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
 @NgModule({
@@ -58,7 +57,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
          apiKey: 'AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM'
       }),
       AgmJsMarkerClustererModule,
-      NgSelectModule
+      NgSelectModule,
+      NgxPageScrollCoreModule
 
    ],
    providers: [],
