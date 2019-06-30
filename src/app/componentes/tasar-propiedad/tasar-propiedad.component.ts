@@ -39,7 +39,7 @@ export class TasarPropiedadComponent implements OnInit {
     this.validatingForm = new FormGroup({
       superficie: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(15), Validators.max(2000)]),
       ambientes: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(15)]),
-      direccion: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.pattern(/A-Za-z0-9'\.\-\s\,$/)])
+      direccion: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\s\d\/]*\d[a-zA-Z\s\d\/]*$/)]),
       //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
     })
   }
