@@ -45,7 +45,7 @@ export class EvolucionPreciosComponent implements OnInit {
     this.id_tasacion = this.route.snapshot.paramMap.get("id")
     this.historialTasacion = await this.tasacionService.historialTasacion(this.id_tasacion)
     let historial_precios = this.historialTasacion.map(tasacion => tasacion.valor)
-    let fechas = this.historialTasacion.map(tasacion => this.moment(tasacion.fecha).format('MM/DD/YYYY HH:MM'))
+    let fechas = this.historialTasacion.map(tasacion => this.moment(tasacion.fecha).format('DD/MM/YYYY HH:MM'))
     this.chartDatasets = [
       { data: historial_precios, label: 'Evolución de precios' },
       // { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }

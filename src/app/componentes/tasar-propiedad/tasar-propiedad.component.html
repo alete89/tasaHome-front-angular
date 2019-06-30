@@ -55,7 +55,7 @@
 
   <div style="margin-left: 3rem;margin-bottom: 1rem;width: 40rem;" class="form-row">
     <div class="col margen">
-      <div [formGroup]="numbersValidatingForm" class="md-form form-sm">
+      <div [formGroup]="validatingForm" class="md-form form-sm">
         <input class="form-control form-control-sm" id="ambientes_tasar" formControlName="ambientes" type="number"
           mdbInput mdbValidate min="1" mdbInput max="15" [(ngModel)]="tasacion.ambientes">
         <label style="font-size: 0.8rem;" for="ambientes_tasar">Cantidad ambientes</label>
