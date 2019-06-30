@@ -8,20 +8,17 @@
 
   <mdb-card-body class="px-lg-5 pt-0">
     <form class="text-center" style="color: #757575;margin-top: 2rem;">
-
       <div style="margin-bottom: 2rem;" class="form-row">
-        <div class="col margen">
-          <p>Barrio</p>
-          <select name="barrio" [(ngModel)]="tasacionBusqueda.id_barrio" class="browser-default custom-select">
-            <option *ngFor="let barrio of barrios" [value]="barrio.id">{{barrio.descripcion}}</option>
-          </select>
+        <div style="margin-top: 1rem;" class="col margen">
+          <ng-select name="barrio" [virtualScroll]="true" [items]="barrios" [multiple]="true" [closeOnSelect]="true"
+            [searchable]="true" bindLabel="descripcion" placeholder="Barrios" [(ngModel)]="barriosSeleccionados">
+          </ng-select>
         </div>
-        <div class="col margen">
-          <p>Tipo de propiedad</p>
-          <select name="tipo_propiedad" [(ngModel)]="tasacionBusqueda.id_tipo_propiedad"
-            class="browser-default custom-select">
-            <option *ngFor="let tipo of tiposDePropiedad" [value]="tipo.id">{{tipo.descripcion}}</option>
-          </select>
+        <div style="margin-top: 1rem;" class="col margen">
+          <ng-select name="tipoDePropiedad" [virtualScroll]="true" [items]="tiposDePropiedad" [multiple]="false"
+            [closeOnSelect]="true" [searchable]="true" bindLabel="descripcion" placeholder="Tipos de propiedad"
+            [(ngModel)]="tipoDePropiedad">
+          </ng-select>
         </div>
       </div>
       <div class="form-row">
@@ -59,13 +56,13 @@
       </div>
 
       <div class="md-form">
-        <input name="fecha_nacimiento" [(ngModel)]="tasacionBusqueda.fecha_desde" type="date" id="input"
-          class="form-control" mdbInput>
-        <label for="input">Fecha desde</label>
+        <input [max]="fecha_maxima" name="fecha_desde" [(ngModel)]="tasacionBusqueda.fecha_desde" type="date"
+          id="input_fecha_buscar_tasaciones" class="form-control" mdbInput>
+        <label for="input_fecha_buscar_tasaciones">Fecha desde</label>
       </div>
 
       <div class="botonera">
-        <button style="color: white;" [disabled]="formularioVacio()" (click)="buscar()" mdbBtn gradient="blue"
+        <button style="color: white;" [disabled]="noPuedeBuscar()" (click)="buscar()" mdbBtn gradient="blue"
           outline="true" rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect
           type="submit">Buscar</button>
         <button [disabled]="formularioVacio()" (click)="setearFormulario()" mdbBtn color="blue-grey" rounded="true"
@@ -98,15 +95,16 @@
           <td *ngIf="resultado.ambientes">{{ resultado.ambientes }}</td>
           <td *ngIf="resultado.superficie">{{ resultado.superficie }}</td>
           <td *ngIf="resultado.tipoDePropiedad">{{ resultado.tipoDePropiedad.descripcion }}</td>
-          <td *ngIf="resultado.usuario"><button [disabled]="modalContactarYaAbierto()" (click)="openModalContactarUsuario(resultado.usuario)"
-              class="contactar_usuario" mdbBtn type="button" color="mdb-color" size="sm"
-              mdbWavesEffect><strong>Contactar</strong></button>
+          <td *ngIf="resultado.usuario"><button [disabled]="modalContactarYaAbierto()"
+              (click)="openModalContactarUsuario(resultado.usuario)" class="contactar_usuario" mdbBtn type="button"
+              color="mdb-color" size="sm" mdbWavesEffect><strong>Contactar</strong></button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="card" style="text-align: center;margin:3rem;color: white;background-color: black;" *ngIf="seLanzoBusqueda && noHuboResultados()">
+  <div class="card" style="text-align: center;margin:3rem;color: white;background-color: black;"
+    *ngIf="seLanzoBusqueda && noHuboResultados()">
     <strong style="font-size: 2.5rem">No se encontraron tasaciones similares</strong>
   </div>
 

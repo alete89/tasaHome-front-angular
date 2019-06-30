@@ -1,3 +1,5 @@
+import { TipoPropiedad } from './tipo_propiedad';
+
 export class TasacionBusqueda {
 
     ambientes_minimos: number
@@ -6,9 +8,9 @@ export class TasacionBusqueda {
 
     fecha_desde: Date
 
-    id_barrio: number
+    ids_barrios: Array<number> = [-1]
 
-    id_tipo_propiedad: number
+    id_tipo_propiedad: number = -1
 
     id_tipo_operacion: number
 

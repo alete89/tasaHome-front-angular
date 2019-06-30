@@ -12,7 +12,7 @@ import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { ZonaService } from 'src/app/servicios/zona.service';
 import { ContactarUsuarioComponent } from '../contactar-usuario/contactar-usuario.component';
-
+declare var require: any
 @Component({
   selector: 'app-buscar-tasaciones',
   templateUrl: './buscar-tasaciones.component.html',
@@ -20,6 +20,7 @@ import { ContactarUsuarioComponent } from '../contactar-usuario/contactar-usuari
 })
 export class BuscarTasacionesComponent implements OnInit {
 
+  moment = require('moment');
   barrios: Array<Zona>
   tiposDePropiedad: Array<TipoPropiedad>
   tiposDeOperacion: Array<TipoOperacion>
@@ -28,6 +29,13 @@ export class BuscarTasacionesComponent implements OnInit {
   resultados: Array<Tasacion>
   seLanzoBusqueda: boolean
   modalContactarUsuario: MDBModalRef
+  barriosSeleccionados: Array<Zona>
+  tipoDePropiedad: TipoPropiedad
+  fecha_maxima = "9999-12-31"
+  model: Date
+  myDatePickerOptions: any
+
+  
 
   constructor(private router: Router, public modalService: MDBModalService, public modalBuscarTasaciones: MDBModalRef, private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
   }
@@ -44,6 +52,7 @@ export class BuscarTasacionesComponent implements OnInit {
   }
 
   setearFormulario() {
+    this.barriosSeleccionados = []
     this.seLanzoBusqueda = false
     this.resultados = undefined
     this.tasacionBusqueda = new TasacionBusqueda()
@@ -61,11 +70,21 @@ export class BuscarTasacionesComponent implements OnInit {
     return this.inputAmbientes.invalid && (this.inputAmbientes.dirty || this.inputAmbientes.touched)
   }
 
+  noPuedeBuscar() {
+    return this.superficieInvalida() || this.ambientesInvalidos() || this.formularioVacio()
+  }
+
   formularioVacio() {
-    return !this.tasacionBusqueda.ambientes_minimos && !this.tasacionBusqueda.fecha_desde && !this.tasacionBusqueda.id_barrio && !this.tasacionBusqueda.id_tipo_operacion && !this.tasacionBusqueda.id_tipo_propiedad && !this.tasacionBusqueda.superficie_minima
+    return !this.tasacionBusqueda.ambientes_minimos && !this.tasacionBusqueda.fecha_desde && this.barriosSeleccionados.length == 0 && !this.tasacionBusqueda.id_tipo_operacion && !this.tipoDePropiedad && !this.tasacionBusqueda.superficie_minima
   }
 
   async buscar() {
+    if (this.barriosSeleccionados.length > 0) {
+      this.tasacionBusqueda.ids_barrios = this.barriosSeleccionados.map(barrio => barrio.id)
+    }
+    if (this.tipoDePropiedad) {
+      this.tasacionBusqueda.id_tipo_propiedad = this.tipoDePropiedad.id
+    }
     this.resultados = await this.usuarioService.tasacionesSimilares(this.tasacionBusqueda)
     this.seLanzoBusqueda = true
   }
