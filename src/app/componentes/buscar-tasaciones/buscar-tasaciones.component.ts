@@ -91,4 +91,8 @@ export class BuscarTasacionesComponent implements OnInit {
     })
   }
 
+  modalContactarYaAbierto() {
+    return this.modalService.getModalsCount() == 2
+  }
+
 }

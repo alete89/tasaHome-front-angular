@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Router } from '@angular/router';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { BuscarTasacionesComponent } from 'src/app/componentes/buscar-tasaciones/buscar-tasaciones.component';
+import { DatosPorZonaComponent } from 'src/app/componentes/datos-por-zona/datos-por-zona.component';
 import { LoginComponent } from 'src/app/componentes/login/login.component';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
-import { DatosPorZonaComponent } from 'src/app/componentes/datos-por-zona/datos-por-zona.component';
-import { BuscarTasacionesComponent } from 'src/app/componentes/buscar-tasaciones/buscar-tasaciones.component';
-import { RegistrarUsuarioComponent } from 'src/app/componentes/registrar-usuario/registrar-usuario.component';
 
 @Component({
   selector: 'navbar',
@@ -72,7 +71,10 @@ export class NavbarComponent implements OnInit {
       class: 'modal-dialog modal-lg',
       containerClass: 'right',
       animated: true
-
     });
+  }
+
+  modalLoginYaAbierto() {
+    return this.modalService.getModalsCount() == 1
   }
 }

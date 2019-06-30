@@ -21,9 +21,9 @@
       </ul>
 
       <div class="nav-item" *ngIf="!estaLogueado()">
-        <button class="boton" type="button" mdbBtn color="primary" size="sm" outline="true" rounded="true"
-          data-toggle="modal" [disabled]="modalAbierto" data-target="#modal" (click)="openModalLogin()"
-          mdbWavesEffect>Iniciar Sesion</button>
+        <button [disabled]="modalYaAbierto()" class="boton" type="button" mdbBtn color="primary" size="sm"
+          outline="true" rounded="true" data-toggle="modal" [disabled]="modalAbierto" data-target="#modal"
+          (click)="openModalLogin()" mdbWavesEffect>Iniciar Sesion</button>
       </div>
 
       <!-- <ul *ngIf="estaLogueado()" class="navbar-nav ml-auto nav-flex-icons">

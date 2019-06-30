@@ -1,16 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Estado } from 'src/app/dominio/estado';
+import { Servicio } from 'src/app/dominio/servicio';
 import { Tasacion } from 'src/app/dominio/tasacion';
+import { TipoOperacion } from 'src/app/dominio/tipo_operacion';
 import { TipoPropiedad } from 'src/app/dominio/tipo_propiedad';
 import { EstadoService } from 'src/app/servicios/estado.service';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { MostrarTasacionComponent } from '../mostrar-tasacion/mostrar-tasacion.component';
-import { Servicio } from 'src/app/dominio/servicio';
-import { TipoOperacion } from 'src/app/dominio/tipo_operacion';
 
 @Component({
   selector: 'tasar-propiedad',
@@ -80,9 +80,12 @@ export class TasarPropiedadComponent implements OnInit {
 
 
   noPuedeTasar() {
-    return this.superficieInvalida() || this.ambientesInvalidos() || !this.tasacion.direccion || !this.tasacion.superficie || !this.tasacion.tipoDePropiedad.id || !this.tasacion.tipoDeOperacion.id || !this.tasacion.ambientes || !this.tasacion.estado.id
+    return this.superficieInvalida() || this.ambientesInvalidos() || this.formularioIncompleto() || this.modalTasarYaAbierto()
   }
 
+  formularioIncompleto() {
+    return !this.tasacion.direccion || !this.tasacion.superficie || !this.tasacion.tipoDePropiedad.id || !this.tasacion.tipoDeOperacion.id || !this.tasacion.ambientes || !this.tasacion.estado.id
+  }
 
   async openModalTasacion() {
     await this.tasar()
@@ -100,6 +103,10 @@ export class TasarPropiedadComponent implements OnInit {
       }
 
     });
+  }
+
+  modalTasarYaAbierto() {
+    return this.modalService.getModalsCount() == 1
   }
 
 }

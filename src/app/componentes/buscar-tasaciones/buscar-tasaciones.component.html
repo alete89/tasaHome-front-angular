@@ -98,7 +98,7 @@
           <td *ngIf="resultado.ambientes">{{ resultado.ambientes }}</td>
           <td *ngIf="resultado.superficie">{{ resultado.superficie }}</td>
           <td *ngIf="resultado.tipoDePropiedad">{{ resultado.tipoDePropiedad.descripcion }}</td>
-          <td *ngIf="resultado.usuario"><button (click)="openModalContactarUsuario(resultado.usuario)"
+          <td *ngIf="resultado.usuario"><button [disabled]="modalContactarYaAbierto()" (click)="openModalContactarUsuario(resultado.usuario)"
               class="contactar_usuario" mdbBtn type="button" color="mdb-color" size="sm"
               mdbWavesEffect><strong>Contactar</strong></button>
           </td>
