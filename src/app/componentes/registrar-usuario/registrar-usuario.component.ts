@@ -84,10 +84,11 @@ export class RegistrarUsuarioComponent implements OnInit {
     this.confirmacion_contrasenia = undefined
     this.usuario = new Usuario()
     this.camposValidatingForm = new FormGroup({
-      nombreForm: new FormControl(null, [Validators.required]),
-      apellidoForm: new FormControl(null, [Validators.required]),
-      direccionForm: new FormControl(null, [Validators.required]),
-      emailForm: new FormControl(null, [Validators.required, Validators.email]),
+      nombreForm: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.pattern("[a-zA-Z ]*")]),
+      apellidoForm: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.pattern("[a-zA-Z ]*")]),
+      direccionForm: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\s\d\/]*\d[a-zA-Z\s\d\/]*$/)]),
+     //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
+      emailForm: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
       passwordForm: new FormControl(null, [Validators.required, Validators.minLength(8)]),
       confirmacionPasswordForm: new FormControl(null, [Validators.required, Validators.minLength(8)])
     })

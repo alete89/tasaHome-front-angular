@@ -4,22 +4,29 @@
       <strong style="font-size: 2rem;">{{titulo}}</strong>
     </h5>
   </mdb-card-header>
-  <div style="margin-left: 3rem;">
+
+  <div style="margin-left: 3rem;;" class="md-form" [formGroup]="validatingForm">
+    <input name="direccion_tasar" formControlName="direccion" [(ngModel)]="tasacion.direccion" type="text"
+      class="form-control" id="direccion_tasar" mdbValidate mdbInput>
+    <label for="direccion_tasar">Dirección</label>
+    <mdb-error *ngIf="direccionInvalida()">Direccion inválida</mdb-error>
+  </div>
+  <!-- <div style="margin-left: 3rem;">
     <div style="margin-bottom: 3rem;width: 30rem;" class="md-form">
       <input name="direccion_tasar" [(ngModel)]="tasacion.direccion" type="text" id="direccion_tasar"
         class="form-control" mdbInput>
       <label for="direccion_tasar">Dirección</label>
-    </div>
+    </div> -->
 
-    <!-- <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM
+  <!-- <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM
     &q=UNSAM+Buenos+Aires" allowfullscreen>
         </iframe> -->
-  </div>
+  <!-- </div> -->
 
 
   <div style="margin-left: 3rem; margin-top: 1rem;margin-bottom: 2rem;width: 40rem;" class="form-row">
     <div class="col margen">
-      <div [formGroup]="numbersValidatingForm" class="md-form">
+      <div [formGroup]="validatingForm" class="md-form">
         <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="15" mdbInput
           max="2000" id="superficie_tasar" [(ngModel)]="tasacion.superficie">
         <label for="superficie_tasar">Superficie</label>

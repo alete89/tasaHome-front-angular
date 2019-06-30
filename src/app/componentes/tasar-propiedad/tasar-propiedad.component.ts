@@ -24,7 +24,7 @@ export class TasarPropiedadComponent implements OnInit {
   tiposDeOperacion: Array<TipoOperacion>
   estados: Array<Estado>
   servicios: Array<Servicio>
-  numbersValidatingForm: FormGroup
+  validatingForm: FormGroup
   modalTasacion: MDBModalRef;
   @Input() titulo: string
   @Input() titulo_boton: string
@@ -36,14 +36,17 @@ export class TasarPropiedadComponent implements OnInit {
     this.titulo_boton = "Tasar"
     this.esActualizacion = false
     this.tasacion = new Tasacion()
-    this.numbersValidatingForm = new FormGroup({
+    this.validatingForm = new FormGroup({
       superficie: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(15), Validators.max(2000)]),
       ambientes: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(15)]),
+      direccion: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.pattern(/A-Za-z0-9'\.\-\s\,$/)])
+      //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
     })
   }
 
-  get inputSuperficie() { return this.numbersValidatingForm.get('superficie') }
-  get inputAmbientes() { return this.numbersValidatingForm.get('ambientes') }
+  get inputSuperficie() { return this.validatingForm.get('superficie') }
+  get inputAmbientes() { return this.validatingForm.get('ambientes') }
+  get inputDireccion() { return this.validatingForm.get('direccion') }
 
 
   superficieInvalida() {
@@ -52,6 +55,10 @@ export class TasarPropiedadComponent implements OnInit {
 
   ambientesInvalidos() {
     return this.inputAmbientes.invalid && (this.inputAmbientes.dirty || this.inputAmbientes.touched)
+  }
+
+  direccionInvalida() {
+    return this.inputDireccion.invalid && (this.inputDireccion.dirty || this.inputDireccion.touched)
   }
 
   async ngOnInit() {
@@ -80,7 +87,11 @@ export class TasarPropiedadComponent implements OnInit {
 
 
   noPuedeTasar() {
-    return this.superficieInvalida() || this.ambientesInvalidos() || this.formularioIncompleto() || this.modalTasarYaAbierto()
+    return this.camposInvalidos() || this.formularioIncompleto() || this.modalTasarYaAbierto()
+  }
+
+  camposInvalidos() {
+    return this.superficieInvalida() || this.ambientesInvalidos() || this.direccionInvalida()
   }
 
   formularioIncompleto() {

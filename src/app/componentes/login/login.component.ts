@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MDBModalRef } from 'angular-bootstrap-md';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Notification } from '../../shared/notifications/notification';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -17,15 +18,31 @@ export class LoginComponent implements OnInit {
   returnUrl: string
   notification: Notification = new Notification()
   intentoFallido: boolean = false
+  validatingForm: FormGroup
 
   constructor(private router: Router, private usuarioService: UsuarioService, private route: ActivatedRoute, public modalRef: MDBModalRef) { }
 
   ngOnInit() {
+    this.validatingForm = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
+      password: new FormControl(null, [Validators.required])
+    })
     this.notification.cleanLoading()
   }
 
-  camposIncompletos() {
-    return (!this.email || !this.password)
+  get inputEmail() { return this.validatingForm.get('email'); }
+  get inputPassword() { return this.validatingForm.get('password'); }
+
+  noPuedeIniciar() {
+    return !this.email || !this.password || this.emailTieneErrores()
+  }
+
+  noCompletoContrasenia() {
+    return this.inputPassword.invalid && (this.inputPassword.dirty || this.inputPassword.touched)
+  }
+
+  emailTieneErrores() {
+    return this.inputEmail.invalid && (this.inputEmail.dirty || this.inputEmail.touched)
   }
 
   async iniciarSesion() {

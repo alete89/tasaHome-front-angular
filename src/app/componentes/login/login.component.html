@@ -3,24 +3,32 @@
 
     <p class="h4 mb-4">Iniciar Sesión</p>
 
-    <input type="text" name="email_login" [(ngModel)]="email" class="form-control mb-4"
-      placeholder="Correo electrónico">
+    <div style="margin-bottom: 3rem;" class="md-form mt-0" [formGroup]="validatingForm">
+      <input style="color: white;" formControlName="email" [(ngModel)]="email" name="email_login" type="email"
+        id="email_login" class="form-control" mdbValidate mdbInput>
+      <label style="color: white">Correo electrónico</label>
+      <mdb-error *ngIf="emailTieneErrores()">Email Inválido</mdb-error>
+    </div>
+
+
     <div *ngIf="intentoFallido">
       <a class="recuperar-contraseña">¿Olvidaste tu contraseña?</a>
     </div>
-    <input type="password" name="password_login" [(ngModel)]="password" class="form-control mb-4"
-      placeholder="Password">
-
+    <div class="md-form mt-0" [formGroup]="validatingForm">
+      <input style="color: white;" id="pass_login" formControlName="password" mdbInput type="password"
+        name="password_login" [(ngModel)]="password" class="form-control mb-4" mdbValidate>
+      <label style="color: white">Contraseña</label>
+      <mdb-error *ngIf="noCompletoContrasenia()">Debe ingresar contraseña</mdb-error>
+    </div>
     <div class="d-flex justify-content-around">
     </div>
 
-    <button class="iniciar-sesion" [disabled]="camposIncompletos()" mdbBtn type="button" gradient="blue" rounded="true"
+    <button class="iniciar-sesion" [disabled]="noPuedeIniciar()" mdbBtn type="button" gradient="blue" rounded="true"
       block="true" (click)="iniciarSesion()">Iniciar Sesión</button>
-    <p *ngIf="intentoFallido">Nuevo en TasaHome?
+    <p style="margin-top: 0.5rem;margin-bottom:2rem;" *ngIf="intentoFallido">¿Nuevo en TasaHome?
       <a (click)="irARegistrarUsuario()">Registrarse</a>
     </p>
-    <app-notifications [notification]="notification"></app-notifications>
-
+      <app-notifications [notification]="notification"></app-notifications>
     <!--      <p>¿No tienes cuenta?
       <a href="">Registrarse</a>
     </p>
