@@ -22,6 +22,8 @@ import { TasacionesAnterioresComponent } from './componentes/tasaciones-anterior
 import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
@@ -55,7 +57,8 @@ import { NotificationsComponent } from './shared/notifications/notifications.com
       AgmCoreModule.forRoot({
          apiKey: 'AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM'
       }),
-      AgmJsMarkerClustererModule
+      AgmJsMarkerClustererModule,
+      NgSelectModule
 
    ],
    providers: [],
