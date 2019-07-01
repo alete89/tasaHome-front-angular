@@ -11,8 +11,7 @@
   <mdb-card-body class="px-lg-5 pt-0">
     <!-- Form -->
     <form class="text-center" style="color: #757575;">
-
-      <div class="form-row">
+      <div style="margin-bottom: 1.5rem;margin-top: 0.5rem;" class="form-row">
         <div class="col margen">
           <!-- First name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
@@ -34,17 +33,29 @@
       </div>
 
       <div class="form-row">
-        <div class="col margen">
-          <p style="text-align: left">Género</p>
-          <select name="genero" [(ngModel)]="usuario.genero" class="browser-default custom-select">
+        <div style="text-align: left;" class="col margen">
+          <p style="text-align: left;">Género</p>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button rounded="true" outline="true" mdbBtn mdbWavesEffect
+              [ngClass]="{ 'fondo-azul': usuario.genero == 'Masculino'}" (click)="seleccionarGenero('Masculino')"
+              type="button" size="md" class="btn btn-white">Masculino</button>
+            <button rounded="true" outline="true" mdbBtn mdbWavesEffect
+              [ngClass]="{ 'fondo-azul': usuario.genero == 'Femenino'}" (click)="seleccionarGenero('Femenino')"
+              type="button" size="md" class="btn btn-white">Femenino</button>
+            <button rounded="true" outline="true" mdbBtn mdbWavesEffect
+              [ngClass]="{ 'fondo-azul': usuario.genero == 'Otro'}" (click)="seleccionarGenero('Otro')" type="button"
+              size="md" class="btn btn-white">Otro</button>
+          </div>
+          <!-- <select name="genero" [(ngModel)]="usuario.genero" class="browser-default custom-select">
             <option value="Femenino">Femenino</option>
             <option value="Masculino">Masculino</option>
-          </select>
+          </select> -->
         </div>
         <div class="col">
           <div class="md-form" [formGroup]="camposValidatingForm">
             <input formControlName="fechaForm" [max]="fecha_maxima" name="fecha_nacimiento"
-              [(ngModel)]="usuario.fecha_nacimiento" type="date" id="input_fecha_registro" class="form-control" mdbValidate mdbInput>
+              [(ngModel)]="usuario.fecha_nacimiento" type="date" id="input_fecha_registro" class="form-control"
+              mdbValidate mdbInput>
             <label for="input_fecha_registro">Fecha de nacimiento</label>
             <mdb-error *ngIf="esMenorDeEdad()">Debe ser mayor de edad</mdb-error>
             <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
@@ -52,7 +63,7 @@
         </div>
       </div>
 
-      <div class="form-row">
+      <div class="form-row" style="margin-top:0.5rem;">
         <div class="col">
           <div style="margin-right: 1rem;" class="md-form">
             <p>Provincia</p>
@@ -129,7 +140,7 @@
 
         <button [disabled]="formularioVacio()" (click)="limpiarFormulario()" mdbBtn color="danger" rounded="true"
           class="my-4 waves-effect z-depth-0 aceptar" mdbWavesEffect type="button">Limpiar formulario</button>
-        <button [disabled]="hayErrores()" (click)="aceptar()" mdbBtn color="info" outline="true" rounded="true"
+        <button [disabled]="hayErrores()" (click)="aceptar()" mdbBtn color="success" rounded="true"
           class="my-4 waves-effect z-depth-0 aceptar " mdbWavesEffect type="submit">Aceptar</button>
         <hr>
       </div>

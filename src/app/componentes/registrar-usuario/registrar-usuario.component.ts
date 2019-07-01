@@ -110,8 +110,8 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   inicializarValidaciones() {
     this.camposValidatingForm = new FormGroup({
-      nombreForm: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.pattern("[a-zA-Z ]*")]),
-      apellidoForm: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.pattern("[a-zA-Z ]*")]),
+      nombreForm: new FormControl(null, [Validators.required, Validators.maxLength(70), Validators.pattern("[a-zA-Z ]*")]),
+      apellidoForm: new FormControl(null, [Validators.required, Validators.maxLength(70), Validators.pattern("[a-zA-Z ]*")]),
       direccionForm: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\s\d\/]*\d[a-zA-Z\s\d\/]*$/)]),
       //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
       emailForm: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
@@ -146,6 +146,10 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   async getLocalidades() {
     this.localidades = await this.zonaService.localidades(this.usuario.partido)
+  }
+
+  seleccionarGenero(genero: string) {
+    this.usuario.genero = genero
   }
 
 }
