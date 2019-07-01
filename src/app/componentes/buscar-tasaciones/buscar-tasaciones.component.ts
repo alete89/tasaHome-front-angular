@@ -25,7 +25,7 @@ export class BuscarTasacionesComponent implements OnInit {
   tiposDePropiedad: Array<TipoPropiedad>
   tiposDeOperacion: Array<TipoOperacion>
   tasacionBusqueda: TasacionBusqueda
-  numbersValidatingForm: FormGroup
+  validatingForm: FormGroup
   resultados: Array<Tasacion>
   seLanzoBusqueda: boolean
   modalContactarUsuario: MDBModalRef
@@ -40,8 +40,9 @@ export class BuscarTasacionesComponent implements OnInit {
   constructor(private router: Router, public modalService: MDBModalService, public modalBuscarTasaciones: MDBModalRef, private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
   }
 
-  get inputSuperficie() { return this.numbersValidatingForm.get('superficie') }
-  get inputAmbientes() { return this.numbersValidatingForm.get('ambientes') }
+  get inputSuperficie() { return this.validatingForm.get('superficie') }
+  get inputAmbientes() { return this.validatingForm.get('ambientes') }
+  get inputFecha() { return this.validatingForm.get('fecha') }
 
 
   async ngOnInit() {
@@ -62,15 +63,17 @@ export class BuscarTasacionesComponent implements OnInit {
   }
 
   inicializarValidaciones() {
-    this.numbersValidatingForm = new FormGroup({
+    this.validatingForm = new FormGroup({
       superficie: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(15), Validators.max(2000)]),
       ambientes: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(15)]),
+      fecha: new FormControl(null, [Validators.required]),
     })
   }
 
+
   nuevaBusqueda() {
     this.inicializarFormulario()
-    this.numbersValidatingForm.reset()
+    this.validatingForm.reset()
   }
 
   superficieInvalida() {
@@ -79,6 +82,10 @@ export class BuscarTasacionesComponent implements OnInit {
 
   ambientesInvalidos() {
     return this.inputAmbientes.invalid && (this.inputAmbientes.dirty || this.inputAmbientes.touched)
+  }
+  noPusoFecha() {
+    return this.inputFecha.invalid && (this.inputFecha.dirty || this.inputFecha.touched)
+
   }
 
   noPuedeBuscar() {
@@ -123,6 +130,10 @@ export class BuscarTasacionesComponent implements OnInit {
 
   modalContactarYaAbierto() {
     return this.modalService.getModalsCount() == 2
+  }
+
+  seleccionarTipoDeOperacion(tipoDeOperacion: TipoOperacion) {
+    this.tasacionBusqueda.id_tipo_operacion = tipoDeOperacion.id
   }
 
 }

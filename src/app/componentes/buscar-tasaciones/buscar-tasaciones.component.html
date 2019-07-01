@@ -7,8 +7,8 @@
   </mdb-card-header>
 
   <mdb-card-body class="px-lg-5 pt-0">
-    <form class="text-center" style="color: #757575;margin-top: 2rem;">
-      <div style="margin-bottom: 2rem;" class="form-row">
+    <form class="text-center" style="color: #757575;">
+      <div style="margin-bottom: 1.2rem;" class="form-row">
         <div style="margin-top: 1rem;" class="col margen">
           <ng-select name="barrio" [virtualScroll]="true" [items]="barrios" [multiple]="true" [closeOnSelect]="true"
             [searchable]="true" bindLabel="descripcion" placeholder="Barrios" [(ngModel)]="barriosSeleccionados">
@@ -21,21 +21,33 @@
           </ng-select>
         </div>
       </div>
+      <!-- <p style="text-align: left;">Tipo de operación</p> -->
       <div class="form-row">
-
-        <div *ngFor="let tipo of tiposDeOperacion">
-          <div style="margin-left: 2rem;" class="custom-control custom-radio custom-control-inline">
+        <div style="text-align: left;" class="btn-group" role="group" aria-label="Basic example">
+          <div *ngFor="let tipo of tiposDeOperacion">
+            <div style="text-align: left;" class="col ">
+              <button rounded="true" outline="true" mdbBtn mdbWavesEffect
+                [ngClass]="{ 'fondo-azul': tasacionBusqueda.id_tipo_operacion == tipo.id}"
+                (click)="seleccionarTipoDeOperacion(tipo)" type="button" size="md"
+                class="btn btn-white">{{tipo.descripcion}}</button>
+            </div>
+            <!-- <select name="genero" [(ngModel)]="usuario.genero" class="browser-default custom-select">
+                      <option value="Femenino">Femenino</option>
+                      <option value="Masculino">Masculino</option>
+                    </select> -->
+          </div>
+          <!-- <div style="margin-left: 2rem;" class="custom-control custom-radio custom-control-inline">
             <input [(ngModel)]="tasacionBusqueda.id_tipo_operacion" name="buscar_tipo_operacion_{{tipo.id}}"
               [value]="tipo.id" type="radio" class="custom-control-input" id="buscar_tipo_operacion_{{tipo.id}}"
               mdbInput>
             <label class="custom-control-label" for="buscar_tipo_operacion_{{tipo.id}}">{{tipo.descripcion}}</label>
-          </div>
+          </div> -->
         </div>
       </div>
 
-      <div style="margin-top: 1rem" class="form-row">
-        <div class="col">
-          <div [formGroup]="numbersValidatingForm" class="md-form">
+      <div style="margin-top: 1rem;" class="form-row">
+        <div style="margin-bottom: 1rem;" class="col">
+          <div [formGroup]="validatingForm" class="md-form">
             <input class="form-control" formControlName="ambientes" type="number" mdbInput mdbValidate min="1" mdbInput
               max="15" [(ngModel)]="tasacionBusqueda.ambientes_minimos" id="cantidad_ambientes_min_buscar_tasaciones">
             <label style="font-size: 0.8rem;" for="cantidad_ambientes_min_buscar_tasaciones">Cantidad mínima de
@@ -45,7 +57,7 @@
           </div>
         </div>
         <div class="col">
-          <div [formGroup]="numbersValidatingForm" class="md-form">
+          <div [formGroup]="validatingForm" class="md-form">
             <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="5" mdbInput
               max="2000" [(ngModel)]="tasacionBusqueda.superficie_minima" id="superficie_minima_buscar_tasacion">
             <label style="font-size: 0.8rem;" for="superficie_minima_buscar_tasacion">Superficie mínima</label>
@@ -55,18 +67,26 @@
         </div>
       </div>
 
-      <div class="md-form">
-        <input [max]="fecha_maxima" name="fecha_desde" [(ngModel)]="tasacionBusqueda.fecha_desde" type="date"
-          id="input_fecha_buscar_tasaciones" class="form-control" mdbInput>
+      <div class="md-form" [formGroup]="validatingForm">
+        <!-- <input formControlName="fechaForm" [max]="fecha_maxima" name="fecha_nacimiento"
+            [(ngModel)]="usuario.fecha_nacimiento" type="date" id="input_fecha_registro" class="form-control"
+            mdbValidate mdbInput>
+          <label for="input_fecha_registro">Fecha de nacimiento</label>
+          <mdb-error *ngIf="esMenorDeEdad()">Debe ser mayor de edad</mdb-error>
+          <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error> -->
+        <input [max]="fecha_maxima" formControlName="fecha" name="fecha_desde"
+          [(ngModel)]="tasacionBusqueda.fecha_desde" type="date" id="input_fecha_buscar_tasaciones" class="form-control"
+          mdbValidate mdbInput>
         <label for="input_fecha_buscar_tasaciones">Fecha desde</label>
+        <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
       </div>
 
       <div class="botonera">
-        <button style="color: white;" [disabled]="noPuedeBuscar()" (click)="buscar()" mdbBtn gradient="blue"
+        <button size="md" style="color: white;" [disabled]="noPuedeBuscar()" (click)="buscar()" mdbBtn gradient="blue"
           outline="true" rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect
           type="submit">Buscar</button>
-        <button [disabled]="formularioVacio()" (click)="nuevaBusqueda()" mdbBtn color="blue-grey" rounded="true"
-          class="my-4 waves-effect z-depth-0 buscar" mdbWavesEffect type="button">Nueva búsqueda</button>
+        <button size="md" [disabled]="formularioVacio()" (click)="nuevaBusqueda()" mdbBtn color="blue-grey"
+          rounded="true" class="my-4 waves-effect z-depth-0 buscar" mdbWavesEffect type="button">Nueva búsqueda</button>
         <hr>
       </div>
     </form>

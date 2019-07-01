@@ -33,3 +33,8 @@ th {
 .fondo-tr {
     background-color: #7FDBFF;
 }
+
+.fondo-azul {
+    color: white;
+    background-color: #0074D9 !important;
+}
