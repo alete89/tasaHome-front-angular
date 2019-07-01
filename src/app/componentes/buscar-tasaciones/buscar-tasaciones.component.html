@@ -8,13 +8,13 @@
 
   <mdb-card-body class="px-lg-5 pt-0">
     <form class="text-center" style="color: #757575;">
-      <div style="margin-bottom: 1.2rem;" class="form-row">
-        <div style="margin-top: 1rem;" class="col margen">
+      <div style="margin-bottom: 1rem;margin-top: 1rem;" class="form-row">
+        <div class="col margen">
           <ng-select name="barrio" [virtualScroll]="true" [items]="barrios" [multiple]="true" [closeOnSelect]="true"
             [searchable]="true" bindLabel="descripcion" placeholder="Barrios" [(ngModel)]="barriosSeleccionados">
           </ng-select>
         </div>
-        <div style="margin-top: 1rem;" class="col margen">
+        <div class="col margen">
           <ng-select name="tipoDePropiedad" [virtualScroll]="true" [items]="tiposDePropiedad" [multiple]="false"
             [closeOnSelect]="true" [searchable]="true" bindLabel="descripcion" placeholder="Tipos de propiedad"
             [(ngModel)]="tipoDePropiedad">
@@ -22,7 +22,7 @@
         </div>
       </div>
       <!-- <p style="text-align: left;">Tipo de operación</p> -->
-      <div class="form-row">
+      <div style="margin-bottom: 1rem;" class="form-row">
         <div style="text-align: left;" class="btn-group" role="group" aria-label="Basic example">
           <div *ngFor="let tipo of tiposDeOperacion">
             <div style="text-align: left;" class="col ">
@@ -45,8 +45,8 @@
         </div>
       </div>
 
-      <div style="margin-top: 1rem;" class="form-row">
-        <div style="margin-bottom: 1rem;" class="col">
+      <div style="margin-bottom: 1rem;" class="form-row">
+        <div class="col">
           <div [formGroup]="validatingForm" class="md-form">
             <input class="form-control" formControlName="ambientes" type="number" mdbInput mdbValidate min="1" mdbInput
               max="15" [(ngModel)]="tasacionBusqueda.ambientes_minimos" id="cantidad_ambientes_min_buscar_tasaciones">
@@ -67,7 +67,7 @@
         </div>
       </div>
 
-      <div class="md-form" [formGroup]="validatingForm">
+      <div style="margin-bottom: 1rem;" class="md-form" [formGroup]="validatingForm">
         <!-- <input formControlName="fechaForm" [max]="fecha_maxima" name="fecha_nacimiento"
             [(ngModel)]="usuario.fecha_nacimiento" type="date" id="input_fecha_registro" class="form-control"
             mdbValidate mdbInput>

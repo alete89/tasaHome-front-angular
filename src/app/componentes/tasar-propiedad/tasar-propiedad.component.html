@@ -5,7 +5,7 @@
     </h5>
   </mdb-card-header>
 
-  <div style="margin-left: 3rem;;" class="md-form" [formGroup]="validatingForm">
+  <div style="margin-left: 3rem; margin-top: 1rem;margin-bottom: 1rem;" class="md-form" [formGroup]="validatingForm">
     <input name="direccion_tasar" formControlName="direccion" [(ngModel)]="tasacion.direccion" type="text"
       class="form-control" id="direccion_tasar" mdbValidate mdbInput>
     <label for="direccion_tasar">Dirección</label>
@@ -24,7 +24,7 @@
   <!-- </div> -->
 
 
-  <div style="margin-left: 3rem; margin-top: 1rem;margin-bottom: 2rem;width: 40rem;" class="form-row">
+  <div style="margin-left: 3rem;margin-bottom: 1rem;width: 40rem;" class="form-row">
     <div class="col margen">
       <div [formGroup]="validatingForm" class="md-form">
         <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="15" mdbInput

@@ -11,7 +11,7 @@
   <mdb-card-body class="px-lg-5 pt-0">
     <!-- Form -->
     <form class="text-center" style="color: #757575;">
-      <div style="margin-bottom: 1.5rem;margin-top: 0.5rem;" class="form-row">
+      <div style="margin-bottom: 1rem;margin-top: 0.5rem;" class="form-row">
         <div class="col margen">
           <!-- First name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
@@ -52,7 +52,7 @@
           </select> -->
         </div>
         <div class="col">
-          <div class="md-form" [formGroup]="camposValidatingForm">
+          <div style="margin-top: 2rem;" class="md-form" [formGroup]="camposValidatingForm">
             <input formControlName="fechaForm" [max]="fecha_maxima" name="fecha_nacimiento"
               [(ngModel)]="usuario.fecha_nacimiento" type="date" id="input_fecha_registro" class="form-control"
               mdbValidate mdbInput>
@@ -63,7 +63,7 @@
         </div>
       </div>
 
-      <div class="form-row" style="margin-top:0.5rem;">
+      <div class="form-row">
         <div class="col">
           <div style="margin-right: 1rem;" class="md-form">
             <p>Provincia</p>
