@@ -7,6 +7,7 @@ import { ZonaService } from 'src/app/servicios/zona.service';
 import { Notification } from 'src/app/shared/notifications/notification';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { DOCUMENT } from '@angular/common';
+declare var require: any
 
 @Component({
   selector: 'registrar-usuario',
@@ -15,6 +16,7 @@ import { DOCUMENT } from '@angular/common';
 })
 export class RegistrarUsuarioComponent implements OnInit {
 
+  moment = require('moment');
   partidos: Array<Zona>
   provincias: Array<Zona>
   localidades: Array<Zona>
@@ -22,9 +24,11 @@ export class RegistrarUsuarioComponent implements OnInit {
   confirmacion_contrasenia: string
   camposValidatingForm: FormGroup
   notification: Notification = new Notification()
+  fecha_maxima = "9999-12-31"
 
   constructor(private zonaService: ZonaService, private usuarioService: UsuarioService, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
-    this.setearFormulario()
+    this.inicializarFormulario()
+    this.inicializarValidaciones()
   }
 
   async ngOnInit() {
@@ -33,6 +37,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   get inputNombre() { return this.camposValidatingForm.get('nombreForm') }
+  get inputFecha() { return this.camposValidatingForm.get('fechaForm') }
   get inputApellido() { return this.camposValidatingForm.get('apellidoForm') }
   get inputDireccion() { return this.camposValidatingForm.get('direccionForm') }
   get inputEmail() { return this.camposValidatingForm.get('emailForm') }
@@ -68,32 +73,57 @@ export class RegistrarUsuarioComponent implements OnInit {
     return (this.confirmacion_contrasenia != this.usuario.contrasenia) && (this.inputConfirmacionPassword.dirty || this.inputConfirmacionPassword.touched)
   }
 
+  fechaInvalida() {
+    return this.esMenorDeEdad() || this.noPusoFecha()
+  }
+
+  noPusoFecha() {
+    return this.inputFecha.invalid && (this.inputFecha.dirty || this.inputFecha.touched)
+  }
+
+  esMenorDeEdad() {
+    let hoy = new Date()
+    let hace18Anios = new Date((hoy.getFullYear() - 18), hoy.getMonth() + 1, hoy.getDay())
+    let formateada = this.moment(hace18Anios).format('YYYY-MM-DD')
+    // console.log(formateada)
+    return this.usuario.fecha_nacimiento > formateada
+  }
+
   hayErrores() {
-    return this.inputNombre.invalid || this.inputApellido.invalid || !this.usuario.genero || !this.usuario.direccion || !this.usuario.fecha_nacimiento || !this.usuario.provincia || !this.usuario.partido || !this.usuario.localidad || !this.usuario.email || !this.usuario.contrasenia || !this.confirmacion_contrasenia || (this.usuario.contrasenia != this.confirmacion_contrasenia)
+    return this.inputNombre.invalid || this.inputApellido.invalid || !this.usuario.genero || !this.usuario.direccion || !this.usuario.fecha_nacimiento || !this.usuario.provincia || !this.usuario.partido || !this.usuario.localidad || !this.usuario.email || !this.usuario.contrasenia || !this.confirmacion_contrasenia || (this.usuario.contrasenia != this.confirmacion_contrasenia) || this.fechaInvalida()
   }
 
   async aceptar() {
     try {
       await this.usuarioService.registrarUsuario(this.usuario)
       this.notification.popUpMessage("Usuario registrado.", "success", 1500)
-      this.setearFormulario()
+      this.limpiarFormulario()
     } catch (error) {
       this.notification.showError(error._body)
     }
   }
 
-  setearFormulario() {
+  inicializarFormulario() {
     this.confirmacion_contrasenia = undefined
     this.usuario = new Usuario()
+  }
+
+  inicializarValidaciones() {
     this.camposValidatingForm = new FormGroup({
       nombreForm: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.pattern("[a-zA-Z ]*")]),
       apellidoForm: new FormControl(null, [Validators.required, Validators.maxLength(60), Validators.pattern("[a-zA-Z ]*")]),
       direccionForm: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\s\d\/]*\d[a-zA-Z\s\d\/]*$/)]),
       //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
       emailForm: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
+      fechaForm: new FormControl(null, [Validators.required]),
       passwordForm: new FormControl(null, [Validators.required, Validators.minLength(8)]),
       confirmacionPasswordForm: new FormControl(null, [Validators.required, Validators.minLength(8)])
     })
+  }
+
+  limpiarFormulario() {
+    this.inicializarFormulario()
+    this.camposValidatingForm.reset()
     this.scrollToTop()
   }
 
