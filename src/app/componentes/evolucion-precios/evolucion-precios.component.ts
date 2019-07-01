@@ -53,9 +53,6 @@ export class EvolucionPreciosComponent implements OnInit {
     this.chartLabels = fechas
   }
   // this.formatear(tasacion.fecha)
-  formatear(fecha: Date) {
-
-  }
 
 }
 

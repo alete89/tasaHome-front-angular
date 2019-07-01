@@ -35,7 +35,7 @@ export class BuscarTasacionesComponent implements OnInit {
   model: Date
   myDatePickerOptions: any
 
-  
+
 
   constructor(private router: Router, public modalService: MDBModalService, public modalBuscarTasaciones: MDBModalRef, private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
   }
@@ -45,21 +45,32 @@ export class BuscarTasacionesComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.setearFormulario()
+    this.inicializarFormulario()
+    this.inicializarValidaciones()
     this.barrios = await this.zonaService.barrios()
     this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
     this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
   }
 
-  setearFormulario() {
+  inicializarFormulario() {
+    this.tipoDePropiedad = undefined
     this.barriosSeleccionados = []
     this.seLanzoBusqueda = false
     this.resultados = undefined
     this.tasacionBusqueda = new TasacionBusqueda()
+
+  }
+
+  inicializarValidaciones() {
     this.numbersValidatingForm = new FormGroup({
       superficie: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(15), Validators.max(2000)]),
       ambientes: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(15)]),
     })
+  }
+
+  nuevaBusqueda() {
+    this.inicializarFormulario()
+    this.numbersValidatingForm.reset()
   }
 
   superficieInvalida() {
