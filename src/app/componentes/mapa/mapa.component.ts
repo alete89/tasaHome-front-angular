@@ -61,12 +61,10 @@ export class MapaComponent implements OnInit {
 
   inicializarMapa() {
     this.mapsApiLoader.load().then(() => {
-      // var defaultBounds = new google.maps.LatLngBounds(
-      //   new google.maps.LatLng(-33.8902, 151.1759),
-      //   new google.maps.LatLng(-33.8474, 151.2631))
       this.geocoder = new google.maps.Geocoder();
-      this.autocomplete = new google.maps.places.SearchBox(this.searchElementRef.nativeElement, {
-        types: ["address"],
+      this.autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        // types: ["address"],
+        componentRestrictions: { country: 'ar' }
       });
       this.autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
