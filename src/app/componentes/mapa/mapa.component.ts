@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
 import { GoogleMapsService } from 'src/app/servicios/google-maps.service';
 import { Escuela } from 'src/app/dominio/escuela';
@@ -39,6 +39,7 @@ export class MapaComponent implements OnInit {
   esModal: boolean = false
   notification: Notification = new Notification()
   errores: Array<string> = []
+  autocomplete
 
   icon = {
     url: 'https://cdn0.iconfinder.com/data/icons/learning-icons-rounded/110/School-512.png',
@@ -49,12 +50,39 @@ export class MapaComponent implements OnInit {
     }
   }
 
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
   marker = { latitude: -34.5783994, longitude: -58.5268406 };
 
-  constructor(public mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private escuelaService: EscuelaService, private tasacionService: TasacionService, public modalMapa: MDBModalRef) {
-    this.mapsApiLoader = mapsApiLoader;
+  constructor(private ngZone: NgZone, private mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private escuelaService: EscuelaService, private tasacionService: TasacionService, public modalMapa: MDBModalRef) {
+  
+  }
+
+  inicializarMapa() {
     this.mapsApiLoader.load().then(() => {
       this.geocoder = new google.maps.Geocoder();
+      this.autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"]
+      });
+      this.autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place = this.autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.marker = { latitude: this.latitude, longitude: this.longitude };
+          this.direccion = place.formatted_address
+          this.direccionGoogle = this.direccion
+        });
+      });
     });
   }
 
@@ -74,6 +102,7 @@ export class MapaComponent implements OnInit {
 
   async ngOnInit() {
     this.notification.cleanLoading()
+    this.inicializarMapa()
     this.map.zoom = 16
     if (!this.esModal) {
       this.escuelas = await this.escuelaService.getEscuelas()
@@ -113,6 +142,10 @@ export class MapaComponent implements OnInit {
 
   noPuedeAceptar() {
     return !this.direccionGoogle || this.direccionGoogle !== this.direccion
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('keyup', this.autocomplete, false);
   }
 
 }

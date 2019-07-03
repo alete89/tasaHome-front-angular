@@ -54,7 +54,8 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
       ReactiveFormsModule,
       MDBBootstrapModule.forRoot(),
       AgmCoreModule.forRoot({
-         apiKey: 'AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM'
+         apiKey: 'AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM',
+         libraries: ['places']
       }),
       AgmJsMarkerClustererModule,
       NgSelectModule,

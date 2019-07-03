@@ -6,20 +6,27 @@
 <!-- <p style="color: white; text-align: center;font-size: 3rem;">Bienvenidos a TasaHome!!!</p> -->
 <form style="width: 50rem; margin: auto;">
   <div style="background-color: #3F729B; padding-bottom: 1rem;" class="container">
-    <div class="row d-flex flex-center " style="background-color: #3E4551;">
-      <div class="col">
-        <div class=" md-form">
-          <input style="color:white;" name="direccion_mapa" type="text" [(ngModel)]="direccion" class="form-control"
-            id="searchField" mdbInput />
-          <label style="color: white" for="searchField">Buscar Locación</label>
-        </div>
-      </div>
+    <div class="row d-flex flex-center " style="background-color: #3E4551;padding-top: 1rem;padding-bottom: 1rem;">
       <!-- <div class="col"> -->
+      <!-- <div class=" form-group"> -->
       <div>
+        <!-- <label>Enter address</label> -->
+        <input style=" width: 25rem;margin-right: 1rem;" [(ngModel)]="direccion" type="text" class="form-control"
+        placeholder="Buscar dirección" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search
+        id="searchAddressBar" name="searchAddressBar">
+      </div>
+
+      <!-- <input #search style="margin-top:5rem;margin:auto;color:black;" name="direccion_mapa" type="text" [(ngModel)]="direccion"
+          class="form-control pac-container" id="searchField" mdbInput />
+        <label style="color: black" for="searchField">Buscar Locación</label> -->
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- <div class="col"> -->
+      <!-- <div>
         <button [disabled]="!direccion" mdbBtn color="indigo" mdbWavesLight (click)="updateOnMap()" type="submit">
           Buscar
         </button>
-      </div>
+      </div> -->
       <div>
         <button [disabled]="!direccion" mdbBtn color="grey" mdbWavesLight (click)="borrarBusqueda()" type="button">
           Borrar
