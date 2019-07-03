@@ -4,13 +4,13 @@
 
 <!-- EL QUE TIENE EL BUSCADOR -->
 <!-- <p style="color: white; text-align: center;font-size: 3rem;">Bienvenidos a TasaHome!!!</p> -->
-<div style="margin-top:10rem; max-height: 30rem;">
-  <div style="margin:auto;background-color: #3F729B; width: 750px;height: auto;padding-bottom: 3rem;" class="container">
-    <div class="row my-5 d-flex flex-center" style="background-color: #3E4551;">
+<form style="width: 50rem; margin: auto;">
+  <div style="background-color: #3F729B; padding-bottom: 1rem;" class="container">
+    <div class="row d-flex flex-center " style="background-color: #3E4551;">
       <div class="col">
         <div class=" md-form">
-          <input style="color:white;" type="text" [(ngModel)]="direccion" class="form-control" id="searchField"
-            mdbInput />
+          <input style="color:white;" name="direccion_mapa" type="text" [(ngModel)]="direccion" class="form-control"
+            id="searchField" mdbInput />
           <label style="color: white" for="searchField">Buscar Locación</label>
         </div>
       </div>
@@ -21,28 +21,53 @@
         </button>
       </div>
       <div>
-        <button (click)="borrarBusqueda()" mdbBtn type="button" color="danger" mdbWavesEffect>
-          <mdb-icon fas icon="times"></mdb-icon>
+        <button [disabled]="!direccion" mdbBtn color="grey" mdbWavesLight (click)="borrarBusqueda()" type="button">
+          Borrar
+        </button>
+      </div>
+      <div *ngIf="esModal">
+        <button [disabled]="noPuedeAceptar()" mdbBtn color="success" mdbWavesLight (click)="aceptar()" type="submit">
+          Aceptar
         </button>
       </div>
       <!-- </div> -->
+      <div *ngIf="esModal">
+        <button (click)="cerrarModal()" mdbBtn type="button" color="danger" mdbWavesEffect>
+          <mdb-icon fas icon="times"></mdb-icon>
+        </button>
+      </div>
+      <!-- <div class="notifications" style="height: 3rem; ">
+        <app-notifications [notification]="notification">
+        </app-notifications>
+      </div> -->
     </div>
-    <div class="card">
-      <agm-map #map [zoom]="map.zoom" [mapTypeId]="'terrain'" [usePanning]="true" [latitude]="latitude"
-        [longitude]="longitude" [scrollwheel]="null" (mapClick)="placeMarker($event)"
-        style="height: 500px; width: 700px;">
-        <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
-        <agm-marker-cluster
-          imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-          <div *ngFor="let escuela of escuelas">
-            <agm-marker [iconUrl]="icon" [latitude]="escuela.latitud" [longitude]="escuela.longitud"> </agm-marker>
-            <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
+
+    <div>
+      <div class="card" style="margin-top:1rem; margin-left:2rem; margin-right:3rem; ">
+        <agm-map #map [zoom]="map.zoom" [mapTypeId]="'terrain'" [usePanning]="true" [latitude]="latitude"
+          [longitude]="longitude" [scrollwheel]="null" (mapClick)="placeMarker($event)"
+          style="height: 500px; width: 700px;">
+          <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
+          <agm-marker-cluster *ngIf="!esModal"
+            imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
+            <div *ngFor="let escuela of escuelas">
+              <agm-marker [iconUrl]="icon" [latitude]="escuela.latitud" [longitude]="escuela.longitud"> </agm-marker>
+              <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
           <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
 
-            <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
-          </div>
-        </agm-marker-cluster>
-      </agm-map>
+              <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
+            </div>
+          </agm-marker-cluster>
+        </agm-map>
+      </div>
+    </div>
+    <div class="card" *ngIf="errores && errores.length > 0"
+      style="margin-left: 7rem;margin-right: 7rem;; margin-top: 2rem;text-align: center; background-color: #ff4444;">
+      <div>
+        <strong style="color: white;">No se pudo encontrar la dirección ingresada</strong>
+      </div>
     </div>
   </div>
-</div>
+
+
+</form>

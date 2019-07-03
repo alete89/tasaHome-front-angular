@@ -14,10 +14,12 @@ import { TasacionesAnterioresComponent } from './componentes/tasaciones-anterior
 import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-propiedad.component';
 import { AuthGuard } from './guard/auth-guard';
 import { LogueadoGuard } from './guard/logueado-guard';
+import { MapaComponent } from './componentes/mapa/mapa.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
+  { path: 'mapa', component: MapaComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [LogueadoGuard], pathMatch: 'full' },
   { path: 'tasaciones-anteriores', component: TasacionesAnterioresComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent, canActivate: [LogueadoGuard], pathMatch: 'full' },
