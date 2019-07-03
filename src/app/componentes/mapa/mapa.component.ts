@@ -56,14 +56,17 @@ export class MapaComponent implements OnInit {
   marker = { latitude: -34.5783994, longitude: -58.5268406 };
 
   constructor(private ngZone: NgZone, private mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private escuelaService: EscuelaService, private tasacionService: TasacionService, public modalMapa: MDBModalRef) {
-  
+
   }
 
   inicializarMapa() {
     this.mapsApiLoader.load().then(() => {
+      // var defaultBounds = new google.maps.LatLngBounds(
+      //   new google.maps.LatLng(-33.8902, 151.1759),
+      //   new google.maps.LatLng(-33.8474, 151.2631))
       this.geocoder = new google.maps.Geocoder();
-      this.autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
+      this.autocomplete = new google.maps.places.SearchBox(this.searchElementRef.nativeElement, {
+        types: ["address"],
       });
       this.autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
