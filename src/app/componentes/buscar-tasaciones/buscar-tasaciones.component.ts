@@ -97,11 +97,15 @@ export class BuscarTasacionesComponent implements OnInit {
   }
 
   async buscar() {
+    console.log(this.tasacionBusqueda)
     if (this.barriosSeleccionados.length > 0) {
       this.tasacionBusqueda.ids_barrios = this.barriosSeleccionados.map(barrio => barrio.id)
     }
     if (this.tipoDePropiedad) {
       this.tasacionBusqueda.id_tipo_propiedad = this.tipoDePropiedad.id
+    }
+    if(!this.tasacionBusqueda.fecha_desde){
+      this.tasacionBusqueda.fecha_desde = new Date()
     }
     this.resultados = await this.usuarioService.tasacionesSimilares(this.tasacionBusqueda)
     this.seLanzoBusqueda = true
