@@ -11,6 +11,8 @@ import { TipoOperacion } from '../dominio/tipo_operacion';
 
 export class TasacionService {
 
+  direccion: String
+
   constructor(private http: Http) { }
 
   async tiposDePropiedad() {
@@ -26,6 +28,7 @@ export class TasacionService {
   }
 
   async tasarPropiedad(tasacion: Tasacion) {
+    tasacion.direccion = this.direccion
     const json = JSON.parse(JSON.stringify(tasacion))
     let resp = await this.http.put(REST_SERVER_URL + '/tasar_propiedad', json).toPromise()
     return resp.json()
@@ -43,6 +46,14 @@ export class TasacionService {
     const url = REST_SERVER_URL + "/historial_tasacion/" + id_tasacion
     const resp = await this.http.get(url).toPromise()
     return resp.json().map(Tasacion.fromJson)
+  }
+
+  guardarDireccion(direccion: string) {
+    this.direccion = direccion
+  }
+
+  getDireccion() {
+    return this.direccion
   }
 
 }

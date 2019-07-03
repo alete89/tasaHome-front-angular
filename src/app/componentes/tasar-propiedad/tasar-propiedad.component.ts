@@ -11,6 +11,7 @@ import { ServicioService } from 'src/app/servicios/servicio.service';
 import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { MostrarTasacionComponent } from '../mostrar-tasacion/mostrar-tasacion.component';
+import { MapaComponent } from '../mapa/mapa.component';
 
 @Component({
   selector: 'tasar-propiedad',
@@ -26,10 +27,10 @@ export class TasarPropiedadComponent implements OnInit {
   servicios: Array<Servicio>
   validatingForm: FormGroup
   modalTasacion: MDBModalRef;
+  modalMapa: MDBModalRef;
   @Input() titulo: string
   @Input() titulo_boton: string
   @Input() esActualizacion: boolean
-
 
   constructor(private modalService: MDBModalService, private usuarioService: UsuarioService, private tasacionService: TasacionService, private estadoService: EstadoService, private servicioService: ServicioService) {
     this.titulo = "Tasar propiedad"
@@ -66,6 +67,11 @@ export class TasarPropiedadComponent implements OnInit {
     this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
     this.estados = await this.estadoService.estados()
     this.servicios = await this.servicioService.servicios()
+    if (this.esActualizacion) {
+      this.tasacionService.direccion = this.tasacion.direccion
+    } else {
+      this.tasacionService.direccion = undefined
+    }
     this.chequearServicios()
   }
 
@@ -95,7 +101,7 @@ export class TasarPropiedadComponent implements OnInit {
   }
 
   formularioIncompleto() {
-    return !this.tasacion.direccion || !this.tasacion.superficie || !this.tasacion.tipoDePropiedad.id || !this.tasacion.tipoDeOperacion.id || !this.tasacion.ambientes || !this.tasacion.estado.id
+    return !this.tasacionService.direccion || !this.tasacion.superficie || !this.tasacion.tipoDePropiedad.id || !this.tasacion.tipoDeOperacion.id || !this.tasacion.ambientes || !this.tasacion.estado.id
   }
 
   async openModalTasacion() {
@@ -112,7 +118,22 @@ export class TasarPropiedadComponent implements OnInit {
       data: {
         tasacion: this.tasacion
       }
+    });
+  }
 
+  async openModalMapa() {
+    this.modalMapa = this.modalService.show(MapaComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog modal-lg',
+      containerClass: 'right',
+      animated: true,
+      data: {
+        esModal: true,
+      }
     });
   }
 
