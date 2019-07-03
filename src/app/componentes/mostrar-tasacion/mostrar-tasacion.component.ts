@@ -55,4 +55,8 @@ export class MostrarTasacionComponent implements OnInit {
     this.modalMostrarTasacion.hide()
   }
 
+  modalAbierto(){
+    return this.modalService.getModalsCount() > 1
+  }
+
 }

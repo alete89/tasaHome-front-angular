@@ -133,6 +133,7 @@ export class TasarPropiedadComponent implements OnInit {
       animated: true,
       data: {
         esModal: true,
+        // modalMapa: this.modalMapa
       }
     });
   }
