@@ -76,6 +76,9 @@ export class MapaComponent implements OnInit {
     }
   }
 
+  borrarBusqueda() {
+    this.direccion = undefined
+  }
 
 }
 

@@ -3,31 +3,35 @@
 </agm-map> -->
 
 <!-- EL QUE TIENE EL BUSCADOR -->
-<div class="container">
-  <div class="row my-5 d-flex flex-center">
-    <div class="col-md-6">
-
-        <div class="col">
-            <div class="md-form">
-              <input style="color:white;" type="text" [(ngModel)]="direccion" class="form-control" id="searchField"
-                mdbInput />
-              <label for="searchField">Buscar Locación</label>
-            </div>
-            <div class="row">
-              <div class="col-md-12 d-flex flex-center">
-                <button mdbBtn color="primary" mdbWavesLight (click)="updateOnMap()" type="submit">
-                  Buscar
-                </button>
-              </div>
-            </div>
-          </div>
-
-
+<!-- <p style="color: white; text-align: center;font-size: 3rem;">Bienvenidos a TasaHome!!!</p> -->
+<div style="margin-top:10rem; max-height: 30rem;">
+  <div style="margin:auto;background-color: #3F729B; width: 750px;height: auto;padding-bottom: 3rem;" class="container">
+    <div class="row my-5 d-flex flex-center" style="background-color: #3E4551;">
+      <div class="col">
+        <div class=" md-form">
+          <input style="color:white;" type="text" [(ngModel)]="direccion" class="form-control" id="searchField"
+            mdbInput />
+          <label style="color: white" for="searchField">Buscar Locación</label>
+        </div>
+      </div>
+      <!-- <div class="col"> -->
+      <div>
+        <button [disabled]="!direccion" mdbBtn color="indigo" mdbWavesLight (click)="updateOnMap()" type="submit">
+          Buscar
+        </button>
+      </div>
+      <div>
+        <button (click)="borrarBusqueda()" mdbBtn type="button" color="danger" mdbWavesEffect>
+          <mdb-icon fas icon="times"></mdb-icon>
+        </button>
+      </div>
+      <!-- </div> -->
+    </div>
+    <div class="card">
       <agm-map #map [zoom]="map.zoom" [mapTypeId]="'terrain'" [usePanning]="true" [latitude]="latitude"
         [longitude]="longitude" [scrollwheel]="null" (mapClick)="placeMarker($event)"
         style="height: 500px; width: 700px;">
         <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
-
         <agm-marker-cluster
           imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
           <div *ngFor="let escuela of escuelas">
@@ -39,9 +43,6 @@
           </div>
         </agm-marker-cluster>
       </agm-map>
-
-
     </div>
-
   </div>
 </div>
