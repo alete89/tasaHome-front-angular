@@ -13,6 +13,7 @@
 .aceptar {
     max-width: 14rem;
     margin-top: 3rem;
+
     /* margin-right: 4rem; */
 }
 
@@ -32,6 +33,11 @@
 }
 
 .fondo-azul {
+    color: white;
+    background-color: #0074D9 !important;
+}
+
+.color-hover:hover {
     color: white;
     background-color: #0074D9 !important;
 }

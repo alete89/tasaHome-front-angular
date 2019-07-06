@@ -36,15 +36,15 @@
         <div style="text-align: left;" class="col margen">
           <p style="text-align: left;">Género</p>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button rounded="true" outline="true" mdbBtn mdbWavesEffect
+            <button style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn mdbWavesEffect
               [ngClass]="{ 'fondo-azul': usuario.genero == 'Masculino'}" (click)="seleccionarGenero('Masculino')"
-              type="button" size="md" class="btn btn-white">Masculino</button>
-            <button rounded="true" outline="true" mdbBtn mdbWavesEffect
+              type="button" size="md" class="btn btn-white color-hover">Masculino</button>
+            <button style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn mdbWavesEffect
               [ngClass]="{ 'fondo-azul': usuario.genero == 'Femenino'}" (click)="seleccionarGenero('Femenino')"
-              type="button" size="md" class="btn btn-white">Femenino</button>
+              type="button" size="md" class="btn btn-white color-hover">Femenino</button>
             <button rounded="true" outline="true" mdbBtn mdbWavesEffect
               [ngClass]="{ 'fondo-azul': usuario.genero == 'Otro'}" (click)="seleccionarGenero('Otro')" type="button"
-              size="md" class="btn btn-white">Otro</button>
+              size="md" class="btn btn-white color-hover">Otro</button>
           </div>
           <!-- <select name="genero" [(ngModel)]="usuario.genero" class="browser-default custom-select">
             <option value="Femenino">Femenino</option>

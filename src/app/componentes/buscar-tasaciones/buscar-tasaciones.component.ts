@@ -97,7 +97,7 @@ export class BuscarTasacionesComponent implements OnInit {
   }
 
   async buscar() {
-    console.log(this.tasacionBusqueda)
+    // console.log(this.tasacionBusqueda)
     if (this.barriosSeleccionados.length > 0) {
       this.tasacionBusqueda.ids_barrios = this.barriosSeleccionados.map(barrio => barrio.id)
     }
