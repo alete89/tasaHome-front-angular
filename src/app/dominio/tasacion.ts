@@ -22,6 +22,8 @@ export class Tasacion {
 
     direccion: String
 
+    barrio: String
+
     tipoDePropiedad: TipoPropiedad
 
     tipoDeOperacion: TipoOperacion

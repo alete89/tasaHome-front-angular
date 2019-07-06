@@ -12,8 +12,12 @@ import { TipoOperacion } from '../dominio/tipo_operacion';
 export class TasacionService {
 
   direccion: String
+  barrio: String
+  ultimaBusqueda: String
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    this.barrio = undefined
+  }
 
   async tiposDePropiedad() {
     const url = REST_SERVER_URL + "/tipos_propiedad"
@@ -29,6 +33,7 @@ export class TasacionService {
 
   async tasarPropiedad(tasacion: Tasacion) {
     tasacion.direccion = this.direccion
+    tasacion.barrio = this.barrio
     const json = JSON.parse(JSON.stringify(tasacion))
     let resp = await this.http.put(REST_SERVER_URL + '/tasar_propiedad', json).toPromise()
     return resp.json()
@@ -48,12 +53,33 @@ export class TasacionService {
     return resp.json().map(Tasacion.fromJson)
   }
 
-  guardarDireccion(direccion: string) {
+  guardarDatos(direccion: string, barrio: string) {
     this.direccion = direccion
+    this.barrio = barrio
   }
 
   getDireccion() {
     return this.direccion
+  }
+
+  setUltimaBusqueda() {
+    this.ultimaBusqueda = this.direccion
+  }
+
+  cambioDireccion() {
+    return this.direccion != this.ultimaBusqueda
+  }
+
+  async datosBarrioPorNombre() {
+    let json: any = {}
+    json.barrio = this.barrio
+    const url = REST_SERVER_URL + "/datos/barrio-nombre/"
+    const resp = await this.http.put(url, json).toPromise()
+    return resp.json()
+  }
+
+  guardarBarrio(barrio: string) {
+    this.barrio = barrio
   }
 
 }

@@ -12,8 +12,8 @@
       <div>
         <!-- <label>Enter address</label> -->
         <input style=" width: 25rem;margin-right: 1rem;" [(ngModel)]="direccion" type="text" class="form-control"
-        placeholder="Buscar dirección" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search
-        id="searchAddressBar" name="searchAddressBar">
+          placeholder="Buscar dirección" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search
+          id="searchAddressBar" name="searchAddressBar">
       </div>
 
       <!-- <input #search style="margin-top:5rem;margin:auto;color:black;" name="direccion_mapa" type="text" [(ngModel)]="direccion"
@@ -68,13 +68,20 @@
         </agm-map>
       </div>
     </div>
-    <div class="card" *ngIf="errores && errores.length > 0"
-      style="margin-left: 7rem;margin-right: 7rem;; margin-top: 2rem;text-align: center; background-color: #ff4444;">
-      <div>
-        <strong style="color: white;">No se pudo encontrar la dirección ingresada</strong>
+    <div *ngIf="esModal" style="height:2rem !important;">
+      <div class="card" *ngIf="errores && errores.length > 0"
+        style="margin-left: 7rem;margin-right: 7rem;; margin-top: 2rem;text-align: center; background-color: #ff4444;">
+        <div>
+          <strong style="color: white;">No se pudo encontrar la dirección ingresada</strong>
+        </div>
+      </div>
+      <div class="card"
+        style="margin-left: 7rem;margin-right: 7rem;; margin-top: 2rem;text-align: center; background-color: #ff4444;">
+        <div>
+          <strong *ngIf="ingresoDireccionNoDeCABA() && esModal" style="color: white;">La dirección debe ser de
+            CABA</strong>
+        </div>
       </div>
     </div>
   </div>
-
-
 </form>

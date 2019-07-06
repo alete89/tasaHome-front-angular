@@ -3,7 +3,7 @@
 
   <mdb-card-header class="registro default-color-dark white-text text-center py-4">
     <h5>
-      <strong class="grande">Datos por zona</strong>
+      <strong class="grande">Datos por {{titulo}}</strong>
     </h5>
   </mdb-card-header>
 
@@ -52,11 +52,30 @@
       </div>
 
 
+      <div *ngIf="zonaSeleccionada == 'Direccion'"
+        style="margin-left: 2rem; margin-right:3rem; margin-top: 1rem;margin-bottom: 1rem;">
+        <input placeholder="Dirección" [disabled]="modalYaAbierto()" [(ngModel)]="tasacionService.direccion"
+          (focus)="openModalMapa()" name="direccion_datos_por_zona" type="text" class="form-control"
+          id="direccion_datos_por_zona" mdbInput>
+        <div>
+          <button style="margin-top: 1rem;" [disabled]="noPuedeBuscar()" mdbBtn color="success" mdbWavesLight
+            (click)="traerDatosBarrioPorNombre()" type="submit">
+            Buscar
+          </button>
+          <!-- <button style="margin-top: 1rem;" [disabled]="noPuedeBorrar()" mdbBtn color="danger" mdbWavesLight
+            (click)="borrarBusqueda()" type="submit">
+            Borrar
+          </button> -->
+        </div>
+        <!-- <label for="direccion_tasar">Dirección</label> -->
+        <!-- <mdb-error *ngIf="direccionInvalida()">Direccion inválida</mdb-error> -->
+      </div>
+
     </form>
     <!-- Form -->
 
 
-    <div class="contenedor-tasaciones">
+    <div *ngIf="mostrarDatos() " class="contenedor-tasaciones">
       <div class="card-datos">
         <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
           <table class="table">
@@ -67,20 +86,20 @@
               </tr>
             </thead>
             <tr class="fila-contenido">
-              <td *ngIf="datos"> Escuelas </td>
-              <td *ngIf="datos">{{ datos.escuelas }} </td>
+              <td> Escuelas </td>
+              <td>{{ datos.escuelas }} </td>
             </tr>
             <tr class="fila-contenido">
-              <td *ngIf="datos"> Comisarias </td>
+              <td> Comisarias </td>
               <td *ngIf="datos">{{ datos.comisarias }} </td>
             </tr>
             <tr class="fila-contenido">
-              <td *ngIf="datos"> Espacios Verdes </td>
+              <td> Espacios Verdes </td>
               <td *ngIf="datos">{{ datos.espacios_verdes }} </td>
             </tr>
             <tr class="fila-contenido">
-              <td *ngIf="datos"> Hospitales </td>
-              <td *ngIf="datos">{{ datos.hospitales }} </td>
+              <td> Hospitales </td>
+              <td>{{ datos.hospitales }} </td>
             </tr>
           </table>
         </div>
