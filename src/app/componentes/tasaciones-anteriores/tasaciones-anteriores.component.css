@@ -24,3 +24,8 @@ th {
     display: block;
     margin: auto;
 }
+
+.tasaciones {
+    color: white;
+    background-color: #59698d;
+}

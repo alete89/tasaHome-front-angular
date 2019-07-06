@@ -1,5 +1,5 @@
 <!-- Material form register -->
-<mdb-card class="card">
+<mdb-card class="card" style="margin: auto;max-width:40rem;">
 
   <mdb-card-header class="registro default-color-dark white-text text-center py-4">
     <h5>
@@ -54,7 +54,7 @@
 
       <div *ngIf="zonaSeleccionada == 'Direccion'"
         style="margin-left: 2rem; margin-right:3rem; margin-top: 1rem;margin-bottom: 1rem;">
-        <input placeholder="Dirección" [disabled]="modalYaAbierto()" [(ngModel)]="tasacionService.direccion"
+        <input style="text-align: center;" placeholder="Dirección" [disabled]="modalYaAbierto()" [(ngModel)]="tasacionService.direccion"
           (focus)="openModalMapa()" name="direccion_datos_por_zona" type="text" class="form-control"
           id="direccion_datos_por_zona" mdbInput>
         <div>
