@@ -31,8 +31,8 @@ export class MostrarTasacionComponent implements OnInit {
       this.notification.popUpMessage("Tasación guardada.", "success", 1500)
       this.yaGuardo = true
     } catch (error) {
-      this.notification.showError(error._body)
-    }
+      let mensaje = JSON.parse(error._body).message
+      this.notification.popUpMessage(mensaje, "danger", 1500)    }
   }
 
   publicar() {

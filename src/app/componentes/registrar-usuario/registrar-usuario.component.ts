@@ -25,6 +25,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   camposValidatingForm: FormGroup
   notification: Notification = new Notification()
   fecha_maxima = "9999-12-31"
+  mail_invalido: String
 
   constructor(private zonaService: ZonaService, private usuarioService: UsuarioService, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
     this.inicializarFormulario()
@@ -90,20 +91,25 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   hayErrores() {
-    return this.inputNombre.invalid || this.inputApellido.invalid || !this.usuario.genero || !this.usuario.direccion || !this.usuario.fecha_nacimiento || !this.usuario.provincia || !this.usuario.partido || !this.usuario.localidad || !this.usuario.email || !this.usuario.contrasenia || !this.confirmacion_contrasenia || (this.usuario.contrasenia != this.confirmacion_contrasenia) || this.fechaInvalida()
+    return this.inputNombre.invalid || this.inputApellido.invalid || !this.usuario.genero || !this.usuario.direccion || !this.usuario.fecha_nacimiento || !this.usuario.provincia || !this.usuario.partido || !this.usuario.localidad || !this.usuario.email || !this.usuario.contrasenia || !this.confirmacion_contrasenia || (this.usuario.contrasenia != this.confirmacion_contrasenia) || this.fechaInvalida() || (this.mail_invalido == this.usuario.email)
   }
 
   async aceptar() {
+    this.notification = new Notification
+    this.notification.cleanLoading()
     try {
       await this.usuarioService.registrarUsuario(this.usuario)
-      this.notification.popUpMessage("Usuario registrado.", "success", 1500)
+      this.notification.popUpMessage("Usuario registrado.", "success", 3500)
       this.limpiarFormulario()
     } catch (error) {
-      this.notification.showError(error._body)
+      console.log(error)
+      this.notification.showError(error)
+      this.mail_invalido = this.usuario.email
     }
   }
 
   inicializarFormulario() {
+    this.mail_invalido = "invalido"
     this.confirmacion_contrasenia = undefined
     this.usuario = new Usuario()
   }

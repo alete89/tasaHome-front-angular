@@ -2,12 +2,13 @@
   <div *ngIf="notification.loading" class="progress">
     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%"></div>
   </div>
-  <div *ngIf="notification.error" class="alert alert-danger fade show">
-    <button type="button" class="close" (click)="cleanError()">&times;</button>
-    {{notification.error}}
+  <div style="background-color: #ff4444;color: white;" *ngIf="notification.error" class="alert alert-danger fade show"
+    role="alert">
+    <strong style="margin-right: 1rem;">{{notification.error}}</strong>
+    <button style="color: white;" type="button" class="close" (click)="cleanError()">&times;</button>
   </div>
   <div *ngIf="notification.message" class="alert fade show" style="color:white"
-    [ngClass]="{ 'alert-success background-color: green': notification.type === 'success', 'alert-danger background-color: red': notification.type === 'danger'}"
+    [ngClass]="{ 'alert-success background-color: success-color': notification.type === 'success', 'alert-danger background-color: danger-color !important;': notification.type === 'danger'}"
     role="alert">
     {{notification.message}}
   </div>

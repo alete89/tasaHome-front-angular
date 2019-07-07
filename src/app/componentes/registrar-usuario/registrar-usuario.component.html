@@ -11,7 +11,7 @@
   <mdb-card-body class="px-lg-5 pt-0">
     <!-- Form -->
     <form class="text-center" style="color: #757575;">
-      <div style="margin-bottom: 1rem;margin-top: 0.5rem;" class="form-row">
+      <div style="margin-top: 0.5rem;" class="form-row">
         <div class="col margen">
           <!-- First name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
@@ -153,13 +153,10 @@
 
     </form>
     <!-- Form -->
-
   </mdb-card-body>
-
+  <div *ngIf="notification" class="notification" style="height: 3rem; ">
+    <app-notifications [notification]="notification">
+    </app-notifications>
+  </div>
 </mdb-card>
 <!-- Material form register -->
-
-<div class="notifications" style="height: 3rem; ">
-  <app-notifications [notification]="notification">
-  </app-notifications>
-</div>
