@@ -7,6 +7,7 @@ import { ZonaService } from 'src/app/servicios/zona.service';
 import { Notification } from 'src/app/shared/notifications/notification';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 declare var require: any
 
 @Component({
@@ -27,7 +28,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   fecha_maxima = "9999-12-31"
   mail_invalido: String
 
-  constructor(private zonaService: ZonaService, private usuarioService: UsuarioService, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+  constructor(private router: Router, private zonaService: ZonaService, private usuarioService: UsuarioService, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
     this.inicializarFormulario()
     this.inicializarValidaciones()
   }
@@ -99,8 +100,11 @@ export class RegistrarUsuarioComponent implements OnInit {
     this.notification.cleanLoading()
     try {
       await this.usuarioService.registrarUsuario(this.usuario)
-      this.notification.popUpMessage("Usuario registrado.", "success", 3500)
+      this.notification.popUpMessage("Usuario registrado.", "success", 2500)
       this.limpiarFormulario()
+      setTimeout(() => {
+        this.router.navigate(['/home'])
+      }, 2500)
     } catch (error) {
       console.log(error)
       this.notification.showError(error)
