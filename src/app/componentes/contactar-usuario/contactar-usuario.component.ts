@@ -32,7 +32,7 @@ export class ContactarUsuarioComponent implements OnInit {
       this.mensaje = undefined
       this.cerrarModal()
     } catch (error) {
-      this.notification.showError(error._body)
+      this.notification.showError(error)
     }
   }
 

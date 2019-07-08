@@ -48,17 +48,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  openModalDatosPorZona() {
-    this.router.navigate(['/home'])
-    this.modalDatosPorZona = this.modalService.show(DatosPorZonaComponent, {
-      backdrop: true,
-      keyboard: true,
-      focus: true,
-      show: false,
-      ignoreBackdropClick: false,
-      containerClass: 'right',
-      animated: true
-    });
+  irADatosPorZona() {
+    this.router.navigate(['/datos-por-zona'])
   }
 
   openModalBuscarTasaciones() {

@@ -15,7 +15,7 @@ export class PublicarTasacionComponent implements OnInit {
   modalPublicarTasacion: MDBModalRef
   sitios: Array<SitioPublicacion>
 
-  constructor(private sitiosService: SitioPublicacionService) { }
+  constructor(private sitiosService: SitioPublicacionService, public modalPublicar: MDBModalRef) { }
 
   async ngOnInit() {
     this.sitios = await this.sitiosService.sitios_publicacion()
@@ -23,6 +23,10 @@ export class PublicarTasacionComponent implements OnInit {
 
   async publicar() {
     this.modalPublicarTasacion.hide()
+  }
+
+  cancelar() {
+    this.modalPublicar.hide()
   }
 
 }

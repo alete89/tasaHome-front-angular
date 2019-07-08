@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModule, MDBModalRef } from 'angular-bootstrap-md';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ActualizarTasacionComponent } from './componentes/actualizar-tasacion/actualizar-tasacion.component';
@@ -54,14 +54,15 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
       ReactiveFormsModule,
       MDBBootstrapModule.forRoot(),
       AgmCoreModule.forRoot({
-         apiKey: 'AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM'
+         apiKey: 'AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM',
+         libraries: ['places']
       }),
       AgmJsMarkerClustererModule,
       NgSelectModule,
       NgxPageScrollCoreModule
 
    ],
-   providers: [],
+   providers: [MDBModalRef],
    bootstrap: [
       AppComponent
    ]

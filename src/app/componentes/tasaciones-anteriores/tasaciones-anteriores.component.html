@@ -1,7 +1,7 @@
 <div *ngIf="hayTasacionesAnteriores()" class="margen">
-  <p class="tasaciones">Tasaciones Anteriores</p>
   <div class="contenedor-tasaciones">
     <div class="card tasaciones">
+      <p class="tasaciones">Tasaciones Anteriores</p>
       <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
         <table class="table">
           <thead class="colorear-celeste">
@@ -52,4 +52,9 @@
     <button style="margin-top: 2rem;margin-bottom: 2rem;" (click)="irATasarPropiedad()" class="boton" mdbBtn
       type="button" color="unique" size="md" mdbWavesEffect><strong>Hacer una tasación</strong></button>
   </div>
+</div>
+
+<div *ngIf="notification" class="notification" style="height: 3rem; ">
+  <app-notifications [notification]="notification">
+  </app-notifications>
 </div>

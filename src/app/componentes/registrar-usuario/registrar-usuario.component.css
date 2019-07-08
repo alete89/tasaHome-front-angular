@@ -13,6 +13,7 @@
 .aceptar {
     max-width: 14rem;
     margin-top: 3rem;
+
     /* margin-right: 4rem; */
 }
 
@@ -20,9 +21,10 @@
     max-width: 50rem;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 3rem;
 }
 
-.notifications {
+.notification {
     z-index: 9999;
     top: 0;
     right: 0;
@@ -32,6 +34,11 @@
 }
 
 .fondo-azul {
+    color: white;
+    background-color: #0074D9 !important;
+}
+
+.color-hover:hover {
     color: white;
     background-color: #0074D9 !important;
 }

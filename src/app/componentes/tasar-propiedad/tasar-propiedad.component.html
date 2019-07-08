@@ -1,14 +1,12 @@
-<div class="card fondo_tasar" style="margin:auto;margin-top: 8rem; width: 45rem;">
+<form class="card fondo_tasar" style="margin:auto; width: 45rem;">
   <mdb-card-header class="blue-gradient white-text text-center py-4">
     <h5>
       <strong style="font-size: 2rem;">{{titulo}}</strong>
     </h5>
   </mdb-card-header>
-
-  <div style="margin-left: 2rem; margin-right:3rem; margin-top: 1rem;margin-bottom: 1rem;" class="md-form"
-    [formGroup]="validatingForm">
-    <input name="direccion_tasar" formControlName="direccion" [(ngModel)]="tasacion.direccion" type="text"
-      class="form-control" id="direccion_tasar" mdbValidate mdbInput>
+  <div style="margin-left: 2rem; margin-right:3rem; margin-top: 1rem;margin-bottom: 1rem;" class="md-form">
+    <input [disabled]="modalTasarYaAbierto()" [(ngModel)]="tasacionService.direccion" (focus)="openModalMapa()"
+      name="direccion_tasar" type="text" class="form-control" id="direccion_tasar" mdbValidate mdbInput>
     <label for="direccion_tasar">Dirección</label>
     <mdb-error *ngIf="direccionInvalida()">Direccion inválida</mdb-error>
   </div>
@@ -23,8 +21,6 @@
     &q=UNSAM+Buenos+Aires" allowfullscreen>
         </iframe> -->
   <!-- </div> -->
-
-
   <div style="margin-left: 2rem; margin-bottom: 1rem;width: 40rem;" class="form-row">
     <div class="col margen">
       <div [formGroup]="validatingForm" class="md-form">
@@ -52,8 +48,6 @@
       </div>
     </div>
   </div>
-
-
   <div style="margin-left: 2rem;margin-bottom: 1rem;width: 40rem;" class="form-row">
     <div class="col margen">
       <div [formGroup]="validatingForm" class="md-form form-sm">
@@ -86,8 +80,5 @@
     </div>
   </div>
   <button [disabled]="noPuedeTasar()" (click)="openModalTasacion()" mdbBtn color="cyan" rounded="true"
-    class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="button">{{titulo_boton}}</button>
-  <div style="margin:auto;" class="botonera">
-  </div>
-
-</div>
+    class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">{{titulo_boton}}</button>
+</form>

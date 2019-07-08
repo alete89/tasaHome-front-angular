@@ -51,3 +51,7 @@ body::-webkit-scrollbar-thumb {
 body {
     background-color: #1C2331;
 }
+
+.pac-container {
+    z-index: 10000 !important;
+}

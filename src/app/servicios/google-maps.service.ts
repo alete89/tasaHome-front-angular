@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 })
 export class GoogleMapsService {
   apiKey = "&key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM"
+  // apiKey = "&key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM&libraries=places"
   googleUrl = "https://maps.googleapis.com/maps/api/geocode/json?"
   placesUrl = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+in+Sydney"
 
