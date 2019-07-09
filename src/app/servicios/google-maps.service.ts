@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Lugar } from '../dominio/lugar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GoogleMapsService {
-  apiKey = "&key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM"
-  // apiKey = "&key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM&libraries=places"
+  // apiKey = "&key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM"
+  apiKey = "&key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM&libraries=places"
   googleUrl = "https://maps.googleapis.com/maps/api/geocode/json?"
   placesUrl = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+in+Sydney"
 
@@ -18,7 +19,7 @@ export class GoogleMapsService {
 
     const url = this.googleUrl + "latlng=" + marker.latitude + "," + marker.longitude + this.apiKey
     const resp = await this.http.get(url).toPromise()
-    return resp.json().results[0].formatted_address
+    return resp.json().results[0]
   }
 
   async getLatLongFromStringAddress(address: string) {
