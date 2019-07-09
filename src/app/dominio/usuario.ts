@@ -18,12 +18,6 @@ export class Usuario {
 
     contrasenia: String
 
-    partido: number
-
-    provincia: number
-
-    localidad: number
-
     direccion: string
 
     constructor(init?: Partial<Usuario>) {

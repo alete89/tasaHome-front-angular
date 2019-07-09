@@ -19,14 +19,11 @@ declare var google: any;
 export class RegistrarUsuarioComponent implements OnInit {
 
   moment = require('moment');
-  partidos: Array<Zona>
-  provincias: Array<Zona>
-  localidades: Array<Zona>
   usuario: Usuario
   confirmacion_contrasenia: string
   camposValidatingForm: FormGroup
   notification: Notification = new Notification()
-  fecha_maxima = "9999-12-31"
+  fecha_maxima = "1980-12-31"
   mail_invalido: String
   autocomplete
   direccionAutocomplete: string
@@ -39,7 +36,6 @@ export class RegistrarUsuarioComponent implements OnInit {
   async ngOnInit() {
     this.notification.cleanLoading()
     this.inicializarAutocomplete()
-    this.provincias = await this.zonaService.provincias()
   }
 
   get inputNombre() { return this.camposValidatingForm.get('nombreForm') }
@@ -167,14 +163,6 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   formularioVacio() {
     return !this.usuario.nombre && !this.usuario.apellido && !this.usuario.genero && !this.usuario.fecha_nacimiento && !this.usuario.direccion && !this.usuario.email && !this.usuario.contrasenia && !this.confirmacion_contrasenia
-  }
-
-  async getPartidos() {
-    this.partidos = await this.zonaService.partidos(this.usuario.provincia)
-  }
-
-  async getLocalidades() {
-    this.localidades = await this.zonaService.localidades(this.usuario.partido)
   }
 
   seleccionarGenero(genero: string) {
