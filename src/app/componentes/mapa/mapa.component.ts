@@ -216,7 +216,8 @@ export class MapaComponent implements OnInit {
         this.marker = { latitude: latLong.lat, longitude: latLong.lng };
         this.latitude = latLong.lat
         this.longitude = latLong.lng
-        this.direccion = await this.googleMapsService.getStringDireccionFromLatLong(this.marker)
+        let respuesta = await this.googleMapsService.getStringDireccionFromLatLong(this.marker)
+        this.direccion = respuesta.formatted_address
         this.direccionGoogle = this.direccion
         this.errores = []
       }
