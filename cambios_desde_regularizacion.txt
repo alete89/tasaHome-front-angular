@@ -1,0 +1,6 @@
+- limpiar formulario ahora sube
+- filtros en pantalla de buscar tasaciones similares
+- nuevas validaciones:
+no pueden ir numeros en el nombre
+el formato del mail en el login
+el género era un combo, ahora son botones seleccionables
