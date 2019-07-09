@@ -20,6 +20,7 @@ export class DatosPorZonaComponent implements OnInit {
   datos: Array<any>
   modalMapa: MDBModalRef;
   titulo: string
+  cargando: boolean
 
   constructor(private tasacionService: TasacionService, private modalService: MDBModalService, public modalRef: MDBModalRef, private zonaService: ZonaService) {
 
@@ -54,15 +55,25 @@ export class DatosPorZonaComponent implements OnInit {
 
   async traerDatosBarrio() {
     this.datos = await this.zonaService.datosBarrio(this.zonaId)
+    this.esperar()
+  }
+
+  esperar() {
+    this.cargando = true
+    setTimeout(() => {
+      this.cargando = false
+    }, 600);
   }
 
   async traerDatosComuna() {
     this.datos = await this.zonaService.datosComuna(this.zonaId)
+    this.esperar()
   }
 
   async traerDatosBarrioPorNombre() {
     this.tasacionService.setUltimaBusqueda()
     this.datos = await this.tasacionService.datosBarrioPorNombre()
+    this.esperar()
   }
 
   cambioDireccion() {

@@ -81,4 +81,8 @@
   </div>
   <button [disabled]="noPuedeTasar()" (click)="openModalTasacion()" mdbBtn color="cyan" rounded="true"
     class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">{{titulo_boton}}</button>
+  <div *ngIf="cargando" style="margin: auto;margin-top: 1rem;margin-bottom:1rem;"
+    class="spinner-border text-primary d-flex justify-content-center" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 </form>

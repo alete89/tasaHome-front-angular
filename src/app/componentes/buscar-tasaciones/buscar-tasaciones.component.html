@@ -94,7 +94,12 @@
 
   </mdb-card-body>
 
-  <div *ngIf="resultados && resultados.length > 0" class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+  <div *ngIf="cargando" style="margin: auto;margin-top: 1rem;margin-bottom:1rem;"
+    class="spinner-border text-primary d-flex justify-content-center" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div *ngIf="resultados && resultados.length > 0 && !cargando"
+    class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
     <table class="table">
       <thead class="colorear-celeste">
         <tr class="fondo-tr">
@@ -124,7 +129,7 @@
     </table>
   </div>
   <div class="card" style="text-align: center;margin:3rem;color: white;background-color: black;"
-    *ngIf="seLanzoBusqueda && noHuboResultados()">
+    *ngIf="seLanzoBusqueda && noHuboResultados() && !cargando">
     <strong style="font-size: 2.5rem">No se encontraron tasaciones similares</strong>
   </div>
 

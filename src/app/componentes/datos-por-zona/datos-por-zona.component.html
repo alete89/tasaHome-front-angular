@@ -54,9 +54,9 @@
 
       <div *ngIf="zonaSeleccionada == 'Direccion'"
         style="margin-left: 2rem; margin-right:3rem; margin-top: 1rem;margin-bottom: 1rem;">
-        <input style="text-align: center;" placeholder="Dirección" [disabled]="modalYaAbierto()" [(ngModel)]="tasacionService.direccion"
-          (focus)="openModalMapa()" name="direccion_datos_por_zona" type="text" class="form-control"
-          id="direccion_datos_por_zona" mdbInput>
+        <input style="text-align: center;" placeholder="Dirección" [disabled]="modalYaAbierto()"
+          [(ngModel)]="tasacionService.direccion" (focus)="openModalMapa()" name="direccion_datos_por_zona" type="text"
+          class="form-control" id="direccion_datos_por_zona" mdbInput>
         <div>
           <button style="margin-top: 1rem;" [disabled]="noPuedeBuscar()" mdbBtn color="success" mdbWavesLight
             (click)="traerDatosBarrioPorNombre()" type="submit">
@@ -74,8 +74,11 @@
     </form>
     <!-- Form -->
 
-
-    <div *ngIf="mostrarDatos() " class="contenedor-tasaciones">
+    <div *ngIf="cargando" style="margin: auto;margin-top: 1rem;"
+      class="spinner-border text-primary d-flex justify-content-center" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div *ngIf="mostrarDatos() && !cargando" class="contenedor-tasaciones">
       <div class="card-datos">
         <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
           <table class="table">

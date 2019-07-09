@@ -34,7 +34,7 @@ export class BuscarTasacionesComponent implements OnInit {
   fecha_maxima = "9999-12-31"
   model: Date
   myDatePickerOptions: any
-
+  cargando: boolean = false
 
 
   constructor(private router: Router, public modalService: MDBModalService, public modalBuscarTasaciones: MDBModalRef, private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
@@ -98,17 +98,23 @@ export class BuscarTasacionesComponent implements OnInit {
 
   async buscar() {
     // console.log(this.tasacionBusqueda)
+
+    this.cargando = true
     if (this.barriosSeleccionados.length > 0) {
       this.tasacionBusqueda.ids_barrios = this.barriosSeleccionados.map(barrio => barrio.id)
     }
     if (this.tipoDePropiedad) {
       this.tasacionBusqueda.id_tipo_propiedad = this.tipoDePropiedad.id
     }
-    if(!this.tasacionBusqueda.fecha_desde){
+    if (!this.tasacionBusqueda.fecha_desde) {
       this.tasacionBusqueda.fecha_desde = new Date()
     }
     this.resultados = await this.usuarioService.tasacionesSimilares(this.tasacionBusqueda)
     this.seLanzoBusqueda = true
+    setTimeout(() => {
+      this.cargando = false
+    }, 700);
+
   }
 
   noHuboResultados() {

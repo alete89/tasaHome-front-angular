@@ -31,6 +31,7 @@ export class TasarPropiedadComponent implements OnInit {
   @Input() titulo: string
   @Input() titulo_boton: string
   @Input() esActualizacion: boolean
+  cargando: boolean
 
   constructor(private modalService: MDBModalService, private usuarioService: UsuarioService, private tasacionService: TasacionService, private estadoService: EstadoService, private servicioService: ServicioService) {
     this.titulo = "Tasar propiedad"
@@ -106,19 +107,23 @@ export class TasarPropiedadComponent implements OnInit {
 
   async openModalTasacion() {
     await this.tasar()
-    this.modalTasacion = this.modalService.show(MostrarTasacionComponent, {
-      backdrop: true,
-      keyboard: true,
-      focus: true,
-      show: false,
-      ignoreBackdropClick: false,
-      class: 'modal-dialog modal-frame modal-bottom ',
-      containerClass: 'right',
-      animated: true,
-      data: {
-        tasacion: this.tasacion
-      }
-    });
+    this.cargando = true
+    setTimeout(() => {
+      this.cargando = false
+      this.modalTasacion = this.modalService.show(MostrarTasacionComponent, {
+        backdrop: true,
+        keyboard: true,
+        focus: true,
+        show: false,
+        ignoreBackdropClick: false,
+        class: 'modal-dialog modal-frame modal-bottom ',
+        containerClass: 'right',
+        animated: true,
+        data: {
+          tasacion: this.tasacion
+        }
+      });
+    }, 1000);
   }
 
   async openModalMapa() {

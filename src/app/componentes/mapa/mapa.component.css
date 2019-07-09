@@ -1,3 +1,23 @@
 agm-map {
-  height: 300px;
+    height: 300px;
 }
+
+.fondo-azul {
+    color: white;
+    background-color: #0074D9 !important;
+}
+
+.color-hover:hover {
+    color: white;
+    background-color: #0074D9 !important;
+}
+
+.margen {
+    margin-right: 2rem;
+}
+
+/* .centrado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */

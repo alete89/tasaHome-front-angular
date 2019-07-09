@@ -6,6 +6,7 @@ import { GoogleMapsService } from 'src/app/servicios/google-maps.service';
 import { LugarService } from 'src/app/servicios/lugar.service';
 import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { Notification } from 'src/app/shared/notifications/notification';
+import { Router } from '@angular/router';
 declare var google: any;
 
 interface Marker {
@@ -46,6 +47,8 @@ export class MapaComponent implements OnInit {
   autocomplete
   esDatosPorZona: boolean
   lugarSeleccionado: Lugar
+  opcion: string = "Ninguna"
+  cargando: boolean = false
 
   clusterStyle = [{
     height: 53,
@@ -117,7 +120,11 @@ export class MapaComponent implements OnInit {
 
   marker = { latitude: -34.603729, longitude: -58.381569 };
 
-  constructor(private ngZone: NgZone, private mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private lugarService: LugarService, private tasacionService: TasacionService, public modalMapa: MDBModalRef) {
+  constructor(private router: Router, private ngZone: NgZone, private mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private lugarService: LugarService, private tasacionService: TasacionService, public modalMapa: MDBModalRef) {
+  }
+
+  esHome() {
+    return this.router.url === '/home'
   }
 
   inicializarMapa() {
@@ -143,12 +150,21 @@ export class MapaComponent implements OnInit {
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           this.marker = { latitude: this.latitude, longitude: this.longitude };
+          this.map.zoom = 16
           this.direccion = place.formatted_address
           console.log(place)
           this.direccionGoogle = this.direccion
         });
       });
     });
+  }
+
+  seleccionarOpcion(opcion: string) {
+    this.cargando = true
+    setTimeout(() => {
+      this.opcion = opcion
+      this.cargando = false
+    }, 700);
   }
 
   buscarBarrio(components: any) {
@@ -220,6 +236,10 @@ export class MapaComponent implements OnInit {
   seleccionarLugar(lugar: Lugar) {
     console.log(lugar)
     this.lugarSeleccionado = lugar
+  }
+
+  seleccionarNinguna() {
+    this.opcion = "Ninguna"
   }
 
 
