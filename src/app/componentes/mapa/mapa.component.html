@@ -55,15 +55,100 @@
           [longitude]="longitude" [scrollwheel]="null" (mapClick)="placeMarker($event)"
           style="height: 500px; width: 700px;">
           <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
-          <agm-marker-cluster *ngIf="!esModal"
-            imagePath="https://raw.githubusercontent.com/googlemaps/v3-utility-library/master/markerclustererplus/images/m">
-            <div *ngFor="let escuela of escuelas">
-              <agm-marker [iconUrl]="icon" [latitude]="escuela.latitud" [longitude]="escuela.longitud"> </agm-marker>
-              <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
+          <agm-marker-cluster *ngIf="!esModal" [styles]="clusterStyle">
+            <!-- <div > -->
+            <agm-marker *ngFor="let escuela of escuelas" (mouseOver)="seleccionarLugar(escuela)" [iconUrl]="iconEscuela"
+              [latitude]="escuela.latitud" [longitude]="escuela.longitud">
+
+              <agm-info-window *ngIf="lugarSeleccionado && (lugarSeleccionado.id == escuela.id)">
+
+                <strong style="font-weight: bold;">{{escuela.id}}</strong>
+
+              </agm-info-window>
+
+
+              <!-- <agm-info-window>
+                <strong>InfoWindow content</strong>
+              </agm-info-window> -->
+
+            </agm-marker>
+            <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
           <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
 
-              <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
-            </div>
+            <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
+            <!-- </div> -->
+          </agm-marker-cluster>
+
+          <agm-marker-cluster *ngIf="!esModal" [styles]="clusterStyle">
+            <!-- <div > -->
+            <agm-marker *ngFor="let hospital of hospitales" (mouseOver)="seleccionarLugar(hospital)"
+              [iconUrl]="iconHospital" [latitude]="hospital.latitud" [longitude]="hospital.longitud">
+
+              <!-- <agm-info-window *ngIf="hospitalSeleccionado && (hospitalSeleccionado.id == hospital.id)"> -->
+
+              <!-- <strong style="font-weight: bold;">{{hospital.id}}</strong> -->
+
+              <!-- </agm-info-window> -->
+
+
+              <!-- <agm-info-window>
+                          <strong>InfoWindow content</strong>
+                        </agm-info-window> -->
+
+            </agm-marker>
+            <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
+                    <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
+
+            <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
+            <!-- </div> -->
+          </agm-marker-cluster>
+
+          <agm-marker-cluster *ngIf="!esModal" [styles]="clusterStyle">
+            <!-- <div > -->
+            <agm-marker *ngFor="let comisaria of comisarias" (mouseOver)="seleccionarLugar(comisaria)"
+              [iconUrl]="iconComisaria" [latitude]="comisaria.latitud" [longitude]="comisaria.longitud">
+
+              <!-- <agm-info-window *ngIf="hospitalSeleccionado && (hospitalSeleccionado.id == hospital.id)"> -->
+
+              <!-- <strong style="font-weight: bold;">{{hospital.id}}</strong> -->
+
+              <!-- </agm-info-window> -->
+
+
+              <!-- <agm-info-window>
+                                            <strong>InfoWindow content</strong>
+                                          </agm-info-window> -->
+
+            </agm-marker>
+            <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
+                                      <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
+
+            <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
+            <!-- </div> -->
+          </agm-marker-cluster>
+
+          <agm-marker-cluster *ngIf="!esModal" [styles]="clusterStyle">
+            <!-- <div > -->
+            <agm-marker *ngFor="let espacio of espacios_verdes" (mouseOver)="seleccionarLugar(espacio)"
+              [iconUrl]="iconEspacio" [latitude]="espacio.latitud" [longitude]="espacio.longitud">
+
+              <!-- <agm-info-window *ngIf="hospitalSeleccionado && (hospitalSeleccionado.id == hospital.id)"> -->
+
+              <!-- <strong style="font-weight: bold;">{{hospital.id}}</strong> -->
+
+              <!-- </agm-info-window> -->
+
+
+              <!-- <agm-info-window>
+                                                    <strong>InfoWindow content</strong>
+                                                  </agm-info-window> -->
+
+            </agm-marker>
+            <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
+                                              <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
+
+            <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
+            <!-- </div> -->
           </agm-marker-cluster>
         </agm-map>
       </div>

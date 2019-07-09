@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild, Input, ElementRef, NgZone } from '@angular/core';
-import { MapsAPILoader, AgmMap } from '@agm/core';
-import { GoogleMapsService } from 'src/app/servicios/google-maps.service';
-import { Escuela } from 'src/app/dominio/escuela';
-import { EscuelaService } from 'src/app/servicios/escuela.service';
+import { AgmMap, MapsAPILoader } from '@agm/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MDBModalRef } from 'angular-bootstrap-md';
+import { Lugar } from 'src/app/dominio/lugar';
+import { GoogleMapsService } from 'src/app/servicios/google-maps.service';
+import { LugarService } from 'src/app/servicios/lugar.service';
 import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { Notification } from 'src/app/shared/notifications/notification';
-import { ZonaService } from 'src/app/servicios/zona.service';
 declare var google: any;
 
 interface Marker {
@@ -36,16 +35,76 @@ export class MapaComponent implements OnInit {
   direccion = ""
   direccionGoogle: string
   geocoder: any;
-  escuelas: Array<Escuela>
+  escuelas: Array<Lugar>
+  hospitales: Array<Lugar>
+  comisarias: Array<Lugar>
+  espacios_verdes: Array<Lugar>
   esModal: boolean = false
   barrio: string
   notification: Notification = new Notification()
   errores: Array<string> = []
   autocomplete
   esDatosPorZona: boolean
+  lugarSeleccionado: Lugar
 
-  icon = {
-    url: 'https://cdn0.iconfinder.com/data/icons/learning-icons-rounded/110/School-512.png',
+  clusterStyle = [{
+    height: 53,
+    url: 'assets/m1.png',
+    width: 53
+  },
+  {
+    height: 56,
+    url: 'assets/m2.png',
+    width: 56
+  },
+  {
+    height: 66,
+    url: 'assets/m3.png',
+    width: 66
+  },
+  {
+    height: 78,
+    url: 'assets/m4.png',
+    width: 78
+  },
+  {
+    height: 90,
+    url: 'assets/m5.png',
+    width: 90
+  }]
+
+  // hospitalesClusterOptions = {
+  //   gridSize: 50,
+  //   styles: this.hospitalesClusterStyle,
+  //   maxZoom: 15
+  // };
+
+  iconEscuela = {
+    url: 'assets/escuela2.png',
+    scaledSize: {
+      width: 30,
+      height: 30
+    }
+  }
+
+  iconHospital = {
+    url: 'assets/hospital3.png',
+    scaledSize: {
+      width: 30,
+      height: 30
+    }
+  }
+
+  iconComisaria = {
+    url: 'assets/comisaria.png',
+    scaledSize: {
+      width: 30,
+      height: 30
+    }
+  }
+
+  iconEspacio = {
+    url: 'assets/espacio3.png',
     // url: 'https://banner2.kisspng.com/20180706/gvh/kisspng-computer-icons-google-maps-school-student-5b3f228f73f853.247641171530864271475.jpg',
     scaledSize: {
       width: 30,
@@ -58,7 +117,7 @@ export class MapaComponent implements OnInit {
 
   marker = { latitude: -34.603729, longitude: -58.381569 };
 
-  constructor(private ngZone: NgZone, private mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private escuelaService: EscuelaService, private tasacionService: TasacionService, public modalMapa: MDBModalRef) {
+  constructor(private ngZone: NgZone, private mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private lugarService: LugarService, private tasacionService: TasacionService, public modalMapa: MDBModalRef) {
   }
 
   inicializarMapa() {
@@ -125,7 +184,10 @@ export class MapaComponent implements OnInit {
     this.inicializarMapa()
     this.map.zoom = 16
     if (!this.esModal) {
-      this.escuelas = await this.escuelaService.getEscuelas()
+      this.escuelas = await this.lugarService.getEscuelas()
+      this.hospitales = await this.lugarService.getHospitales()
+      this.comisarias = await this.lugarService.getComisarias()
+      this.espacios_verdes = await this.lugarService.getEspaciosVerdes()
     }
   }
 
@@ -154,6 +216,12 @@ export class MapaComponent implements OnInit {
   cerrarModal() {
     this.modalMapa.hide()
   }
+
+  seleccionarLugar(lugar: Lugar) {
+    console.log(lugar)
+    this.lugarSeleccionado = lugar
+  }
+
 
   aceptar() {
     this.tasacionService.guardarDatos(this.direccion, this.barrio)
