@@ -46,10 +46,6 @@
               [ngClass]="{ 'fondo-azul': usuario.genero == 'Otro'}" (click)="seleccionarGenero('Otro')" type="button"
               size="md" class="btn btn-white color-hover">Otro</button>
           </div>
-          <!-- <select name="genero" [(ngModel)]="usuario.genero" class="browser-default custom-select">
-            <option value="Femenino">Femenino</option>
-            <option value="Masculino">Masculino</option>
-          </select> -->
         </div>
         <div class="col">
           <div style="margin-top: 2rem;" class="md-form" [formGroup]="camposValidatingForm">
@@ -63,42 +59,11 @@
         </div>
       </div>
 
-      <div class="form-row">
-        <div class="col">
-          <div style="margin-right: 1rem;" class="md-form">
-            <p>Provincia</p>
-            <select name="provincia" (change)="getPartidos()" [(ngModel)]="usuario.provincia"
-              class="browser-default custom-select">
-              <option *ngFor="let provincia of provincias" [value]="provincia.id">{{provincia.descripcion}}</option>
-            </select>
-          </div>
-
-        </div>
-        <div class="col">
-          <div style="margin-right: 1rem;" class="md-form">
-            <p>Partido</p>
-            <select name="partido" (change)="getLocalidades()" [(ngModel)]="usuario.partido"
-              class="browser-default custom-select">
-              <option *ngFor="let partido of partidos" [value]="partido.id">{{partido.descripcion}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="col">
-          <div style="margin-right: 1rem;" class="md-form">
-            <p>Localidad</p>
-            <select name="localidad" [(ngModel)]="usuario.localidad" class="browser-default custom-select">
-              <option *ngFor="let localidad of localidades" [value]="localidad.id">{{localidad.descripcion}}</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-
-      <div style="margin-bottom: 3rem;" class="md-form" [formGroup]="camposValidatingForm">
-        <input name="direccion_registro" formControlName="direccionForm" [(ngModel)]="usuario.direccion" type="text"
-          id="materialRegisterFormDireccion" class="form-control" mdbValidate mdbInput>
-        <label for="materialRegisterFormDireccion">Dirección</label>
-        <mdb-error *ngIf="direccionTieneErrores()">Direccion inválida</mdb-error>
+      <div style="margin-top:2rem;margin-bottom:2rem;">
+        <!-- <label>Enter address</label> -->
+        <input style="margin-right: 1rem;" [(ngModel)]="usuario.direccion" type="text" class="form-control"
+          placeholder="Dirección" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search
+          id="direccion_registro" name="direccion_registro">
       </div>
 
       <!-- E-mail -->
@@ -129,10 +94,6 @@
         <mdb-error *ngIf="confirmacionPasswordTieneErrores()">Contraseña inválida</mdb-error>
         <mdb-error class="errorContraseñas" *ngIf="contraseniasNoCoinciden()">Las contraseñas deben coincidir
         </mdb-error>
-
-        <!-- <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-          Al menos 8 caracteres y un digito
-        </small> -->
       </div>
 
       <!-- Sign up button -->
@@ -144,13 +105,6 @@
           class="my-4 waves-effect z-depth-0 aceptar " mdbWavesEffect type="submit">Aceptar</button>
         <hr>
       </div>
-
-      <!-- Terms of service -->
-      <!-- <p>By clicking
-        <em>Sign up</em> you agree to our
-        <a href="" target="_blank">terms of service</a> and
-        <a href="" target="_blank">terms of service</a>. </p> -->
-
     </form>
     <!-- Form -->
   </mdb-card-body>

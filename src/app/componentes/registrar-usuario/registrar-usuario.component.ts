@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/dominio/usuario';
 import { Zona } from 'src/app/dominio/zona';
@@ -8,8 +8,9 @@ import { Notification } from 'src/app/shared/notifications/notification';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
+import { MapsAPILoader } from '@agm/core';
 declare var require: any
-
+declare var google: any;
 @Component({
   selector: 'registrar-usuario',
   templateUrl: './registrar-usuario.component.html',
@@ -27,14 +28,17 @@ export class RegistrarUsuarioComponent implements OnInit {
   notification: Notification = new Notification()
   fecha_maxima = "9999-12-31"
   mail_invalido: String
+  autocomplete
+  direccionAutocomplete: string
 
-  constructor(private router: Router, private zonaService: ZonaService, private usuarioService: UsuarioService, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+  constructor(private mapsApiLoader: MapsAPILoader, private ngZone: NgZone, private router: Router, private zonaService: ZonaService, private usuarioService: UsuarioService, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
     this.inicializarFormulario()
     this.inicializarValidaciones()
   }
 
   async ngOnInit() {
     this.notification.cleanLoading()
+    this.inicializarAutocomplete()
     this.provincias = await this.zonaService.provincias()
   }
 
@@ -47,6 +51,9 @@ export class RegistrarUsuarioComponent implements OnInit {
   get inputConfirmacionPassword() { return this.camposValidatingForm.get('confirmacionPasswordForm') }
 
 
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
+
   nombreTieneErrores() {
     return this.inputNombre.invalid && (this.inputNombre.dirty || this.inputNombre.touched)
   }
@@ -56,7 +63,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   direccionTieneErrores() {
-    return this.inputDireccion.invalid && (this.inputDireccion.dirty || this.inputDireccion.touched)
+    return (this.inputDireccion.invalid && (this.inputDireccion.dirty || this.inputDireccion.touched))
   }
 
   emailTieneErrores() {
@@ -92,7 +99,19 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   hayErrores() {
-    return this.inputNombre.invalid || this.inputApellido.invalid || !this.usuario.genero || !this.usuario.direccion || !this.usuario.fecha_nacimiento || !this.usuario.provincia || !this.usuario.partido || !this.usuario.localidad || !this.usuario.email || !this.usuario.contrasenia || !this.confirmacion_contrasenia || (this.usuario.contrasenia != this.confirmacion_contrasenia) || this.fechaInvalida() || (this.mail_invalido == this.usuario.email)
+    return this.inputNombre.invalid 
+    || this.inputApellido.invalid
+    || !this.usuario.genero 
+    || !this.usuario.direccion 
+    || !this.usuario.fecha_nacimiento 
+    || !this.usuario.email 
+    || !this.usuario.contrasenia 
+    || !this.confirmacion_contrasenia 
+    || (this.usuario.contrasenia != this.confirmacion_contrasenia) 
+    || this.fechaInvalida() 
+    || (this.mail_invalido == this.usuario.email)
+    || !hasNumber(this.usuario.direccion)
+    || (!this.direccionAutocomplete || (this.direccionAutocomplete != this.usuario.direccion))
   }
 
   async aceptar() {
@@ -147,7 +166,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   formularioVacio() {
-    return !this.usuario.nombre && !this.usuario.apellido && !this.usuario.genero && !this.usuario.fecha_nacimiento && !this.usuario.provincia && !this.usuario.partido && !this.usuario.localidad && !this.usuario.direccion && !this.usuario.email && !this.usuario.contrasenia && !this.confirmacion_contrasenia
+    return !this.usuario.nombre && !this.usuario.apellido && !this.usuario.genero && !this.usuario.fecha_nacimiento && !this.usuario.direccion && !this.usuario.email && !this.usuario.contrasenia && !this.confirmacion_contrasenia
   }
 
   async getPartidos() {
@@ -162,4 +181,31 @@ export class RegistrarUsuarioComponent implements OnInit {
     this.usuario.genero = genero
   }
 
+  inicializarAutocomplete() {
+    this.mapsApiLoader.load().then(() => {
+      this.autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ["address"],
+        componentRestrictions: { country: 'ar' }
+      });
+      this.autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place = this.autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          this.usuario.direccion = place.formatted_address
+          this.direccionAutocomplete = place.formatted_address
+          console.log("direccion usuario", this.usuario.direccion)
+        });
+      });
+    });
+  }
+
+}
+
+function hasNumber(myString) {
+  return /\d/.test(myString);
 }
