@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MDBModalRef } from 'angular-bootstrap-md';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Notification } from '../../shared/notifications/notification';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { RecuperarContraseniaComponent } from '../recuperar-contrasenia/recuperar-contrasenia.component';
 
 
 @Component({
@@ -17,10 +18,10 @@ export class LoginComponent implements OnInit {
   password: string
   returnUrl: string
   notification: Notification = new Notification()
-  intentoFallido: boolean = false
   validatingForm: FormGroup
+  modalRecuperarContrasenia: MDBModalRef;
 
-  constructor(private router: Router, private usuarioService: UsuarioService, private route: ActivatedRoute, public modalRef: MDBModalRef) { }
+  constructor(private router: Router, private usuarioService: UsuarioService, private route: ActivatedRoute, public modalRef: MDBModalRef, private modalService: MDBModalService) { }
 
   ngOnInit() {
     this.validatingForm = new FormGroup({
@@ -50,17 +51,16 @@ export class LoginComponent implements OnInit {
       await this.usuarioService.userLogin(this.email, this.password)
       this.modalRef.hide()
       // console.log(this.returnUrl)
-      if (this.returnUrl == '/registrar-usuario') {
-        this.router.navigate(['/home'])
-      } else {
-        this.router.navigate([this.returnUrl])
+      if (this.returnUrl) {
+        if (this.returnUrl == '/registrar-usuario') {
+          this.router.navigate(['/home'])
+        } else {
+          this.router.navigate([this.returnUrl])
+        }
       }
     }
     catch (error) {
       let mensaje = JSON.parse(error._body).message
-      if (mensaje == "Credenciales incorrectas") {
-        this.intentoFallido = true
-      }
       this.notification.showError(error)
     }
   }
@@ -68,6 +68,21 @@ export class LoginComponent implements OnInit {
   irARegistrarUsuario() {
     this.modalRef.hide()
     this.router.navigate(["/registrar-usuario"])
+  }
+
+  abrirModalRecuperarContrasenia() {
+    this.modalRecuperarContrasenia = this.modalService.show(RecuperarContraseniaComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      containerClass: 'right',
+      animated: true,
+      data: {
+        // returnUrl: this.router.url
+      }
+    });
   }
 
 }
