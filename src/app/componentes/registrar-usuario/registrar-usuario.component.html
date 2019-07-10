@@ -18,7 +18,7 @@
             <input name="nombre" formControlName="nombreForm" [(ngModel)]="usuario.nombre" type="text"
               id="materialRegisterFormFirstName" class="form-control" mdbValidate mdbInput>
             <label for="materialRegisterFormFirstName">Nombre</label>
-            <mdb-error *ngIf="nombreTieneErrores()">Nombre inválido</mdb-error>
+            <mdb-error *ngIf="nombreInvalido()">Nombre inválido</mdb-error>
           </div>
         </div>
         <div class="col">
@@ -27,7 +27,7 @@
             <input name="apellido" formControlName="apellidoForm" [(ngModel)]="usuario.apellido" type="text"
               id="materialRegisterFormLastName" class="form-control" mdbValidate mdbInput>
             <label for="materialRegisterFormLastName">Apellido</label>
-            <mdb-error *ngIf="apellidoTieneErrores()">Apellido inválido</mdb-error>
+            <mdb-error *ngIf="apellidoInvalido()">Apellido inválido</mdb-error>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@
         <input formControlName="emailForm" [(ngModel)]="usuario.email" name="email_registro" type="email"
           id="email_registro" class="form-control" mdbValidate mdbInput>
         <label for="email_registro">E-mail</label>
-        <mdb-error *ngIf="emailTieneErrores()">Email Inválido</mdb-error>
+        <mdb-error *ngIf="emailInvalido()">Email Inválido</mdb-error>
 
       </div>
 
@@ -81,7 +81,7 @@
           id="password_registro" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
           mdbValidate mdbInput>
         <label for="password_registro">Contraseña</label>
-        <mdb-error *ngIf="passwordTieneErrores()">Contraseña inválida</mdb-error>
+        <mdb-error *ngIf="passwordInvalido()">Contraseña inválida</mdb-error>
         <small id="password_registroHelp" class="form-text text-muted mb-4">
           Al menos 8 caracteres
         </small>
@@ -91,7 +91,7 @@
           name="confirmacion_password" type="password" class="form-control" id="confirmar_password_registro"
           aria-describedby="materialRegisterFormPasswordHelpBlock" mdbValidate mdbInput>
         <label for="confirmar_password_registro">Confirmar</label>
-        <mdb-error *ngIf="confirmacionPasswordTieneErrores()">Contraseña inválida</mdb-error>
+        <mdb-error *ngIf="confirmacionPasswordInvalido()">Contraseña inválida</mdb-error>
         <mdb-error class="errorContraseñas" *ngIf="contraseniasNoCoinciden()">Las contraseñas deben coincidir
         </mdb-error>
       </div>

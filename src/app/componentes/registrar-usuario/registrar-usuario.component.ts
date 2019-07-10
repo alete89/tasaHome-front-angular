@@ -50,27 +50,27 @@ export class RegistrarUsuarioComponent implements OnInit {
   @ViewChild("search")
   public searchElementRef: ElementRef;
 
-  nombreTieneErrores() {
+  nombreInvalido() {
     return this.inputNombre.invalid && (this.inputNombre.dirty || this.inputNombre.touched)
   }
 
-  apellidoTieneErrores() {
+  apellidoInvalido() {
     return this.inputApellido.invalid && (this.inputApellido.dirty || this.inputApellido.touched)
   }
 
-  direccionTieneErrores() {
+  direccionInvalido() {
     return (this.inputDireccion.invalid && (this.inputDireccion.dirty || this.inputDireccion.touched))
   }
 
-  emailTieneErrores() {
+  emailInvalido() {
     return this.inputEmail.invalid && (this.inputEmail.dirty || this.inputEmail.touched)
   }
 
-  passwordTieneErrores() {
+  passwordInvalido() {
     return this.inputPassword.invalid && (this.inputPassword.dirty || this.inputPassword.touched)
   }
 
-  confirmacionPasswordTieneErrores() {
+  confirmacionPasswordInvalido() {
     return this.inputConfirmacionPassword.invalid && (this.inputConfirmacionPassword.dirty || this.inputConfirmacionPassword.touched)
   }
 
@@ -95,19 +95,25 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   hayErrores() {
-    return this.inputNombre.invalid 
-    || this.inputApellido.invalid
-    || !this.usuario.genero 
-    || !this.usuario.direccion 
-    || !this.usuario.fecha_nacimiento 
-    || !this.usuario.email 
-    || !this.usuario.contrasenia 
-    || !this.confirmacion_contrasenia 
-    || (this.usuario.contrasenia != this.confirmacion_contrasenia) 
-    || this.fechaInvalida() 
-    || (this.mail_invalido == this.usuario.email)
-    || !hasNumber(this.usuario.direccion)
-    || (!this.direccionAutocomplete || (this.direccionAutocomplete != this.usuario.direccion))
+    return this.inputNombre.invalid
+      || this.inputApellido.invalid
+      || !this.usuario.genero
+      || !this.usuario.direccion
+      || !this.usuario.fecha_nacimiento
+      || !this.usuario.email
+      || this.contraseniasTienenErrores()
+      || this.fechaInvalida()
+      || (this.mail_invalido == this.usuario.email)
+      || !hasNumber(this.usuario.direccion)
+      || (!this.direccionAutocomplete || (this.direccionAutocomplete != this.usuario.direccion))
+  }
+
+  contraseniasTienenErrores() {
+    return !this.usuario.contrasenia
+      || !this.confirmacion_contrasenia
+      || (this.usuario.contrasenia != this.confirmacion_contrasenia)
+      || this.passwordInvalido()
+      || this.confirmacionPasswordInvalido()
   }
 
   async aceptar() {
