@@ -1,13 +1,13 @@
 export class Estado {
 
     id: number
-    descripcion: String
+    descripcion: string
 
     constructor(init?: Partial<Estado>) {
         Object.assign(this, init)
     }
 
-    static fromJson(estadoJson: String) {
+    static fromJson(estadoJson: string) {
         return Object.assign(new Estado(), estadoJson)
     }
 

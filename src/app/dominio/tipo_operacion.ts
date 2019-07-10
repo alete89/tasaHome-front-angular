@@ -7,7 +7,7 @@ export class TipoOperacion {
 
     id: number
 
-    descripcion: String
+    descripcion: string
 
     static fromJson(tipoOperacionJson) {
         return Object.assign(new TipoOperacion(), tipoOperacionJson)

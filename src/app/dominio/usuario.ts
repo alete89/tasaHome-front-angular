@@ -4,19 +4,19 @@ export class Usuario {
 
     id: number
 
-    nombre: String
+    nombre: string
 
-    apellido: String
+    apellido: string
 
     edad: number
 
-    email: String
+    email: string
 
     fecha_nacimiento: Date
 
-    genero: String
+    genero: string
 
-    contrasenia: String
+    contrasenia: string
 
     direccion: string
 
@@ -32,7 +32,7 @@ export class Usuario {
         // }
     }
 
-    static fromJson(usuarioJson: String) {
+    static fromJson(usuarioJson: string) {
         return Object.assign(new Usuario(), usuarioJson)
     }
 }

@@ -19,7 +19,7 @@ export class Lugar {
 
     vigente: boolean
 
-    static fromJson(lugarJson: String) {
+    static fromJson(lugarJson: string) {
         return Object.assign(new Lugar(), lugarJson)
     }
 

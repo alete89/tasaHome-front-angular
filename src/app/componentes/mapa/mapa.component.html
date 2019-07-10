@@ -58,7 +58,7 @@
           style="height: 500px; width: 700px;">
           <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
 
-          <div *ngIf="esHome() && !estaCargando">
+          <div *ngIf="esHome() && !cargando">
             <agm-marker-cluster *ngIf="opcion == 'Escuelas'" [styles]="clusterStyle">
               <!-- <div > -->
               <agm-marker *ngFor="let escuela of escuelas" (mouseOver)="seleccionarLugar(escuela)"
@@ -66,21 +66,13 @@
 
                 <agm-info-window *ngIf="lugarSeleccionado && (lugarSeleccionado.id == escuela.id)">
 
-                  <strong style="font-weight: bold;">{{escuela.id}}</strong>
+                  <strong style="font-weight: bold; text-align: center;">{{escuela.descripcion}}</strong>
 
                 </agm-info-window>
 
 
-                <!-- <agm-info-window>
-                <strong>InfoWindow content</strong>
-              </agm-info-window> -->
 
               </agm-marker>
-              <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
-          <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
-
-              <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
-              <!-- </div> -->
             </agm-marker-cluster>
 
             <agm-marker-cluster *ngIf="opcion == 'Hospitales'" [styles]="clusterStyle">
@@ -88,71 +80,39 @@
               <agm-marker *ngFor="let hospital of hospitales" (mouseOver)="seleccionarLugar(hospital)"
                 [iconUrl]="iconHospital" [latitude]="hospital.latitud" [longitude]="hospital.longitud">
 
-                <!-- <agm-info-window *ngIf="hospitalSeleccionado && (hospitalSeleccionado.id == hospital.id)"> -->
+                <agm-info-window *ngIf="lugarSeleccionado && (lugarSeleccionado.id == hospital.id)">
 
-                <!-- <strong style="font-weight: bold;">{{hospital.id}}</strong> -->
+                  <strong style="font-weight: bold;">{{hospital.descripcion}}</strong>
 
-                <!-- </agm-info-window> -->
-
-
-                <!-- <agm-info-window>
-                          <strong>InfoWindow content</strong>
-                        </agm-info-window> -->
+                </agm-info-window>
 
               </agm-marker>
-              <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
-                    <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
-
-              <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
-              <!-- </div> -->
             </agm-marker-cluster>
 
             <agm-marker-cluster *ngIf="opcion == 'Comisarias'" [styles]="clusterStyle">
-              <!-- <div > -->
               <agm-marker *ngFor="let comisaria of comisarias" (mouseOver)="seleccionarLugar(comisaria)"
                 [iconUrl]="iconComisaria" [latitude]="comisaria.latitud" [longitude]="comisaria.longitud">
 
-                <!-- <agm-info-window *ngIf="hospitalSeleccionado && (hospitalSeleccionado.id == hospital.id)"> -->
+                <agm-info-window *ngIf="lugarSeleccionado && (lugarSeleccionado.id == comisaria.id)">
 
-                <!-- <strong style="font-weight: bold;">{{hospital.id}}</strong> -->
+                  <strong style="font-weight: bold;">{{comisaria.descripcion}}</strong>
 
-                <!-- </agm-info-window> -->
-
-
-                <!-- <agm-info-window>
-                                            <strong>InfoWindow content</strong>
-                                          </agm-info-window> -->
+                </agm-info-window>
 
               </agm-marker>
-              <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
-                                      <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
-
-              <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
-              <!-- </div> -->
             </agm-marker-cluster>
 
             <agm-marker-cluster *ngIf="opcion == 'Espacios'" [styles]="clusterStyle">
-              <!-- <div > -->
               <agm-marker *ngFor="let espacio of espacios_verdes" (mouseOver)="seleccionarLugar(espacio)"
                 [iconUrl]="iconEspacio" [latitude]="espacio.latitud" [longitude]="espacio.longitud">
 
-                <!-- <agm-info-window *ngIf="hospitalSeleccionado && (hospitalSeleccionado.id == hospital.id)"> -->
+                <agm-info-window *ngIf="lugarSeleccionado && (lugarSeleccionado.id == espacio.id)">
 
-                <!-- <strong style="font-weight: bold;">{{hospital.id}}</strong> -->
+                  <strong style="font-weight: bold;">{{espacio.descripcion}}</strong>
 
-                <!-- </agm-info-window> -->
-
-
-                <!-- <agm-info-window>
-                                                    <strong>InfoWindow content</strong>
-                                                  </agm-info-window> -->
+                </agm-info-window>
 
               </agm-marker>
-              <!-- <agm-marker [iconUrl]="icon" [latitude]="-34.5740994" [longitude]="-58.5268406"> </agm-marker>
-                                              <agm-marker [iconUrl]="icon" [latitude]="-34.580994" [longitude]="-58.5268406"> </agm-marker> -->
-
-              <!-- <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker> -->
-              <!-- </div> -->
             </agm-marker-cluster>
           </div>
         </agm-map>
@@ -162,7 +122,6 @@
     <div>
       <div *ngIf="esHome() " style="text-align: center;margin-top: 3rem;padding:1rem;background-color: #59698d ;"
         class="card ">
-        <!-- <p style="text-align: left;">Género</p> -->
         <div class="btn-group" role="group" aria-label="Basic example">
           <button [disabled]="opcion == 'Escuelas'" style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn
             mdbWavesEffect [ngClass]="{ 'fondo-azul': opcion == 'Escuelas'}" (click)="seleccionarOpcion('Escuelas')"

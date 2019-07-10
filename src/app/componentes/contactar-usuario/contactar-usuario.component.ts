@@ -11,8 +11,8 @@ import { Notification } from 'src/app/shared/notifications/notification';
 export class ContactarUsuarioComponent implements OnInit {
 
   id_emisor: string
-  email_receptor: String
-  mensaje: String
+  email_receptor: string
+  mensaje: string
   notification: Notification = new Notification()
   id: number = 0
 

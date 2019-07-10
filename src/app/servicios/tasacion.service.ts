@@ -12,8 +12,8 @@ import { TipoOperacion } from '../dominio/tipo_operacion';
 export class TasacionService {
 
   direccion: string
-  barrio: String
-  ultimaBusqueda: String
+  barrio: string
+  ultimaBusqueda: string
 
   constructor(private http: Http) {
     this.barrio = undefined

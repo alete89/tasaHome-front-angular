@@ -24,7 +24,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   camposValidatingForm: FormGroup
   notification: Notification = new Notification()
   fecha_maxima = "9999-12-31"
-  mail_invalido: String
+  mail_invalido: string
   autocomplete
   direccionAutocomplete: string
   id: number = 0

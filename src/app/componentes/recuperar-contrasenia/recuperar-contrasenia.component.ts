@@ -13,7 +13,7 @@ export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
 
   constructor(public modalRecuperarContrasenia: MDBModalRef, private mensajeService: MensajeService) { }
 
-  email: String
+  email: string
   notification: Notification = new Notification()
   validatingForm: FormGroup
   id: number = 0

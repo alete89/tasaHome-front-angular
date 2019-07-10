@@ -14,7 +14,7 @@ import { GoogleMapsService } from 'src/app/servicios/google-maps.service';
 export class DatosPorZonaComponent implements OnInit {
 
   zonas: Array<Zona>
-  zonaSeleccionada: String
+  zonaSeleccionada: string
   zonaId: number
   barrios: Array<Zona>
   comunas: Array<Zona>

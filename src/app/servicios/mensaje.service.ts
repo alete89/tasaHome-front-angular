@@ -11,7 +11,7 @@ export class MensajeService {
 
   constructor(private http: Http) { }
 
-  async enviarMensaje(id_emisor: string, email_receptor: String, mensaje: String) {
+  async enviarMensaje(id_emisor: string, email_receptor: string, mensaje: string) {
     const url = REST_SERVER_URL + "/enviar_mensaje/" + id_emisor
     let json: any = {}
     json.email_receptor = email_receptor
@@ -20,7 +20,7 @@ export class MensajeService {
     return resp
   }
 
-  async recuperarContrasenia(email: String) {
+  async recuperarContrasenia(email: string) {
     const url = REST_SERVER_URL + "/recuperar_contrasenia/"
     let json: any = {}
     json.email = email

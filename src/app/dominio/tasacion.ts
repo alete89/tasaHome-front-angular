@@ -10,7 +10,7 @@ export class Tasacion {
 
     id_anterior: number
 
-    descripcion: String
+    descripcion: string
 
     ambientes: number
 
@@ -22,7 +22,7 @@ export class Tasacion {
 
     direccion: string
 
-    barrio: String
+    barrio: string
 
     tipoDePropiedad: TipoPropiedad
 

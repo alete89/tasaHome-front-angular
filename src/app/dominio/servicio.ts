@@ -1,7 +1,7 @@
 export class Servicio {
 
     id: number
-    descripcion: String
+    descripcion: string
     chequeado: boolean = false
 
     constructor(init?: Partial<Servicio>) {
@@ -12,7 +12,7 @@ export class Servicio {
         this.chequeado = true
     }
 
-    static fromJson(servicioJson: String) {
+    static fromJson(servicioJson: string) {
         return Object.assign(new Servicio(), servicioJson)
     }
 
