@@ -5,7 +5,7 @@
     </h5>
   </mdb-card-header>
   <div style="margin: 2rem;" class="md-form md-outline">
-    <textarea [(ngModel)]="mensaje" type="text" id="mensaje_contactar_usuario" class="form-control md-textarea" rows="6"
+    <textarea #focusThis [(ngModel)]="mensaje" type="text" id="mensaje_contactar_usuario" class="form-control md-textarea" rows="6"
       mdbInput></textarea>
     <label style="text-align: center;" for="mensaje_contactar_usuario">Mensaje</label>
   </div>

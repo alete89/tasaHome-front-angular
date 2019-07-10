@@ -4,14 +4,14 @@
     <p class="h4 mb-4">Recuperar contraseña</p>
 
     <div style="margin-bottom: 3rem;" class="md-form mt-0" [formGroup]="validatingForm">
-      <input style="color: white;" formControlName="email" [(ngModel)]="email" name="email_recuperar" type="email"
+      <input #focusThis style="color: white;" formControlName="email" [(ngModel)]="email" name="email_recuperar" type="email"
         id="email_recuperar" class="form-control" mdbValidate mdbInput>
       <label for="email_recuperar" style="color: white">Correo electrónico</label>
       <mdb-error *ngIf="emailTieneErrores()">Email Inválido</mdb-error>
     </div>
 
     <button class="recuperar_contrasenia" [disabled]="noPusoEmail()" mdbBtn type="button" gradient="blue" rounded="true"
-      block="true" (click)="recuperarContrasenia()">Recuperar contrasenia</button>
+      block="true" (click)="recuperarContrasenia()">Recuperar contraseña</button>
   </form>
   <app-notifications [notification]="notification"></app-notifications>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { UsuarioService } from '../../servicios/usuario.service';
@@ -12,7 +12,7 @@ import { RecuperarContraseniaComponent } from '../recuperar-contrasenia/recupera
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit, AfterContentInit {
 
   email: string
   password: string
@@ -20,15 +20,35 @@ export class LoginComponent implements OnInit {
   notification: Notification = new Notification()
   validatingForm: FormGroup
   modalRecuperarContrasenia: MDBModalRef;
+  id: number = 0
 
-  constructor(private router: Router, private usuarioService: UsuarioService, private route: ActivatedRoute, public modalRef: MDBModalRef, private modalService: MDBModalService) { }
+  @ViewChild('focusThis') focusThis;
 
+
+  ngAfterContentInit() {
+    setTimeout(() => {
+      this.focusThis.nativeElement.focus();
+      if (this.id == 0) {
+        this.id++
+      }
+    }, 10);
+  }
+
+  async ngAfterViewInit() {
+
+  }
+
+  constructor(private router: Router, private usuarioService: UsuarioService, private route: ActivatedRoute, public modalRef: MDBModalRef, private modalService: MDBModalService) {
+
+  }
   ngOnInit() {
+
     this.validatingForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
       password: new FormControl(null, [Validators.required])
     })
     this.notification.cleanLoading()
+
   }
 
   get inputEmail() { return this.validatingForm.get('email'); }
@@ -78,6 +98,7 @@ export class LoginComponent implements OnInit {
       show: false,
       ignoreBackdropClick: false,
       containerClass: 'right',
+      class: 'modal-dialog modal-side modal-top-right',
       animated: true,
       data: {
         // returnUrl: this.router.url

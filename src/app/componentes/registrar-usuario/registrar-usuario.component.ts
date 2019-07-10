@@ -27,6 +27,12 @@ export class RegistrarUsuarioComponent implements OnInit {
   mail_invalido: String
   autocomplete
   direccionAutocomplete: string
+  id: number = 0
+
+  @ViewChild('focusThis') focusThis;
+
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
 
   constructor(private mapsApiLoader: MapsAPILoader, private ngZone: NgZone, private router: Router, private zonaService: ZonaService, private usuarioService: UsuarioService, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
     this.inicializarFormulario()
@@ -47,8 +53,15 @@ export class RegistrarUsuarioComponent implements OnInit {
   get inputConfirmacionPassword() { return this.camposValidatingForm.get('confirmacionPasswordForm') }
 
 
-  @ViewChild("search")
-  public searchElementRef: ElementRef;
+
+  ngAfterContentInit(): void {
+    this.focusThis.nativeElement.focus();
+    if (this.id == 0) {
+      this.id++
+    }
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+  }
 
   nombreInvalido() {
     return this.inputNombre.invalid && (this.inputNombre.dirty || this.inputNombre.touched)

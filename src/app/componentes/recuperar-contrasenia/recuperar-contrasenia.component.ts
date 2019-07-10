@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
 import { MensajeService } from 'src/app/servicios/mensaje.service';
 import { Notification } from 'src/app/shared/notifications/notification';
 import { MDBModalRef } from 'angular-bootstrap-md';
@@ -9,16 +9,28 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './recuperar-contrasenia.component.html',
   styleUrls: ['./recuperar-contrasenia.component.css']
 })
-export class RecuperarContraseniaComponent implements OnInit {
+export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
 
   constructor(public modalRecuperarContrasenia: MDBModalRef, private mensajeService: MensajeService) { }
 
   email: String
   notification: Notification = new Notification()
   validatingForm: FormGroup
+  id: number = 0
 
+  @ViewChild('focusThis') focusThis;
+
+  ngAfterContentInit() {
+    setTimeout(() => {
+      this.focusThis.nativeElement.focus();
+      if (this.id == 0) {
+        this.id++
+      }
+    }, 10);
+  }
 
   ngOnInit() {
+
     this.notification.cleanLoading()
     this.validatingForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),

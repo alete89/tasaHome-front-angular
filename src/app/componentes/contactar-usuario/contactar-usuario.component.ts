@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { MensajeService } from 'src/app/servicios/mensaje.service';
 import { Notification } from 'src/app/shared/notifications/notification';
@@ -14,6 +14,9 @@ export class ContactarUsuarioComponent implements OnInit {
   email_receptor: String
   mensaje: String
   notification: Notification = new Notification()
+  id: number = 0
+
+  @ViewChild('focusThis') focusThis;
 
   constructor(public modalContactarUsuario: MDBModalRef, private mensajeService: MensajeService) { }
 
@@ -23,6 +26,15 @@ export class ContactarUsuarioComponent implements OnInit {
 
   cancelar() {
     this.modalContactarUsuario.hide()
+  }
+
+  ngAfterContentInit() {
+    setTimeout(() => {
+      this.focusThis.nativeElement.focus();
+      if (this.id == 0) {
+        this.id++
+      }
+    }, 10);
   }
 
   async aceptar() {

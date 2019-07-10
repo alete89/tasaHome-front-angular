@@ -15,7 +15,7 @@
         <div class="col margen">
           <!-- First name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
-            <input name="nombre" formControlName="nombreForm" [(ngModel)]="usuario.nombre" type="text"
+            <input #focusThis  name="nombre" formControlName="nombreForm" [(ngModel)]="usuario.nombre" type="text"
               id="materialRegisterFormFirstName" class="form-control" mdbValidate mdbInput>
             <label for="materialRegisterFormFirstName">Nombre</label>
             <mdb-error *ngIf="nombreInvalido()">Nombre inválido</mdb-error>

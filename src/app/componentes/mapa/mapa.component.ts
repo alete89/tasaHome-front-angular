@@ -50,6 +50,10 @@ export class MapaComponent implements OnInit {
   opcion: string = "Ninguna"
   cargando: boolean = false
 
+  id: number = 0
+
+  @ViewChild('focusThis') focusThis;
+
   clusterStyle = [{
     height: 53,
     url: 'assets/m1.png',
@@ -121,6 +125,15 @@ export class MapaComponent implements OnInit {
   marker = { latitude: -34.603729, longitude: -58.381569 };
 
   constructor(private router: Router, private ngZone: NgZone, private mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private lugarService: LugarService, private tasacionService: TasacionService, public modalMapa: MDBModalRef) {
+  }
+
+  ngAfterContentInit() {
+    setTimeout(() => {
+      this.focusThis.nativeElement.focus();
+      if (this.id == 0) {
+        this.id++
+      }
+    }, 10);
   }
 
   esHome() {
