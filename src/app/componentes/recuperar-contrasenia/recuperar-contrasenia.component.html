@@ -1,17 +1,18 @@
 <div (keyup.enter)="iniciarSesion()" class="card recuperar">
   <form class="form text-center border border-light p-5">
+    <p style="margin-bottom: 2.5rem !important;" class="h4 mb-4">Recuperar contraseña</p>
 
-    <p class="h4 mb-4">Recuperar contraseña</p>
-
-    <div style="margin-bottom: 3rem;" class="md-form mt-0" [formGroup]="validatingForm">
-      <input #focusThis style="color: white;" formControlName="email" [(ngModel)]="email" name="email_recuperar" type="email"
-        id="email_recuperar" class="form-control" mdbValidate mdbInput>
+    <div style="margin-bottom: 2rem !important; " class="md-form mt-0" [formGroup]="validatingForm">
+      <input #focusThis style="color: white;" formControlName="email" [(ngModel)]="email" name="email_recuperar"
+        type="email" id="email_recuperar" class="form-control" mdbValidate mdbInput>
       <label for="email_recuperar" style="color: white">Correo electrónico</label>
       <mdb-error *ngIf="emailTieneErrores()">Email Inválido</mdb-error>
     </div>
 
     <button class="recuperar_contrasenia" [disabled]="noPusoEmail()" mdbBtn type="button" gradient="blue" rounded="true"
       block="true" (click)="recuperarContrasenia()">Recuperar contraseña</button>
+    <div style="margin-top: 1rem;height: 1rem;;">
+      <app-notifications class="notifications" [notification]="notification"></app-notifications>
+    </div>
   </form>
-  <app-notifications [notification]="notification"></app-notifications>
 </div>

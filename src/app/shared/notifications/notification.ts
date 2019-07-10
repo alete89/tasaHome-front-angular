@@ -5,14 +5,18 @@ export class Notification {
     type: string
 
     showError(error) {
-        let mensaje = JSON.parse(error._body).message
-        console.log(error);
-        if (error.status == 0) {
-            this.error = "No se pudo comunicar con el servidor."
-        } else if (mensaje) {
-            this.error = mensaje
-        } else {
+        if (!error._body) {
             this.error = error
+        } else {
+            let mensaje = JSON.parse(error._body).message
+            console.log(error);
+            if (error.status == 0) {
+                this.error = "No se pudo comunicar con el servidor."
+            } else if (mensaje) {
+                this.error = mensaje
+            } else {
+                this.error = error
+            }
         }
     }
 

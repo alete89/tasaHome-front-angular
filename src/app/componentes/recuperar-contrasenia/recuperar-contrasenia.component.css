@@ -1,12 +1,17 @@
 .card {
     /* background-image: url('https://www.alientech-tools.com/wp-content/uploads/2017/08/login-background.jpg'); */
-    background-color: #1C2331
-
-    /* background-image: url('https://i2.wp.com/www.wahoodocks.com/wp-content/uploads/2017/05/custom-login-background.jpg'); */
-
-    /* background-color: black; */
+    background-color: #1C2331;
 }
 
 .recuperar {
     color: white;
+}
+
+.notifications {
+    /* z-index: 9999;
+    top: 0;
+    right: 0;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    position: fixed; */
 }

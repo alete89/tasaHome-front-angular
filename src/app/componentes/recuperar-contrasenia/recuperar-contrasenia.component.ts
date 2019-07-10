@@ -50,7 +50,7 @@ export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
       this.notification.popUpMessage("Solicitud enviada.", "success", 1500)
       this.cerrarModal()
     } catch (error) {
-      this.notification.showError(error)
+      this.notification.popUpMessage(error.statusText, "danger", 1500)
     }
   }
 
