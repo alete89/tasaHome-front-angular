@@ -20,6 +20,14 @@ export class MensajeService {
     return resp
   }
 
+  async recuperarContrasenia(email: String) {
+    const url = REST_SERVER_URL + "/recuperar_contrasenia/"
+    let json: any = {}
+    json.email = email
+    const resp = await this.http.post(url, json).toPromise()
+    return resp
+  }
+
 
 }
 

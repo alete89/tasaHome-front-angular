@@ -9,7 +9,6 @@ export interface IUsuarioService {
   userLogin(username: string, password: string)
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -31,7 +30,7 @@ export class UsuarioService implements IUsuarioService {
   async tasacionesAnteriores() {
     const url = REST_SERVER_URL + "/tasaciones_anteriores/" + this.userLoggedInId()
     const resp = await this.http.get(url).toPromise()
-    
+
     return resp.json().map(Tasacion.fromJson)
   }
 
@@ -64,6 +63,23 @@ export class UsuarioService implements IUsuarioService {
     return resp.json().map(Tasacion.fromJson)
   }
 
+  async getUserByToken(token: string) {
+    const url = REST_SERVER_URL + "/usuarios/token"
+    let json: any = {}
+    json.token = token
+    const resp = await this.http.post(url, json).toPromise()
+    const usuario: Usuario = Usuario.fromJson(resp.json())
+    return usuario
+  }
+
+  async reestablecerContrasenia(token: string, contrasenia_nueva: string) {
+    const url = REST_SERVER_URL + "/reestablecer_contrasenia"
+    let json: any = {}
+    json.token = token
+    json.contrasenia = contrasenia_nueva
+    const resp = await this.http.put(url, json).toPromise()
+    return resp
+  }
 
 }
 

@@ -20,6 +20,8 @@ export class Usuario {
 
     direccion: string
 
+    token_recuperacion: string
+
     constructor(init?: Partial<Usuario>) {
         Object.assign(this, init)
     }

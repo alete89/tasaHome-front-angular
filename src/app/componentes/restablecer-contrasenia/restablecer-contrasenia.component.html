@@ -1,0 +1,38 @@
+<mdb-card style="margin: auto;width: 40rem;">
+  <mdb-card-header style="background-color: black;" class="registro white-text text-center py-4">
+    <h5>
+      <strong>Restablecer contraseña</strong>
+    </h5>
+  </mdb-card-header>
+  <mdb-card-body class="px-lg-5 pt-0">
+    <form class="text-center" style="color: #757575;">
+      <div class="md-form" [formGroup]="camposValidatingForm">
+        <input formControlName="passwordForm" [(ngModel)]="contrasenia" name="password_restablecer" type="password"
+          id="password_restablecer" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
+          mdbValidate mdbInput>
+        <label for="password_restablecer">Nueva contraseña</label>
+        <mdb-error *ngIf="passwordTieneErrores()">Contraseña inválida</mdb-error>
+        <small id="password_restablecerHelp" class="form-text text-muted mb-4">
+          Al menos 8 caracteres
+        </small>
+      </div>
+      <div class="md-form" [formGroup]="camposValidatingForm">
+        <input formControlName="confirmacionPasswordForm" [(ngModel)]="confirmacion_contrasenia"
+          name="confirmacion_contrasenia_restablecer" type="password" class="form-control"
+          id="confirmacion_contrasenia_restablecer" aria-describedby="materialRegisterFormPasswordHelpBlock" mdbValidate
+          mdbInput>
+        <label for="confirmacion_contrasenia_restablecer">Confirmar</label>
+        <mdb-error *ngIf="confirmacionPasswordTieneErrores()">Contraseña inválida</mdb-error>
+        <mdb-error class="errorContraseñas" *ngIf="contraseniasNoCoinciden()">Las contraseñas deben coincidir
+        </mdb-error>
+      </div>
+      <button [disabled]="hayErrores()" (click)="reestablecerContrasenia()" mdbBtn color="success" rounded="true"
+        class="my-4 waves-effect z-depth-0 aceptar " mdbWavesEffect type="submit">Reestablecer</button>
+      <hr>
+    </form>
+    <div *ngIf="notification" class="notification" style="height: 3rem;text-align: center;">
+      <app-notifications [notification]="notification">
+      </app-notifications>
+    </div>
+  </mdb-card-body>
+</mdb-card>

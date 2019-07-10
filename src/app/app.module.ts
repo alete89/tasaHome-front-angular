@@ -24,6 +24,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { RecuperarContraseniaComponent } from './componentes/recuperar-contrasenia/recuperar-contrasenia.component';
+import { RestablecerContraseniaComponent } from './componentes/restablecer-contrasenia/restablecer-contrasenia.component';
+import { NotFoundComponent } from './componentes/not-found/not-found.component';
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
 @NgModule({
@@ -43,7 +46,10 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
       MostrarTasacionComponent,
       PublicarTasacionComponent,
       EvolucionPreciosComponent,
-      ActualizarTasacionComponent
+      ActualizarTasacionComponent,
+      RecuperarContraseniaComponent,
+      RestablecerContraseniaComponent,
+      NotFoundComponent
       // SafePipe
    ],
    imports: [

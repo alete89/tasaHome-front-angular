@@ -15,6 +15,10 @@ import { TasarPropiedadComponent } from './componentes/tasar-propiedad/tasar-pro
 import { AuthGuard } from './guard/auth-guard';
 import { LogueadoGuard } from './guard/logueado-guard';
 import { MapaComponent } from './componentes/mapa/mapa.component';
+import { RecuperarContraseniaComponent } from './componentes/recuperar-contrasenia/recuperar-contrasenia.component';
+import { RestablecerContraseniaComponent } from './componentes/restablecer-contrasenia/restablecer-contrasenia.component';
+import { RecoveryGuard } from './guard/recovery-guard';
+import { NotFoundComponent } from './componentes/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -30,7 +34,10 @@ const routes: Routes = [
   { path: 'mostrar-tasacion', component: MostrarTasacionComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   { path: 'publicar-tasacion', component: PublicarTasacionComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   { path: 'evolucion-precios/:id', component: EvolucionPreciosComponent, canActivate: [AuthGuard], pathMatch: 'full' },
-  { path: 'actualizar-tasacion/:id', component: ActualizarTasacionComponent, canActivate: [AuthGuard], pathMatch: 'full' }
+  { path: 'actualizar-tasacion/:id', component: ActualizarTasacionComponent, canActivate: [AuthGuard], pathMatch: 'full' },
+  { path: 'recuperar-contrasenia', component: RecuperarContraseniaComponent, canActivate: [LogueadoGuard], pathMatch: 'full' },
+  { path: 'restablecer-contrasenia/:token', component: RestablecerContraseniaComponent, canActivate: [RecoveryGuard], pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
