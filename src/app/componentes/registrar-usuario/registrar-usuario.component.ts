@@ -23,7 +23,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   confirmacion_contrasenia: string
   camposValidatingForm: FormGroup
   notification: Notification = new Notification()
-  fecha_maxima = "1980-12-31"
+  fecha_maxima = "9999-12-31"
   mail_invalido: String
   autocomplete
   direccionAutocomplete: string
