@@ -20,7 +20,7 @@ export class Tasacion {
 
     valor: number
 
-    direccion: String
+    direccion: string
 
     barrio: String
 

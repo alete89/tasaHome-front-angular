@@ -4,6 +4,7 @@ import { ZonaService } from 'src/app/servicios/zona.service';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { MapaComponent } from '../mapa/mapa.component';
 import { TasacionService } from 'src/app/servicios/tasacion.service';
+import { GoogleMapsService } from 'src/app/servicios/google-maps.service';
 
 @Component({
   selector: 'app-datos-por-zona',
@@ -21,8 +22,9 @@ export class DatosPorZonaComponent implements OnInit {
   modalMapa: MDBModalRef;
   titulo: string
   cargando: boolean
+  direccion: string
 
-  constructor(private tasacionService: TasacionService, private modalService: MDBModalService, public modalRef: MDBModalRef, private zonaService: ZonaService) {
+  constructor(private tasacionService: TasacionService, private modalService: MDBModalService, public modalRef: MDBModalRef, private zonaService: ZonaService, private googleMapsService: GoogleMapsService) {
 
   }
 
@@ -71,8 +73,15 @@ export class DatosPorZonaComponent implements OnInit {
   }
 
   async traerDatosBarrioPorNombre() {
+    // this.tasacionService.setUltimaBusqueda()
+    // this.direccion = this.tasacionService.direccion
+    //this.datos = await this.tasacionService.datosBarrioPorNombre()
+    // console.log(this.googleMapsService.getLatLongFromStringAddress(this.direccion))
+    // this.esperar()
     this.tasacionService.setUltimaBusqueda()
-    this.datos = await this.tasacionService.datosBarrioPorNombre()
+    this.direccion = this.tasacionService.direccion
+    let coordenadas = await this.googleMapsService.getLatLongFromStringAddress(this.direccion)
+    this.datos = await this.tasacionService.datosBarrioPorNombre(coordenadas.lng, coordenadas.lat)
     this.esperar()
   }
 
