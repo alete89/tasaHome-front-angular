@@ -40,16 +40,16 @@ export class MapaComponent implements OnInit {
   hospitales: Array<Lugar>
   comisarias: Array<Lugar>
   espacios_verdes: Array<Lugar>
-  esModal: boolean = false
+  esModal: boolean
   barrio: string
-  notification: Notification = new Notification()
-  errores: Array<string> = []
+  notification: Notification
+  errores: Array<string>
   autocomplete
   esDatosPorZona: boolean
   lugarSeleccionado: Lugar
-  opcion: string = "Ninguna"
-  cargando: boolean = false
-
+  opcion: string
+  cargando: boolean
+  map_loaded: boolean
   id: number = 0
 
   @ViewChild('focusThis') focusThis;
@@ -125,6 +125,13 @@ export class MapaComponent implements OnInit {
   marker = { latitude: -34.603729, longitude: -58.381569 };
 
   constructor(private router: Router, private ngZone: NgZone, private mapsApiLoader: MapsAPILoader, private googleMapsService: GoogleMapsService, private lugarService: LugarService, private tasacionService: TasacionService, public modalMapa: MDBModalRef) {
+    this.map_loaded = false
+    this.errores = []
+    this.notification = new Notification()
+    this.cargando = false
+    this.esModal = false
+    this.opcion = "Ninguna"
+
   }
 
   ngAfterContentInit() {

@@ -24,7 +24,7 @@ export class DatosPorZonaComponent implements OnInit {
   cargando: boolean
   direccion: string
 
-  constructor(private tasacionService: TasacionService, private modalService: MDBModalService, public modalRef: MDBModalRef, private zonaService: ZonaService, private googleMapsService: GoogleMapsService) {
+  constructor(public tasacionService: TasacionService, private modalService: MDBModalService, public modalRef: MDBModalRef, private zonaService: ZonaService, private googleMapsService: GoogleMapsService) {
 
   }
 

@@ -33,7 +33,7 @@ export class TasarPropiedadComponent implements OnInit {
   @Input() esActualizacion: boolean
   cargando: boolean
 
-  constructor(private modalService: MDBModalService, private usuarioService: UsuarioService, private tasacionService: TasacionService, private estadoService: EstadoService, private servicioService: ServicioService) {
+  constructor(private modalService: MDBModalService, private usuarioService: UsuarioService, public tasacionService: TasacionService, private estadoService: EstadoService, private servicioService: ServicioService) {
     this.titulo = "Tasar propiedad"
     this.titulo_boton = "Tasar"
     this.esActualizacion = false

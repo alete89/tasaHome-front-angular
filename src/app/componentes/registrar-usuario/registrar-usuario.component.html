@@ -1,7 +1,7 @@
 <!-- Material form register -->
 <mdb-card class="card-registro">
 
-  <mdb-card-header class="registro info-color-dark white-text text-center py-4">
+  <mdb-card-header class="info-color-dark white-text text-center py-4">
     <h5>
       <strong class="grande">Crear cuenta</strong>
     </h5>
@@ -15,7 +15,7 @@
         <div class="col margen">
           <!-- First name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
-            <input #focusThis  name="nombre" formControlName="nombreForm" [(ngModel)]="usuario.nombre" type="text"
+            <input #focusThis name="nombre" formControlName="nombreForm" [(ngModel)]="usuario.nombre" type="text"
               id="materialRegisterFormFirstName" class="form-control" mdbValidate mdbInput>
             <label for="materialRegisterFormFirstName">Nombre</label>
             <mdb-error *ngIf="nombreInvalido()">Nombre inválido</mdb-error>
@@ -97,7 +97,7 @@
       </div>
 
       <!-- Sign up button -->
-      <div class="botonera">
+      <div>
 
         <button [disabled]="formularioVacio()" (click)="limpiarFormulario()" mdbBtn color="danger" rounded="true"
           class="my-4 waves-effect z-depth-0 aceptar" mdbWavesEffect type="button">Limpiar formulario</button>

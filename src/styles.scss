@@ -1,5 +1,12 @@
 @import '~@ng-select/ng-select/themes/material.theme.css';
 
+@font-face {
+    font-family: 'Roboto Condensed';
+    font-display: auto;
+    src: url(/assets/Roboto/RobotoCondensed-Regular.ttf) format('truetype');
+    font-weight: 300;
+}
+
 /* You can add global styles to this file, and also import other style files */
 
 body {

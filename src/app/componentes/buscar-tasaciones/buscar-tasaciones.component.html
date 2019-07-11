@@ -1,4 +1,4 @@
-<mdb-card class="card-busqueda">
+<mdb-card>
 
   <mdb-card-header style="background-color: #101357;" class="white-text text-center py-4">
     <h5>
@@ -81,7 +81,7 @@
         <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
       </div>
 
-      <div class="botonera">
+      <div>
         <button size="md" style="color: white;" [disabled]="noPuedeBuscar()" (click)="buscar()" mdbBtn gradient="blue"
           outline="true" rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect
           type="submit">Buscar</button>
@@ -101,7 +101,7 @@
   <div *ngIf="resultados && resultados.length > 0 && !cargando"
     class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
     <table class="table">
-      <thead class="colorear-celeste">
+      <thead>
         <tr class="fondo-tr">
           <th>FECHA</th>
           <th>BARRIO</th>
@@ -113,7 +113,7 @@
         </tr>
       </thead>
       <tbody *ngFor="let resultado of resultados">
-        <tr class="fila-contenido">
+        <tr>
           <td *ngIf="resultado.fecha">{{ resultado.fecha  | date: 'dd/MM/yyyy'}} </td>
           <td *ngIf="resultado.barrio">{{ resultado.barrio.descripcion }}</td>
           <td *ngIf="resultado.valor">{{ resultado.valor }} </td>

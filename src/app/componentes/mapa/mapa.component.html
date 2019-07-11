@@ -4,6 +4,11 @@
 
 <!-- EL QUE TIENE EL BUSCADOR -->
 <!-- <p style="color: white; text-align: center;font-size: 3rem;">Bienvenidos a TasaHome!!!</p> -->
+
+<div *ngIf="!map_loaded" style="margin: auto;margin-top: 1rem;margin-bottom:1rem;"
+  class="spinner-border text-primary d-flex justify-content-center" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
 <form style="width: 50rem; margin: auto;">
   <div style="background-color: #263238; padding-bottom: 1rem;" class="container">
     <div class="row d-flex flex-center " style="background-color: #3E4551;padding-top: 1rem;padding-bottom: 1rem;">
@@ -51,10 +56,12 @@
       </div> -->
     </div>
 
+
+
     <div>
       <div class="card" style="margin-top:1rem; margin-left:2rem; margin-right:3rem; ">
-        <agm-map #map [zoom]="map.zoom" [mapTypeId]="'terrain'" [usePanning]="true" [latitude]="latitude"
-          [longitude]="longitude" [scrollwheel]="null" (mapClick)="placeMarker($event)"
+        <agm-map #map (mapReady)="map_loaded = true" [zoom]="map.zoom" [mapTypeId]="'terrain'" [usePanning]="true"
+          [latitude]="latitude" [longitude]="longitude" [scrollwheel]="null" (mapClick)="placeMarker($event)"
           style="height: 500px; width: 700px;">
           <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
 
