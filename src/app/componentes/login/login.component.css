@@ -7,10 +7,7 @@
 }
 
 .card {
-    /* background-image: url('https://www.alientech-tools.com/wp-content/uploads/2017/08/login-background.jpg'); */
-    background-image: url('https://i2.wp.com/www.wahoodocks.com/wp-content/uploads/2017/05/custom-login-background.jpg');
-
-    /* background-color: black; */
+    background-color:#1c2a48;
 }
 
 .iniciar-sesion {
