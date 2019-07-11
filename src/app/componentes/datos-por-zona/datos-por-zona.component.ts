@@ -73,6 +73,8 @@ export class DatosPorZonaComponent implements OnInit {
   }
 
   async traerDatosBarrioPorNombre() {
+    this.datos = undefined
+
     // this.tasacionService.setUltimaBusqueda()
     // this.direccion = this.tasacionService.direccion
     //this.datos = await this.tasacionService.datosBarrioPorNombre()
@@ -80,9 +82,12 @@ export class DatosPorZonaComponent implements OnInit {
     // this.esperar()
     this.tasacionService.setUltimaBusqueda()
     this.direccion = this.tasacionService.direccion
+    this.cargando = true
     let coordenadas = await this.googleMapsService.getLatLongFromStringAddress(this.direccion)
     this.datos = await this.tasacionService.datosBarrioPorNombre(coordenadas.lng, coordenadas.lat)
-    this.esperar()
+    setTimeout(async () => {
+      this.cargando = false
+    }, 10);
   }
 
   cambioDireccion() {
