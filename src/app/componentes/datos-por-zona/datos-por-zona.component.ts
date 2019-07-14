@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Zona } from 'src/app/dominio/zona';
 import { ZonaService } from 'src/app/servicios/zona.service';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
@@ -15,7 +15,7 @@ export class DatosPorZonaComponent implements OnInit {
 
   zonas: Array<Zona>
   zonaSeleccionada: string
-  zonaId: number
+  zona: Zona
   barrios: Array<Zona>
   comunas: Array<Zona>
   datos: Array<any>
@@ -23,9 +23,18 @@ export class DatosPorZonaComponent implements OnInit {
   titulo: string
   cargando: boolean
   direccion: string
+  searchTerm: string
 
   constructor(public tasacionService: TasacionService, private modalService: MDBModalService, public modalRef: MDBModalRef, private zonaService: ZonaService, private googleMapsService: GoogleMapsService) {
 
+  }
+
+  cambiarSeleccion(select) {
+    const [first] = select.itemsList.filteredItems;
+    select.itemsList.markItem(first);
+    if (select.dropdownPanel) {
+      select.dropdownPanel.scrollTo(first);
+    }
   }
 
   async ngOnInit() {
@@ -39,7 +48,7 @@ export class DatosPorZonaComponent implements OnInit {
     this.titulo = "barrio"
     this.zonas = this.barrios
     this.datos = undefined
-    this.zonaId = undefined
+    this.zona = undefined
   }
 
   async seleccionarDireccion() {
@@ -52,12 +61,15 @@ export class DatosPorZonaComponent implements OnInit {
     this.titulo = "comuna"
     this.zonas = this.comunas
     this.datos = undefined
-    this.zonaId = undefined
+    this.zona = undefined
   }
 
   async traerDatosBarrio() {
-    this.datos = await this.zonaService.datosBarrio(this.zonaId)
-    this.esperar()
+    this.datos = undefined
+    if (this.zona) {
+      this.datos = await this.zonaService.datosBarrio(this.zona.id)
+      this.esperar()
+    }
   }
 
   esperar() {
@@ -68,8 +80,11 @@ export class DatosPorZonaComponent implements OnInit {
   }
 
   async traerDatosComuna() {
-    this.datos = await this.zonaService.datosComuna(this.zonaId)
-    this.esperar()
+    this.datos = undefined
+    if (this.zona) {
+      this.datos = await this.zonaService.datosComuna(this.zona.id)
+      this.esperar()
+    }
   }
 
   async traerDatosBarrioPorNombre() {

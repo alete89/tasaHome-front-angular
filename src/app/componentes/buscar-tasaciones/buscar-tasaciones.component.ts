@@ -70,6 +70,13 @@ export class BuscarTasacionesComponent implements OnInit {
     })
   }
 
+  cambiarSeleccion(select) {
+    const [first] = select.itemsList.filteredItems;
+    select.itemsList.markItem(first);
+    if (select.dropdownPanel) {
+      select.dropdownPanel.scrollTo(first);
+    }
+  }
 
   nuevaBusqueda() {
     this.inicializarFormulario()
@@ -83,9 +90,9 @@ export class BuscarTasacionesComponent implements OnInit {
   ambientesInvalidos() {
     return this.inputAmbientes.invalid && (this.inputAmbientes.dirty || this.inputAmbientes.touched)
   }
+
   noPusoFecha() {
     return this.inputFecha.invalid && (this.inputFecha.dirty || this.inputFecha.touched)
-
   }
 
   noPuedeBuscar() {

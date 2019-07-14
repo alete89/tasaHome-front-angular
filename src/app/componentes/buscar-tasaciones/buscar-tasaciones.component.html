@@ -9,13 +9,16 @@
   <mdb-card-body class="px-lg-5 pt-0">
     <form class="text-center" style="color: #757575;">
       <div style="margin-bottom: 1rem;margin-top: 1rem;" class="form-row">
+
         <div class="col margen">
-          <ng-select name="barrio" [virtualScroll]="true" [items]="barrios" [multiple]="true" [closeOnSelect]="true"
-            [searchable]="true" bindLabel="descripcion" placeholder="Barrios" [(ngModel)]="barriosSeleccionados">
+          <ng-select #select (keypress)="cambiarSeleccion(select)" notFoundText="No se encontro el barrio" name="barrio"
+            [virtualScroll]="true" [items]="barrios" [multiple]="true" [closeOnSelect]="true" [searchable]="true"
+            bindLabel="descripcion" placeholder="Barrios" [(ngModel)]="barriosSeleccionados">
           </ng-select>
         </div>
         <div class="col margen">
-          <ng-select name="tipoDePropiedad" [virtualScroll]="true" [items]="tiposDePropiedad" [multiple]="false"
+          <ng-select #select (keypress)="cambiarSeleccion(select)" notFoundText="No se encontro el tipo de propiedad"
+            name="tipoDePropiedad" [virtualScroll]="true" [items]="tiposDePropiedad" [multiple]="false"
             [closeOnSelect]="true" [searchable]="true" bindLabel="descripcion" placeholder="Tipos de propiedad"
             [(ngModel)]="tipoDePropiedad">
           </ng-select>

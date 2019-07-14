@@ -35,20 +35,17 @@
       </div>
 
       <div *ngIf="zonaSeleccionada == 'Barrio'" class="md-form">
-
-        <select name="datos" [(ngModel)]="zonaId" (change)="traerDatosBarrio()" class="browser-default custom-select">
-          <option *ngFor="let zona of zonas" [value]="zona.id">
-            {{zona.descripcion}}</option>
-        </select>
+        <ng-select #select notFoundText="No se encontro el barrio" (keypress)="cambiarSeleccion(select)"
+          name="datosBarrio" (change)="traerDatosBarrio()" [virtualScroll]="true" [items]="zonas" [multiple]="false"
+          [closeOnSelect]="true" [searchable]="true" bindLabel="descripcion" placeholder="Barrio" [(ngModel)]="zona">
+        </ng-select>
       </div>
 
-
       <div *ngIf="zonaSeleccionada == 'Comuna'" class="md-form">
-
-        <select name="datos" [(ngModel)]="zonaId" (change)="traerDatosComuna()" class="browser-default custom-select">
-          <option *ngFor="let zona of zonas" [value]="zona.id">
-            {{zona.descripcion}}</option>
-        </select>
+        <ng-select #select notFoundText="No se encontro la comuna" (keypress)="cambiarSeleccion(select)"
+          name="datosComuna" (change)="traerDatosComuna()" [virtualScroll]="true" [items]="zonas" [multiple]="false"
+          [closeOnSelect]="true" [searchable]="true" bindLabel="descripcion" placeholder="Comuna" [(ngModel)]="zona">
+        </ng-select>
       </div>
 
 
