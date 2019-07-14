@@ -69,7 +69,7 @@ export class TasarPropiedadComponent implements OnInit {
     this.estados = await this.estadoService.estados()
     this.servicios = await this.servicioService.servicios()
     if (this.esActualizacion) {
-      this.tasacionService.direccion = this.tasacion.direccion
+      this.tasacionService.setDireccionYBarrio(this.tasacion.direccion, this.tasacion.barrio)
     } else {
       this.tasacionService.direccion = undefined
     }

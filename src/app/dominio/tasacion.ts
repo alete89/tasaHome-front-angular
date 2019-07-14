@@ -3,6 +3,7 @@ import { Servicio } from './servicio';
 import { TipoPropiedad } from './tipo_propiedad';
 import { Usuario } from './usuario';
 import { TipoOperacion } from './tipo_operacion';
+import { Zona } from './zona';
 
 export class Tasacion {
 
@@ -22,7 +23,7 @@ export class Tasacion {
 
     direccion: string
 
-    barrio: string
+    barrio: Zona
 
     tipoDePropiedad: TipoPropiedad
 

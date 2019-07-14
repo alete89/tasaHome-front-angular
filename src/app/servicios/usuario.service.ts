@@ -53,6 +53,7 @@ export class UsuarioService implements IUsuarioService {
   }
 
   async guardarTasacion(tasacion: Tasacion) {
+    console.log(tasacion)
     const json = JSON.parse(JSON.stringify(tasacion))
     return await this.http.post(REST_SERVER_URL + '/guardar_tasacion/' + this.userLoggedInId(), json).toPromise()
   }
