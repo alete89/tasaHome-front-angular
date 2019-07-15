@@ -13,9 +13,12 @@ export class TasacionesAnterioresComponent implements OnInit {
 
   tasaciones: Array<Tasacion>
   notification: Notification = new Notification()
+  cargando: boolean
 
 
-  constructor(private router: Router, private usuarioService: UsuarioService) { }
+  constructor(private router: Router, private usuarioService: UsuarioService) {
+    this.cargando = true
+  }
 
   async ngOnInit() {
     this.traerTasaciones()
@@ -25,6 +28,7 @@ export class TasacionesAnterioresComponent implements OnInit {
   async traerTasaciones() {
     try {
       this.tasaciones = await this.usuarioService.tasacionesAnteriores()
+      this.cargando = false
     } catch (error) {
       this.notification.showError(error)
     }

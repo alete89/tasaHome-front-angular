@@ -29,3 +29,11 @@ th {
     color: white;
     background-color: #59698d;
 }
+
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 50%;
+    right: 50%; /* or: left: 50%; */
+}

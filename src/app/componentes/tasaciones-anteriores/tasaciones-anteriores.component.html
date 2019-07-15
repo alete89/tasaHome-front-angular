@@ -1,4 +1,9 @@
-<div *ngIf="hayTasacionesAnteriores()" class="margen">
+<div *ngIf="cargando" style="margin: auto;margin-top: 1rem;"
+  class="spinner-border text-primary d-flex justify-content-center spinner" role="status">
+  <span class="sr-only ">Loading...</span>
+</div>
+
+<div *ngIf="hayTasacionesAnteriores() && !cargando" class="margen">
   <div class="contenedor-tasaciones">
     <div class="card tasaciones">
       <p class="tasaciones">Tasaciones Anteriores</p>
@@ -45,7 +50,7 @@
 
 </div>
 
-<div class="card" *ngIf="!hayTasacionesAnteriores()"
+<div class="card" *ngIf="!hayTasacionesAnteriores() && !cargando"
   style="width: 36rem;color: white;background-color: black !important">
   <div style="text-align:center;">
     <strong style="font-size: 3rem; text-align: center;">No tienes tasaciones</strong>
