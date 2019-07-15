@@ -17,6 +17,7 @@ export class EvolucionPreciosComponent implements OnInit {
   public chartType: string = 'line';
   public chartDatasets: Array<any>
   public chartLabels: Array<any>
+  descripcion: string
 
   public chartColors: Array<any> = [
     {
@@ -44,6 +45,7 @@ export class EvolucionPreciosComponent implements OnInit {
   async ngOnInit() {
     this.id_tasacion = this.route.snapshot.paramMap.get("id")
     this.historialTasacion = await this.tasacionService.historialTasacion(this.id_tasacion)
+    console.log(this.historialTasacion)
     let historial_precios = this.historialTasacion.map(tasacion => tasacion.valor)
     let fechas = this.historialTasacion.map(tasacion => this.moment(tasacion.fecha).format('DD/MM/YYYY HH:MM'))
     this.chartDatasets = [
@@ -51,6 +53,8 @@ export class EvolucionPreciosComponent implements OnInit {
       // { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
     ];
     this.chartLabels = fechas
+    let ultima_tasacion = this.historialTasacion[this.historialTasacion.length - 1]
+    this.descripcion = ultima_tasacion.tipoDePropiedad.descripcion + " con ubicación en " + ultima_tasacion.descripcion
   }
   // this.formatear(tasacion.fecha)
 
