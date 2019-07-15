@@ -120,7 +120,7 @@ export class BuscarTasacionesComponent implements OnInit {
     this.seLanzoBusqueda = true
     setTimeout(() => {
       this.cargando = false
-    }, 700);
+    }, 350);
 
   }
 

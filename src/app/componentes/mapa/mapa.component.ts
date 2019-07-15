@@ -184,7 +184,7 @@ export class MapaComponent implements OnInit {
     setTimeout(() => {
       this.opcion = opcion
       this.cargando = false
-    }, 700);
+    }, 350);
   }
 
   buscarBarrio(components: any) {

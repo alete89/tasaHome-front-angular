@@ -76,7 +76,7 @@ export class DatosPorZonaComponent implements OnInit {
     this.cargando = true
     setTimeout(() => {
       this.cargando = false
-    }, 600);
+    }, 350);
   }
 
   async traerDatosComuna() {
