@@ -9,7 +9,7 @@
       <mdb-error *ngIf="emailTieneErrores()">Email Inválido</mdb-error>
     </div>
 
-    <button class="recuperar_contrasenia" [disabled]="noPusoEmail()" mdbBtn type="button" gradient="blue" rounded="true"
+    <button class="recuperar_contrasenia" [disabled]="noPusoEmail() || deshabilitarBoton" mdbBtn type="button" gradient="blue" rounded="true"
       block="true" (click)="recuperarContrasenia()">Recuperar contraseña</button>
     <div style="margin-top: 1rem;height: 1rem;;">
       <app-notifications class="notifications" [notification]="notification"></app-notifications>

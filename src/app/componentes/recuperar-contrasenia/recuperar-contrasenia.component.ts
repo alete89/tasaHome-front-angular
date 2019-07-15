@@ -17,6 +17,7 @@ export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
   notification: Notification = new Notification()
   validatingForm: FormGroup
   id: number = 0
+  deshabilitarBoton: boolean
 
   @ViewChild('focusThis') focusThis;
 
@@ -30,7 +31,7 @@ export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
-
+    this.deshabilitarBoton = false
     this.notification.cleanLoading()
     this.validatingForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
@@ -48,10 +49,20 @@ export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
     try {
       await this.mensajeService.recuperarContrasenia(this.email)
       this.notification.popUpMessage("Solicitud enviada.", "success", 1500)
+      this.deshabilitarBoton = true
       this.cerrarModal()
     } catch (error) {
-      this.notification.popUpMessage(error.statusText, "danger", 1500)
+      let mensaje = JSON.parse(error._body).message
+      this.notification.popUpMessage(mensaje, "danger", 1500)
+      this.deshabilitarBotonTemporalmente()
     }
+  }
+
+  deshabilitarBotonTemporalmente() {
+    this.deshabilitarBoton = true
+    setTimeout(() => {
+      this.deshabilitarBoton = false
+    }, 1500);
   }
 
   cerrarModal() {
