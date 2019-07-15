@@ -121,6 +121,14 @@ export class RegistrarUsuarioComponent implements OnInit {
       || (!this.direccionAutocomplete || (this.direccionAutocomplete != this.usuario.direccion))
   }
 
+  direccionNotieneNumeros() {
+    return !hasNumber(this.usuario.direccion) && (this.inputDireccion.dirty || this.inputDireccion.touched) && (this.usuario.direccion == this.direccionAutocomplete)
+  }
+
+  noUsoAutoComplete() {
+    return this.usuario.direccion != this.direccionAutocomplete
+  }
+
   contraseniasTienenErrores() {
     return !this.usuario.contrasenia
       || !this.confirmacion_contrasenia
@@ -156,7 +164,7 @@ export class RegistrarUsuarioComponent implements OnInit {
     this.camposValidatingForm = new FormGroup({
       nombreForm: new FormControl(null, [Validators.required, Validators.maxLength(70), Validators.pattern("[a-zA-Z ]*")]),
       apellidoForm: new FormControl(null, [Validators.required, Validators.maxLength(70), Validators.pattern("[a-zA-Z ]*")]),
-      direccionForm: new FormControl(null, [Validators.required, Validators.maxLength(100), Validators.pattern(/^[a-zA-Z\s\d\/]*\d[a-zA-Z\s\d\/]*$/)]),
+      direccionForm: new FormControl(null, [Validators.required]),
       //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
       emailForm: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
       fechaForm: new FormControl(null, [Validators.required]),

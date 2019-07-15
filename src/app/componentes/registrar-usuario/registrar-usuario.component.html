@@ -59,15 +59,22 @@
         </div>
       </div>
 
-      <div style="margin-top:2rem;margin-bottom:2rem;">
+      <div style="margin-top:0rem;margin-bottom:3rem;" class="md-form" [formGroup]="camposValidatingForm">
         <!-- <label>Enter address</label> -->
-        <input style="margin-right: 1rem;" [(ngModel)]="usuario.direccion" type="text" class="form-control"
-          placeholder="Dirección" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search
-          id="direccion_registro" name="direccion_registro">
+        <input formControlName="direccionForm" style="margin-right: 1rem;" [(ngModel)]="usuario.direccion" type="text"
+          class="form-control" placeholder="Dirección" autocorrect="off" autocapitalize="off" spellcheck="off"
+          type="text" #search id="direccion_registro" name="direccion_registro" mdbInput>
+        <mdb-error *ngIf="direccionNotieneNumeros()">
+          La dirección debe ser concreta
+        </mdb-error>
+        <mdb-error *ngIf="noUsoAutoComplete()">
+          Debe ingresar una dirección usando el autocompletar
+        </mdb-error>
+
       </div>
 
       <!-- E-mail -->
-      <div style="margin-bottom: 3rem;" class="md-form mt-0" [formGroup]="camposValidatingForm">
+      <div style="margin-bottom: 3.5rem;" class="md-form mt-0" [formGroup]="camposValidatingForm">
         <input formControlName="emailForm" [(ngModel)]="usuario.email" name="email_registro" type="email"
           id="email_registro" class="form-control" mdbValidate mdbInput>
         <label for="email_registro">E-mail</label>
@@ -82,7 +89,7 @@
           mdbValidate mdbInput>
         <label for="password_registro">Contraseña</label>
         <mdb-error *ngIf="passwordInvalido()">Contraseña inválida</mdb-error>
-        <small id="password_registroHelp" class="form-text text-muted mb-4">
+        <small id=" password_registroHelp" class="form-text text-muted mb-4">
           Al menos 8 caracteres
         </small>
       </div>
