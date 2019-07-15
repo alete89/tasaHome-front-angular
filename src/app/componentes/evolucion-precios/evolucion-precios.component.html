@@ -1,28 +1,32 @@
-<div class="card" style="color: white;background-color:#263238 !important;width: auto;">
-  <p class="titulo">Evolución de precios</p>
-</div>
-<div class="container-grafico">
-  <div style="display: block;background-color: white;">
-    <canvas *ngIf="chartDatasets && chartLabels" mdbChart [chartType]="chartType" [datasets]="chartDatasets"
+<div class="card"
+  style="margin-left: 2rem;margin-right: 2rem;margin-bottom: 2rem; background-color:#263238 !important;">
+  <div class="card " style="color: white;background-color:#263238 !important; ">
+    <p class="titulo">Evolución de precios</p>
+  </div>
+  <div class="card"
+    style="display: block;background-color: white; padding-left: 5rem; padding-right: 5rem;margin:2rem;">
+    <canvas height="110rem;" *ngIf="chartDatasets && chartLabels" mdbChart [chartType]="chartType" [datasets]="chartDatasets"
       [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions" [legend]="true"
       (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
     </canvas>
   </div>
 </div>
 
-<mdb-card class="card tasaciones" style="margin-top: 4rem;">
-  <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
-    <table class="table">
-      <thead>
-        <tr class="fondo-tr">
-          <th>FECHA DE TASACIÓN</th>
-          <th>VALOR</th>
-        </tr>
-      </thead>
-      <tr *ngFor="let tasacion of historialTasacion" class="fila-contenido">
-        <td> {{tasacion.fecha | date: 'dd/MM/yyyy'}} </td>
-        <td>{{ tasacion.valor }} </td>
-      </tr>
-    </table>
-  </div>
-</mdb-card>
+<!-- <div>
+        <div class="card" style="margin-top: 2rem;margin-bottom: 2rem;margin-left: 4rem;">
+          <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+            <table class="table">
+              <thead>
+                <tr class="fondo-tr">
+                  <th>FECHA DE TASACIÓN</th>
+                  <th>VALOR</th>
+                </tr>
+              </thead>
+              <tr *ngFor="let tasacion of historialTasacion" class="fila-contenido">
+                <td> {{tasacion.fecha | date: 'dd/MM/yyyy'}} </td>
+                <td>{{ tasacion.valor }} </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div> -->

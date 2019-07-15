@@ -5,13 +5,6 @@
     color: white;
 }
 
-.card {
-    max-width: 80rem;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: white !important;
-}
-
 .texto-centrado {
     text-align: center;
 }
@@ -20,11 +13,6 @@ th {
     font-weight: bold;
 }
 
-.container-grafico {
-    margin-left: 15rem;
-    margin-right: 15rem;
-    margin-top: 3rem;
-}
 
 .titulo {
     font-size: 3rem;
@@ -33,5 +21,6 @@ th {
 }
 
 .fondo-tr {
-    background-color: #39CCCC;
+    color: white;
+    background-color: #4B515D;
 }
