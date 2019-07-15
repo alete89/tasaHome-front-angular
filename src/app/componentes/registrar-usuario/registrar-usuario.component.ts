@@ -158,6 +158,7 @@ export class RegistrarUsuarioComponent implements OnInit {
     this.mail_invalido = "invalido"
     this.confirmacion_contrasenia = undefined
     this.usuario = new Usuario()
+    this.direccionAutocomplete = undefined
   }
 
   inicializarValidaciones() {
