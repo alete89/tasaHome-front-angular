@@ -23,7 +23,7 @@ export class UsuarioService implements IUsuarioService {
     json.contraseña = password
     const resp = await this.http.post(url, json).toPromise()
     const usuario: Usuario = Usuario.fromJson(resp.json())
-    sessionStorage.setItem("userLoggedInId", String(usuario.id));
+    localStorage.setItem("userLoggedInId", String(usuario.id));
     return usuario
   }
 
@@ -39,12 +39,12 @@ export class UsuarioService implements IUsuarioService {
   }
 
   userLoggedInId() {
-    return sessionStorage.getItem("userLoggedInId")
+    return localStorage.getItem("userLoggedInId")
   }
 
 
   cerrarSesion() {
-    sessionStorage.clear()
+    localStorage.clear()
   }
 
   async registrarUsuario(usuario: Usuario) {
