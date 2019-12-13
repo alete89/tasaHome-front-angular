@@ -64,6 +64,13 @@ export class UsuarioService implements IUsuarioService {
     return resp.json().map(Tasacion.fromJson)
   }
 
+  async getUsers() {
+    const url = REST_SERVER_URL + "/administracion"
+    let json: any = {}
+    const resp = await this.http.get(url, json).toPromise()
+    return resp.json().map(Usuario.fromJson)
+  }
+
   async getUserByToken(token: string) {
     const url = REST_SERVER_URL + "/usuarios/token"
     let json: any = {}
