@@ -1,0 +1,68 @@
+<div *ngIf="cargando" style="margin: auto;margin-top: 1rem;"
+  class="spinner-border text-primary d-flex justify-content-center spinner" role="status">
+  <span class="sr-only ">Loading...</span>
+</div>
+
+<div class="margen">
+  <div class="contenedor-tasaciones">
+    <div class="card tasaciones">
+      <p class="tasaciones">Actualización de configuraciones</p>
+      <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+
+          ACA VAN LAS CONFIGURACIONES
+        <!--<table class="table">
+          <thead class="colorear-celeste">
+            <tr>
+              <th>FECHA</th>
+              <th>DIRECCIÓN</th>
+              <th>VALOR</th>
+              <th>AMBIENTES</th>
+              <th>SUPERFICE</th>
+              <th>TIPO</th>
+              <th>PRIVADA</th>
+              <th>ACTUALIZAR</th>
+              <th>EVOLUCIÓN DE PRECIOS</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let tasacion of tasaciones">
+            <tr class="fila-contenido">
+              <td>{{ tasacion.fecha || "-" | date: 'dd/MM/yyyy hh:mm' }} </td>
+              <td>{{ tasacion.direccion || "-" }}</td>
+              <td>{{ tasacion.valor || "-"}} </td>
+              <td>{{ tasacion.ambientes || "-" }}</td>
+              <td>{{ tasacion.superficie || "-"}}</td>
+              <td *ngIf="tasacion.tipoDePropiedad">{{ tasacion.tipoDePropiedad.descripcion || "-" }}</td>
+              <td *ngIf="!tasacion.tipoDePropiedad">-</td>
+              <td>
+                <mdb-checkbox [disabled]="true" [checked]=tasacion.privada [default]="true">
+                </mdb-checkbox>
+              </td>
+              <td><button (click)="irAActualizarTasacion(tasacion)" class="boton" mdbBtn type="button" color="unique"
+                  size="sm" mdbWavesEffect><strong>Actualizar</strong></button>
+              </td>
+              <td><button (click)="irAEvolucionDePrecios(tasacion)" class="boton" mdbBtn type="button" color="unique"
+                  size="sm" mdbWavesEffect><strong>Evolución de precios</strong></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>-->
+      </div>
+    </div>
+  </div>
+
+</div>
+<!--
+<div class="card" *ngIf="!hayTasacionesAnteriores() && !cargando"
+  style="width: 36rem;color: white;background-color: black !important">
+  <div style="text-align:center;">
+    <strong style="font-size: 3rem; text-align: center;">No tienes tasaciones</strong>
+    <button style="margin-top: 2rem;margin-bottom: 2rem;" (click)="irATasarPropiedad()" class="boton" mdbBtn
+      type="button" color="unique" size="md" mdbWavesEffect><strong>Hacer una tasación</strong></button>
+  </div>
+</div>
+
+<div *ngIf="notification" class="notification" style="height: 3rem; ">
+  <app-notifications [notification]="notification">
+  </app-notifications>
+</div>
+-->
