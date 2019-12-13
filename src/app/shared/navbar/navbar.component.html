@@ -18,6 +18,12 @@
         <li *ngIf="!estaLogueado()" class="nav-item">
           <a class="nav-link" routerLink="registrar-usuario">Registrar usuario</a>
         </li>
+        <li *ngIf="estaLogueado()" class="nav-item">
+          <a class="nav-link" routerLink="/administrar-usuarios">Administrar usuarios</a>
+        </li>
+        <li *ngIf="estaLogueado()" class="nav-item">
+          <a class="nav-link" routerLink="/actualizar-configuraciones">Actualizar configuraciones</a>
+        </li>
       </ul>
 
       <div class="nav-item" *ngIf="!estaLogueado()">
