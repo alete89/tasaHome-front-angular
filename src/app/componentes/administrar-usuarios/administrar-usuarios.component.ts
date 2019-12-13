@@ -22,7 +22,10 @@ export class AdministrarUsuariosComponent implements OnInit {
 
   moment = require('moment');
   estados = ["Activo", "Inactivo"]
-  estadoSeleccionado: Array<String>
+  estadoSeleccionado: String
+  fechaAlta: Date
+  fechaModificacion: Date
+  cantidadTasaciones: number
   usuarioBusqueda: UsuarioBusqueda
   validatingForm: FormGroup
   resultados: Array<Usuario>
@@ -44,14 +47,11 @@ export class AdministrarUsuariosComponent implements OnInit {
   async ngOnInit() {
     this.inicializarFormulario()
     this.inicializarValidaciones()
-    //this.barrios = await this.zonaService.barrios()
-    //this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
-    //this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
   }
 
   inicializarFormulario() {
     this.seLanzoBusqueda = false
-    this.estadoSeleccionado = []
+    this.estadoSeleccionado = ''
     this.resultados = undefined
     this.usuarioBusqueda = new UsuarioBusqueda()
   }
@@ -89,20 +89,41 @@ export class AdministrarUsuariosComponent implements OnInit {
   }
 
   formularioVacio() {
-    return !this.usuarioBusqueda.cantidad_minima_tasaciones && !this.usuarioBusqueda.fecha_desde_alta && !this.usuarioBusqueda.fecha_desde_modificacion && this.estadoSeleccionado.length == 0 
+    return !this.usuarioBusqueda.cantidad_minima_tasaciones && !this.usuarioBusqueda.fecha_desde_alta && !this.usuarioBusqueda.fecha_desde_modificacion && this.usuarioBusqueda.estado_usuario == ''
   }
 
   async buscar() {
 
     this.cargando = true
 
-    if (!this.usuarioBusqueda.fecha_desde_alta) {
-      this.usuarioBusqueda.fecha_desde_alta = new Date()
+    if(!this.estadoSeleccionado){
+      this.usuarioBusqueda.estado_usuario = ''
+    } else 
+    {
+      this.usuarioBusqueda.estado_usuario = this.estadoSeleccionado
     }
-    if (!this.usuarioBusqueda.fecha_desde_modificacion) {
-      this.usuarioBusqueda.fecha_desde_modificacion = new Date()
+
+    if (!this.fechaAlta) {
+      this.usuarioBusqueda.fecha_desde_alta = "1900-01-01"
+    } else {
+      this.usuarioBusqueda.fecha_desde_alta = this.fechaAlta.toString()
     }
-    this.resultados = await this.usuarioService.getUsers()
+    
+    if (!this.fechaModificacion) {
+      this.usuarioBusqueda.fecha_desde_modificacion = "1900-01-01"
+    } else {
+      this.usuarioBusqueda.fecha_desde_modificacion = this.fechaModificacion.toString()
+    }
+    
+    if (!this.cantidadTasaciones) {
+      this.usuarioBusqueda.cantidad_minima_tasaciones = 0
+    } else {
+      this.usuarioBusqueda.cantidad_minima_tasaciones = this.cantidadTasaciones
+    }
+
+    console.log(this.usuarioBusqueda)
+
+    this.resultados = await this.usuarioService.getUsers(this.usuarioBusqueda)
     this.seLanzoBusqueda = true
     setTimeout(() => {
       this.cargando = false

@@ -12,7 +12,7 @@
 
         <div class="col margen">
           <ng-select #select (keypress)="cambiarSeleccion(select)" notFoundText="No se encontro el barrio" name="estados"
-            [virtualScroll]="true" [items]="estados" [multiple]="true" [closeOnSelect]="true" [searchable]="true"
+            [virtualScroll]="true" [items]="estados" [multiple]="false" [closeOnSelect]="true" [searchable]="true"
              placeholder="Estado" [(ngModel)]="estadoSeleccionado">
           </ng-select>
         </div>
@@ -23,7 +23,7 @@
       <div class="col">
         <div style="margin-bottom: 1rem;" class="md-form" [formGroup]="validatingForm">
           <input [max]="fecha_maxima" formControlName="fecha" name="fecha_desde"
-            [(ngModel)]="usuarioBusqueda.fecha_desde_alta" type="date" id="input_fecha_alta_usuarios" class="form-control"
+            [(ngModel)]="fechaAlta" type="date" id="input_fecha_alta_usuarios" class="form-control"
             mdbValidate mdbInput>
           <label for="input_fecha_alta_usuarios">Fecha de Alta</label>
           <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
@@ -32,7 +32,7 @@
       <div class="col">
         <div style="margin-bottom: 1rem;" class="md-form" [formGroup]="validatingForm">
             <input [max]="fecha_maxima" formControlName="fecha" name="fecha_desde"
-              [(ngModel)]="usuarioBusqueda.fecha_desde_modificacion" type="date" id="input_fecha_modificacion_usuario" class="form-control"
+              [(ngModel)]="fechaModificacion" type="date" id="input_fecha_modificacion_usuario" class="form-control"
               mdbValidate mdbInput>
             <label for="input_fecha_modificacion_usuario">Fecha de modificación</label>
             <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
@@ -40,7 +40,7 @@
         </div>
         <div class="col">
             <div [formGroup]="validatingForm" class="md-form">
-              <input class="form-control" formControlName="tasaciones" type="number" mdbInput mdbValidate min="0" [(ngModel)]="usuarioBusqueda.cantidad_minima_tasaciones" id="cantidad_minima_tasaciones">
+              <input class="form-control" formControlName="tasaciones" type="number" mdbInput mdbValidate min="0" [(ngModel)]="cantidadTasaciones" id="cantidad_minima_tasaciones">
               <label style="font-size: 0.8rem;" for="cantidad_minima_tasaciones">Cantidad mínima de tasaciones</label>
               <mdb-error *ngIf="tasacionesInvalida()">Cantidad inválida</mdb-error>
               <mdb-success *ngIf="!tasacionesInvalida()"></mdb-success>

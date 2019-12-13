@@ -4,6 +4,7 @@ import { REST_SERVER_URL } from './configuration';
 import { Http } from '@angular/http';
 import { Tasacion } from '../dominio/tasacion';
 import { TasacionBusqueda } from '../dominio/tasacion_busqueda';
+import { UsuarioBusqueda } from '../dominio/usuario_busqueda';
 
 export interface IUsuarioService {
   userLogin(username: string, password: string)
@@ -64,8 +65,8 @@ export class UsuarioService implements IUsuarioService {
     return resp.json().map(Tasacion.fromJson)
   }
 
-  async getUsers() {
-    const url = REST_SERVER_URL + "/administracion"
+  async getUsers(usuarioBusqueda: UsuarioBusqueda) {
+    const url = REST_SERVER_URL + "/administracion?estado=" + usuarioBusqueda.estado_usuario + '&cant_tasaciones=' + usuarioBusqueda.cantidad_minima_tasaciones + '&fecha_alta=' + usuarioBusqueda.fecha_desde_alta + '&fecha_modificacion=' + usuarioBusqueda.fecha_desde_modificacion
     let json: any = {}
     const resp = await this.http.get(url, json).toPromise()
     return resp.json().map(Usuario.fromJson)
