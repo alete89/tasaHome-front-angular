@@ -1,0 +1,106 @@
+<mdb-card>
+
+  <mdb-card-header style="background-color: #101357;" class="white-text text-center py-4">
+    <h5>
+      <strong class="grande">Administración de usuarios</strong>
+    </h5>
+  </mdb-card-header>
+
+  <mdb-card-body class="px-lg-5 pt-0">
+    <form class="text-center" style="color: #757575;">
+      <div style="margin-bottom: 1rem;margin-top: 1rem;" class="form-row">
+
+        <div class="col margen">
+          <ng-select #select (keypress)="cambiarSeleccion(select)" notFoundText="No se encontro el barrio" name="estados"
+            [virtualScroll]="true" [items]="estados" [multiple]="true" [closeOnSelect]="true" [searchable]="true"
+             placeholder="Estado" [(ngModel)]="estadoSeleccionado">
+          </ng-select>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1rem;margin-top: 1rem;" class="form-row">
+
+      <div class="col">
+        <div style="margin-bottom: 1rem;" class="md-form" [formGroup]="validatingForm">
+          <input [max]="fecha_maxima" formControlName="fecha" name="fecha_desde"
+            [(ngModel)]="usuarioBusqueda.fecha_desde_alta" type="date" id="input_fecha_alta_usuarios" class="form-control"
+            mdbValidate mdbInput>
+          <label for="input_fecha_alta_usuarios">Fecha de Alta</label>
+          <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
+        </div>
+      </div>
+      <div class="col">
+        <div style="margin-bottom: 1rem;" class="md-form" [formGroup]="validatingForm">
+            <input [max]="fecha_maxima" formControlName="fecha" name="fecha_desde"
+              [(ngModel)]="usuarioBusqueda.fecha_desde_modificacion" type="date" id="input_fecha_modificacion_usuario" class="form-control"
+              mdbValidate mdbInput>
+            <label for="input_fecha_modificacion_usuario">Fecha de modificación</label>
+            <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
+          </div>
+        </div>
+        <div class="col">
+            <div [formGroup]="validatingForm" class="md-form">
+              <input class="form-control" formControlName="tasaciones" type="number" mdbInput mdbValidate min="0" [(ngModel)]="usuarioBusqueda.cantidad_minima_tasaciones" id="cantidad_minima_tasaciones">
+              <label style="font-size: 0.8rem;" for="cantidad_minima_tasaciones">Cantidad mínima de tasaciones</label>
+              <mdb-error *ngIf="tasacionesInvalida()">Cantidad inválida</mdb-error>
+              <mdb-success *ngIf="!tasacionesInvalida()"></mdb-success>
+            </div>
+          </div>
+      </div>
+      <div>
+        <button size="md" style="color: white;" [disabled]="noPuedeBuscar()" (click)="buscar()" mdbBtn gradient="blue"
+          outline="true" rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect
+          type="submit">Buscar</button>
+        <button size="md" [disabled]="formularioVacio()" (click)="nuevaBusqueda()" mdbBtn color="blue-grey"
+          rounded="true" class="my-4 waves-effect z-depth-0 buscar" mdbWavesEffect type="button">Nueva búsqueda</button>
+        <hr>
+      </div>
+    </form>
+
+
+  </mdb-card-body>
+
+  <div *ngIf="cargando" style="margin: auto;margin-top: 1rem;margin-bottom:1rem;"
+    class="spinner-border text-primary d-flex justify-content-center" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div *ngIf="resultados && resultados.length > 0 && !cargando"
+    class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+    <table class="table">
+      <thead>
+        <tr class="fondo-tr">
+          <th>USUARIO</th>
+          <th>ESTADO</th>
+          <th>FECHA DE ALTA</th>
+          <th>FECHA DE MODIFICACION</th>
+          <th>CANTIDAD DE TASACIONES</th>
+          <!-- <th>TIPO</th>
+          <th></th> -->
+        </tr>
+      </thead>
+      <tbody *ngFor="let resultado of resultados">
+        <tr>
+          <td *ngIf="resultado.email">{{ resultado.email }} </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <!-- <td *ngIf="resultado.barrio">{{ resultado.barrio.descripcion }}</td>
+          <td *ngIf="resultado.valor">{{ resultado.valor }} </td>
+          <td *ngIf="resultado.ambientes">{{ resultado.ambientes }}</td>
+          <td *ngIf="resultado.superficie">{{ resultado.superficie }}</td>
+          <td *ngIf="resultado.tipoDePropiedad">{{ resultado.tipoDePropiedad.descripcion }}</td>
+          <td *ngIf="resultado.usuario"><button [disabled]="modalContactarYaAbierto()"
+              (click)="openModalContactarUsuario(resultado.usuario)" class="contactar_usuario" mdbBtn type="button"
+              color="mdb-color" size="sm" mdbWavesEffect><strong>Contactar</strong></button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card" style="text-align: center;margin:3rem;color: white;background-color: black;"
+    *ngIf="seLanzoBusqueda && noHuboResultados() && !cargando">
+    <strong style="font-size: 2.5rem">No se usuarios que cumplan los criterios</strong>
+  </div>
+
+</mdb-card>

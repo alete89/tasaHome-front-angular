@@ -1,0 +1,39 @@
+.grande {
+    font-size: 2rem;
+}
+
+.margen {
+    margin-right: 2rem;
+}
+
+.buscar {
+    max-width: 14rem;
+    margin-top: 3rem;
+}
+
+.texto-centrado {
+    text-align: center;
+}
+
+th {
+    font-weight: bold;
+}
+
+.contactar_usuario {
+    display: block;
+    margin: auto;
+}
+
+.fondo-tr {
+    background-color: #7FDBFF;
+}
+
+.fondo-azul {
+    color: white;
+    background-color: #0074D9 !important;
+}
+
+.azul-hover:hover {
+    color: white;
+    background-color: #0074D9 !important;
+}
