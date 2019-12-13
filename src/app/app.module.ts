@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ActualizarTasacionComponent } from './componentes/actualizar-tasacion/actualizar-tasacion.component';
 import { ActualizarConfiguracionesComponent } from './componentes/actualizar-configuraciones/actualizar-configuraciones.component';
+import { AdministrarUsuariosComponent } from './componentes/administrar-usuarios/administrar-usuarios.component';
 import { BuscarTasacionesComponent } from './componentes/buscar-tasaciones/buscar-tasaciones.component';
 import { ContactarUsuarioComponent } from './componentes/contactar-usuario/contactar-usuario.component';
 import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zona.component';
@@ -38,6 +39,7 @@ import { NotFoundComponent } from './componentes/not-found/not-found.component';
       LoginComponent,
       NotificationsComponent,
       ActualizarConfiguracionesComponent,
+      AdministrarUsuariosComponent,
       TasacionesAnterioresComponent,
       RegistrarUsuarioComponent,
       DatosPorZonaComponent,

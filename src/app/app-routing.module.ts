@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ActualizarTasacionComponent } from './componentes/actualizar-tasacion/actualizar-tasacion.component';
 import { ActualizarConfiguracionesComponent } from './componentes/actualizar-configuraciones/actualizar-configuraciones.component';
+import { AdministrarUsuariosComponent } from './componentes/administrar-usuarios/administrar-usuarios.component';
 import { BuscarTasacionesComponent } from './componentes/buscar-tasaciones/buscar-tasaciones.component';
 import { ContactarUsuarioComponent } from './componentes/contactar-usuario/contactar-usuario.component';
 import { DatosPorZonaComponent } from './componentes/datos-por-zona/datos-por-zona.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LogueadoGuard] },
   { path: 'tasaciones-anteriores', component: TasacionesAnterioresComponent, canActivate: [AuthGuard] },
   { path: 'actualizar-configuraciones', component: ActualizarConfiguracionesComponent, canActivate: [AuthGuard] },
+  { path: 'administrar-usuarios', component: AdministrarUsuariosComponent, canActivate: [AuthGuard] },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent, canActivate: [LogueadoGuard] },
   { path: 'datos-por-zona', component: DatosPorZonaComponent },
   { path: 'tasar-propiedad', component: TasarPropiedadComponent, canActivate: [AuthGuard] },
