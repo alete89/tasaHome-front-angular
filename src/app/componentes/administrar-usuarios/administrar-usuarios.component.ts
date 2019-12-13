@@ -102,13 +102,7 @@ export class AdministrarUsuariosComponent implements OnInit {
     if (!this.usuarioBusqueda.fecha_desde_modificacion) {
       this.usuarioBusqueda.fecha_desde_modificacion = new Date()
     }
-    this.usuario = new Usuario()
-    this.usuario.nombre = "Fran"
-    this.usuario.apellido = "Repetto"
-    //this.usuario.estado = "ACTIVO"
-    this.usuario.email = "fran@gmail.com"
-    //this.usuario.cantidad_tasaciones = 18
-    this.resultados = [this.usuario] //await this.usuarioService.tasacionesSimilares(this.usuarioBusqueda)
+    this.resultados = await this.usuarioService.getUsers()
     this.seLanzoBusqueda = true
     setTimeout(() => {
       this.cargando = false

@@ -81,19 +81,10 @@
       <tbody *ngFor="let resultado of resultados">
         <tr>
           <td *ngIf="resultado.email">{{ resultado.email }} </td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <!-- <td *ngIf="resultado.barrio">{{ resultado.barrio.descripcion }}</td>
-          <td *ngIf="resultado.valor">{{ resultado.valor }} </td>
-          <td *ngIf="resultado.ambientes">{{ resultado.ambientes }}</td>
-          <td *ngIf="resultado.superficie">{{ resultado.superficie }}</td>
-          <td *ngIf="resultado.tipoDePropiedad">{{ resultado.tipoDePropiedad.descripcion }}</td>
-          <td *ngIf="resultado.usuario"><button [disabled]="modalContactarYaAbierto()"
-              (click)="openModalContactarUsuario(resultado.usuario)" class="contactar_usuario" mdbBtn type="button"
-              color="mdb-color" size="sm" mdbWavesEffect><strong>Contactar</strong></button>
-          </td> -->
+          <td *ngIf="resultado.estado">{{ resultado.estado }} </td>
+          <td *ngIf="resultado.fecha_alta">{{ resultado.fecha_alta  | date: 'dd/MM/yyyy'}} </td>
+          <td *ngIf="resultado.fecha_modificacion">{{ resultado.fecha_modificacion  | date: 'dd/MM/yyyy'}} </td>
+          <td *ngIf="resultado.cant_tasaciones">{{ resultado.cant_tasaciones }} </td>
         </tr>
       </tbody>
     </table>
