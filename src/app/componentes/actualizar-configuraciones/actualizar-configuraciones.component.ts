@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Tasacion } from 'src/app/dominio/tasacion';
-import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { Configuracion } from 'src/app/dominio/Configuracion';
+import { ConfiguracionService } from 'src/app/servicios/configuracion.service';
 import { Notification } from 'src/app/shared/notifications/notification';
 
 @Component({
@@ -11,35 +11,30 @@ import { Notification } from 'src/app/shared/notifications/notification';
 })
 export class ActualizarConfiguracionesComponent implements OnInit {
 
-  tasaciones: Array<Tasacion>
+  configuraciones: Array<Configuracion>
   notification: Notification = new Notification()
   cargando: boolean
 
 
-  constructor(private router: Router, private usuarioService: UsuarioService) {
+  constructor(private router: Router, private configuracionService: ConfiguracionService) {
     this.cargando = false
   }
 
   async ngOnInit() {
-    //this.traerTasaciones()
+    this.traerConfiguraciones()
     this.notification.cleanLoading()
   }
-/*
-  async traerTasaciones() {
+
+  async traerConfiguraciones() {
     try {
-      this.tasaciones = await this.usuarioService.tasacionesAnteriores()
+      this.configuraciones = await this.configuracionService.configuraciones()
       this.cargando = false
     } catch (error) {
       this.notification.showError(error)
     }
   }
 
-  hayTasacionesAnteriores() {
-    if (this.tasaciones) {
-      return this.tasaciones.length > 0
-    }
-  }
-
+/*
   irAActualizarTasacion(tasacion: Tasacion) {
     this.router.navigate(['/actualizar-tasacion', tasacion.id])
   }
