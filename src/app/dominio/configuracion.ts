@@ -1,6 +1,7 @@
 export class Configuracion {
 
     descripcion: string
+    dataset: string
     fecha_actualizacion: Date
 
     constructor(init?: Partial<Configuracion>) {

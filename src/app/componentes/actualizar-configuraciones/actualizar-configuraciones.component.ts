@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Configuracion } from 'src/app/dominio/Configuracion';
 import { ConfiguracionService } from 'src/app/servicios/configuracion.service';
@@ -34,11 +34,16 @@ export class ActualizarConfiguracionesComponent implements OnInit {
     }
   }
 
-/*
-  irAActualizarTasacion(tasacion: Tasacion) {
-    this.router.navigate(['/actualizar-tasacion', tasacion.id])
-  }
 
+  async actualizarConfiguracion(configuracion: Configuracion) {
+    try {
+      await this.configuracionService.actualizarConfiguraciones(configuracion)
+      this.traerConfiguraciones()
+    } catch (error) {
+      this.notification.showError(error)
+    }
+  }
+/*
   irAEvolucionDePrecios(tasacion: Tasacion) {
     if (tasacion.id) {
       this.router.navigate(['/evolucion-precios', tasacion.id])

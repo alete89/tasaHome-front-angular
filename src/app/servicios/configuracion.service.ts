@@ -17,6 +17,10 @@ export class ConfiguracionService {
     return resp.json().map(Configuracion.fromJson)
   }
 
+  async actualizarConfiguraciones(configuracion: Configuracion) {
+    const url = REST_SERVER_URL + "/configuracion/actualizar/" + configuracion.dataset 
+    const resp = await this.http.get(url).toPromise()
+  }
 
 }
 
