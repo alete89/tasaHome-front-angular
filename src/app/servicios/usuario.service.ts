@@ -17,6 +17,8 @@ export class UsuarioService implements IUsuarioService {
 
   constructor(private http: Http) { }
 
+    esAdmin: boolean
+
   async userLogin(email: string, password: string) {
     const url = REST_SERVER_URL + "/login"
     let json: any = {}
@@ -25,14 +27,18 @@ export class UsuarioService implements IUsuarioService {
     const resp = await this.http.post(url, json).toPromise()
     const usuario: Usuario = Usuario.fromJson(resp.json())
     localStorage.setItem("userLoggedInId", String(usuario.id));
+    this.esAdmin = usuario.esAdmin
     return usuario
   }
 
   async tasacionesAnteriores() {
     const url = REST_SERVER_URL + "/tasaciones_anteriores/" + this.userLoggedInId()
     const resp = await this.http.get(url).toPromise()
-
     return resp.json().map(Tasacion.fromJson)
+  }
+
+  esAdministrador() {
+    return this.estaLogueado() && this.esAdmin
   }
 
   estaLogueado() {

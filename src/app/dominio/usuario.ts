@@ -22,6 +22,8 @@ export class Usuario {
 
     token_recuperacion: string
 
+    esAdmin: boolean
+
     constructor(init?: Partial<Usuario>) {
         Object.assign(this, init)
     }

@@ -24,6 +24,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  esAdministrador(){
+    return this.usuarioService.esAdministrador()
+  }
+
   estaLogueado() {
     return this.usuarioService.estaLogueado()
   }
