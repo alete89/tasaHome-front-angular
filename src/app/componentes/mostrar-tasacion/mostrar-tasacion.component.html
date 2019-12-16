@@ -3,9 +3,9 @@
     <div>
       <div style="text-align: center;font-size: 4rem;">
         <strong *ngIf="tasacion.tipoDeOperacion.id == 1" style="color:white;">Valor: U$S
-          {{tasacion.valor | number}}</strong>
+          {{tasacion.valor | number:'1.0-0'}}</strong>
         <strong *ngIf="tasacion.tipoDeOperacion.id == 2" style="color:white;">Valor: AR$
-          {{tasacion.valor | number}}</strong>
+          {{tasacion.valor | number:'1.0-0'}}</strong>
       </div>
       <div class="botonera" style="text-align: center;">
         <button [disabled]="yaGuardo" mdbTooltip="Guardar tasación" placement="bottom" (click)="guardar()" mdbBtn
