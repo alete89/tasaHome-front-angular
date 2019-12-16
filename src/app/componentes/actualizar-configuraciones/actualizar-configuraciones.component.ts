@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Configuracion } from 'src/app/dominio/Configuracion';
+import { Configuracion } from 'src/app/dominio/configuracion';
 import { ConfiguracionService } from 'src/app/servicios/configuracion.service';
 import { Notification } from 'src/app/shared/notifications/notification';
 
