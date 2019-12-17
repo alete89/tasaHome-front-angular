@@ -81,19 +81,24 @@ export class TasacionService {
     let jsonData: any = {}
     let latitudCasted = latitud.toString()
     let longitudCasted = longitud.toString()
-    const urlEscuelas = "http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=cuc_establecimientos_educativos&radio=500"
+    console.log(latitudCasted)
+    console.log(longitudCasted)
+    const urlEscuelas = "https://cors-anywhere.herokuapp.com/http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=cuc_establecimientos_educativos&radio=500" 
+    // const urlEscuelas = "http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=cuc_establecimientos_educativos&radio=500"
     const respEscuelas = await this.http.get(urlEscuelas).toPromise()
     jsonData.escuelas = respEscuelas.json().totalFull
 
-    const urlEspaciosVerdes = "http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=espacios_verdes_publicos&radio=500"
+    console.log(jsonData.escuelas)
+
+    const urlEspaciosVerdes = "https://cors-anywhere.herokuapp.com/http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=espacios_verdes_publicos&radio=500"
     const respEspaciosVerdes = await this.http.get(urlEspaciosVerdes).toPromise()
     jsonData.espacios_verdes = respEspaciosVerdes.json().totalFull
 
-    const urlHospitales = "http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=centros_de_salud_y_accion_comunitaria,hospitales_de_ninos,hospitales_especializados,hospitales_generales_de_agudos&radio=500"
+    const urlHospitales = "https://cors-anywhere.herokuapp.com/http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=centros_de_salud_y_accion_comunitaria,hospitales_de_ninos,hospitales_especializados,hospitales_generales_de_agudos&radio=500"
     const respHospitales = await this.http.get(urlHospitales).toPromise()
     jsonData.hospitales = respHospitales.json().totalFull
 
-    const urlComisarias = "http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=comisarias&radio=500"
+    const urlComisarias = "https://cors-anywhere.herokuapp.com/http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=comisarias&radio=500"
     const respComisarias = await this.http.get(urlComisarias).toPromise()
     jsonData.comisarias = respComisarias.json().totalFull
 
