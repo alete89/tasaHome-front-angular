@@ -64,9 +64,9 @@ export class BuscarTasacionesComponent implements OnInit {
 
   inicializarValidaciones() {
     this.validatingForm = new FormGroup({
-      superficie: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(15), Validators.max(2000)]),
-      ambientes: new FormControl(null, [Validators.required, Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(15)]),
-      fecha: new FormControl(null, [Validators.required]),
+      superficie: new FormControl(null, [Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(15), Validators.max(2000)]),
+      ambientes: new FormControl(null, [Validators.pattern(/^-?[0-9][^\.]*$/), Validators.min(1), Validators.max(15)]),
+      fecha: new FormControl(),
     })
   }
 
@@ -112,9 +112,6 @@ export class BuscarTasacionesComponent implements OnInit {
     }
     if (this.tipoDePropiedad) {
       this.tasacionBusqueda.id_tipo_propiedad = this.tipoDePropiedad.id
-    }
-    if (!this.tasacionBusqueda.fecha_desde) {
-      this.tasacionBusqueda.fecha_desde = new Date()
     }
     this.resultados = await this.usuarioService.tasacionesSimilares(this.tasacionBusqueda)
     this.seLanzoBusqueda = true
