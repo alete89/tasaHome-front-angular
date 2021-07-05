@@ -48,9 +48,9 @@ export class EvolucionPreciosComponent implements OnInit {
     console.log(this.historialTasacion)
     let historial_precios = this.historialTasacion.map(tasacion => tasacion.valor)
     let fechas = this.historialTasacion.map(tasacion => this.moment(tasacion.fecha).format('DD/MM/YYYY HH:MM'))
+    console.log(historial_precios)
     this.chartDatasets = [
       { data: historial_precios, label: 'Precio' },
-      // { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
     ];
     this.chartLabels = fechas
     let ultima_tasacion = this.historialTasacion[this.historialTasacion.length - 1]

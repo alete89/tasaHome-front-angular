@@ -180,11 +180,7 @@ export class MapaComponent implements OnInit {
   }
 
   seleccionarOpcion(opcion: string) {
-    this.cargando = true
-    setTimeout(() => {
-      this.opcion = opcion
-      this.cargando = false
-    }, 350);
+    this.opcion = opcion
   }
 
   buscarBarrio(components: any) {
@@ -211,6 +207,7 @@ export class MapaComponent implements OnInit {
       this.errores = []
       // console.log(this.direccion)
     } catch (error) {
+      console.error(error)
       this.errores.push(error)
     }
   }
@@ -242,6 +239,7 @@ export class MapaComponent implements OnInit {
         this.errores = []
       }
     } catch (error) {
+      console.error(error)
       this.errores.push(error)
     }
   }

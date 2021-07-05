@@ -1,6 +1,5 @@
 <!-- Material form register -->
 <mdb-card class="card-registro">
-
   <mdb-card-header class="info-color-dark white-text text-center py-4">
     <h5>
       <strong class="grande">Crear cuenta</strong>
@@ -10,13 +9,22 @@
   <!--Card content-->
   <mdb-card-body class="px-lg-5 pt-0">
     <!-- Form -->
-    <form class="text-center" style="color: #757575;">
-      <div style="margin-top: 0.5rem;" class="form-row">
+    <form class="text-center" style="color: #757575">
+      <div style="margin-top: 0.5rem" class="form-row">
         <div class="col margen">
           <!-- First name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
-            <input #focusThis name="nombre" formControlName="nombreForm" [(ngModel)]="usuario.nombre" type="text"
-              id="materialRegisterFormFirstName" class="form-control" mdbValidate mdbInput>
+            <input
+              #focusThis
+              name="nombre"
+              formControlName="nombreForm"
+              [(ngModel)]="usuario.nombre"
+              type="text"
+              id="materialRegisterFormFirstName"
+              class="form-control"
+              mdbValidate
+              mdbInput
+            />
             <label for="materialRegisterFormFirstName">Nombre</label>
             <mdb-error *ngIf="nombreInvalido()">Nombre inválido</mdb-error>
           </div>
@@ -24,8 +32,16 @@
         <div class="col">
           <!-- Last name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
-            <input name="apellido" formControlName="apellidoForm" [(ngModel)]="usuario.apellido" type="text"
-              id="materialRegisterFormLastName" class="form-control" mdbValidate mdbInput>
+            <input
+              name="apellido"
+              formControlName="apellidoForm"
+              [(ngModel)]="usuario.apellido"
+              type="text"
+              id="materialRegisterFormLastName"
+              class="form-control"
+              mdbValidate
+              mdbInput
+            />
             <label for="materialRegisterFormLastName">Apellido</label>
             <mdb-error *ngIf="apellidoInvalido()">Apellido inválido</mdb-error>
           </div>
@@ -33,91 +49,201 @@
       </div>
 
       <div class="form-row">
-        <div style="text-align: left;" class="col margen">
-          <p style="text-align: left;">Género</p>
+        <div style="text-align: left" class="col margen">
+          <p style="text-align: left">Género</p>
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn mdbWavesEffect
-              [ngClass]="{ 'fondo-azul': usuario.genero == 'Masculino'}" (click)="seleccionarGenero('Masculino')"
-              type="button" size="md" class="btn btn-white color-hover">Masculino</button>
-            <button style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn mdbWavesEffect
-              [ngClass]="{ 'fondo-azul': usuario.genero == 'Femenino'}" (click)="seleccionarGenero('Femenino')"
-              type="button" size="md" class="btn btn-white color-hover">Femenino</button>
-            <button rounded="true" outline="true" mdbBtn mdbWavesEffect
-              [ngClass]="{ 'fondo-azul': usuario.genero == 'Otro'}" (click)="seleccionarGenero('Otro')" type="button"
-              size="md" class="btn btn-white color-hover">Otro</button>
+            <button
+              style="margin-right: 1rem"
+              rounded="true"
+              outline="true"
+              mdbBtn
+              mdbWavesEffect
+              [ngClass]="{ 'fondo-azul': usuario.genero == 'Masculino' }"
+              (click)="seleccionarGenero('Masculino')"
+              type="button"
+              size="md"
+              class="btn btn-white color-hover"
+            >
+              Masculino
+            </button>
+            <button
+              style="margin-right: 1rem"
+              rounded="true"
+              outline="true"
+              mdbBtn
+              mdbWavesEffect
+              [ngClass]="{ 'fondo-azul': usuario.genero == 'Femenino' }"
+              (click)="seleccionarGenero('Femenino')"
+              type="button"
+              size="md"
+              class="btn btn-white color-hover"
+            >
+              Femenino
+            </button>
+            <button
+              rounded="true"
+              outline="true"
+              mdbBtn
+              mdbWavesEffect
+              [ngClass]="{ 'fondo-azul': usuario.genero == 'Otro' }"
+              (click)="seleccionarGenero('Otro')"
+              type="button"
+              size="md"
+              class="btn btn-white color-hover"
+            >
+              Otro
+            </button>
           </div>
         </div>
         <div class="col">
-          <div style="margin-top: 2rem;" class="md-form" [formGroup]="camposValidatingForm">
-            <input formControlName="fechaForm" [max]="fecha_maxima" name="fecha_nacimiento"
-              [(ngModel)]="usuario.fecha_nacimiento" type="date" id="input_fecha_registro" class="form-control"
-              mdbValidate mdbInput>
+          <div
+            style="margin-top: 2rem"
+            class="md-form"
+            [formGroup]="camposValidatingForm"
+          >
+            <input
+              formControlName="fechaForm"
+              [max]="fecha_maxima"
+              name="fecha_nacimiento"
+              [(ngModel)]="usuario.fecha_nacimiento"
+              type="date"
+              id="input_fecha_registro"
+              class="form-control"
+              mdbValidate
+              mdbInput
+            />
             <label for="input_fecha_registro">Fecha de nacimiento</label>
-            <mdb-error *ngIf="esMenorDeEdad()">Debe ser mayor de edad</mdb-error>
+            <mdb-error *ngIf="esMenorDeEdad()"
+              >Debe tener más de 18 años</mdb-error
+            >
+            <mdb-error *ngIf="superaEdadMaxima()">Edad inválida</mdb-error>
             <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
           </div>
         </div>
       </div>
 
-      <div style="margin-top:0rem;margin-bottom:3rem;" class="md-form" [formGroup]="camposValidatingForm">
+      <div
+        style="margin-top: 0rem; margin-bottom: 3rem"
+        class="md-form"
+        [formGroup]="camposValidatingForm"
+      >
         <!-- <label>Enter address</label> -->
-        <input formControlName="direccionForm" style="margin-right: 1rem;" [(ngModel)]="usuario.direccion" type="text"
-          class="form-control" placeholder="Dirección" autocorrect="off" autocapitalize="off" spellcheck="off"
-          type="text" #search id="direccion_registro" name="direccion_registro" mdbInput>
+
+        <input
+          formControlName="direccionForm"
+          style="margin-right: 1rem"
+          [(ngModel)]="usuario.direccion"
+          type="text"
+          class="form-control"
+          placeholder="Dirección"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="off"
+          type="text"
+          #search
+          id="direccion_registro"
+          name="direccion_registro"
+          mdbInput
+        />
         <mdb-error *ngIf="direccionNotieneNumeros()">
-          La dirección debe ser concreta
+          La dirección debe incluir la altura
         </mdb-error>
         <mdb-error *ngIf="noUsoAutoComplete()">
           Debe ingresar una dirección usando el autocompletar
         </mdb-error>
-
       </div>
 
       <!-- E-mail -->
-      <div style="margin-bottom: 3.5rem;" class="md-form mt-0" [formGroup]="camposValidatingForm">
-        <input formControlName="emailForm" [(ngModel)]="usuario.email" name="email_registro" type="email"
-          id="email_registro" class="form-control" mdbValidate mdbInput>
+      <div
+        style="margin-bottom: 3.5rem"
+        class="md-form mt-0"
+        [formGroup]="camposValidatingForm"
+      >
+        <input
+          formControlName="emailForm"
+          [(ngModel)]="usuario.email"
+          name="email_registro"
+          type="email"
+          id="email_registro"
+          class="form-control"
+          mdbValidate
+          mdbInput
+        />
         <label for="email_registro">E-mail</label>
         <mdb-error *ngIf="emailInvalido()">Email Inválido</mdb-error>
-
       </div>
 
       <!-- Password -->
       <div class="md-form" [formGroup]="camposValidatingForm">
-        <input formControlName="passwordForm" [(ngModel)]="usuario.contrasenia" name="password_registro" type="password"
-          id="password_registro" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock"
-          mdbValidate mdbInput>
+        <input
+          formControlName="passwordForm"
+          [(ngModel)]="usuario.contrasenia"
+          name="password_registro"
+          type="password"
+          id="password_registro"
+          class="form-control"
+          aria-describedby="materialRegisterFormPasswordHelpBlock"
+          mdbValidate
+          mdbInput
+        />
         <label for="password_registro">Contraseña</label>
         <mdb-error *ngIf="passwordInvalido()">Contraseña inválida</mdb-error>
         <small id=" password_registroHelp" class="form-text text-muted mb-4">
-          Al menos 8 caracteres
+          entre 8 y 72 caracteres
         </small>
       </div>
       <div class="md-form" [formGroup]="camposValidatingForm">
-        <input formControlName="confirmacionPasswordForm" [(ngModel)]="confirmacion_contrasenia"
-          name="confirmacion_password" type="password" class="form-control" id="confirmar_password_registro"
-          aria-describedby="materialRegisterFormPasswordHelpBlock" mdbValidate mdbInput>
+        <input
+          formControlName="confirmacionPasswordForm"
+          [(ngModel)]="confirmacion_contrasenia"
+          name="confirmacion_password"
+          type="password"
+          class="form-control"
+          id="confirmar_password_registro"
+          aria-describedby="materialRegisterFormPasswordHelpBlock"
+          mdbValidate
+          mdbInput
+        />
         <label for="confirmar_password_registro">Confirmar</label>
-        <mdb-error *ngIf="confirmacionPasswordInvalido()">Contraseña inválida</mdb-error>
-        <mdb-error class="errorContraseñas" *ngIf="contraseniasNoCoinciden()">Las contraseñas deben coincidir
+        <mdb-error *ngIf="confirmacionPasswordInvalido()"
+          >Contraseña inválida</mdb-error
+        >
+        <mdb-error class="errorContraseñas" *ngIf="contraseniasNoCoinciden()"
+          >Las contraseñas deben coincidir
         </mdb-error>
       </div>
 
       <!-- Sign up button -->
       <div>
-
-        <button [disabled]="formularioVacio()" (click)="limpiarFormulario()" mdbBtn color="danger" rounded="true"
-          class="my-4 waves-effect z-depth-0 aceptar" mdbWavesEffect type="button">Limpiar formulario</button>
-        <button [disabled]="hayErrores()" (click)="aceptar()" mdbBtn color="success" rounded="true"
-          class="my-4 waves-effect z-depth-0 aceptar " mdbWavesEffect type="submit">Aceptar</button>
-        <hr>
+        <button
+          (click)="limpiarFormulario()"
+          mdbBtn
+          color="danger"
+          rounded="true"
+          class="my-4 waves-effect z-depth-0 aceptar"
+          mdbWavesEffect
+          type="button"
+        >
+          Limpiar formulario
+        </button>
+        <button
+          [disabled]="hayErrores()"
+          (click)="aceptar()"
+          mdbBtn
+          color="success"
+          rounded="true"
+          class="my-4 waves-effect z-depth-0 aceptar"
+          mdbWavesEffect
+          type="submit"
+        >
+          Aceptar
+        </button>
       </div>
     </form>
     <!-- Form -->
   </mdb-card-body>
-  <div *ngIf="notification" class="notification" style="height: 3rem; ">
-    <app-notifications [notification]="notification">
-    </app-notifications>
+  <div *ngIf="notification" class="notification">
+    <app-notifications [notification]="notification"> </app-notifications>
   </div>
 </mdb-card>
 <!-- Material form register -->

@@ -1,7 +1,7 @@
 <!-- Material form register -->
 <mdb-card class="card" style="margin: auto;max-width:40rem;">
 
-  <mdb-card-header class="registro default-color-dark white-text text-center py-4">
+  <mdb-card-header class="header white-text text-center py-4">
     <h5>
       <strong class="grande">Datos por {{titulo}}</strong>
     </h5>
@@ -55,7 +55,7 @@
           [(ngModel)]="tasacionService.direccion" (focus)="openModalMapa()" name="direccion_datos_por_zona" type="text"
           class="form-control" id="direccion_datos_por_zona" mdbInput>
         <div>
-          <button style="margin-top: 1rem;" [disabled]="noPuedeBuscar()" mdbBtn color="success" mdbWavesLight
+          <button style="margin-top: 1rem;" [disabled]="noPuedeBuscar()" mdbBtn color="elegant" mdbWavesLight
             (click)="traerDatosBarrioPorNombre()" type="submit">
             Buscar
           </button>

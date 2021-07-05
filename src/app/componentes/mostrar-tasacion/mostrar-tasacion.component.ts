@@ -22,7 +22,6 @@ export class MostrarTasacionComponent implements OnInit {
 
   ngOnInit() {
     this.notification.cleanLoading()
-
   }
 
   async guardar() {
@@ -32,7 +31,8 @@ export class MostrarTasacionComponent implements OnInit {
       this.yaGuardo = true
     } catch (error) {
       let mensaje = JSON.parse(error._body).message
-      this.notification.popUpMessage(mensaje, "danger", 1500)    }
+      this.notification.popUpMessage(mensaje, "danger", 1500)
+    }
   }
 
   publicar() {
@@ -55,7 +55,7 @@ export class MostrarTasacionComponent implements OnInit {
     this.modalMostrarTasacion.hide()
   }
 
-  modalAbierto(){
+  modalAbierto() {
     return this.modalService.getModalsCount() > 1
   }
 

@@ -23,15 +23,6 @@
     margin-bottom: 3rem;
 }
 
-.notification {
-    z-index: 9999;
-    top: 0;
-    right: 0;
-    margin-top: 2rem;
-    margin-right: 2rem;
-    position: fixed;
-}
-
 .fondo-azul {
     color: white;
     background-color: #0074D9 !important;

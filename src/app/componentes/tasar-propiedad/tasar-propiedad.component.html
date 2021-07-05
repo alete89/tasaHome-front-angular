@@ -1,88 +1,178 @@
-<form class="card fondo_tasar" style="margin:auto; width: 45rem;">
-  <mdb-card-header class="blue-gradient white-text text-center py-4">
+<form class="card fondo_tasar" style="margin: auto; width: 45rem">
+  <mdb-card-header class="header white-text text-center py-4">
     <h5>
-      <strong style="font-size: 2rem;">{{titulo}}</strong>
+      <strong style="font-size: 2rem">{{ titulo }}</strong>
     </h5>
   </mdb-card-header>
-  <div style="margin-left: 2rem; margin-right:3rem; margin-top: 1rem;margin-bottom: 1rem;" class="md-form">
-    <input [disabled]="modalTasarYaAbierto()" [(ngModel)]="tasacionService.direccion" (focus)="openModalMapa()"
-      name="direccion_tasar" type="text" class="form-control" id="direccion_tasar" mdbValidate mdbInput>
+  <div
+    style="
+      margin-left: 2rem;
+      margin-right: 3rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    "
+    class="md-form"
+  >
+    <input
+      [disabled]="modalTasarYaAbierto()"
+      [(ngModel)]="tasacionService.direccion"
+      (focus)="openModalMapa()"
+      name="direccion_tasar"
+      type="text"
+      class="form-control"
+      id="direccion_tasar"
+      mdbValidate
+      mdbInput
+    />
     <label for="direccion_tasar">Dirección</label>
     <mdb-error *ngIf="direccionInvalida()">Direccion inválida</mdb-error>
   </div>
-  <!-- <div style="margin-left: 3rem;">
-    <div style="margin-bottom: 3rem;width: 30rem;" class="md-form">
-      <input name="direccion_tasar" [(ngModel)]="tasacion.direccion" type="text" id="direccion_tasar"
-        class="form-control" mdbInput>
-      <label for="direccion_tasar">Dirección</label>
-    </div> -->
-
-  <!-- <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM
-    &q=UNSAM+Buenos+Aires" allowfullscreen>
-        </iframe> -->
-  <!-- </div> -->
-  <div style="margin-left: 2rem; margin-bottom: 1rem;width: 40rem;" class="form-row">
+  <div
+    style="margin-left: 2rem; margin-bottom: 1rem; width: 40rem"
+    class="form-row"
+  >
     <div class="col margen">
       <div [formGroup]="validatingForm" class="md-form">
-        <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="15" mdbInput
-          max="2000" id="superficie_tasar" [(ngModel)]="tasacion.superficie">
+        <input
+          class="form-control"
+          formControlName="superficie"
+          type="number"
+          mdbInput
+          mdbValidate
+          min="15"
+          mdbInput
+          max="2000"
+          id="superficie_tasar"
+          [(ngModel)]="tasacion.superficie"
+        />
         <label for="superficie_tasar">Superficie</label>
-        <mdb-error *ngIf="superficieInvalida()">Superficie incorrecta</mdb-error>
+        <mdb-error *ngIf="superficieInvalida()"
+          >Debe ingresar un valor entre 15 y 2000</mdb-error
+        >
         <mdb-success *ngIf="!superficieInvalida()"></mdb-success>
       </div>
     </div>
     <div class="col margen">
       <p>Tipo de propiedad</p>
-      <select style="width: 10rem;" name="tipoDePropiedad" [(ngModel)]="tasacion.tipoDePropiedad.id"
-        class="browser-default custom-select">
-        <option *ngFor="let tipo of tiposDePropiedad" [value]="tipo.id">{{tipo.descripcion}}</option>
+      <select
+        style="width: 10rem"
+        name="tipoDePropiedad"
+        [(ngModel)]="tasacion.tipoDePropiedad.id"
+        class="browser-default custom-select"
+      >
+        <option *ngFor="let tipo of tiposDePropiedad" [value]="tipo.id">
+          {{ tipo.descripcion }}
+        </option>
       </select>
     </div>
-    <div class="row" style="margin-top: 3rem;">
+    <div class="row" style="margin-top: 3rem">
       <div *ngFor="let tipo of tiposDeOperacion">
         <div class="custom-control custom-radio custom-control-inline">
-          <input [(ngModel)]="tasacion.tipoDeOperacion.id" name="tipoDeOperacion{{tipo.id}}" [value]="tipo.id"
-            type="radio" class="custom-control-input" id="defaultInline1_{{tipo.id}}" mdbInput>
-          <label class="custom-control-label" for="defaultInline1_{{tipo.id}}">{{tipo.descripcion}}</label>
+          <input
+            [(ngModel)]="tasacion.tipoDeOperacion.id"
+            name="tipoDeOperacion{{ tipo.id }}"
+            [value]="tipo.id"
+            type="radio"
+            class="custom-control-input"
+            id="defaultInline1_{{ tipo.id }}"
+            mdbInput
+          />
+          <label
+            class="custom-control-label"
+            for="defaultInline1_{{ tipo.id }}"
+            >{{ tipo.descripcion }}</label
+          >
         </div>
       </div>
     </div>
   </div>
-  <div style="margin-left: 2rem;margin-bottom: 1rem;width: 40rem;" class="form-row">
+  <div
+    style="margin-left: 2rem; margin-bottom: 1rem; width: 40rem"
+    class="form-row"
+  >
     <div class="col margen">
       <div [formGroup]="validatingForm" class="md-form form-sm">
-        <input class="form-control form-control-sm" id="ambientes_tasar" formControlName="ambientes" type="number"
-          mdbInput mdbValidate min="1" mdbInput max="15" [(ngModel)]="tasacion.ambientes">
-        <label style="font-size: 1rem;" for="ambientes_tasar">Cantidad ambientes</label>
-        <mdb-error *ngIf="ambientesInvalidos()">Cantidad de ambientes incorrecta</mdb-error>
+        <input
+          class="form-control form-control-sm"
+          id="ambientes_tasar"
+          formControlName="ambientes"
+          type="number"
+          mdbInput
+          mdbValidate
+          min="1"
+          mdbInput
+          max="15"
+          [(ngModel)]="tasacion.ambientes"
+        />
+        <label style="font-size: 1rem" for="ambientes_tasar"
+          >Cantidad ambientes</label
+        >
+        <mdb-error *ngIf="ambientesInvalidos()"
+          >Debe ingresar un valor entre 1 y 15</mdb-error
+        >
         <mdb-success *ngIf="!ambientesInvalidos()"></mdb-success>
       </div>
     </div>
     <div class="col margen">
       <p>Estado General</p>
-      <select style="width: 10rem;" name="estado" [(ngModel)]="tasacion.estado.id"
-        class="browser-default custom-select">
-        <option *ngFor="let estado of estados" [value]="estado.id">{{estado.descripcion}}</option>
+      <select
+        style="width: 10rem"
+        name="estado"
+        [(ngModel)]="tasacion.estado.id"
+        class="browser-default custom-select"
+      >
+        <option *ngFor="let estado of estados" [value]="estado.id">
+          {{ estado.descripcion }}
+        </option>
       </select>
     </div>
     <div class="row">
       <div>
-        <input [disabled]="true" style="border-style:none;background-color: white;">
+        <input
+          [disabled]="true"
+          style="border-style: none; background-color: white"
+        />
       </div>
     </div>
   </div>
   <!-- Default unchecked -->
   <!-- <p>Servicios</p> -->
-  <div style="margin-left:2.4rem;margin-bottom: 1rem;width: 40rem;" class="form-row">
-    <div style="margin-right: 1rem;" *ngFor="let servicio of servicios">
-      <mdb-checkbox [(ngModel)]="servicio.chequeado" name="servicio.chequeado" [default]="true">
-        {{servicio.descripcion}}</mdb-checkbox>
+  <div
+    style="margin-left: 2.4rem; margin-bottom: 1rem; width: 40rem"
+    class="form-row"
+  >
+    <div style="margin-right: 1rem" *ngFor="let servicio of servicios">
+      <mdb-checkbox
+        [(ngModel)]="servicio.chequeado"
+        name="servicio.chequeado"
+        [default]="true"
+      >
+        {{ servicio.descripcion }}</mdb-checkbox
+      >
     </div>
   </div>
-  <button [disabled]="noPuedeTasar()" (click)="openModalTasacion()" mdbBtn color="cyan" rounded="true"
-    class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">{{titulo_boton}}</button>
-  <div *ngIf="cargando" style="margin: auto;margin-top: 1rem;margin-bottom:1rem;"
-    class="spinner-border text-primary d-flex justify-content-center" role="status">
+  <button
+    [disabled]="noPuedeTasar()"
+    (click)="openModalTasacion()"
+    mdbBtn
+    color="black"
+    rounded="true"
+    class="my-4 waves-effect z-depth-0 buscar"
+    mdbWavesEffect
+    type="submit"
+  >
+    {{ titulo_boton }}
+  </button>
+  <div
+    *ngIf="cargando"
+    style="margin: auto; margin-top: 1rem; margin-bottom: 1rem"
+    class="spinner-border text-primary d-flex justify-content-center"
+    role="status"
+  >
     <span class="sr-only">Loading...</span>
   </div>
 </form>
+
+<div class="notification">
+  <app-notifications [notification]="notification"> </app-notifications>
+</div>

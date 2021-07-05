@@ -8,9 +8,9 @@ export class TasacionBusqueda {
 
     fecha_desde: Date
 
-    ids_barrios: Array<number> = [-1]
+    ids_barrios: Array<number> = []
 
-    id_tipo_propiedad: number = -1
+    id_tipo_propiedad: number
 
     id_tipo_operacion: number
 

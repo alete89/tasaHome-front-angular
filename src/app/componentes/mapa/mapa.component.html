@@ -11,7 +11,7 @@
 </div>
 <form style="width: 50rem; margin: auto;">
   <div style="background-color: #263238; padding-bottom: 1rem;" class="container">
-    <div class="row d-flex flex-center " style="background-color: #3E4551;padding-top: 1rem;padding-bottom: 1rem;">
+    <div class="row d-flex flex-center " style="padding-top: 1rem;padding-bottom: 1rem;">
       <!-- <div class="col"> -->
       <!-- <div class=" form-group"> -->
       <div>
@@ -50,7 +50,7 @@
           <mdb-icon fas icon="times"></mdb-icon>
         </button>
       </div>
-      <!-- <div class="notifications" style="height: 3rem; ">
+      <!-- <div class="notification" style="height: 3rem; ">
         <app-notifications [notification]="notification">
         </app-notifications>
       </div> -->
@@ -127,8 +127,8 @@
     </div>
 
     <div>
-      <div *ngIf="esHome() " style="text-align: center;margin-top: 3rem;padding:1rem;background-color: #59698d ;"
-        class="card ">
+      <div *ngIf="esHome()" style="text-align: center;margin-top: 2rem;padding:1rem"
+        >
         <div class="btn-group" role="group" aria-label="Basic example">
           <button [disabled]="opcion == 'Escuelas'" style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn
             mdbWavesEffect [ngClass]="{ 'fondo-azul': opcion == 'Escuelas'}" (click)="seleccionarOpcion('Escuelas')"

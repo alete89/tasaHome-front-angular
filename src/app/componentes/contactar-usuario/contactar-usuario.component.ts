@@ -40,7 +40,6 @@ export class ContactarUsuarioComponent implements OnInit {
   async aceptar() {
     try {
       await this.mensajeService.enviarMensaje(this.id_emisor, this.email_receptor, this.mensaje)
-      this.notification.popUpMessage("Mensaje enviado.", "success", 1500)
       this.mensaje = undefined
       this.cerrarModal()
     } catch (error) {
@@ -49,10 +48,7 @@ export class ContactarUsuarioComponent implements OnInit {
   }
 
   cerrarModal() {
-    setTimeout(() => {
-      this.modalContactarUsuario.hide()
-    }, 1500)
+    this.modalContactarUsuario.hide()
   }
-
 
 }

@@ -107,6 +107,11 @@ export class RegistrarUsuarioComponent implements OnInit {
     return this.usuario.fecha_nacimiento > formateada
   }
 
+  superaEdadMaxima() {
+    let anios = this.moment().diff(this.usuario.fecha_nacimiento, 'years');
+    return anios > 100
+  }
+
   hayErrores() {
     return this.inputNombre.invalid
       || this.inputApellido.invalid
@@ -144,9 +149,6 @@ export class RegistrarUsuarioComponent implements OnInit {
       await this.usuarioService.registrarUsuario(this.usuario)
       this.notification.popUpMessage("Usuario registrado.", "success", 2500)
       this.limpiarFormulario()
-      setTimeout(() => {
-        this.router.navigate(['/home'])
-      }, 2500)
     } catch (error) {
       console.log(error)
       this.notification.showError(error)
@@ -169,8 +171,8 @@ export class RegistrarUsuarioComponent implements OnInit {
       //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
       emailForm: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
       fechaForm: new FormControl(null, [Validators.required]),
-      passwordForm: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-      confirmacionPasswordForm: new FormControl(null, [Validators.required, Validators.minLength(8)])
+      passwordForm: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(72)]),
+      confirmacionPasswordForm: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(72)])
     })
   }
 
@@ -187,10 +189,6 @@ export class RegistrarUsuarioComponent implements OnInit {
       scrollOffset: 99,
       duration: 300,
     });
-  }
-
-  formularioVacio() {
-    return !this.usuario.nombre && !this.usuario.apellido && !this.usuario.genero && !this.usuario.fecha_nacimiento && !this.usuario.direccion && !this.usuario.email && !this.usuario.contrasenia && !this.confirmacion_contrasenia
   }
 
   seleccionarGenero(genero: string) {

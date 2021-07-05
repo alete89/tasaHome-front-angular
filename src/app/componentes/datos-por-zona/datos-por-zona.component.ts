@@ -68,22 +68,13 @@ export class DatosPorZonaComponent implements OnInit {
     this.datos = undefined
     if (this.zona) {
       this.datos = await this.zonaService.datosBarrio(this.zona.id)
-      this.esperar()
     }
-  }
-
-  esperar() {
-    this.cargando = true
-    setTimeout(() => {
-      this.cargando = false
-    }, 350);
   }
 
   async traerDatosComuna() {
     this.datos = undefined
     if (this.zona) {
       this.datos = await this.zonaService.datosComuna(this.zona.id)
-      this.esperar()
     }
   }
 
@@ -100,9 +91,7 @@ export class DatosPorZonaComponent implements OnInit {
     this.cargando = true
     let coordenadas = await this.googleMapsService.getLatLongFromStringAddress(this.direccion)
     this.datos = await this.tasacionService.datosBarrioPorNombre(coordenadas.lng, coordenadas.lat)
-    setTimeout(async () => {
-      this.cargando = false
-    }, 10);
+    this.cargando = false
   }
 
   cambioDireccion() {

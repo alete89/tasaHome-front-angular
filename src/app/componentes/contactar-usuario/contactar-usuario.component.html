@@ -14,9 +14,8 @@
       mdbWavesEffect type="button">Cancelar</button>
     <button [disabled]=!mensaje (click)="aceptar()" mdbBtn color="success" rounded="true"
       class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect type="submit">Aceptar</button>
-    <hr>
   </div>
-  <div class="notifications" style="height: 3rem; ">
+  <div class="notification">
     <app-notifications [notification]="notification">
     </app-notifications>
   </div>

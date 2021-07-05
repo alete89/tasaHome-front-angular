@@ -11,8 +11,8 @@
 
     <button class="recuperar_contrasenia" [disabled]="noPusoEmail() || deshabilitarBoton" mdbBtn type="button" gradient="blue" rounded="true"
       block="true" (click)="recuperarContrasenia()">Recuperar contraseña</button>
-    <div style="margin-top: 1rem;height: 1rem;;">
-      <app-notifications class="notifications" [notification]="notification"></app-notifications>
+    <div class="notification-default">
+      <app-notifications [notification]="notification"></app-notifications>
     </div>
   </form>
 </div>

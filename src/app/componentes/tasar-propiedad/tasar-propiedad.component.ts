@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Notification } from 'src/app/shared/notifications/notification';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Estado } from 'src/app/dominio/estado';
 import { Servicio } from 'src/app/dominio/servicio';
@@ -28,6 +29,7 @@ export class TasarPropiedadComponent implements OnInit {
   validatingForm: FormGroup
   modalTasacion: MDBModalRef;
   modalMapa: MDBModalRef;
+  notification: Notification = new Notification()
   @Input() titulo: string
   @Input() titulo_boton: string
   @Input() esActualizacion: boolean
@@ -64,6 +66,7 @@ export class TasarPropiedadComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.notification.cleanLoading()
     this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
     this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
     this.estados = await this.estadoService.estados()
@@ -89,6 +92,7 @@ export class TasarPropiedadComponent implements OnInit {
   async tasar() {
     let servicios_seleccionados = this.servicios.filter(servicio => servicio.chequeado)
     this.tasacion.servicios = servicios_seleccionados
+    this.tasacion.direccion = "dada"
     this.tasacion.valor = await this.tasacionService.tasarPropiedad(this.tasacion)
   }
 
@@ -98,17 +102,17 @@ export class TasarPropiedadComponent implements OnInit {
   }
 
   camposInvalidos() {
-    return this.superficieInvalida() || this.ambientesInvalidos() || this.direccionInvalida()
+    return this.superficieInvalida() || this.ambientesInvalidos()
   }
 
   formularioIncompleto() {
-    return !this.tasacionService.direccion || !this.tasacion.superficie || !this.tasacion.tipoDePropiedad.id || !this.tasacion.tipoDeOperacion.id || !this.tasacion.ambientes || !this.tasacion.estado.id
+    return !this.tasacion.superficie || !this.tasacion.tipoDePropiedad.id || !this.tasacion.tipoDeOperacion.id || !this.tasacion.ambientes || !this.tasacion.estado.id
   }
 
   async openModalTasacion() {
-    await this.tasar()
-    this.cargando = true
-    setTimeout(() => {
+    try {
+      this.cargando = true
+      await this.tasar()
       this.cargando = false
       this.modalTasacion = this.modalService.show(MostrarTasacionComponent, {
         backdrop: true,
@@ -123,7 +127,11 @@ export class TasarPropiedadComponent implements OnInit {
           tasacion: this.tasacion
         }
       });
-    }, 1000);
+    } catch (error) {
+      console.error(error)
+      let mensaje = JSON.parse(error._body).message
+      this.notification.popUpMessage(mensaje, "danger", 1500)
+    }
   }
 
   async openModalMapa() {

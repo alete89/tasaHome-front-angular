@@ -11,6 +11,7 @@ import { Zona } from 'src/app/dominio/zona';
 import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { ZonaService } from 'src/app/servicios/zona.service';
+import { Notification } from 'src/app/shared/notifications/notification';
 import { ContactarUsuarioComponent } from '../contactar-usuario/contactar-usuario.component';
 declare var require: any
 @Component({
@@ -35,9 +36,11 @@ export class BuscarTasacionesComponent implements OnInit {
   model: Date
   myDatePickerOptions: any
   cargando: boolean = false
+  notification: Notification = new Notification()
 
 
   constructor(private router: Router, public modalService: MDBModalService, public modalBuscarTasaciones: MDBModalRef, private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
+    this.notification.cleanLoading()
   }
 
   get inputSuperficie() { return this.validatingForm.get('superficie') }
@@ -105,20 +108,20 @@ export class BuscarTasacionesComponent implements OnInit {
 
   async buscar() {
     // console.log(this.tasacionBusqueda)
-
-    this.cargando = true
-    if (this.barriosSeleccionados.length > 0) {
-      this.tasacionBusqueda.ids_barrios = this.barriosSeleccionados.map(barrio => barrio.id)
-    }
-    if (this.tipoDePropiedad) {
-      this.tasacionBusqueda.id_tipo_propiedad = this.tipoDePropiedad.id
-    }
-    this.resultados = await this.usuarioService.tasacionesSimilares(this.tasacionBusqueda)
-    this.seLanzoBusqueda = true
-    setTimeout(() => {
+    try {
+      this.cargando = true
+      this.tasacionBusqueda.ids_barrios = this.barriosSeleccionados.length > 0 ? this.barriosSeleccionados.map(barrio => barrio.id) : []
+      if (this.tipoDePropiedad) {
+        this.tasacionBusqueda.id_tipo_propiedad = this.tipoDePropiedad.id
+      }
+      this.resultados = await this.usuarioService.tasacionesSimilares(this.tasacionBusqueda)
+      this.seLanzoBusqueda = true
+    } catch (error) {
+      console.error(error)
+      this.notification.showError(error)
+    } finally {
       this.cargando = false
-    }, 350);
-
+    }
   }
 
   noHuboResultados() {
@@ -140,6 +143,10 @@ export class BuscarTasacionesComponent implements OnInit {
       containerClass: 'right',
       animated: true,
     })
+
+    this.modalService.close.subscribe(() => this.notification.popUpMessage("Mensaje enviado.", "success", 3000)
+    );
+
   }
 
   modalContactarYaAbierto() {

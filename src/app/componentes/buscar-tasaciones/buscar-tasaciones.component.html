@@ -1,38 +1,73 @@
-<mdb-card>
-
-  <mdb-card-header style="background-color: #101357;" class="white-text text-center py-4">
+<mdb-card style="margin: auto; width: 45rem">
+  <mdb-card-header class="header white-text text-center py-4">
     <h5>
       <strong class="grande">Buscar tasaciones similares</strong>
     </h5>
   </mdb-card-header>
 
   <mdb-card-body class="px-lg-5 pt-0">
-    <form class="text-center" style="color: #757575;">
-      <div style="margin-bottom: 1rem;margin-top: 1rem;" class="form-row">
-
+    <form class="text-center" style="color: #757575">
+      <div style="margin-bottom: 1rem; margin-top: 1rem" class="form-row">
         <div class="col margen">
-          <ng-select #select (keypress)="cambiarSeleccion(select)" notFoundText="No se encontro el barrio" name="barrio"
-            [virtualScroll]="true" [items]="barrios" [multiple]="true" [closeOnSelect]="true" [searchable]="true"
-            bindLabel="descripcion" placeholder="Barrios" [(ngModel)]="barriosSeleccionados">
+          <ng-select
+            #select
+            (keypress)="cambiarSeleccion(select)"
+            notFoundText="No se encontro el barrio"
+            name="barrio"
+            [virtualScroll]="true"
+            [items]="barrios"
+            [multiple]="true"
+            [closeOnSelect]="true"
+            [searchable]="true"
+            bindLabel="descripcion"
+            placeholder="Barrios"
+            [(ngModel)]="barriosSeleccionados"
+          >
           </ng-select>
         </div>
         <div class="col margen">
-          <ng-select #select (keypress)="cambiarSeleccion(select)" notFoundText="No se encontro el tipo de propiedad"
-            name="tipoDePropiedad" [virtualScroll]="true" [items]="tiposDePropiedad" [multiple]="false"
-            [closeOnSelect]="true" [searchable]="true" bindLabel="descripcion" placeholder="Tipos de propiedad"
-            [(ngModel)]="tipoDePropiedad">
+          <ng-select
+            #select
+            (keypress)="cambiarSeleccion(select)"
+            notFoundText="No se encontro el tipo de propiedad"
+            name="tipoDePropiedad"
+            [virtualScroll]="true"
+            [items]="tiposDePropiedad"
+            [multiple]="false"
+            [closeOnSelect]="true"
+            [searchable]="true"
+            bindLabel="descripcion"
+            placeholder="Tipos de propiedad"
+            [(ngModel)]="tipoDePropiedad"
+          >
           </ng-select>
         </div>
       </div>
       <!-- <p style="text-align: left;">Tipo de operación</p> -->
-      <div style="margin-bottom: 1rem;" class="form-row">
-        <div style="text-align: left;" class="btn-group" role="group" aria-label="Basic example">
+      <div style="margin-bottom: 1rem" class="form-row">
+        <div
+          style="text-align: left"
+          class="btn-group"
+          role="group"
+          aria-label="Basic example"
+        >
           <div *ngFor="let tipo of tiposDeOperacion">
-            <div style="text-align: left;" class="col ">
-              <button rounded="true" outline="true" mdbBtn mdbWavesEffect
-                [ngClass]="{ 'fondo-azul': tasacionBusqueda.id_tipo_operacion == tipo.id}"
-                (click)="seleccionarTipoDeOperacion(tipo)" type="button" size="md"
-                class="btn btn-white azul-hover">{{tipo.descripcion}}</button>
+            <div style="text-align: left" class="col">
+              <button
+                rounded="true"
+                outline="true"
+                mdbBtn
+                mdbWavesEffect
+                [ngClass]="{
+                  'fondo-azul': tasacionBusqueda.id_tipo_operacion == tipo.id
+                }"
+                (click)="seleccionarTipoDeOperacion(tipo)"
+                type="button"
+                size="md"
+                class="btn btn-white azul-hover"
+              >
+                {{ tipo.descripcion }}
+              </button>
             </div>
             <!-- <select name="genero" [(ngModel)]="usuario.genero" class="browser-default custom-select">
                       <option value="Femenino">Femenino</option>
@@ -48,61 +83,127 @@
         </div>
       </div>
 
-      <div style="margin-bottom: 1rem;" class="form-row">
+      <div style="margin-bottom: 1rem" class="form-row">
         <div class="col">
           <div [formGroup]="validatingForm" class="md-form">
-            <input class="form-control" formControlName="ambientes" type="number" mdbInput mdbValidate min="1" mdbInput
-              max="15" [(ngModel)]="tasacionBusqueda.ambientes_minimos" id="cantidad_ambientes_min_buscar_tasaciones">
-            <label style="font-size: 0.8rem;" for="cantidad_ambientes_min_buscar_tasaciones">Cantidad mínima de
-              ambientes</label>
-            <mdb-error *ngIf="ambientesInvalidos()">Cantidad de ambientes incorrecta</mdb-error>
+            <input
+              class="form-control"
+              formControlName="ambientes"
+              type="number"
+              mdbInput
+              mdbValidate
+              min="1"
+              mdbInput
+              max="15"
+              [(ngModel)]="tasacionBusqueda.ambientes_minimos"
+              id="cantidad_ambientes_min_buscar_tasaciones"
+            />
+            <label
+              style="font-size: 0.8rem"
+              for="cantidad_ambientes_min_buscar_tasaciones"
+              >Cantidad mínima de ambientes</label
+            >
+            <mdb-error *ngIf="ambientesInvalidos()"
+              >Debe ingresar un valor entre 1 y 15</mdb-error
+            >
             <mdb-success *ngIf="!ambientesInvalidos()"></mdb-success>
           </div>
         </div>
         <div class="col">
           <div [formGroup]="validatingForm" class="md-form">
-            <input class="form-control" formControlName="superficie" type="number" mdbInput mdbValidate min="5" mdbInput
-              max="2000" [(ngModel)]="tasacionBusqueda.superficie_minima" id="superficie_minima_buscar_tasacion">
-            <label style="font-size: 0.8rem;" for="superficie_minima_buscar_tasacion">Superficie mínima</label>
-            <mdb-error *ngIf="superficieInvalida()">Superficie incorrecta</mdb-error>
+            <input
+              class="form-control"
+              formControlName="superficie"
+              type="number"
+              mdbInput
+              mdbValidate
+              min="5"
+              mdbInput
+              max="2000"
+              [(ngModel)]="tasacionBusqueda.superficie_minima"
+              id="superficie_minima_buscar_tasacion"
+            />
+            <label
+              style="font-size: 0.8rem"
+              for="superficie_minima_buscar_tasacion"
+              >Superficie mínima</label
+            >
+            <mdb-error *ngIf="superficieInvalida()"
+              >Debe ingresar un valor entre 15 y 2000</mdb-error
+            >
             <mdb-success *ngIf="!superficieInvalida()"></mdb-success>
           </div>
         </div>
       </div>
 
-      <div style="margin-bottom: 1rem;" class="md-form" [formGroup]="validatingForm">
+      <div
+        style="margin-bottom: 1rem"
+        class="md-form"
+        [formGroup]="validatingForm"
+      >
         <!-- <input formControlName="fechaForm" [max]="fecha_maxima" name="fecha_nacimiento"
             [(ngModel)]="usuario.fecha_nacimiento" type="date" id="input_fecha_registro" class="form-control"
             mdbValidate mdbInput>
           <label for="input_fecha_registro">Fecha de nacimiento</label>
           <mdb-error *ngIf="esMenorDeEdad()">Debe ser mayor de edad</mdb-error>
           <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error> -->
-        <input [max]="fecha_maxima" formControlName="fecha" name="fecha_desde"
-          [(ngModel)]="tasacionBusqueda.fecha_desde" type="date" id="input_fecha_buscar_tasaciones" class="form-control"
-          mdbValidate mdbInput>
+        <input
+          [max]="fecha_maxima"
+          formControlName="fecha"
+          name="fecha_desde"
+          [(ngModel)]="tasacionBusqueda.fecha_desde"
+          type="date"
+          id="input_fecha_buscar_tasaciones"
+          class="form-control"
+          mdbValidate
+          mdbInput
+        />
         <label for="input_fecha_buscar_tasaciones">Fecha desde</label>
         <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
       </div>
 
       <div>
-        <button size="md" style="color: white;" [disabled]="noPuedeBuscar()" (click)="buscar()" mdbBtn gradient="blue"
-          outline="true" rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect
-          type="submit">Buscar</button>
-        <button size="md" (click)="nuevaBusqueda()" mdbBtn color="blue-grey" rounded="true"
-          class="my-4 waves-effect z-depth-0 buscar" mdbWavesEffect type="button">Nueva búsqueda</button>
-        <hr>
+        <button
+          size="md"
+          style="color: white"
+          [disabled]="noPuedeBuscar()"
+          (click)="buscar()"
+          mdbBtn
+          rounded="true"
+          class="button-primary my-4 waves-effect z-depth-0 buscar"
+          mdbWavesEffect
+          type="submit"
+        >
+          Buscar
+        </button>
+        <button
+          size="md"
+          (click)="nuevaBusqueda()"
+          color="blue-grey"
+          mdbBtn
+          rounded="true"
+          class="my-4 waves-effect z-depth-0 buscar"
+          mdbWavesEffect
+          type="button"
+        >
+          Nueva búsqueda
+        </button>
       </div>
     </form>
-
-
   </mdb-card-body>
 
-  <div *ngIf="cargando" style="margin: auto;margin-top: 1rem;margin-bottom:1rem;"
-    class="spinner-border text-primary d-flex justify-content-center" role="status">
+  <div
+    *ngIf="cargando"
+    style="margin: auto; margin-top: 1rem; margin-bottom: 1rem"
+    class="spinner-border text-primary d-flex justify-content-center"
+    role="status"
+  >
     <span class="sr-only">Loading...</span>
   </div>
-  <div *ngIf="resultados && resultados.length > 0 && !cargando"
-    class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
+  <div
+    *ngIf="resultados && resultados.length > 0 && !cargando"
+    class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado"
+  >
     <table class="table">
       <thead>
         <tr class="fondo-tr">
@@ -117,22 +218,44 @@
       </thead>
       <tbody *ngFor="let resultado of resultados">
         <tr>
-          <td *ngIf="resultado.fecha">{{ resultado.fecha  | date: 'dd/MM/yyyy'}} </td>
+          <td *ngIf="resultado.fecha">
+            {{ resultado.fecha | date: "dd/MM/yyyy" }}
+          </td>
           <td *ngIf="resultado.barrio">{{ resultado.barrio.descripcion }}</td>
-          <td *ngIf="resultado.valor">{{ resultado.valor }} </td>
+          <td *ngIf="resultado.valor">{{ resultado.valor }}</td>
           <td *ngIf="resultado.ambientes">{{ resultado.ambientes }}</td>
           <td *ngIf="resultado.superficie">{{ resultado.superficie }}</td>
-          <td *ngIf="resultado.tipoDePropiedad">{{ resultado.tipoDePropiedad.descripcion }}</td>
-          <td *ngIf="resultado.usuario"><button [disabled]="modalContactarYaAbierto()"
-              (click)="openModalContactarUsuario(resultado.usuario)" class="contactar_usuario" mdbBtn type="button"
-              color="mdb-color" size="sm" mdbWavesEffect><strong>Contactar</strong></button>
+          <td *ngIf="resultado.tipoDePropiedad">
+            {{ resultado.tipoDePropiedad.descripcion }}
+          </td>
+          <td *ngIf="resultado.usuario">
+            <button
+              [disabled]="modalContactarYaAbierto()"
+              (click)="openModalContactarUsuario(resultado.usuario)"
+              class="contactar_usuario"
+              mdbBtn
+              type="button"
+              color="mdb-color"
+              size="sm"
+              mdbWavesEffect
+            >
+              <strong>Contactar</strong>
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div style="text-align: center;margin:3rem;" *ngIf="seLanzoBusqueda && noHuboResultados() && !cargando">
-    <strong style="font-size: 2.5rem">No se encontraron tasaciones similares</strong>
+  <div
+    style="text-align: center; margin: 3rem"
+    *ngIf="seLanzoBusqueda && noHuboResultados() && !cargando"
+  >
+    <strong style="font-size: 2.5rem"
+      >No se encontraron tasaciones similares</strong
+    >
   </div>
-
 </mdb-card>
+
+<div *ngIf="notification" class="notification">
+  <app-notifications [notification]="notification"> </app-notifications>
+</div>

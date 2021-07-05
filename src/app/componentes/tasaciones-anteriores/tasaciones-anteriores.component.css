@@ -1,8 +1,6 @@
 .tasaciones {
-    font-weight: bold;
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
-    color: white;
 }
 
 .card {
@@ -26,8 +24,6 @@ th {
 }
 
 .tasaciones {
-    color: white;
-    background-color: #59698d;
 }
 
 .spinner {

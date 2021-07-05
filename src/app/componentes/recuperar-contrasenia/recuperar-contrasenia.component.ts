@@ -68,7 +68,7 @@ export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
   cerrarModal() {
     setTimeout(() => {
       this.modalRecuperarContrasenia.hide()
-    }, 1500)
+    }, 2500)
   }
 
   noPusoEmail() {

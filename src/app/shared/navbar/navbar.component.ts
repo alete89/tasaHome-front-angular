@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  esAdministrador(){
+  esAdministrador() {
     return this.usuarioService.esAdministrador()
   }
 
@@ -57,16 +57,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openModalBuscarTasaciones() {
-    this.modalBuscarTasaciones = this.modalService.show(BuscarTasacionesComponent, {
-      backdrop: true,
-      keyboard: true,
-      focus: true,
-      show: false,
-      ignoreBackdropClick: false,
-      class: 'modal-dialog modal-lg',
-      containerClass: 'right',
-      animated: true
-    });
+    this.router.navigate(['/buscar-tasaciones'])
   }
 
   modalLoginYaAbierto() {

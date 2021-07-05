@@ -96,10 +96,9 @@ export class AdministrarUsuariosComponent implements OnInit {
 
     this.cargando = true
 
-    if(!this.estadoSeleccionado){
+    if (!this.estadoSeleccionado) {
       this.usuarioBusqueda.estado_usuario = ''
-    } else 
-    {
+    } else {
       this.usuarioBusqueda.estado_usuario = this.estadoSeleccionado
     }
 
@@ -108,13 +107,13 @@ export class AdministrarUsuariosComponent implements OnInit {
     } else {
       this.usuarioBusqueda.fecha_desde_alta = this.fechaAlta.toString()
     }
-    
+
     if (!this.fechaModificacion) {
       this.usuarioBusqueda.fecha_desde_modificacion = "1900-01-01"
     } else {
       this.usuarioBusqueda.fecha_desde_modificacion = this.fechaModificacion.toString()
     }
-    
+
     if (!this.cantidadTasaciones) {
       this.usuarioBusqueda.cantidad_minima_tasaciones = 0
     } else {
@@ -125,10 +124,7 @@ export class AdministrarUsuariosComponent implements OnInit {
 
     this.resultados = await this.usuarioService.getUsers(this.usuarioBusqueda)
     this.seLanzoBusqueda = true
-    setTimeout(() => {
-      this.cargando = false
-    }, 350);
-
+    this.cargando = false
   }
 
   noHuboResultados() {
@@ -152,12 +148,12 @@ export class AdministrarUsuariosComponent implements OnInit {
     })
   }*/
 
-/*  modalContactarYaAbierto() {
-    return this.modalService.getModalsCount() == 2
-  }
-
-  seleccionarTipoDeOperacion(tipoDeOperacion: TipoOperacion) {
-    this.tasacionBusqueda.id_tipo_operacion = tipoDeOperacion.id
-  }*/
+  /*  modalContactarYaAbierto() {
+      return this.modalService.getModalsCount() == 2
+    }
+  
+    seleccionarTipoDeOperacion(tipoDeOperacion: TipoOperacion) {
+      this.tasacionBusqueda.id_tipo_operacion = tipoDeOperacion.id
+    }*/
 
 }
