@@ -22,7 +22,6 @@ export class TasacionesAnterioresComponent implements OnInit {
 
   async ngOnInit() {
     this.traerTasaciones()
-    this.notification.cleanLoading()
   }
 
   async traerTasaciones() {

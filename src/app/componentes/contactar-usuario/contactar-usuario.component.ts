@@ -21,7 +21,6 @@ export class ContactarUsuarioComponent implements OnInit {
   constructor(public modalContactarUsuario: MDBModalRef, private mensajeService: MensajeService) { }
 
   ngOnInit() {
-    this.notification.cleanLoading()
   }
 
   cancelar() {

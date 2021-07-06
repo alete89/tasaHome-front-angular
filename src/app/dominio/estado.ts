@@ -7,7 +7,7 @@ export class Estado {
         Object.assign(this, init)
     }
 
-    static fromJson(estadoJson: string) {
+    static fromJson(estadoJson) {
         return Object.assign(new Estado(), estadoJson)
     }
 

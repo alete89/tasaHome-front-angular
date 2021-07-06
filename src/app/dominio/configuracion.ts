@@ -8,7 +8,7 @@ export class Configuracion {
         Object.assign(this, init)
     }
 
-    static fromJson(estadoJson: string) {
+    static fromJson(estadoJson) {
         return Object.assign(new Configuracion(), estadoJson)
     }
 

@@ -47,8 +47,6 @@ export class LoginComponent implements OnInit, AfterViewInit, AfterContentInit {
       email: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
       password: new FormControl(null, [Validators.required])
     })
-    this.notification.cleanLoading()
-
   }
 
   get inputEmail() { return this.validatingForm.get('email'); }
@@ -80,7 +78,6 @@ export class LoginComponent implements OnInit, AfterViewInit, AfterContentInit {
       }
     }
     catch (error) {
-      let mensaje = JSON.parse(error._body).message
       this.notification.showError(error)
     }
   }

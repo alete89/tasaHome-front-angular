@@ -1,5 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Servicio } from '../dominio/servicio';
 import { REST_SERVER_URL } from './configuration';
 
@@ -9,14 +9,13 @@ import { REST_SERVER_URL } from './configuration';
 
 export class ServicioService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   async servicios() {
     const url = REST_SERVER_URL + "/servicios"
-    const resp = await this.http.get(url).toPromise()
-    return resp.json().map(Servicio.fromJson)
+    const resp = await this.http.get<Servicio[]>(url).toPromise()
+    return resp.map(Servicio.fromJson)
   }
-
 
 }
 

@@ -34,7 +34,7 @@ export class Usuario {
         // }
     }
 
-    static fromJson(usuarioJson: string) {
+    static fromJson(usuarioJson) {
         return Object.assign(new Usuario(), usuarioJson)
     }
 }

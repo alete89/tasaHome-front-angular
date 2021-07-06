@@ -29,6 +29,7 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { RecuperarContraseniaComponent } from './componentes/recuperar-contrasenia/recuperar-contrasenia.component';
 import { RestablecerContraseniaComponent } from './componentes/restablecer-contrasenia/restablecer-contrasenia.component';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
+import { HttpClientModule } from '@angular/common/http';
 // import { SafePipe } from './shared/pipes/url_sanitizer';
 
 @NgModule({
@@ -60,6 +61,7 @@ import { NotFoundComponent } from './componentes/not-found/not-found.component';
       BrowserModule,
       AppRoutingModule,
       HttpModule,
+      HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
       MDBBootstrapModule.forRoot(),

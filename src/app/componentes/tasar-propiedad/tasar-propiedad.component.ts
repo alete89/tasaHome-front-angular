@@ -66,17 +66,20 @@ export class TasarPropiedadComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.notification.cleanLoading()
-    this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
-    this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
-    this.estados = await this.estadoService.estados()
-    this.servicios = await this.servicioService.servicios()
-    if (this.esActualizacion) {
-      this.tasacionService.setDireccionYBarrio(this.tasacion.direccion, this.tasacion.barrio)
-    } else {
-      this.tasacionService.direccion = undefined
+    try {
+      this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
+      this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
+      this.estados = await this.estadoService.estados()
+      this.servicios = await this.servicioService.servicios()
+      if (this.esActualizacion) {
+        this.tasacionService.setDireccionYBarrio(this.tasacion.direccion, this.tasacion.barrio)
+      } else {
+        this.tasacionService.direccion = undefined
+      }
+      this.chequearServicios()
+    } catch (error) {
+      this.notification.showError(error)
     }
-    this.chequearServicios()
   }
 
   chequearServicios() {
@@ -113,7 +116,6 @@ export class TasarPropiedadComponent implements OnInit {
     try {
       this.cargando = true
       await this.tasar()
-      this.cargando = false
       this.modalTasacion = this.modalService.show(MostrarTasacionComponent, {
         backdrop: true,
         keyboard: true,
@@ -128,9 +130,11 @@ export class TasarPropiedadComponent implements OnInit {
         }
       });
     } catch (error) {
-      console.error(error)
-      let mensaje = JSON.parse(error._body).message
-      this.notification.popUpMessage(mensaje, "danger", 1500)
+      this.notification.showError(error)
+      // let mensaje = JSON.parse(error.error).message
+      // this.notification.popUpMessage(mensaje, "danger", 1500)
+    } finally {
+      this.cargando = false
     }
   }
 

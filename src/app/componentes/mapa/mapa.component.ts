@@ -213,14 +213,17 @@ export class MapaComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.notification.cleanLoading()
-    this.inicializarMapa()
-    this.map.zoom = 16
-    if (!this.esModal) {
-      this.escuelas = await this.lugarService.getEscuelas()
-      this.hospitales = await this.lugarService.getHospitales()
-      this.comisarias = await this.lugarService.getComisarias()
-      this.espacios_verdes = await this.lugarService.getEspaciosVerdes()
+    try {
+      this.inicializarMapa()
+      this.map.zoom = 16
+      if (!this.esModal) {
+        this.escuelas = await this.lugarService.getEscuelas()
+        this.hospitales = await this.lugarService.getHospitales()
+        this.comisarias = await this.lugarService.getComisarias()
+        this.espacios_verdes = await this.lugarService.getEspaciosVerdes()
+      }
+    } catch (error) {
+      this.notification.showError(error)
     }
   }
 
@@ -239,7 +242,6 @@ export class MapaComponent implements OnInit {
         this.errores = []
       }
     } catch (error) {
-      console.error(error)
       this.errores.push(error)
     }
   }

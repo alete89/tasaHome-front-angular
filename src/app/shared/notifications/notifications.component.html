@@ -4,7 +4,7 @@
   </div>
   <div style="background-color: #ff4444;color: white;" *ngIf="notification.error" class="alert alert-danger fade show"
     role="alert">
-    <strong style="margin-right: 1rem;">{{notification.error}}</strong>
+    <strong style="margin-right: 1rem;">{{notification.error.message}}</strong>
     <button style="color: white;" type="button" class="close" (click)="cleanError()">&times;</button>
   </div>
   <div *ngIf="notification.message" class="alert fade show" style="color:white"

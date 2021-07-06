@@ -12,6 +12,7 @@ import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { ZonaService } from 'src/app/servicios/zona.service';
 import { ContactarUsuarioComponent } from '../contactar-usuario/contactar-usuario.component';
+import { Notification } from 'src/app/shared/notifications/notification';
 declare var require: any
 @Component({
   selector: 'app-administrar-usuarios',
@@ -36,6 +37,7 @@ export class AdministrarUsuariosComponent implements OnInit {
   myDatePickerOptions: any
   cargando: boolean = false
 
+  notification: Notification = new Notification()
 
   constructor(private router: Router, public modalService: MDBModalService, public modalBuscarTasaciones: MDBModalRef, private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
   }
@@ -94,37 +96,41 @@ export class AdministrarUsuariosComponent implements OnInit {
 
   async buscar() {
 
-    this.cargando = true
+    try {
 
-    if (!this.estadoSeleccionado) {
-      this.usuarioBusqueda.estado_usuario = ''
-    } else {
-      this.usuarioBusqueda.estado_usuario = this.estadoSeleccionado
+      this.cargando = true
+
+      if (!this.estadoSeleccionado) {
+        this.usuarioBusqueda.estado_usuario = ''
+      } else {
+        this.usuarioBusqueda.estado_usuario = this.estadoSeleccionado
+      }
+
+      if (!this.fechaAlta) {
+        this.usuarioBusqueda.fecha_desde_alta = "1900-01-01"
+      } else {
+        this.usuarioBusqueda.fecha_desde_alta = this.fechaAlta.toString()
+      }
+
+      if (!this.fechaModificacion) {
+        this.usuarioBusqueda.fecha_desde_modificacion = "1900-01-01"
+      } else {
+        this.usuarioBusqueda.fecha_desde_modificacion = this.fechaModificacion.toString()
+      }
+
+      if (!this.cantidadTasaciones) {
+        this.usuarioBusqueda.cantidad_minima_tasaciones = 0
+      } else {
+        this.usuarioBusqueda.cantidad_minima_tasaciones = this.cantidadTasaciones
+      }
+
+      this.resultados = await this.usuarioService.getUsers(this.usuarioBusqueda)
+      this.seLanzoBusqueda = true
+    } catch (error) {
+      this.notification.showError(error)
+    } finally {
+      this.cargando = false
     }
-
-    if (!this.fechaAlta) {
-      this.usuarioBusqueda.fecha_desde_alta = "1900-01-01"
-    } else {
-      this.usuarioBusqueda.fecha_desde_alta = this.fechaAlta.toString()
-    }
-
-    if (!this.fechaModificacion) {
-      this.usuarioBusqueda.fecha_desde_modificacion = "1900-01-01"
-    } else {
-      this.usuarioBusqueda.fecha_desde_modificacion = this.fechaModificacion.toString()
-    }
-
-    if (!this.cantidadTasaciones) {
-      this.usuarioBusqueda.cantidad_minima_tasaciones = 0
-    } else {
-      this.usuarioBusqueda.cantidad_minima_tasaciones = this.cantidadTasaciones
-    }
-
-    console.log(this.usuarioBusqueda)
-
-    this.resultados = await this.usuarioService.getUsers(this.usuarioBusqueda)
-    this.seLanzoBusqueda = true
-    this.cargando = false
   }
 
   noHuboResultados() {

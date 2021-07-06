@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Estado } from '../dominio/estado';
@@ -9,12 +10,12 @@ import { REST_SERVER_URL } from './configuration';
 
 export class EstadoService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   async estados() {
     const url = REST_SERVER_URL + "/estados"
-    const resp = await this.http.get(url).toPromise()
-    return resp.json().map(Estado.fromJson)
+    const resp = await this.http.get<Estado[]>(url).toPromise()
+    return resp.map(Estado.fromJson)
   }
 
 

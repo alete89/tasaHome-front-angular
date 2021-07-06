@@ -21,7 +21,6 @@ export class MostrarTasacionComponent implements OnInit {
   constructor(private modalService: MDBModalService, private router: Router, private usuarioService: UsuarioService, private modalMostrarTasacion: MDBModalRef) { }
 
   ngOnInit() {
-    this.notification.cleanLoading()
   }
 
   async guardar() {
@@ -30,7 +29,7 @@ export class MostrarTasacionComponent implements OnInit {
       this.notification.popUpMessage("Tasación guardada.", "success", 1500)
       this.yaGuardo = true
     } catch (error) {
-      let mensaje = JSON.parse(error._body).message
+      let mensaje = JSON.parse(error.error).message
       this.notification.popUpMessage(mensaje, "danger", 1500)
     }
   }

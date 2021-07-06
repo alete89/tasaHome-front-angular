@@ -7,7 +7,7 @@ export class Zona {
         Object.assign(this, init)
     }
 
-    static fromJson(zonaJson: string) {
+    static fromJson(zonaJson) {
         return Object.assign(new Zona(), zonaJson)
     }
 

@@ -40,7 +40,6 @@ export class BuscarTasacionesComponent implements OnInit {
 
 
   constructor(private router: Router, public modalService: MDBModalService, public modalBuscarTasaciones: MDBModalRef, private zonaService: ZonaService, private tasacionService: TasacionService, private usuarioService: UsuarioService) {
-    this.notification.cleanLoading()
   }
 
   get inputSuperficie() { return this.validatingForm.get('superficie') }
@@ -49,11 +48,15 @@ export class BuscarTasacionesComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.inicializarFormulario()
-    this.inicializarValidaciones()
-    this.barrios = await this.zonaService.barrios()
-    this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
-    this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
+    try {
+      this.inicializarFormulario()
+      this.inicializarValidaciones()
+      this.barrios = await this.zonaService.barrios()
+      this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
+      this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
+    } catch(error) {
+      this.notification.showError(error)
+    }
   }
 
   inicializarFormulario() {
@@ -117,7 +120,6 @@ export class BuscarTasacionesComponent implements OnInit {
       this.resultados = await this.usuarioService.tasacionesSimilares(this.tasacionBusqueda)
       this.seLanzoBusqueda = true
     } catch (error) {
-      console.error(error)
       this.notification.showError(error)
     } finally {
       this.cargando = false

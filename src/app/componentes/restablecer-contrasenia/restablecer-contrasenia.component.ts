@@ -77,7 +77,6 @@ export class RestablecerContraseniaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.notification.cleanLoading()
     this.camposValidatingForm = new FormGroup({
       passwordForm: new FormControl(null, [Validators.required, Validators.minLength(8)]),
       confirmacionPasswordForm: new FormControl(null, [Validators.required, Validators.minLength(8)])

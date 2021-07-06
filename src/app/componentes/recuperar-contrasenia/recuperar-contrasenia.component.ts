@@ -32,7 +32,6 @@ export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     this.deshabilitarBoton = false
-    this.notification.cleanLoading()
     this.validatingForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),
     })
@@ -52,8 +51,7 @@ export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
       this.deshabilitarBoton = true
       this.cerrarModal()
     } catch (error) {
-      let mensaje = JSON.parse(error._body).message
-      this.notification.popUpMessage(mensaje, "danger", 1500)
+      this.notification.showError(error)
       this.deshabilitarBotonTemporalmente()
     }
   }

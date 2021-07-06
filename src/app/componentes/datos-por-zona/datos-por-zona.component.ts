@@ -5,6 +5,7 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { MapaComponent } from '../mapa/mapa.component';
 import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { GoogleMapsService } from 'src/app/servicios/google-maps.service';
+import { Notification } from 'src/app/shared/notifications/notification';
 
 @Component({
   selector: 'app-datos-por-zona',
@@ -24,6 +25,7 @@ export class DatosPorZonaComponent implements OnInit {
   cargando: boolean
   direccion: string
   searchTerm: string
+  notification: Notification = new Notification()
 
   constructor(public tasacionService: TasacionService, private modalService: MDBModalService, public modalRef: MDBModalRef, private zonaService: ZonaService, private googleMapsService: GoogleMapsService) {
 
@@ -40,8 +42,12 @@ export class DatosPorZonaComponent implements OnInit {
   async ngOnInit() {
     this.titulo = "zona"
     this.tasacionService.direccion = undefined
-    this.barrios = await this.zonaService.barrios()
-    this.comunas = await this.zonaService.comunas()
+    try {
+      this.barrios = await this.zonaService.barrios()
+      this.comunas = await this.zonaService.comunas()
+    } catch (error) {
+      this.notification.showError(error)
+    }
   }
 
   seleccionarBarrio() {
@@ -65,16 +71,25 @@ export class DatosPorZonaComponent implements OnInit {
   }
 
   async traerDatosBarrio() {
-    this.datos = undefined
-    if (this.zona) {
-      this.datos = await this.zonaService.datosBarrio(this.zona.id)
+    try {
+      this.datos = undefined
+      if (this.zona) {
+        this.datos = await this.zonaService.datosBarrio(this.zona.id)
+      }
+    } catch (error) {
+      this.notification.showError(error)
     }
   }
 
   async traerDatosComuna() {
-    this.datos = undefined
-    if (this.zona) {
-      this.datos = await this.zonaService.datosComuna(this.zona.id)
+    try {
+
+      this.datos = undefined
+      if (this.zona) {
+        this.datos = await this.zonaService.datosComuna(this.zona.id)
+      }
+    } catch (error) {
+      this.notification.showError(error)
     }
   }
 
@@ -88,10 +103,15 @@ export class DatosPorZonaComponent implements OnInit {
     // this.esperar()
     this.tasacionService.setUltimaBusqueda()
     this.direccion = this.tasacionService.direccion
-    this.cargando = true
-    let coordenadas = await this.googleMapsService.getLatLongFromStringAddress(this.direccion)
-    this.datos = await this.tasacionService.datosBarrioPorNombre(coordenadas.lng, coordenadas.lat)
-    this.cargando = false
+    try {
+      this.cargando = true
+      let coordenadas = await this.googleMapsService.getLatLongFromStringAddress(this.direccion)
+      this.datos = await this.tasacionService.datosBarrioPorNombre(coordenadas.lng, coordenadas.lat)
+    } catch (error) {
+      this.notification.showError(error)
+    } finally {
+      this.cargando = false
+    }
   }
 
   cambioDireccion() {

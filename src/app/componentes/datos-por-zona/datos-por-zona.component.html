@@ -1,62 +1,131 @@
 <!-- Material form register -->
-<mdb-card class="card" style="margin: auto;max-width:40rem;">
-
+<mdb-card class="card" style="margin: auto; max-width: 40rem">
   <mdb-card-header class="header white-text text-center py-4">
     <h5>
-      <strong class="grande">Datos por {{titulo}}</strong>
+      <strong class="grande">Datos por {{ titulo }}</strong>
     </h5>
   </mdb-card-header>
 
   <!--Card content-->
   <mdb-card-body class="px-lg-5 pt-0">
-
     <!-- Form -->
-    <form class="text-center radio" style="color: #757575;">
-
+    <form class="text-center radio" style="color: #757575">
       <!-- Default inline 1-->
       <div class="custom-control custom-radio custom-control-inline">
-        <input [(ngModel)]="zonaSeleccionada" (change)="seleccionarDireccion()" name="zona" value="Direccion"
-          type="radio" class="custom-control-input" id="defaultInline1" mdbInput>
-        <label class="custom-control-label" for="defaultInline1">Direccion</label>
+        <input
+          [(ngModel)]="zonaSeleccionada"
+          (change)="seleccionarDireccion()"
+          name="zona"
+          value="Direccion"
+          type="radio"
+          class="custom-control-input"
+          id="defaultInline1"
+          mdbInput
+        />
+        <label class="custom-control-label" for="defaultInline1"
+          >Direccion</label
+        >
       </div>
 
       <!-- Default inline 2-->
       <div class="custom-control custom-radio custom-control-inline">
-        <input [(ngModel)]="zonaSeleccionada" (change)="seleccionarBarrio()" name="zona" value="Barrio" type="radio"
-          class="custom-control-input" id="defaultInline2" mdbInput>
+        <input
+          [(ngModel)]="zonaSeleccionada"
+          (change)="seleccionarBarrio()"
+          name="zona"
+          value="Barrio"
+          type="radio"
+          class="custom-control-input"
+          id="defaultInline2"
+          mdbInput
+        />
         <label class="custom-control-label" for="defaultInline2">Barrio</label>
       </div>
 
       <!-- Default inline 3-->
       <div class="custom-control custom-radio custom-control-inline">
-        <input [(ngModel)]="zonaSeleccionada" (change)="seleccionarComuna()" name="zona" value="Comuna" type="radio"
-          class="custom-control-input" id="defaultInline3" mdbInput>
+        <input
+          [(ngModel)]="zonaSeleccionada"
+          (change)="seleccionarComuna()"
+          name="zona"
+          value="Comuna"
+          type="radio"
+          class="custom-control-input"
+          id="defaultInline3"
+          mdbInput
+        />
         <label class="custom-control-label" for="defaultInline3">Comuna</label>
       </div>
 
       <div *ngIf="zonaSeleccionada == 'Barrio'" class="md-form">
-        <ng-select #select notFoundText="No se encontro el barrio" (keypress)="cambiarSeleccion(select)"
-          name="datosBarrio" (change)="traerDatosBarrio()" [virtualScroll]="true" [items]="zonas" [multiple]="false"
-          [closeOnSelect]="true" [searchable]="true" bindLabel="descripcion" placeholder="Barrio" [(ngModel)]="zona">
+        <ng-select
+          #select
+          notFoundText="No se encontro el barrio"
+          (keypress)="cambiarSeleccion(select)"
+          name="datosBarrio"
+          (change)="traerDatosBarrio()"
+          [virtualScroll]="true"
+          [items]="zonas"
+          [multiple]="false"
+          [closeOnSelect]="true"
+          [searchable]="true"
+          bindLabel="descripcion"
+          placeholder="Barrio"
+          [(ngModel)]="zona"
+        >
         </ng-select>
       </div>
 
       <div *ngIf="zonaSeleccionada == 'Comuna'" class="md-form">
-        <ng-select #select notFoundText="No se encontro la comuna" (keypress)="cambiarSeleccion(select)"
-          name="datosComuna" (change)="traerDatosComuna()" [virtualScroll]="true" [items]="zonas" [multiple]="false"
-          [closeOnSelect]="true" [searchable]="true" bindLabel="descripcion" placeholder="Comuna" [(ngModel)]="zona">
+        <ng-select
+          #select
+          notFoundText="No se encontro la comuna"
+          (keypress)="cambiarSeleccion(select)"
+          name="datosComuna"
+          (change)="traerDatosComuna()"
+          [virtualScroll]="true"
+          [items]="zonas"
+          [multiple]="false"
+          [closeOnSelect]="true"
+          [searchable]="true"
+          bindLabel="descripcion"
+          placeholder="Comuna"
+          [(ngModel)]="zona"
+        >
         </ng-select>
       </div>
 
-
-      <div *ngIf="zonaSeleccionada == 'Direccion'"
-        style="margin-left: 2rem; margin-right:3rem; margin-top: 1rem;margin-bottom: 1rem;">
-        <input style="text-align: center;" placeholder="Dirección" [disabled]="modalYaAbierto()"
-          [(ngModel)]="tasacionService.direccion" (focus)="openModalMapa()" name="direccion_datos_por_zona" type="text"
-          class="form-control" id="direccion_datos_por_zona" mdbInput>
+      <div
+        *ngIf="zonaSeleccionada == 'Direccion'"
+        style="
+          margin-left: 2rem;
+          margin-right: 3rem;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        "
+      >
+        <input
+          style="text-align: center"
+          placeholder="Dirección"
+          [disabled]="modalYaAbierto()"
+          [(ngModel)]="tasacionService.direccion"
+          (focus)="openModalMapa()"
+          name="direccion_datos_por_zona"
+          type="text"
+          class="form-control"
+          id="direccion_datos_por_zona"
+          mdbInput
+        />
         <div>
-          <button style="margin-top: 1rem;" [disabled]="noPuedeBuscar()" mdbBtn color="elegant" mdbWavesLight
-            (click)="traerDatosBarrioPorNombre()" type="submit">
+          <button
+            style="margin-top: 1rem"
+            [disabled]="noPuedeBuscar()"
+            mdbBtn
+            color="elegant"
+            mdbWavesLight
+            (click)="traerDatosBarrioPorNombre()"
+            type="submit"
+          >
             Buscar
           </button>
           <!-- <button style="margin-top: 1rem;" [disabled]="noPuedeBorrar()" mdbBtn color="danger" mdbWavesLight
@@ -67,12 +136,15 @@
         <!-- <label for="direccion_tasar">Dirección</label> -->
         <!-- <mdb-error *ngIf="direccionInvalida()">Direccion inválida</mdb-error> -->
       </div>
-
     </form>
     <!-- Form -->
 
-    <div *ngIf="cargando" style="margin: auto;margin-top: 1rem;"
-      class="spinner-border text-primary d-flex justify-content-center" role="status">
+    <div
+      *ngIf="cargando"
+      style="margin: auto; margin-top: 1rem"
+      class="spinner-border text-primary d-flex justify-content-center"
+      role="status"
+    >
       <span class="sr-only">Loading...</span>
     </div>
     <div *ngIf="mostrarDatos() && !cargando" class="contenedor-tasaciones">
@@ -86,29 +158,28 @@
               </tr>
             </thead>
             <tr class="fila-contenido">
-              <td> Escuelas </td>
-              <td>{{ datos.escuelas }} </td>
+              <td>Escuelas</td>
+              <td>{{ datos.escuelas }}</td>
             </tr>
             <tr class="fila-contenido">
-              <td> Comisarias </td>
-              <td *ngIf="datos">{{ datos.comisarias }} </td>
+              <td>Comisarias</td>
+              <td *ngIf="datos">{{ datos.comisarias }}</td>
             </tr>
             <tr class="fila-contenido">
-              <td> Espacios Verdes </td>
-              <td *ngIf="datos">{{ datos.espacios_verdes }} </td>
+              <td>Espacios Verdes</td>
+              <td *ngIf="datos">{{ datos.espacios_verdes }}</td>
             </tr>
             <tr class="fila-contenido">
-              <td> Hospitales </td>
-              <td>{{ datos.hospitales }} </td>
+              <td>Hospitales</td>
+              <td>{{ datos.hospitales }}</td>
             </tr>
           </table>
         </div>
       </div>
     </div>
-
   </mdb-card-body>
-
-
-
 </mdb-card>
-<!-- Material form register -->
+
+<div class="notification">
+  <app-notifications [notification]="notification"> </app-notifications>
+</div>

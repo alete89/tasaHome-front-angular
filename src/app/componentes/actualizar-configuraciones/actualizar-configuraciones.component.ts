@@ -22,7 +22,6 @@ export class ActualizarConfiguracionesComponent implements OnInit {
 
   async ngOnInit() {
     this.traerConfiguraciones()
-    this.notification.cleanLoading()
   }
 
   async traerConfiguraciones() {

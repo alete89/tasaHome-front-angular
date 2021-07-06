@@ -1,10 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Tasacion } from '../dominio/tasacion';
-import { TipoPropiedad } from '../dominio/tipo_propiedad';
-import { REST_SERVER_URL } from './configuration';
 import { TipoOperacion } from '../dominio/tipo_operacion';
+import { TipoPropiedad } from '../dominio/tipo_propiedad';
 import { Zona } from '../dominio/zona';
+import { REST_SERVER_URL } from './configuration';
 
 @Injectable({
   providedIn: 'root'
@@ -16,21 +16,21 @@ export class TasacionService {
   barrio: Zona
   ultimaBusqueda: string
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     this.barrio = new Zona
     // this.barrio = undefined
   }
 
   async tiposDePropiedad() {
     const url = REST_SERVER_URL + "/tipos_propiedad"
-    const resp = await this.http.get(url).toPromise()
-    return resp.json().map(TipoPropiedad.fromJson)
+    const resp = await this.http.get<TipoPropiedad[]>(url).toPromise()
+    return resp.map(TipoPropiedad.fromJson)
   }
 
   async tiposDeOperacion() {
     const url = REST_SERVER_URL + "/tipos_operacion"
-    const resp = await this.http.get(url).toPromise()
-    return resp.json().map(TipoOperacion.fromJson)
+    const resp = await this.http.get<TipoOperacion[]>(url).toPromise()
+    return resp.map(TipoOperacion.fromJson)
   }
 
   async tasarPropiedad(tasacion: Tasacion) {
@@ -38,21 +38,21 @@ export class TasacionService {
     tasacion.direccion = this.direccion
     tasacion.barrio = this.barrio
     const json = JSON.parse(JSON.stringify(tasacion))
-    let resp = await this.http.put(REST_SERVER_URL + '/tasar_propiedad', json).toPromise()
-    return resp.json()
+    let resp = await this.http.put<number>(REST_SERVER_URL + '/tasar_propiedad', json).toPromise()
+    return resp
   }
 
   async searchTasacionById(id_tasacion: number) {
     const url = REST_SERVER_URL + "/tasacion/" + id_tasacion
     const resp = await this.http.get(url).toPromise()
-    const tasacion: Tasacion = Tasacion.fromJson(resp.json())
+    const tasacion: Tasacion = Tasacion.fromJson(resp)
     return tasacion
   }
 
   async historialTasacion(id_tasacion: string) {
     const url = REST_SERVER_URL + "/historial_tasacion/" + id_tasacion
-    const resp = await this.http.get(url).toPromise()
-    return resp.json().map(Tasacion.fromJson)
+    const resp = await this.http.get<any>(url).toPromise()
+    return resp.map(Tasacion.fromJson)
   }
 
   setDireccionYBarrio(direccion: string, barrio: Zona) {
@@ -83,24 +83,24 @@ export class TasacionService {
     let longitudCasted = longitud.toString()
     console.log(latitudCasted)
     console.log(longitudCasted)
-    const urlEscuelas = "https://cors-anywhere.herokuapp.com/http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=cuc_establecimientos_educativos&radio=500" 
+    const urlEscuelas = "https://cors-anywhere.herokuapp.com/http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=cuc_establecimientos_educativos&radio=500"
     // const urlEscuelas = "http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=cuc_establecimientos_educativos&radio=500"
-    const respEscuelas = await this.http.get(urlEscuelas).toPromise()
-    jsonData.escuelas = respEscuelas.json().totalFull
+    const respEscuelas = await this.http.get<any>(urlEscuelas).toPromise()
+    jsonData.escuelas = respEscuelas.totalFull
 
     console.log(jsonData.escuelas)
 
     const urlEspaciosVerdes = "https://cors-anywhere.herokuapp.com/http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=espacios_verdes_publicos&radio=500"
-    const respEspaciosVerdes = await this.http.get(urlEspaciosVerdes).toPromise()
-    jsonData.espacios_verdes = respEspaciosVerdes.json().totalFull
+    const respEspaciosVerdes = await this.http.get<any>(urlEspaciosVerdes).toPromise()
+    jsonData.espacios_verdes = respEspaciosVerdes.totalFull
 
     const urlHospitales = "https://cors-anywhere.herokuapp.com/http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=centros_de_salud_y_accion_comunitaria,hospitales_de_ninos,hospitales_especializados,hospitales_generales_de_agudos&radio=500"
-    const respHospitales = await this.http.get(urlHospitales).toPromise()
-    jsonData.hospitales = respHospitales.json().totalFull
+    const respHospitales = await this.http.get<any>(urlHospitales).toPromise()
+    jsonData.hospitales = respHospitales.totalFull
 
     const urlComisarias = "https://cors-anywhere.herokuapp.com/http://epok.buenosaires.gob.ar:80/reverseGeocoderLugares/?x=" + longitudCasted + "&y=" + latitudCasted + "&categorias=comisarias&radio=500"
-    const respComisarias = await this.http.get(urlComisarias).toPromise()
-    jsonData.comisarias = respComisarias.json().totalFull
+    const respComisarias = await this.http.get<any>(urlComisarias).toPromise()
+    jsonData.comisarias = respComisarias.totalFull
 
     return jsonData
   }

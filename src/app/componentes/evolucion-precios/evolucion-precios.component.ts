@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TasacionService } from 'src/app/servicios/tasacion.service';
 import { Tasacion } from 'src/app/dominio/tasacion';
+import { Notification } from 'src/app/shared/notifications/notification';
 declare var require: any
 
 @Component({
@@ -18,6 +19,7 @@ export class EvolucionPreciosComponent implements OnInit {
   public chartDatasets: Array<any>
   public chartLabels: Array<any>
   descripcion: string
+  notification: Notification = new Notification()
 
   public chartColors: Array<any> = [
     {
@@ -43,18 +45,23 @@ export class EvolucionPreciosComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.id_tasacion = this.route.snapshot.paramMap.get("id")
-    this.historialTasacion = await this.tasacionService.historialTasacion(this.id_tasacion)
-    console.log(this.historialTasacion)
-    let historial_precios = this.historialTasacion.map(tasacion => tasacion.valor)
-    let fechas = this.historialTasacion.map(tasacion => this.moment(tasacion.fecha).format('DD/MM/YYYY HH:MM'))
-    console.log(historial_precios)
-    this.chartDatasets = [
-      { data: historial_precios, label: 'Precio' },
-    ];
-    this.chartLabels = fechas
-    let ultima_tasacion = this.historialTasacion[this.historialTasacion.length - 1]
-    this.descripcion = ultima_tasacion.tipoDePropiedad.descripcion + " con ubicación en " + ultima_tasacion.descripcion
+    try {
+
+      this.id_tasacion = this.route.snapshot.paramMap.get("id")
+      this.historialTasacion = await this.tasacionService.historialTasacion(this.id_tasacion)
+      console.log(this.historialTasacion)
+      let historial_precios = this.historialTasacion.map(tasacion => tasacion.valor)
+      let fechas = this.historialTasacion.map(tasacion => this.moment(tasacion.fecha).format('DD/MM/YYYY HH:MM'))
+      console.log(historial_precios)
+      this.chartDatasets = [
+        { data: historial_precios, label: 'Precio' },
+      ];
+      this.chartLabels = fechas
+      let ultima_tasacion = this.historialTasacion[this.historialTasacion.length - 1]
+      this.descripcion = ultima_tasacion.tipoDePropiedad.descripcion + " con ubicación en " + ultima_tasacion.descripcion
+    } catch (error) {
+      this.notification.showError(error)
+    }
   }
   // this.formatear(tasacion.fecha)
 

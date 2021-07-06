@@ -1,29 +1,50 @@
 <div class="card" style="background-color: black">
-  <mdb-card-header class="registro elegant-color-dark white-text text-center py-4">
+  <mdb-card-header
+    class="registro elegant-color-dark white-text text-center py-4"
+  >
     <h5>
-      <strong style="font-size: 2rem;">Publicar anuncio</strong>
+      <strong style="font-size: 2rem">Publicar anuncio</strong>
     </h5>
   </mdb-card-header>
 
-  <div style="margin-top: 2.2rem;" class="card-deck">
+  <div style="margin-top: 2.2rem" class="card-deck">
     <div class="container">
-      <div style="margin-bottom: 2rem;" class="col" *ngFor="let sitio of sitios">
+      <div style="margin-bottom: 2rem" class="col" *ngFor="let sitio of sitios">
         <div>
-          <div style="padding:1rem;" class="view overlay waves-light" mdbWavesEffect>
-            <div class="card" style="width: 90%;margin: auto;">
-              <a href="{{sitio.url_publicar}}" target="_blank">
-                <img style="height:35%;;width:35%;margin:auto;" src={{sitio.logo_url}} alt="{{ sitios.descripcion }}">
+          <div
+            style="padding: 1rem"
+            class="view overlay waves-light"
+            mdbWavesEffect
+          >
+            <div class="card" style="width: 90%; margin: auto">
+              <a href="{{ sitio.url_publicar }}" target="_blank">
+                <img
+                  style="height: 35%; width: 35%; margin: auto"
+                  src="{{ sitio.logo_url }}"
+                  alt="{{ sitios.descripcion }}"
+                />
               </a>
             </div>
             <!-- <hr size="8"> -->
           </div>
         </div>
-
       </div>
     </div>
-    <div style="margin: auto;">
-      <button (click)="cancelar()" mdbBtn color="danger" rounded="true" class="my-4 waves-effect z-depth-0 buscar"
-        mdbWavesEffect type="button">Cancelar</button>
+    <div style="margin: auto">
+      <button
+        (click)="cancelar()"
+        mdbBtn
+        color="danger"
+        rounded="true"
+        class="my-4 waves-effect z-depth-0 buscar"
+        mdbWavesEffect
+        type="button"
+      >
+        Cancelar
+      </button>
     </div>
   </div>
+</div>
+<div class="notification">
+  <app-notifications [notification]="notification"> </app-notifications>
 </div>

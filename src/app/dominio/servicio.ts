@@ -12,7 +12,7 @@ export class Servicio {
         this.chequeado = true
     }
 
-    static fromJson(servicioJson: string) {
+    static fromJson(servicioJson) {
         return Object.assign(new Servicio(), servicioJson)
     }
 

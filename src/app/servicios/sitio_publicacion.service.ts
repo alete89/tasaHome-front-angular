@@ -1,8 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Estado } from '../dominio/estado';
-import { REST_SERVER_URL } from './configuration';
 import { SitioPublicacion } from '../dominio/sitio_publicacion';
+import { REST_SERVER_URL } from './configuration';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +9,13 @@ import { SitioPublicacion } from '../dominio/sitio_publicacion';
 
 export class SitioPublicacionService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   async sitios_publicacion() {
     const url = REST_SERVER_URL + "/sitios_publicacion"
-    const resp = await this.http.get(url).toPromise()
-    return resp.json().map(SitioPublicacion.fromJson)
+    const resp = await this.http.get<SitioPublicacion[]>(url).toPromise()
+    return resp.map(SitioPublicacion.fromJson)
   }
-
 
 }
 

@@ -1,6 +1,5 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Lugar } from '../dominio/lugar';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +10,19 @@ export class GoogleMapsService {
   googleUrl = "https://maps.googleapis.com/maps/api/geocode/json?"
   placesUrl = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+in+Sydney"
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   async getStringDireccionFromLatLong(marker: any) {
     // { latitude: lat, longitude: lng }
-    // https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAykSBm-oMeyLr1S4rB_rqVSstWRgqMckM
 
     const url = this.googleUrl + "latlng=" + marker.latitude + "," + marker.longitude + this.apiKey
-    const resp = await this.http.get(url).toPromise()
-    return resp.json().results[0]
+
+    const response = await this.http.get<any>(url).toPromise()
+    console.dir(response)
+    if (response.status != "OK") {
+      throw response
+    }
+    return response.results[0]
   }
 
   async getLatLongFromStringAddress(address: string) {
@@ -27,8 +30,8 @@ export class GoogleMapsService {
     let direccion = address.replace(" ", "+")
     direccion = direccion + "+Argentina"
     const url = this.googleUrl + "address=" + direccion + this.apiKey
-    const resp = await this.http.get(url).toPromise()
-    return resp.json().results[0].geometry.location
+    const resp = await this.http.get<any>(url).toPromise()
+    return resp.results[0].geometry.location
   }
 
 }

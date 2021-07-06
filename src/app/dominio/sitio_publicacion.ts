@@ -9,7 +9,7 @@ export class SitioPublicacion {
         Object.assign(this, init)
     }
 
-    static fromJson(sitioJson: string) {
+    static fromJson(sitioJson) {
         return Object.assign(new SitioPublicacion(), sitioJson)
     }
 

@@ -1,1 +1,11 @@
-<tasar-propiedad *ngIf="tasacion" [tasacion]="tasacion" [titulo_boton]="'Actualizar'" [titulo]="'Actualizar tasación'" [esActualizacion]="true"></tasar-propiedad>
+<tasar-propiedad
+  *ngIf="tasacion"
+  [tasacion]="tasacion"
+  [titulo_boton]="'Actualizar'"
+  [titulo]="'Actualizar tasación'"
+  [esActualizacion]="true"
+></tasar-propiedad>
+
+<div class="notification">
+  <app-notifications [notification]="notification"> </app-notifications>
+</div>

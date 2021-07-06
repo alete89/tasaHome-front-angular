@@ -40,7 +40,6 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.notification.cleanLoading()
     this.inicializarAutocomplete()
   }
 
@@ -143,14 +142,11 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   async aceptar() {
-    this.notification = new Notification
-    this.notification.cleanLoading()
     try {
       await this.usuarioService.registrarUsuario(this.usuario)
       this.notification.popUpMessage("Usuario registrado.", "success", 2500)
       this.limpiarFormulario()
     } catch (error) {
-      console.log(error)
       this.notification.showError(error)
       this.mail_invalido = this.usuario.email
     }

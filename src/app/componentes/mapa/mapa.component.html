@@ -5,22 +5,43 @@
 <!-- EL QUE TIENE EL BUSCADOR -->
 <!-- <p style="color: white; text-align: center;font-size: 3rem;">Bienvenidos a TasaHome!!!</p> -->
 
-<div *ngIf="!map_loaded" style="margin: auto;margin-top: 1rem;margin-bottom:1rem;"
-  class="spinner-border text-primary d-flex justify-content-center" role="status">
+<div
+  *ngIf="!map_loaded"
+  style="margin: auto; margin-top: 1rem; margin-bottom: 1rem"
+  class="spinner-border text-primary d-flex justify-content-center"
+  role="status"
+>
   <span class="sr-only">Loading...</span>
 </div>
-<form style="width: 50rem; margin: auto;">
-  <div style="background-color: #263238; padding-bottom: 1rem;" class="container">
-    <div class="row d-flex flex-center " style="padding-top: 1rem;padding-bottom: 1rem;">
+<form style="width: 50rem; margin: auto">
+  <div
+    style="background-color: #263238; padding-bottom: 1rem"
+    class="container"
+  >
+    <div
+      class="row d-flex flex-center"
+      style="padding-top: 1rem; padding-bottom: 1rem"
+    >
       <!-- <div class="col"> -->
       <!-- <div class=" form-group"> -->
       <div>
         <!-- <label>Enter address</label> -->
-        <input #focusThis style=" width: 25rem;margin-right: 1rem;" [(ngModel)]="direccion" type="text"
-          class="form-control" placeholder="Buscar dirección" autocorrect="off" autocapitalize="off" spellcheck="off"
-          type="text" #search id="searchAddressBar" name="searchAddressBar">
+        <input
+          #focusThis
+          style="width: 25rem; margin-right: 1rem"
+          [(ngModel)]="direccion"
+          type="text"
+          class="form-control"
+          placeholder="Buscar dirección"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="off"
+          type="text"
+          #search
+          id="searchAddressBar"
+          name="searchAddressBar"
+        />
       </div>
-
 
       <!-- <input #search style="margin-top:5rem;margin:auto;color:black;" name="direccion_mapa" type="text" [(ngModel)]="direccion"
           class="form-control pac-container" id="searchField" mdbInput />
@@ -34,91 +55,158 @@
         </button>
       </div> -->
       <div>
-        <button [disabled]="!direccion" mdbBtn color="grey" mdbWavesLight (click)="borrarBusqueda()" type="button">
+        <button
+          [disabled]="!direccion"
+          mdbBtn
+          color="grey"
+          mdbWavesLight
+          (click)="borrarBusqueda()"
+          type="button"
+        >
           Borrar
         </button>
       </div>
 
       <div *ngIf="esModal">
-        <button [disabled]="noPuedeAceptar()" mdbBtn color="success" mdbWavesLight (click)="aceptar()" type="submit">
+        <button
+          [disabled]="noPuedeAceptar()"
+          mdbBtn
+          color="success"
+          mdbWavesLight
+          (click)="aceptar()"
+          type="submit"
+        >
           Aceptar
         </button>
       </div>
       <!-- </div> -->
       <div *ngIf="esModal">
-        <button (click)="cerrarModal()" mdbBtn type="button" color="danger" mdbWavesEffect>
+        <button
+          (click)="cerrarModal()"
+          mdbBtn
+          type="button"
+          color="danger"
+          mdbWavesEffect
+        >
           <mdb-icon fas icon="times"></mdb-icon>
         </button>
       </div>
-      <!-- <div class="notification" style="height: 3rem; ">
-        <app-notifications [notification]="notification">
-        </app-notifications>
-      </div> -->
     </div>
 
-
-
     <div>
-      <div class="card" style="margin-top:1rem; margin-left:2rem; margin-right:3rem; ">
-        <agm-map #map (mapReady)="map_loaded = true" [zoom]="map.zoom" [mapTypeId]="'terrain'" [usePanning]="true"
-          [latitude]="latitude" [longitude]="longitude" [scrollwheel]="null" (mapClick)="placeMarker($event)"
-          style="height: 500px; width: 700px;">
-          <agm-marker [latitude]="marker.latitude" [longitude]="marker.longitude"></agm-marker>
+      <div
+        class="card"
+        style="margin-top: 1rem; margin-left: 2rem; margin-right: 3rem"
+      >
+        <agm-map
+          #map
+          (mapReady)="map_loaded = true"
+          [zoom]="map.zoom"
+          [mapTypeId]="'terrain'"
+          [usePanning]="true"
+          [latitude]="latitude"
+          [longitude]="longitude"
+          [scrollwheel]="null"
+          (mapClick)="placeMarker($event)"
+          style="height: 500px; width: 700px"
+        >
+          <agm-marker
+            [latitude]="marker.latitude"
+            [longitude]="marker.longitude"
+          ></agm-marker>
 
           <div *ngIf="esHome() && !cargando">
-            <agm-marker-cluster *ngIf="opcion == 'Escuelas'" [styles]="clusterStyle">
+            <agm-marker-cluster
+              *ngIf="opcion == 'Escuelas'"
+              [styles]="clusterStyle"
+            >
               <!-- <div > -->
-              <agm-marker *ngFor="let escuela of escuelas" (mouseOver)="seleccionarLugar(escuela)"
-                [iconUrl]="iconEscuela" [latitude]="escuela.latitud" [longitude]="escuela.longitud">
-
-                <agm-info-window *ngIf="lugarSeleccionado && (lugarSeleccionado.id == escuela.id)">
-
-                  <strong style="font-weight: bold; text-align: center;">{{escuela.descripcion}}</strong>
-
+              <agm-marker
+                *ngFor="let escuela of escuelas"
+                (mouseOver)="seleccionarLugar(escuela)"
+                [iconUrl]="iconEscuela"
+                [latitude]="escuela.latitud"
+                [longitude]="escuela.longitud"
+              >
+                <agm-info-window
+                  *ngIf="
+                    lugarSeleccionado && lugarSeleccionado.id == escuela.id
+                  "
+                >
+                  <strong style="font-weight: bold; text-align: center">{{
+                    escuela.descripcion
+                  }}</strong>
                 </agm-info-window>
-
-
-
               </agm-marker>
             </agm-marker-cluster>
 
-            <agm-marker-cluster *ngIf="opcion == 'Hospitales'" [styles]="clusterStyle">
+            <agm-marker-cluster
+              *ngIf="opcion == 'Hospitales'"
+              [styles]="clusterStyle"
+            >
               <!-- <div > -->
-              <agm-marker *ngFor="let hospital of hospitales" (mouseOver)="seleccionarLugar(hospital)"
-                [iconUrl]="iconHospital" [latitude]="hospital.latitud" [longitude]="hospital.longitud">
-
-                <agm-info-window *ngIf="lugarSeleccionado && (lugarSeleccionado.id == hospital.id)">
-
-                  <strong style="font-weight: bold;">{{hospital.descripcion}}</strong>
-
+              <agm-marker
+                *ngFor="let hospital of hospitales"
+                (mouseOver)="seleccionarLugar(hospital)"
+                [iconUrl]="iconHospital"
+                [latitude]="hospital.latitud"
+                [longitude]="hospital.longitud"
+              >
+                <agm-info-window
+                  *ngIf="
+                    lugarSeleccionado && lugarSeleccionado.id == hospital.id
+                  "
+                >
+                  <strong style="font-weight: bold">{{
+                    hospital.descripcion
+                  }}</strong>
                 </agm-info-window>
-
               </agm-marker>
             </agm-marker-cluster>
 
-            <agm-marker-cluster *ngIf="opcion == 'Comisarias'" [styles]="clusterStyle">
-              <agm-marker *ngFor="let comisaria of comisarias" (mouseOver)="seleccionarLugar(comisaria)"
-                [iconUrl]="iconComisaria" [latitude]="comisaria.latitud" [longitude]="comisaria.longitud">
-
-                <agm-info-window *ngIf="lugarSeleccionado && (lugarSeleccionado.id == comisaria.id)">
-
-                  <strong style="font-weight: bold;">{{comisaria.descripcion}}</strong>
-
+            <agm-marker-cluster
+              *ngIf="opcion == 'Comisarias'"
+              [styles]="clusterStyle"
+            >
+              <agm-marker
+                *ngFor="let comisaria of comisarias"
+                (mouseOver)="seleccionarLugar(comisaria)"
+                [iconUrl]="iconComisaria"
+                [latitude]="comisaria.latitud"
+                [longitude]="comisaria.longitud"
+              >
+                <agm-info-window
+                  *ngIf="
+                    lugarSeleccionado && lugarSeleccionado.id == comisaria.id
+                  "
+                >
+                  <strong style="font-weight: bold">{{
+                    comisaria.descripcion
+                  }}</strong>
                 </agm-info-window>
-
               </agm-marker>
             </agm-marker-cluster>
 
-            <agm-marker-cluster *ngIf="opcion == 'Espacios'" [styles]="clusterStyle">
-              <agm-marker *ngFor="let espacio of espacios_verdes" (mouseOver)="seleccionarLugar(espacio)"
-                [iconUrl]="iconEspacio" [latitude]="espacio.latitud" [longitude]="espacio.longitud">
-
-                <agm-info-window *ngIf="lugarSeleccionado && (lugarSeleccionado.id == espacio.id)">
-
-                  <strong style="font-weight: bold;">{{espacio.descripcion}}</strong>
-
+            <agm-marker-cluster
+              *ngIf="opcion == 'Espacios'"
+              [styles]="clusterStyle"
+            >
+              <agm-marker
+                *ngFor="let espacio of espacios_verdes"
+                (mouseOver)="seleccionarLugar(espacio)"
+                [iconUrl]="iconEspacio"
+                [latitude]="espacio.latitud"
+                [longitude]="espacio.longitud"
+              >
+                <agm-info-window
+                  *ngIf="
+                    lugarSeleccionado && lugarSeleccionado.id == espacio.id
+                  "
+                >
+                  <strong style="font-weight: bold">{{
+                    espacio.descripcion
+                  }}</strong>
                 </agm-info-window>
-
               </agm-marker>
             </agm-marker-cluster>
           </div>
@@ -127,55 +215,149 @@
     </div>
 
     <div>
-      <div *ngIf="esHome()" style="text-align: center;margin-top: 2rem;padding:1rem"
-        >
+      <div
+        *ngIf="esHome()"
+        style="text-align: center; margin-top: 2rem; padding: 1rem"
+      >
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button [disabled]="opcion == 'Escuelas'" style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn
-            mdbWavesEffect [ngClass]="{ 'fondo-azul': opcion == 'Escuelas'}" (click)="seleccionarOpcion('Escuelas')"
-            type="button" size="md" class="btn btn-white color-hover">Escuelas
-            <mdb-icon style="padding-left:0.2rem;" fas icon="graduation-cap"></mdb-icon>
+          <button
+            [disabled]="opcion == 'Escuelas'"
+            style="margin-right: 1rem"
+            rounded="true"
+            outline="true"
+            mdbBtn
+            mdbWavesEffect
+            [ngClass]="{ 'fondo-azul': opcion == 'Escuelas' }"
+            (click)="seleccionarOpcion('Escuelas')"
+            type="button"
+            size="md"
+            class="btn btn-white color-hover"
+          >
+            Escuelas
+            <mdb-icon
+              style="padding-left: 0.2rem"
+              fas
+              icon="graduation-cap"
+            ></mdb-icon>
           </button>
-          <button [disabled]="opcion == 'Comisarias'" style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn
-            mdbWavesEffect [ngClass]="{ 'fondo-azul': opcion == 'Comisarias'}" (click)="seleccionarOpcion('Comisarias')"
-            type="button" size="md" class="btn btn-white color-hover">Comisarias
-            <mdb-icon style="padding-left:0.2rem;" fas icon="taxi"></mdb-icon>
+          <button
+            [disabled]="opcion == 'Comisarias'"
+            style="margin-right: 1rem"
+            rounded="true"
+            outline="true"
+            mdbBtn
+            mdbWavesEffect
+            [ngClass]="{ 'fondo-azul': opcion == 'Comisarias' }"
+            (click)="seleccionarOpcion('Comisarias')"
+            type="button"
+            size="md"
+            class="btn btn-white color-hover"
+          >
+            Comisarias
+            <mdb-icon style="padding-left: 0.2rem" fas icon="taxi"></mdb-icon>
           </button>
-          <button [disabled]="opcion == 'Hospitales'" style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn
-            mdbWavesEffect [ngClass]="{ 'fondo-azul': opcion == 'Hospitales'}" (click)="seleccionarOpcion('Hospitales')"
-            type="button" size="md" class="btn btn-white color-hover">Hospitales
-            <mdb-icon style="padding-left:0.2rem;" fas icon="hospital-alt"></mdb-icon>
+          <button
+            [disabled]="opcion == 'Hospitales'"
+            style="margin-right: 1rem"
+            rounded="true"
+            outline="true"
+            mdbBtn
+            mdbWavesEffect
+            [ngClass]="{ 'fondo-azul': opcion == 'Hospitales' }"
+            (click)="seleccionarOpcion('Hospitales')"
+            type="button"
+            size="md"
+            class="btn btn-white color-hover"
+          >
+            Hospitales
+            <mdb-icon
+              style="padding-left: 0.2rem"
+              fas
+              icon="hospital-alt"
+            ></mdb-icon>
           </button>
-          <button [disabled]="opcion == 'Espacios'" style="margin-right: 1rem;" rounded="true" outline="true" mdbBtn
-            mdbWavesEffect [ngClass]="{ 'fondo-azul': opcion == 'Espacios'}" (click)="seleccionarOpcion('Espacios')"
-            type="button" size="md" class="btn btn-white color-hover">Espacios
-            <mdb-icon style="padding-left:0.2rem;" fas icon="tree"></mdb-icon>
+          <button
+            [disabled]="opcion == 'Espacios'"
+            style="margin-right: 1rem"
+            rounded="true"
+            outline="true"
+            mdbBtn
+            mdbWavesEffect
+            [ngClass]="{ 'fondo-azul': opcion == 'Espacios' }"
+            (click)="seleccionarOpcion('Espacios')"
+            type="button"
+            size="md"
+            class="btn btn-white color-hover"
+          >
+            Espacios
+            <mdb-icon style="padding-left: 0.2rem" fas icon="tree"></mdb-icon>
           </button>
 
-          <button [disabled]="opcion == 'Ninguna'" rounded="true" outline="true" mdbBtn mdbWavesEffect
-            [ngClass]="{ 'fondo-azul': opcion == 'Ninguna'}" (click)="seleccionarNinguna()" type="button" size="md"
-            class="btn btn-white color-hover">Ninguna
+          <button
+            [disabled]="opcion == 'Ninguna'"
+            rounded="true"
+            outline="true"
+            mdbBtn
+            mdbWavesEffect
+            [ngClass]="{ 'fondo-azul': opcion == 'Ninguna' }"
+            (click)="seleccionarNinguna()"
+            type="button"
+            size="md"
+            class="btn btn-white color-hover"
+          >
+            Ninguna
           </button>
         </div>
       </div>
-      <div *ngIf="cargando" style="margin: auto;margin-top: 1rem;"
-        class="spinner-border text-primary d-flex justify-content-center" role="status">
+      <div
+        *ngIf="cargando"
+        style="margin: auto; margin-top: 1rem"
+        class="spinner-border text-primary d-flex justify-content-center"
+        role="status"
+      >
         <span class="sr-only">Loading...</span>
       </div>
     </div>
-    <div *ngIf="esModal" style="height:2rem !important;">
-      <div class="card" *ngIf="errores && errores.length > 0"
-        style="margin-left: 7rem;margin-right: 7rem;; margin-top: 2rem;text-align: center; background-color: #ff4444;">
+    <div *ngIf="esModal" style="height: 2rem !important">
+      <div
+        class="card"
+        *ngIf="errores && errores.length > 0"
+        style="
+          margin-left: 7rem;
+          margin-right: 7rem;
+          margin-top: 2rem;
+          text-align: center;
+          background-color: #ff4444;
+        "
+      >
         <div>
-          <strong style="color: white;">No se pudo encontrar la dirección ingresada</strong>
+          <strong style="color: white"
+            >No se pudo encontrar la dirección ingresada</strong
+          >
         </div>
       </div>
-      <div class="card"
-        style="margin-left: 7rem;margin-right: 7rem;; margin-top: 2rem;text-align: center; background-color: #ff4444;">
+      <div
+        class="card"
+        style="
+          margin-left: 7rem;
+          margin-right: 7rem;
+          margin-top: 2rem;
+          text-align: center;
+          background-color: #ff4444;
+        "
+      >
         <div>
-          <strong *ngIf="ingresoDireccionNoDeCABA() && esModal" style="color: white;">La dirección debe ser de
-            CABA</strong>
+          <strong
+            *ngIf="ingresoDireccionNoDeCABA() && esModal"
+            style="color: white"
+            >La dirección debe ser de CABA</strong
+          >
         </div>
       </div>
     </div>
   </div>
 </form>
+
+<div class="notification">
+  <app-notifications [notification]="notification"> </app-notifications>
+</div>
