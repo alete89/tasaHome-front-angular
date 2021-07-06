@@ -54,7 +54,7 @@ export class BuscarTasacionesComponent implements OnInit {
       this.barrios = await this.zonaService.barrios()
       this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
       this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
-    } catch(error) {
+    } catch (error) {
       this.notification.showError(error)
     }
   }
@@ -146,7 +146,11 @@ export class BuscarTasacionesComponent implements OnInit {
       animated: true,
     })
 
-    this.modalService.close.subscribe(() => this.notification.popUpMessage("Mensaje enviado.", "success", 3000)
+    this.modalContactarUsuario.content.action.subscribe((event: any) => {
+      if (event == "OK") {
+        this.notification.popUpMessage("Mensaje enviado.", "success", 3000)
+      }
+    }
     );
 
   }
@@ -156,7 +160,11 @@ export class BuscarTasacionesComponent implements OnInit {
   }
 
   seleccionarTipoDeOperacion(tipoDeOperacion: TipoOperacion) {
-    this.tasacionBusqueda.id_tipo_operacion = tipoDeOperacion.id
+    if (this.tasacionBusqueda.id_tipo_operacion == tipoDeOperacion.id) {
+      this.tasacionBusqueda.id_tipo_operacion = undefined
+    } else {
+      this.tasacionBusqueda.id_tipo_operacion = tipoDeOperacion.id
+    }
   }
 
 }

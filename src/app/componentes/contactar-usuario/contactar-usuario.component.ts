@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { MensajeService } from 'src/app/servicios/mensaje.service';
 import { Notification } from 'src/app/shared/notifications/notification';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'contactar-usuario',
@@ -15,6 +16,8 @@ export class ContactarUsuarioComponent implements OnInit {
   mensaje: string
   notification: Notification = new Notification()
   id: number = 0
+  action: Subject<any> = new Subject();
+
 
   @ViewChild('focusThis', { static: true }) focusThis;
 
@@ -40,6 +43,7 @@ export class ContactarUsuarioComponent implements OnInit {
     try {
       await this.mensajeService.enviarMensaje(this.id_emisor, this.email_receptor, this.mensaje)
       this.mensaje = undefined
+      this.action.next("OK")
       this.cerrarModal()
     } catch (error) {
       this.notification.showError(error)

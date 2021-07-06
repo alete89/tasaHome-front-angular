@@ -14,6 +14,7 @@
         <div class="col margen">
           <!-- First name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
+            <!-- <i class="fas fa-times trailing"></i> -->
             <input
               #focusThis
               name="nombre"
@@ -25,7 +26,7 @@
               mdbValidate
               mdbInput
             />
-            <label for="materialRegisterFormFirstName">Nombre</label>
+            <label for="materialRegisterFormFirstName">Nombre </label>
             <mdb-error *ngIf="nombreInvalido()">Nombre inválido</mdb-error>
           </div>
         </div>

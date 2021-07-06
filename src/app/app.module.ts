@@ -2,7 +2,6 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MDBBootstrapModule, MDBModalRef } from 'angular-bootstrap-md';
 import { AppRoutingModule } from './app-routing.module';

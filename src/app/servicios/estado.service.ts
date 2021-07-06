@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Estado } from '../dominio/estado';
 import { REST_SERVER_URL } from './configuration';
 
