@@ -29,7 +29,7 @@ interface Location {
 })
 export class MapaComponent implements OnInit {
 
-  @ViewChild(AgmMap) map: AgmMap;
+  @ViewChild(AgmMap, { static: true }) map: AgmMap;
 
   latitude = -34.603729
   longitude = -58.381569
@@ -52,7 +52,7 @@ export class MapaComponent implements OnInit {
   map_loaded: boolean
   id: number = 0
 
-  @ViewChild('focusThis') focusThis;
+  @ViewChild('focusThis', { static: true }) focusThis;
 
   clusterStyle = [{
     height: 53,
@@ -119,7 +119,7 @@ export class MapaComponent implements OnInit {
     }
   }
 
-  @ViewChild("search")
+  @ViewChild("search", { static: true })
   public searchElementRef: ElementRef;
 
   marker = { latitude: -34.603729, longitude: -58.381569 };

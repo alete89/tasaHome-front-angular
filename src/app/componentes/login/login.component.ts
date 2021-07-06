@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, AfterViewInit, AfterContentInit {
   modalRecuperarContrasenia: MDBModalRef;
   id: number = 0
 
-  @ViewChild('focusThis') focusThis;
+  @ViewChild('focusThis', { static: true }) focusThis;
 
 
   ngAfterContentInit() {

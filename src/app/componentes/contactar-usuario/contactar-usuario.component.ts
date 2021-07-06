@@ -16,7 +16,7 @@ export class ContactarUsuarioComponent implements OnInit {
   notification: Notification = new Notification()
   id: number = 0
 
-  @ViewChild('focusThis') focusThis;
+  @ViewChild('focusThis', { static: true }) focusThis;
 
   constructor(public modalContactarUsuario: MDBModalRef, private mensajeService: MensajeService) { }
 

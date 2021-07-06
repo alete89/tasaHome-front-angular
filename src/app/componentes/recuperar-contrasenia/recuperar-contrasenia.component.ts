@@ -19,7 +19,7 @@ export class RecuperarContraseniaComponent implements OnInit, AfterContentInit {
   id: number = 0
   deshabilitarBoton: boolean
 
-  @ViewChild('focusThis') focusThis;
+  @ViewChild('focusThis', { static: true }) focusThis;
 
   ngAfterContentInit() {
     setTimeout(() => {

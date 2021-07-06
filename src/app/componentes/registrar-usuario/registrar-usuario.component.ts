@@ -29,9 +29,9 @@ export class RegistrarUsuarioComponent implements OnInit {
   direccionAutocomplete: string
   id: number = 0
 
-  @ViewChild('focusThis') focusThis;
+  @ViewChild('focusThis', { static: true }) focusThis;
 
-  @ViewChild("search")
+  @ViewChild("search", { static: true })
   public searchElementRef: ElementRef;
 
   constructor(private mapsApiLoader: MapsAPILoader, private ngZone: NgZone, private router: Router, private zonaService: ZonaService, private usuarioService: UsuarioService, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
