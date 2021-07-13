@@ -21,6 +21,7 @@ import { RecuperarContraseniaComponent } from './componentes/recuperar-contrasen
 import { RestablecerContraseniaComponent } from './componentes/restablecer-contrasenia/restablecer-contrasenia.component';
 import { RecoveryGuard } from './guard/recovery-guard';
 import { NotFoundComponent } from './componentes/not-found/not-found.component';
+import { AdminGuard } from './guard/admin-guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -28,8 +29,8 @@ const routes: Routes = [
   { path: 'mapa', component: MapaComponent },
   { path: 'login', component: LoginComponent, canActivate: [LogueadoGuard] },
   { path: 'tasaciones-anteriores', component: TasacionesAnterioresComponent, canActivate: [AuthGuard] },
-  { path: 'actualizar-configuraciones', component: ActualizarConfiguracionesComponent, canActivate: [AuthGuard] },
-  { path: 'administrar-usuarios', component: AdministrarUsuariosComponent, canActivate: [AuthGuard] },
+  { path: 'actualizar-configuraciones', component: ActualizarConfiguracionesComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'administrar-usuarios', component: AdministrarUsuariosComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent, canActivate: [LogueadoGuard] },
   { path: 'datos-por-zona', component: DatosPorZonaComponent },
   { path: 'tasar-propiedad', component: TasarPropiedadComponent, canActivate: [AuthGuard] },

@@ -13,11 +13,10 @@ export class ActualizarConfiguracionesComponent implements OnInit {
 
   configuraciones: Array<Configuracion>
   notification: Notification = new Notification()
-  cargando: boolean
+  cargando: boolean = false
 
 
   constructor(private router: Router, private configuracionService: ConfiguracionService) {
-    this.cargando = false
   }
 
   async ngOnInit() {
@@ -26,35 +25,41 @@ export class ActualizarConfiguracionesComponent implements OnInit {
 
   async traerConfiguraciones() {
     try {
+      this.cargando = true
       this.configuraciones = await this.configuracionService.configuraciones()
-      this.cargando = false
     } catch (error) {
       this.notification.showError(error)
+    } finally {
+      this.cargando = false
     }
   }
-
 
   async actualizarConfiguracion(configuracion: Configuracion) {
     try {
+      this.cargando = true
       await this.configuracionService.actualizarConfiguraciones(configuracion)
+      this.notification.popUpMessage("¡Configuración actualizada!", "success", 2500)
       this.traerConfiguraciones()
     } catch (error) {
+      console.dir(error)
       this.notification.showError(error)
+    } finally {
+      this.cargando = false
     }
   }
-/*
-  irAEvolucionDePrecios(tasacion: Tasacion) {
-    if (tasacion.id) {
-      this.router.navigate(['/evolucion-precios', tasacion.id])
+  /*
+    irAEvolucionDePrecios(tasacion: Tasacion) {
+      if (tasacion.id) {
+        this.router.navigate(['/evolucion-precios', tasacion.id])
+      }
+      if (tasacion.id_anterior) {
+        this.router.navigate(['/evolucion-precios', tasacion.id_anterior])
+  
+      }
     }
-    if (tasacion.id_anterior) {
-      this.router.navigate(['/evolucion-precios', tasacion.id_anterior])
-
+  
+    irATasarPropiedad() {
+      this.router.navigate(['/tasar-propiedad'])
     }
-  }
-
-  irATasarPropiedad() {
-    this.router.navigate(['/tasar-propiedad'])
-  }
-*/
+  */
 }
