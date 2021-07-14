@@ -97,16 +97,16 @@ export class MapaComponent implements OnInit {
   iconHospital = {
     url: 'assets/hospital3.png',
     scaledSize: {
-      width: 30,
-      height: 30
+      width: 20,
+      height: 20
     }
   }
 
   iconComisaria = {
     url: 'assets/comisaria.png',
     scaledSize: {
-      width: 30,
-      height: 30
+      width: 20,
+      height: 20
     }
   }
 
@@ -179,8 +179,23 @@ export class MapaComponent implements OnInit {
     });
   }
 
-  seleccionarOpcion(opcion: string) {
-    this.opcion = opcion
+  async seleccionarOpcion(opcion: string) {
+    console.log(opcion)
+    try {
+      this.cargando = true
+      switch (opcion) {
+        case "Escuelas": this.escuelas = this.escuelas || await this.lugarService.getEscuelas()
+        case "Hospitales": this.hospitales = this.hospitales || await this.lugarService.getHospitales()
+        case "Comisarias": this.comisarias = this.comisarias || await this.lugarService.getComisarias()
+        case "Espacios": this.espacios_verdes = this.espacios_verdes || await this.lugarService.getEspaciosVerdes()
+      }
+      this.opcion = opcion
+    } catch (error) {
+      this.notification.showError(error)
+    } finally {
+      this.cargando = false
+
+    }
   }
 
   buscarBarrio(components: any) {
@@ -217,10 +232,7 @@ export class MapaComponent implements OnInit {
       this.inicializarMapa()
       this.map.zoom = 16
       if (!this.esModal) {
-        this.escuelas = await this.lugarService.getEscuelas()
-        this.hospitales = await this.lugarService.getHospitales()
-        this.comisarias = await this.lugarService.getComisarias()
-        this.espacios_verdes = await this.lugarService.getEspaciosVerdes()
+
       }
     } catch (error) {
       this.notification.showError(error)

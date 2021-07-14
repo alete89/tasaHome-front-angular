@@ -17,8 +17,6 @@ export class UsuarioService implements IUsuarioService {
 
   constructor(private http: HttpClient) { }
 
-  esAdmin: boolean
-
   async userLogin(email: string, password: string) {
     const url = REST_SERVER_URL + "/login"
     let json: any = {}
@@ -27,7 +25,7 @@ export class UsuarioService implements IUsuarioService {
     const resp = await this.http.post<Usuario>(url, json).toPromise()
     const usuario: Usuario = Usuario.fromJson(resp)
     localStorage.setItem("userLoggedInId", String(usuario.id));
-    this.esAdmin = usuario.esAdmin
+    localStorage.setItem("esAdmin", String(usuario.esAdmin));
     return usuario
   }
 
@@ -38,7 +36,7 @@ export class UsuarioService implements IUsuarioService {
   }
 
   esAdministrador() {
-    return this.estaLogueado() && this.esAdmin
+    return this.estaLogueado() && this.esAdmin()
   }
 
   estaLogueado() {
@@ -49,6 +47,10 @@ export class UsuarioService implements IUsuarioService {
     return localStorage.getItem("userLoggedInId")
   }
 
+  esAdmin() {
+    const admin = localStorage.getItem("esAdmin")
+    return admin === "true"
+  }
 
   cerrarSesion() {
     localStorage.clear()

@@ -70,6 +70,8 @@ export class TasarPropiedadComponent implements OnInit {
       this.tiposDePropiedad = await this.tasacionService.tiposDePropiedad()
       this.tiposDeOperacion = await this.tasacionService.tiposDeOperacion()
       this.estados = await this.estadoService.estados()
+      const prueba = await this.servicioService.servicios()
+      // console.log(prueba)
       this.servicios = await this.servicioService.servicios()
       if (this.esActualizacion) {
         this.tasacionService.setDireccionYBarrio(this.tasacion.direccion, this.tasacion.barrio)
@@ -85,7 +87,7 @@ export class TasarPropiedadComponent implements OnInit {
   chequearServicios() {
     let i = 0
     while (i < this.servicios.length) {
-      if (this.tasacion.servicios[i] && this.tasacion.servicios[i].chequeado) {
+      if (this.tasacion.servicios.some(servicio => servicio.id == this.servicios[i].id)) {
         this.servicios[i].chequear()
       }
       i++

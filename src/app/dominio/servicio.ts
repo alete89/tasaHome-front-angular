@@ -13,7 +13,9 @@ export class Servicio {
     }
 
     static fromJson(servicioJson) {
-        return Object.assign(new Servicio(), servicioJson)
+        // console.log("serivicio")
+        // console.log(Object.assign(new Servicio({}), servicioJson))
+        return Object.assign(new Servicio({}), servicioJson)
     }
 
 

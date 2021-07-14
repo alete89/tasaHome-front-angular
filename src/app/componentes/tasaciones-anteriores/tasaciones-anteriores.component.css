@@ -4,7 +4,7 @@
 }
 
 .card {
-    max-width: 80rem;
+    max-width: 85rem;
     margin-left: auto;
     margin-right: auto;
     background-color: white !important;
@@ -21,9 +21,6 @@ th {
 .boton {
     display: block;
     margin: auto;
-}
-
-.tasaciones {
 }
 
 .spinner {

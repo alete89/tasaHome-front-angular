@@ -1,19 +1,38 @@
 agm-map {
-    height: 300px;
+  height: 300px;
 }
 
 .fondo-azul {
-    color: white;
-    background-color: #0074D9 !important;
+  color: white;
+  background-color: #0074d9 !important;
 }
 
 .color-hover:hover {
-    color: white;
-    background-color: #0074D9 !important;
+  color: white;
+  background-color: #0074d9 !important;
 }
 
-.margen {
-    margin-right: 2rem;
+.card-mapa {
+  width: 50rem;
+  margin: auto;
+  /* margin: auto; */
+  /* background-color: #263238 !important; */
+  /* padding-bottom: 1rem; */
+}
+
+.home {
+  width: 70rem;
+}
+
+.container {
+  padding: 0;
+  background-color: #a8dadc !important;
+}
+
+.botonera {
+  text-align: center;
+  margin-top: 1rem;
+  /* padding: 1rem; */
 }
 
 /* .centrado {

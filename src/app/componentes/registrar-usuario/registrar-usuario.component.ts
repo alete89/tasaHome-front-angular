@@ -1,14 +1,13 @@
-import { Component, OnInit, Inject, NgZone, ViewChild, ElementRef } from '@angular/core';
+import { MapsAPILoader } from '@agm/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PageScrollService } from 'ngx-page-scroll-core';
 import { Usuario } from 'src/app/dominio/usuario';
-import { Zona } from 'src/app/dominio/zona';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { ZonaService } from 'src/app/servicios/zona.service';
 import { Notification } from 'src/app/shared/notifications/notification';
-import { PageScrollService } from 'ngx-page-scroll-core';
-import { DOCUMENT } from '@angular/common';
-import { Router } from '@angular/router';
-import { MapsAPILoader } from '@agm/core';
 declare var require: any
 declare var google: any;
 @Component({
@@ -161,8 +160,8 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   inicializarValidaciones() {
     this.camposValidatingForm = new FormGroup({
-      nombreForm: new FormControl(null, [Validators.required, Validators.maxLength(70), Validators.pattern("[a-zA-Z ]*")]),
-      apellidoForm: new FormControl(null, [Validators.required, Validators.maxLength(70), Validators.pattern("[a-zA-Z ]*")]),
+      nombreForm: new FormControl(null, [Validators.required, Validators.maxLength(70)]),
+      apellidoForm: new FormControl(null, [Validators.required, Validators.maxLength(70)]),
       direccionForm: new FormControl(null, [Validators.required]),
       //NO VALIDA BIEN LA DIRECCION. VER COMO VALIDARLA USANDO LA API DE GOOGLE
       emailForm: new FormControl(null, [Validators.required, Validators.email, Validators.maxLength(254)]),

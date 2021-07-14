@@ -9,7 +9,7 @@
       </div>
       <div class="botonera" style="text-align: center;">
         <button [disabled]="yaGuardo" mdbTooltip="Guardar tasación" placement="bottom" (click)="guardar()" mdbBtn
-          color="elegant" rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect
+          color="success" rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect
           type="submit">Guardar</button>
         <button [disabled]="modalAbierto()" (click)="publicar()" mdbTooltip="Publicar tasación" placement="bottom"
           mdbBtn color="elegant" rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect
@@ -18,7 +18,7 @@
 
         <button (click)="volver()" mdbBtn color="light">Volver</button>
         <div>
-          <mdb-checkbox [disabled]="yaGuardo" style="cursor: default" class="my-4 waves-effect z-depth-0  "
+          <mdb-checkbox [disabled]="yaGuardo" style="cursor: default" class="my-4 waves-effect z-depth-0 "
             mdbWavesEffect placement="bottom" [(ngModel)]="tasacion.privada" name="privada" [default]="true">
             Guardar tasación privada</mdb-checkbox>
         </div>

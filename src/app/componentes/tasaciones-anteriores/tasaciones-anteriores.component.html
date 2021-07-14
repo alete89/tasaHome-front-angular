@@ -1,12 +1,21 @@
-<div *ngIf="cargando" style="margin: auto;margin-top: 1rem;"
-  class="spinner-border text-primary d-flex justify-content-center spinner" role="status">
-  <span class="sr-only ">Loading...</span>
+<div
+  *ngIf="cargando"
+  style="margin: auto; margin-top: 1rem"
+  class="spinner-border text-primary d-flex justify-content-center spinner"
+  role="status"
+>
+  <span class="sr-only">Loading...</span>
 </div>
 
 <div *ngIf="hayTasacionesAnteriores() && !cargando" class="margen">
   <div class="contenedor-tasaciones">
-    <div class="card tasaciones">
-      <p class="tasaciones">Tasaciones Anteriores</p>
+    <mdb-card class="tasaciones">
+      <mdb-card-header class="header white-text text-center py-4">
+        <h5>
+          <strong class="tasaciones header">Tasaciones Anteriores</strong>
+          <!-- <strong class="grande">Buscar tasaciones similares</strong> -->
+        </h5>
+      </mdb-card-header>
       <div class="table-wrapper-scroll-y scrollbar-tasaciones texto-centrado">
         <table class="table">
           <thead class="colorear-celeste">
@@ -18,47 +27,87 @@
               <th>SUPERFICE</th>
               <th>TIPO</th>
               <th>PRIVADA</th>
-              <th>ACTUALIZAR</th>
-              <th>EVOLUCIÓN DE PRECIOS</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody *ngFor="let tasacion of tasaciones">
             <tr class="fila-contenido">
-              <td>{{ tasacion.fecha || "-" | date: 'dd/MM/yyyy hh:mm' }} </td>
+              <td>{{ tasacion.fecha || "-" | date: "dd/MM/yyyy hh:mm" }}</td>
               <td>{{ tasacion.direccion || "-" }}</td>
-              <td>{{ tasacion.valor || "-"}} </td>
+              <td>{{ tasacion.valor || "-" }}</td>
               <td>{{ tasacion.ambientes || "-" }}</td>
-              <td>{{ tasacion.superficie || "-"}}</td>
-              <td *ngIf="tasacion.tipoDePropiedad">{{ tasacion.tipoDePropiedad.descripcion || "-" }}</td>
+              <td>{{ tasacion.superficie || "-" }}</td>
+              <td *ngIf="tasacion.tipoDePropiedad">
+                {{ tasacion.tipoDePropiedad.descripcion || "-" }}
+              </td>
               <td *ngIf="!tasacion.tipoDePropiedad">-</td>
               <td>
-                <mdb-checkbox [disabled]="true" [checked]=tasacion.privada [default]="true">
+                <mdb-checkbox
+                  [disabled]="true"
+                  [checked]="tasacion.privada"
+                  [default]="true"
+                >
                 </mdb-checkbox>
               </td>
-              <td><button (click)="irAActualizarTasacion(tasacion)" class="boton" mdbBtn type="button" color="unique"
-                  size="sm" mdbWavesEffect><strong>Actualizar</strong></button>
+              <td>
+                <button
+                  (click)="irAActualizarTasacion(tasacion)"
+                  class="boton"
+                  mdbBtn
+                  type="button"
+                  color="unique"
+                  size="sm"
+                  mdbWavesEffect
+                >
+                  <strong>Actualizar</strong>
+                </button>
               </td>
-              <td><button (click)="irAEvolucionDePrecios(tasacion)" class="boton" mdbBtn type="button" color="unique"
-                  size="sm" mdbWavesEffect><strong>Evolución de precios</strong></button>
+              <td>
+                <button
+                  (click)="irAEvolucionDePrecios(tasacion)"
+                  class="boton"
+                  mdbBtn
+                  type="button"
+                  color="unique"
+                  size="sm"
+                  mdbWavesEffect
+                >
+                  <strong>Evolución de precios</strong>
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
+    </mdb-card>
   </div>
-
 </div>
 
-<div class="" *ngIf="!hayTasacionesAnteriores() && !cargando" style="width: 36rem;color: white;margin: auto;">
-  <div style="text-align:center;">
-    <strong style="font-size: 3rem; text-align: center;">No tienes tasaciones</strong>
-    <button style="margin-top: 2rem;margin-bottom: 2rem;" (click)="irATasarPropiedad()" class="boton" mdbBtn
-      type="button" color="unique" size="md" mdbWavesEffect><strong>Hacer una tasación</strong></button>
+<div
+  class=""
+  *ngIf="!hayTasacionesAnteriores() && !cargando"
+  style="width: 36rem; color: white; margin: auto"
+>
+  <div style="text-align: center">
+    <strong style="font-size: 3rem; text-align: center"
+      >No tienes tasaciones</strong
+    >
+    <button
+      style="margin-top: 2rem; margin-bottom: 2rem"
+      (click)="irATasarPropiedad()"
+      class="boton"
+      mdbBtn
+      type="button"
+      color="mdb-color"
+      size="md"
+      mdbWavesEffect
+    >
+      <strong>Hacer una tasación</strong>
+    </button>
   </div>
 </div>
 
 <div *ngIf="notification" class="notification">
-  <app-notifications [notification]="notification">
-  </app-notifications>
+  <app-notifications [notification]="notification"> </app-notifications>
 </div>

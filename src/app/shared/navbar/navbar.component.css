@@ -4,6 +4,10 @@
     color: white !important;
 }
 
+.navbar {
+    background-color: #5c4d7d;
+}
+
 .boton {
     font-size: 0.7em;
     border-color: white !important;

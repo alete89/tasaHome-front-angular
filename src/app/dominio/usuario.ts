@@ -22,7 +22,7 @@ export class Usuario {
 
     token_recuperacion: string
 
-    esAdmin: boolean
+    esAdmin: boolean = false
 
     constructor(init?: Partial<Usuario>) {
         Object.assign(this, init)

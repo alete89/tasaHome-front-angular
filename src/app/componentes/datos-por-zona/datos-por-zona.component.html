@@ -1,5 +1,5 @@
 <!-- Material form register -->
-<mdb-card class="card" style="margin: auto; max-width: 40rem">
+<mdb-card class="card-default">
   <mdb-card-header class="header white-text text-center py-4">
     <h5>
       <strong class="grande">Datos por {{ titulo }}</strong>
@@ -118,10 +118,10 @@
         />
         <div>
           <button
+            class="button-primary"
             style="margin-top: 1rem"
             [disabled]="noPuedeBuscar()"
             mdbBtn
-            color="elegant"
             mdbWavesLight
             (click)="traerDatosBarrioPorNombre()"
             type="submit"

@@ -13,11 +13,8 @@
 >
   <span class="sr-only">Loading...</span>
 </div>
-<form style="width: 50rem; margin: auto">
-  <div
-    style="background-color: #263238; padding-bottom: 1rem"
-    class="container"
-  >
+<form class="card-mapa" [ngClass]="{ home: esHome() }">
+  <div style="padding-bottom: 1rem" class="container">
     <div
       class="row d-flex flex-center"
       style="padding-top: 1rem; padding-bottom: 1rem"
@@ -28,11 +25,10 @@
         <!-- <label>Enter address</label> -->
         <input
           #focusThis
-          style="width: 25rem; margin-right: 1rem"
           [(ngModel)]="direccion"
           type="text"
-          class="form-control"
-          placeholder="Buscar dirección"
+          class="form-control input-busqueda"
+          placeholder="Ingresar dirección"
           autocorrect="off"
           autocapitalize="off"
           spellcheck="off"
@@ -94,10 +90,7 @@
     </div>
 
     <div>
-      <div
-        class="card"
-        style="margin-top: 1rem; margin-left: 2rem; margin-right: 3rem"
-      >
+      <div class="card">
         <agm-map
           #map
           (mapReady)="map_loaded = true"
@@ -108,7 +101,7 @@
           [longitude]="longitude"
           [scrollwheel]="null"
           (mapClick)="placeMarker($event)"
-          style="height: 500px; width: 700px"
+          style="height: 600px"
         >
           <agm-marker
             [latitude]="marker.latitude"
@@ -215,10 +208,7 @@
     </div>
 
     <div>
-      <div
-        *ngIf="esHome()"
-        style="text-align: center; margin-top: 2rem; padding: 1rem"
-      >
+      <div *ngIf="esHome()" class="botonera">
         <div class="btn-group" role="group" aria-label="Basic example">
           <button
             [disabled]="opcion == 'Escuelas'"
@@ -325,7 +315,7 @@
         style="
           margin-left: 7rem;
           margin-right: 7rem;
-          margin-top: 2rem;
+          margin-top: 1rem;
           text-align: center;
           background-color: #ff4444;
         "

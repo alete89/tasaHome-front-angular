@@ -1,4 +1,4 @@
-<form class="card fondo_tasar" style="margin: auto; width: 45rem">
+<mdb-card class="card-default fondo_tasar">
   <mdb-card-header class="header white-text text-center py-4">
     <h5>
       <strong style="font-size: 2rem">{{ titulo }}</strong>
@@ -155,9 +155,8 @@
     [disabled]="noPuedeTasar()"
     (click)="openModalTasacion()"
     mdbBtn
-    color="black"
     rounded="true"
-    class="my-4 waves-effect z-depth-0 buscar"
+    class="my-4 waves-effect z-depth-0 buscar button-primary"
     mdbWavesEffect
     type="submit"
   >
@@ -171,7 +170,7 @@
   >
     <span class="sr-only">Loading...</span>
   </div>
-</form>
+</mdb-card>
 
 <div class="notification">
   <app-notifications [notification]="notification"> </app-notifications>

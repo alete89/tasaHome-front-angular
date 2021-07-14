@@ -1,4 +1,4 @@
-<mdb-card>
+<mdb-card class="card-default">
 
   <mdb-card-header style="background-color: #101357;" class="white-text text-center py-4">
     <h5>
@@ -49,11 +49,10 @@
       </div>
       <div>
         <button size="md" style="color: white;" [disabled]="noPuedeBuscar()" (click)="buscar()" mdbBtn gradient="blue"
-          outline="true" rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect
+          rounded="true" class="my-4 waves-effect z-depth-0 buscar " mdbWavesEffect
           type="submit">Buscar</button>
-        <button size="md" [disabled]="formularioVacio()" (click)="nuevaBusqueda()" mdbBtn color="blue-grey"
+        <button size="md" [disabled]="formularioVacio()" (click)="nuevaBusqueda()" mdbBtn color="grey" outline="true" 
           rounded="true" class="my-4 waves-effect z-depth-0 buscar" mdbWavesEffect type="button">Nueva búsqueda</button>
-        <hr>
       </div>
     </form>
 

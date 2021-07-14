@@ -205,7 +205,7 @@
           mdbValidate
           mdbInput
         />
-        <label for="confirmar_password_registro">Confirmar</label>
+        <label for="confirmar_password_registro">Confirmar contraseña</label>
         <mdb-error *ngIf="confirmacionPasswordInvalido()"
           >Contraseña inválida</mdb-error
         >
@@ -219,7 +219,8 @@
         <button
           (click)="limpiarFormulario()"
           mdbBtn
-          color="danger"
+          color="grey"
+          outline="true"
           rounded="true"
           class="my-4 waves-effect z-depth-0 aceptar"
           mdbWavesEffect
@@ -237,7 +238,7 @@
           mdbWavesEffect
           type="submit"
         >
-          Aceptar
+          Crear cuenta
         </button>
       </div>
     </form>
