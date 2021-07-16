@@ -219,6 +219,8 @@ export class MapaComponent implements OnInit {
         this.buscarBarrio(respuesta.address_components)
       }
       this.direccionGoogle = this.direccion
+
+      // console.dir(this.direccion)
       this.errores = []
       // console.log(this.direccion)
     } catch (error) {

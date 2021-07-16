@@ -143,7 +143,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   async aceptar() {
     try {
       await this.usuarioService.registrarUsuario(this.usuario)
-      this.notification.popUpMessage("Usuario registrado.", "success", 2500)
+      this.notification.showMessage("Usuario registrado")
       this.limpiarFormulario()
     } catch (error) {
       this.notification.showError(error)

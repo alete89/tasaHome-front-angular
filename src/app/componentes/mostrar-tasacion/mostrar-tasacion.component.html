@@ -1,32 +1,72 @@
-<div class="card" style="background-color: #0d47a1; color: white;">
-  <div class="row" style="margin-left: 4rem; margin:auto;">
+<div class="card" style="background-color: #0d47a1; color: white">
+  <div class="row" style="margin-left: 4rem; margin: auto">
     <div>
-      <div style="text-align: center;font-size: 4rem;">
-        <strong *ngIf="tasacion.tipoDeOperacion.id == 1" style="color:white;">Valor: U$S
-          {{tasacion.valor | number:'1.0-0'}}</strong>
-        <strong *ngIf="tasacion.tipoDeOperacion.id == 2" style="color:white;">Valor: AR$
-          {{tasacion.valor | number:'1.0-0'}}</strong>
+      <div style="text-align: center; font-size: 4rem">
+        <strong
+          data-testid="valor-tasacion"
+          *ngIf="tasacion.tipoDeOperacion.id == 1"
+          style="color: white"
+          >Valor: U$S {{ tasacion.valor | number: "1.0-0" }}</strong
+        >
+        <strong
+          data-testid="valor-tasacion"
+          *ngIf="tasacion.tipoDeOperacion.id == 2"
+          style="color: white"
+          >Valor: AR$ {{ tasacion.valor | number: "1.0-0" }}</strong
+        >
       </div>
-      <div class="botonera" style="text-align: center;">
-        <button [disabled]="yaGuardo" mdbTooltip="Guardar tasación" placement="bottom" (click)="guardar()" mdbBtn
-          color="success" rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect
-          type="submit">Guardar</button>
-        <button [disabled]="modalAbierto()" (click)="publicar()" mdbTooltip="Publicar tasación" placement="bottom"
-          mdbBtn color="elegant" rounded="true" class="my-4 waves-effect z-depth-0  " mdbWavesEffect
-          type="submit">Publicar</button>
+      <div class="botonera" style="text-align: center">
+        <button
+          data-testid="boton-guardar-tasacion"
+          [disabled]="yaGuardo"
+          mdbTooltip="Guardar tasación"
+          placement="bottom"
+          (click)="guardar()"
+          mdbBtn
+          color="success"
+          rounded="true"
+          class="my-4 waves-effect z-depth-0"
+          mdbWavesEffect
+          type="submit"
+        >
+          Guardar
+        </button>
+        <button
+          [disabled]="modalAbierto()"
+          (click)="publicar()"
+          mdbTooltip="Publicar tasación"
+          placement="bottom"
+          mdbBtn
+          color="elegant"
+          rounded="true"
+          class="my-4 waves-effect z-depth-0"
+          mdbWavesEffect
+          type="submit"
+        >
+          Publicar
+        </button>
         <!-- <button [disabled]="yaGuardo" mdbBtn style="cursor: default" color="blue-grey"> -->
 
         <button (click)="volver()" mdbBtn color="light">Volver</button>
         <div>
-          <mdb-checkbox [disabled]="yaGuardo" style="cursor: default" class="my-4 waves-effect z-depth-0 "
-            mdbWavesEffect placement="bottom" [(ngModel)]="tasacion.privada" name="privada" [default]="true">
-            Guardar tasación privada</mdb-checkbox>
+          <mdb-checkbox
+            [disabled]="yaGuardo"
+            style="cursor: default"
+            class="my-4 waves-effect z-depth-0"
+            mdbWavesEffect
+            placement="bottom"
+            [(ngModel)]="tasacion.privada"
+            name="privada"
+            [default]="true"
+          >
+            Guardar tasación privada</mdb-checkbox
+          >
         </div>
         <!-- </button> -->
       </div>
     </div>
   </div>
   <div class="notification">
-    <app-notifications [notification]="notification">
-    </app-notifications>
+    <app-notifications [notification]="notification"> </app-notifications>
   </div>
+</div>

@@ -9,13 +9,14 @@
   <!--Card content-->
   <mdb-card-body class="px-lg-5 pt-0">
     <!-- Form -->
-    <form class="text-center" style="color: #757575">
+    <form data-testid="form-registro" class="text-center" style="color: #757575">
       <div style="margin-top: 0.5rem" class="form-row">
         <div class="col margen">
           <!-- First name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
             <!-- <i class="fas fa-times trailing"></i> -->
             <input
+              data-testid="input-nombre"
               #focusThis
               name="nombre"
               formControlName="nombreForm"
@@ -27,13 +28,16 @@
               mdbInput
             />
             <label for="materialRegisterFormFirstName">Nombre </label>
-            <mdb-error *ngIf="nombreInvalido()">Nombre inválido</mdb-error>
+            <mdb-error data-testid="error-nombre" *ngIf="nombreInvalido()"
+              >Nombre inválido</mdb-error
+            >
           </div>
         </div>
         <div class="col">
           <!-- Last name -->
           <div class="md-form" [formGroup]="camposValidatingForm">
             <input
+              data-testid="input-apellido"
               name="apellido"
               formControlName="apellidoForm"
               [(ngModel)]="usuario.apellido"
@@ -44,7 +48,9 @@
               mdbInput
             />
             <label for="materialRegisterFormLastName">Apellido</label>
-            <mdb-error *ngIf="apellidoInvalido()">Apellido inválido</mdb-error>
+            <mdb-error data-testid="error-apellido" *ngIf="apellidoInvalido()"
+              >Apellido inválido</mdb-error
+            >
           </div>
         </div>
       </div>
@@ -54,6 +60,7 @@
           <p style="text-align: left">Género</p>
           <div class="btn-group" role="group" aria-label="Basic example">
             <button
+              data-testid="input-genero-masculino"
               style="margin-right: 1rem"
               rounded="true"
               outline="true"
@@ -68,6 +75,7 @@
               Masculino
             </button>
             <button
+              data-testid="input-genero-femenino"
               style="margin-right: 1rem"
               rounded="true"
               outline="true"
@@ -82,6 +90,7 @@
               Femenino
             </button>
             <button
+              data-testid="input-genero-otro"
               rounded="true"
               outline="true"
               mdbBtn
@@ -103,6 +112,7 @@
             [formGroup]="camposValidatingForm"
           >
             <input
+              data-testid="input-fecha-nacimiento"
               formControlName="fechaForm"
               [max]="fecha_maxima"
               name="fecha_nacimiento"
@@ -114,11 +124,19 @@
               mdbInput
             />
             <label for="input_fecha_registro">Fecha de nacimiento</label>
-            <mdb-error *ngIf="esMenorDeEdad()"
+            <mdb-error data-testid="error-menor-de-edad" *ngIf="esMenorDeEdad()"
               >Debe tener más de 18 años</mdb-error
             >
-            <mdb-error *ngIf="superaEdadMaxima()">Edad inválida</mdb-error>
-            <mdb-error *ngIf="noPusoFecha()">Fecha inválida</mdb-error>
+            <mdb-error
+              data-testid="error-supera-edad-maxima"
+              *ngIf="superaEdadMaxima()"
+              >Edad inválida</mdb-error
+            >
+            <mdb-error
+              data-testid="error-no-completo-fecha-nacimiento"
+              *ngIf="noPusoFecha()"
+              >Fecha inválida</mdb-error
+            >
           </div>
         </div>
       </div>
@@ -131,6 +149,7 @@
         <!-- <label>Enter address</label> -->
 
         <input
+          data-testid="input-direccion"
           formControlName="direccionForm"
           style="margin-right: 1rem"
           [(ngModel)]="usuario.direccion"
@@ -161,6 +180,7 @@
         [formGroup]="camposValidatingForm"
       >
         <input
+          data-testid="input-email"
           formControlName="emailForm"
           [(ngModel)]="usuario.email"
           name="email_registro"
@@ -171,12 +191,15 @@
           mdbInput
         />
         <label for="email_registro">E-mail</label>
-        <mdb-error *ngIf="emailInvalido()">Email Inválido</mdb-error>
+        <mdb-error data-testid="error-email" *ngIf="emailInvalido()"
+          >Email Inválido</mdb-error
+        >
       </div>
 
       <!-- Password -->
       <div class="md-form" [formGroup]="camposValidatingForm">
         <input
+          data-testid="input-contraseña"
           formControlName="passwordForm"
           [(ngModel)]="usuario.contrasenia"
           name="password_registro"
@@ -188,13 +211,16 @@
           mdbInput
         />
         <label for="password_registro">Contraseña</label>
-        <mdb-error *ngIf="passwordInvalido()">Contraseña inválida</mdb-error>
+        <mdb-error data-testid="error-contraseña" *ngIf="passwordInvalido()"
+          >Contraseña inválida</mdb-error
+        >
         <small id=" password_registroHelp" class="form-text text-muted mb-4">
           entre 8 y 72 caracteres
         </small>
       </div>
       <div class="md-form" [formGroup]="camposValidatingForm">
         <input
+          data-testid="input-confirmar-contraseña"
           formControlName="confirmacionPasswordForm"
           [(ngModel)]="confirmacion_contrasenia"
           name="confirmacion_password"
@@ -206,10 +232,15 @@
           mdbInput
         />
         <label for="confirmar_password_registro">Confirmar contraseña</label>
-        <mdb-error *ngIf="confirmacionPasswordInvalido()"
+        <mdb-error
+          data-testid="error-confirmar-contraseña"
+          *ngIf="confirmacionPasswordInvalido()"
           >Contraseña inválida</mdb-error
         >
-        <mdb-error class="errorContraseñas" *ngIf="contraseniasNoCoinciden()"
+        <mdb-error
+          data-testid="error-contraseñas-no-coinciden"
+          class="errorContraseñas"
+          *ngIf="contraseniasNoCoinciden()"
           >Las contraseñas deben coincidir
         </mdb-error>
       </div>
@@ -217,6 +248,7 @@
       <!-- Sign up button -->
       <div>
         <button
+          data-testid="boton-limpiar-formulario"
           (click)="limpiarFormulario()"
           mdbBtn
           color="grey"
@@ -229,6 +261,7 @@
           Limpiar formulario
         </button>
         <button
+          data-testid="registrar_usuario"
           [disabled]="hayErrores()"
           (click)="aceptar()"
           mdbBtn
@@ -238,7 +271,7 @@
           mdbWavesEffect
           type="submit"
         >
-          Crear cuenta
+          Registrar usuario
         </button>
       </div>
     </form>

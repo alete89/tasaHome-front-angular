@@ -1,4 +1,5 @@
 export class Notification {
+    toastMessage: string = null
     message: string = null
     error: any = null
     loading: boolean = false
@@ -13,15 +14,23 @@ export class Notification {
         this.error = error.error.message ? error.error : JSON.parse(error.error)
     }
 
+    showMessage(message) {
+        this.message = message
+    }
+
     cleanError() {
         this.error = undefined
     }
 
+    cleanMessage() {
+        this.message = undefined
+    }
+
     popUpMessage(msg, type: string, delay: number) {
-        this.message = msg
+        this.toastMessage = msg
         this.type = type
         setTimeout(() => {
-            this.message = null
+            this.toastMessage = null
             this.type = null
         }, delay)
     }

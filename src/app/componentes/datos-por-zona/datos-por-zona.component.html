@@ -30,6 +30,7 @@
       <!-- Default inline 2-->
       <div class="custom-control custom-radio custom-control-inline">
         <input
+          data-testid="radio-barrio"
           [(ngModel)]="zonaSeleccionada"
           (change)="seleccionarBarrio()"
           name="zona"
@@ -45,6 +46,7 @@
       <!-- Default inline 3-->
       <div class="custom-control custom-radio custom-control-inline">
         <input
+          data-testid="radio-comuna"
           [(ngModel)]="zonaSeleccionada"
           (change)="seleccionarComuna()"
           name="zona"
@@ -59,6 +61,7 @@
 
       <div *ngIf="zonaSeleccionada == 'Barrio'" class="md-form">
         <ng-select
+          data-testid="select-barrio"
           #select
           notFoundText="No se encontro el barrio"
           (keypress)="cambiarSeleccion(select)"
@@ -78,6 +81,7 @@
 
       <div *ngIf="zonaSeleccionada == 'Comuna'" class="md-form">
         <ng-select
+          data-testid="select-comuna"
           #select
           notFoundText="No se encontro la comuna"
           (keypress)="cambiarSeleccion(select)"

@@ -14,6 +14,7 @@
     class="md-form"
   >
     <input
+      data-testid="direccion"
       [disabled]="modalTasarYaAbierto()"
       [(ngModel)]="tasacionService.direccion"
       (focus)="openModalMapa()"
@@ -34,6 +35,7 @@
     <div class="col margen">
       <div [formGroup]="validatingForm" class="md-form">
         <input
+          data-testid="superficie"
           class="form-control"
           formControlName="superficie"
           type="number"
@@ -55,6 +57,7 @@
     <div class="col margen">
       <p>Tipo de propiedad</p>
       <select
+        data-testid="tipo-propiedad"
         style="width: 10rem"
         name="tipoDePropiedad"
         [(ngModel)]="tasacion.tipoDePropiedad.id"
@@ -69,6 +72,7 @@
       <div *ngFor="let tipo of tiposDeOperacion">
         <div class="custom-control custom-radio custom-control-inline">
           <input
+            [attr.data-testid]="'tipo-operacion-' + tipo.id"
             [(ngModel)]="tasacion.tipoDeOperacion.id"
             name="tipoDeOperacion{{ tipo.id }}"
             [value]="tipo.id"
@@ -93,6 +97,7 @@
     <div class="col margen">
       <div [formGroup]="validatingForm" class="md-form form-sm">
         <input
+          data-testid="cantidad-ambientes"
           class="form-control form-control-sm"
           id="ambientes_tasar"
           formControlName="ambientes"
@@ -116,6 +121,7 @@
     <div class="col margen">
       <p>Estado General</p>
       <select
+        data-testid="estado"
         style="width: 10rem"
         name="estado"
         [(ngModel)]="tasacion.estado.id"
@@ -152,6 +158,7 @@
     </div>
   </div>
   <button
+    data-testid="boton-tasar"
     [disabled]="noPuedeTasar()"
     (click)="openModalTasacion()"
     mdbBtn

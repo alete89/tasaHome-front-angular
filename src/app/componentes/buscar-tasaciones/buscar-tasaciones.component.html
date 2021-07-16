@@ -10,6 +10,7 @@
       <div style="margin-bottom: 1rem; margin-top: 1rem" class="form-row">
         <div class="col margen">
           <ng-select
+            data-testid="select-barrio"
             #select
             (keypress)="cambiarSeleccion(select)"
             notFoundText="No se encontro el barrio"
@@ -28,6 +29,7 @@
         <div class="col margen">
           <ng-select
             #select
+            data-testid="select-tipo-propiedad"
             (keypress)="cambiarSeleccion(select)"
             notFoundText="No se encontro el tipo de propiedad"
             name="tipoDePropiedad"
@@ -54,6 +56,7 @@
           <div *ngFor="let tipo of tiposDeOperacion">
             <div style="text-align: left" class="col">
               <button
+                data-testid="boton-tipo-operacion"
                 rounded="true"
                 outline="true"
                 mdbBtn
@@ -87,6 +90,7 @@
         <div class="col">
           <div [formGroup]="validatingForm" class="md-form">
             <input
+              data-testid="cantidad-ambientes"
               class="form-control"
               formControlName="ambientes"
               type="number"
@@ -103,7 +107,7 @@
               for="cantidad_ambientes_min_buscar_tasaciones"
               >Cantidad mínima de ambientes</label
             >
-            <mdb-error *ngIf="ambientesInvalidos()"
+            <mdb-error data-testid="ambientes-error" *ngIf="ambientesInvalidos()"
               >Debe ingresar un valor entre 1 y 15</mdb-error
             >
             <mdb-success *ngIf="!ambientesInvalidos()"></mdb-success>
@@ -112,6 +116,7 @@
         <div class="col">
           <div [formGroup]="validatingForm" class="md-form">
             <input
+              data-testid="superficie-minima"
               class="form-control"
               formControlName="superficie"
               type="number"
@@ -128,7 +133,7 @@
               for="superficie_minima_buscar_tasacion"
               >Superficie mínima</label
             >
-            <mdb-error *ngIf="superficieInvalida()"
+            <mdb-error data-testid="superficie-error"*ngIf="superficieInvalida()"
               >Debe ingresar un valor entre 15 y 2000</mdb-error
             >
             <mdb-success *ngIf="!superficieInvalida()"></mdb-success>
@@ -164,6 +169,7 @@
 
       <div>
         <button
+          data-testid="boton-buscar-similares"
           size="md"
           style="color: white"
           [disabled]="noPuedeBuscar()"
@@ -251,7 +257,7 @@
     style="text-align: center; margin: 3rem"
     *ngIf="seLanzoBusqueda && noHuboResultados() && !cargando"
   >
-    <strong style="font-size: 2.5rem"
+    <strong data-testid="no-hubo-resultados" style="font-size: 2.5rem"
       >No se encontraron tasaciones similares</strong
     >
   </div>

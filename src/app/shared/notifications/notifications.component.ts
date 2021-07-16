@@ -17,4 +17,8 @@ export class NotificationsComponent implements OnInit {
     this.notification.cleanError()
   }
 
+  cleanMessage() {
+    this.notification.cleanMessage()
+  }
+
 }

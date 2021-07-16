@@ -7,29 +7,56 @@
           <a class="nav-link" (click)="irADatosPorZona()">Datos por zona</a>
         </li>
         <li *ngIf="estaLogueado()" class="nav-item">
-          <a class="nav-link" (click)="openModalBuscarTasaciones()">Buscar tasaciones</a>
+          <a class="nav-link" (click)="openModalBuscarTasaciones()"
+            >Buscar tasaciones</a
+          >
         </li>
         <li *ngIf="estaLogueado()" class="nav-item">
-          <a class="nav-link" routerLink="/tasar-propiedad">Tasar propiedades</a>
+          <a class="nav-link" routerLink="/tasar-propiedad"
+            >Tasar propiedades</a
+          >
         </li>
         <li *ngIf="estaLogueado()" class="nav-item">
-          <a class="nav-link" routerLink="/tasaciones-anteriores">Tasaciones anteriores</a>
+          <a class="nav-link" routerLink="/tasaciones-anteriores"
+            >Tasaciones anteriores</a
+          >
         </li>
         <li *ngIf="!estaLogueado()" class="nav-item">
-          <a class="nav-link" routerLink="registrar-usuario">Registrar usuario</a>
+          <a class="nav-link" routerLink="registrar-usuario"
+            >Registrar usuario</a
+          >
         </li>
         <li *ngIf="esAdministrador()" class="nav-item">
-          <a class="nav-link" routerLink="/administrar-usuarios">Administrar usuarios</a>
+          <a class="nav-link" routerLink="/administrar-usuarios"
+            >Administrar usuarios</a
+          >
         </li>
         <li *ngIf="esAdministrador()" class="nav-item">
-          <a class="nav-link" routerLink="/actualizar-configuraciones">Actualizar configuraciones</a>
+          <a class="nav-link" routerLink="/actualizar-configuraciones"
+            >Actualizar configuraciones</a
+          >
         </li>
       </ul>
 
       <div class="nav-item" *ngIf="!estaLogueado()">
-        <button [disabled]="modalLoginYaAbierto()" class="boton" type="button" mdbBtn color="primary" size="sm"
-          outline="true" rounded="true" data-toggle="modal" [disabled]="modalAbierto" data-target="#modal"
-          (click)="openModalLogin()" mdbWavesEffect>Iniciar Sesión</button>
+        <button
+          data-testid="abrir-login"
+          [disabled]="modalLoginYaAbierto()"
+          class="boton"
+          type="button"
+          mdbBtn
+          color="primary"
+          size="sm"
+          outline="true"
+          rounded="true"
+          data-toggle="modal"
+          [disabled]="modalAbierto"
+          data-target="#modal"
+          (click)="openModalLogin()"
+          mdbWavesEffect
+        >
+          Iniciar Sesión
+        </button>
       </div>
 
       <!-- <ul *ngIf="estaLogueado()" class="navbar-nav ml-auto nav-flex-icons">
@@ -41,13 +68,27 @@
       </ul> -->
 
       <div *ngIf="estaLogueado()" class="btn-group" mdbDropdown>
-        <a mdbDropdownToggle mdbWavesEffect type="button" class="dropdown-toggle waves-light" mdbWavesEffect
-          style="height: 30px">
-          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt=""
-            class="img-fluid rounded-circle z-depth-0" style="height: 30px"></a>
-        <div class="dropdown-menu dropdown-menu-right  dropdown-primary">
-          <a class="dropdown-item" routerLink="/tasaciones-anteriores">Mis tasaciones</a>
-          <a class="dropdown-item" (click)="openModalBuscarTasaciones()">Tasaciones similares</a>
+        <a
+          mdbDropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="dropdown-toggle waves-light"
+          mdbWavesEffect
+          style="height: 30px"
+        >
+          <img
+            src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+            alt=""
+            class="img-fluid rounded-circle z-depth-0"
+            style="height: 30px"
+        /></a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+          <a class="dropdown-item" routerLink="/tasaciones-anteriores"
+            >Mis tasaciones</a
+          >
+          <a class="dropdown-item" (click)="openModalBuscarTasaciones()"
+            >Tasaciones similares</a
+          >
           <div class="divider dropdown-divider"></div>
           <a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesión</a>
         </div>

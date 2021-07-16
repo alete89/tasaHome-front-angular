@@ -97,7 +97,6 @@ export class TasarPropiedadComponent implements OnInit {
   async tasar() {
     let servicios_seleccionados = this.servicios.filter(servicio => servicio.chequeado)
     this.tasacion.servicios = servicios_seleccionados
-    this.tasacion.direccion = "dada"
     this.tasacion.valor = await this.tasacionService.tasarPropiedad(this.tasacion)
   }
 

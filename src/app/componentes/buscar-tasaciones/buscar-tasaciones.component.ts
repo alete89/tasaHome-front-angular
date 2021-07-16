@@ -148,7 +148,9 @@ export class BuscarTasacionesComponent implements OnInit {
 
     this.modalContactarUsuario.content.action.subscribe((event: any) => {
       if (event == "OK") {
-        this.notification.popUpMessage("Mensaje enviado.", "success", 3000)
+        this.notification.showMessage("Mensaje enviado.")
+        // this.notification.popUpMessage("Mensaje enviado.", "success", 3000)
+
       }
     }
     );

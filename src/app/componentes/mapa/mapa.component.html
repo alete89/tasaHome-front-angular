@@ -24,6 +24,7 @@
       <div>
         <!-- <label>Enter address</label> -->
         <input
+          data-testid="input-direccion-mapa"
           #focusThis
           [(ngModel)]="direccion"
           type="text"
@@ -65,6 +66,7 @@
 
       <div *ngIf="esModal">
         <button
+          data-testid="boton-confirmar-direccion"
           [disabled]="noPuedeAceptar()"
           mdbBtn
           color="success"
@@ -78,6 +80,7 @@
       <!-- </div> -->
       <div *ngIf="esModal">
         <button
+          data-testid="cerrar-modal-mapa"
           (click)="cerrarModal()"
           mdbBtn
           type="button"
