@@ -18,11 +18,12 @@ export class GoogleMapsService {
     const url = this.googleUrl + "latlng=" + marker.latitude + "," + marker.longitude + this.apiKey
 
     const response = await this.http.get<any>(url).toPromise()
-    console.dir(response)
     if (response.status != "OK") {
       throw response
     }
-    return response.results[0]
+
+    const direccion = this.obtenerDireccion(response.results)
+    return direccion
   }
 
   async getLatLongFromStringAddress(address: string) {
@@ -32,6 +33,19 @@ export class GoogleMapsService {
     const url = this.googleUrl + "address=" + direccion + this.apiKey
     const resp = await this.http.get<any>(url).toPromise()
     return resp.results[0].geometry.location
+  }
+
+  obtenerDireccion(resultados) {
+    let direccion
+    let max = 0
+
+    for (let resultado of resultados) {
+      if (resultado.address_components.length > max) {
+        direccion = resultado
+        max = resultado.address_components.length
+      }
+    }
+    return direccion
   }
 
 }

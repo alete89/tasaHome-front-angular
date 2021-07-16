@@ -201,8 +201,13 @@ export class MapaComponent implements OnInit {
   buscarBarrio(components: any) {
     this.barrio = undefined
     for (const component of components) {
+      // console.dir(component)
       if (component.types[0] == 'sublocality_level_1' || component.types[0] == 'political' || component.types[0] == 'sublocality') {
         this.barrio = component.short_name
+      }
+
+      if (component.short_name == "Barrio Norte") {
+        this.barrio = "Recoleta"
       }
     }
     this.tasacionService.guardarBarrio(this.barrio)
